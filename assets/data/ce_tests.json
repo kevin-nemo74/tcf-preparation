@@ -1,0 +1,32 @@
+[
+  {
+    "id": "ce_02",
+    "title": "Compréhension Écrite – Test 2",
+    "type": "CE",
+    "durationMinutes": 60,
+    "questions": [
+      {
+        "id": "Q1",
+        "imagePath": "assets/images/ce/ce_02/1.png",
+        "options": [
+          { "id": "A", "text": "Des cours" },
+          { "id": "B", "text": "Des emplois" },
+          { "id": "C", "text": "Des livres" },
+          { "id": "D", "text": "Des voyages" }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q2",
+        "imagePath": "assets/images/ce/ce_02/2.png",
+        "options": [
+          { "id": "A", "text": "De stocker des marchandises" },
+          { "id": "B", "text": "De transporter des colis" },
+          { "id": "C", "text": "De vendre des cartons" },
+          { "id": "D", "text": "De voyager à l’étranger" }
+        ],
+        "correctAnswer": "B"
+      }
+    ]
+  }
+]
