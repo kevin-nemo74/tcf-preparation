@@ -1,9 +1,9 @@
-
-
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/question_model.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
+
+import 'result_screen.dart';
 
 class QuestionScreen extends StatefulWidget {
   final TestModel test;
@@ -16,31 +16,94 @@ class QuestionScreen extends StatefulWidget {
 
 class _QuestionScreenState extends State<QuestionScreen> {
   int currentIndex = 0;
-  String? selectedAnswer;
+
+  // Store answers per question
+  Map<String, String> userAnswers = {};
+
+  late int remainingSeconds;
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    remainingSeconds = widget.test.durationMinutes * 60;
+
+    startTimer();
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (t) {
+      if (remainingSeconds <= 0) {
+        t.cancel();
+        submitExam();
+      } else {
+        setState(() {
+          remainingSeconds--;
+        });
+      }
+    });
+  }
+
+  void submitExam() {
+    timer?.cancel();
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ResultScreen(
+          test: widget.test,
+          userAnswers: userAnswers,
+        ),
+      ),
+    );
+  }
+
+  String formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int secs = seconds % 60;
+
+    return "${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}";
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     QuestionModel question = widget.test.questions[currentIndex];
+    String? selectedAnswer = userAnswers[question.id];
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.test.title),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Center(
+              child: Text(
+                formatTime(remainingSeconds),
+                style: const TextStyle(
+                    fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          )
+        ],
       ),
       body: Column(
         children: [
-          /// PROGRESS BAR
           LinearProgressIndicator(
-            value: (currentIndex + 1) / widget.test.questions.length,
+            value: (currentIndex + 1) /
+                widget.test.questions.length,
           ),
 
-          const SizedBox(height: 10),
-
-          /// QUESTION + OPTIONS
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  /// IMAGE
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InteractiveViewer(
@@ -51,11 +114,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
 
-                  /// OPTIONS
                   ...question.options.map((option) {
-                    bool isSelected = selectedAnswer == option.id;
+                    bool isSelected =
+                        selectedAnswer == option.id;
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(
@@ -63,7 +126,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            selectedAnswer = option.id;
+                            userAnswers[question.id] =
+                                option.id;
                           });
                         },
                         child: Container(
@@ -73,24 +137,23 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                 ? Colors.blue.withOpacity(0.1)
                                 : Colors.white,
                             border: Border.all(
-                              color:
-                              isSelected ? Colors.blue : Colors.grey,
-                              width: 1.5,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
+                                color: isSelected
+                                    ? Colors.blue
+                                    : Colors.grey),
+                            borderRadius:
+                            BorderRadius.circular(10),
                           ),
                           child: Row(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "${option.id}. ",
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight:
+                                    FontWeight.bold),
                               ),
                               Expanded(
-                                child: Text(option.text),
-                              ),
+                                  child:
+                                  Text(option.text)),
                             ],
                           ),
                         ),
@@ -102,36 +165,42 @@ class _QuestionScreenState extends State<QuestionScreen> {
             ),
           ),
 
-          /// NAVIGATION BUTTONS
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment:
-              MainAxisAlignment.spaceBetween,
+            child: Column(
               children: [
-                ElevatedButton(
-                  onPressed: currentIndex > 0
-                      ? () {
-                    setState(() {
-                      currentIndex--;
-                      selectedAnswer = null;
-                    });
-                  }
-                      : null,
-                  child: const Text("Previous"),
+                Row(
+                  mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: currentIndex > 0
+                          ? () {
+                        setState(() {
+                          currentIndex--;
+                        });
+                      }
+                          : null,
+                      child: const Text("Previous"),
+                    ),
+                    ElevatedButton(
+                      onPressed: currentIndex <
+                          widget.test.questions.length - 1
+                          ? () {
+                        setState(() {
+                          currentIndex++;
+                        });
+                      }
+                          : null,
+                      child: const Text("Next"),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: currentIndex <
-                      widget.test.questions.length - 1
-                      ? () {
-                    setState(() {
-                      currentIndex++;
-                      selectedAnswer = null;
-                    });
-                  }
-                      : null,
-                  child: const Text("Next"),
-                ),
+                  onPressed: submitExam,
+                  child: const Text("Submit Exam"),
+                )
               ],
             ),
           ),
