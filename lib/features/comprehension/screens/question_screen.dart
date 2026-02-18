@@ -4,6 +4,7 @@ import 'package:tcf_canada_preparation/features/comprehension/data/models/questi
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
 
 import 'result_screen.dart';
+import 'question_grid_screen.dart';
 
 class QuestionScreen extends StatefulWidget {
   final TestModel test;
@@ -17,8 +18,8 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   int currentIndex = 0;
 
-  // Store answers per question
   Map<String, String> userAnswers = {};
+  Set<String> flaggedQuestions = {};
 
   late int remainingSeconds;
   Timer? timer;
@@ -26,9 +27,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   @override
   void initState() {
     super.initState();
-
     remainingSeconds = widget.test.durationMinutes * 60;
-
     startTimer();
   }
 
@@ -47,7 +46,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   void submitExam() {
     timer?.cancel();
-
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -57,6 +55,26 @@ class _QuestionScreenState extends State<QuestionScreen> {
         ),
       ),
     );
+  }
+
+  void openGrid() async {
+    final selectedIndex = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => QuestionGridScreen(
+          totalQuestions: widget.test.questions.length,
+          currentIndex: currentIndex,
+          userAnswers: userAnswers,
+          flaggedQuestions: flaggedQuestions,
+        ),
+      ),
+    );
+
+    if (selectedIndex != null) {
+      setState(() {
+        currentIndex = selectedIndex;
+      });
+    }
   }
 
   String formatTime(int seconds) {
@@ -76,18 +94,34 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget build(BuildContext context) {
     QuestionModel question = widget.test.questions[currentIndex];
     String? selectedAnswer = userAnswers[question.id];
+    bool isFlagged = flaggedQuestions.contains(question.id);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.test.title),
         actions: [
+          IconButton(
+            icon: Icon(
+              isFlagged ? Icons.flag : Icons.outlined_flag,
+              color: isFlagged ? Colors.orange : null,
+            ),
+            onPressed: () {
+              setState(() {
+                if (isFlagged) {
+                  flaggedQuestions.remove(question.id);
+                } else {
+                  flaggedQuestions.add(question.id);
+                }
+              });
+            },
+          ),
           Padding(
             padding: const EdgeInsets.all(12),
             child: Center(
               child: Text(
                 formatTime(remainingSeconds),
                 style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold),
               ),
             ),
           )
@@ -96,8 +130,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
       body: Column(
         children: [
           LinearProgressIndicator(
-            value: (currentIndex + 1) /
-                widget.test.questions.length,
+            value:
+            (currentIndex + 1) / widget.test.questions.length,
           ),
 
           Expanded(
@@ -131,7 +165,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           });
                         },
                         child: Container(
-                          padding: const EdgeInsets.all(14),
+                          padding:
+                          const EdgeInsets.all(14),
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? Colors.blue.withOpacity(0.1)
@@ -166,7 +201,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
           ),
 
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 Row(
@@ -197,9 +232,19 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: submitExam,
-                  child: const Text("Submit Exam"),
+                Row(
+                  mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: openGrid,
+                      child: const Text("Question Grid"),
+                    ),
+                    ElevatedButton(
+                      onPressed: submitExam,
+                      child: const Text("Submit Exam"),
+                    ),
+                  ],
                 )
               ],
             ),
