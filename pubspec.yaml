@@ -61,6 +61,8 @@ flutter:
   assets:
     - assets/images/ce/ce_01/
     - assets/images/ce/ce_02/
+    - assets/images/ce/ce_03/
+    - assets/images/ce/ce_04/
     - assets/audio/
     - assets/data/
 
