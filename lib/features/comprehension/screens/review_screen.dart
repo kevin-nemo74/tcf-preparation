@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
+
 
 class ReviewScreen extends StatefulWidget {
   final TestModel test;
@@ -18,7 +18,7 @@ class ReviewScreen extends StatefulWidget {
 
 class _ReviewScreenState extends State<ReviewScreen> {
   int selectedIndex = 0;
-  bool showPointsValue = false; // only show question value
+  bool showPointsValue = false;
 
   int getQuestionPoints(int questionNumber) {
     if (questionNumber >= 1 && questionNumber <= 4) return 3;
@@ -50,13 +50,15 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
     final total = widget.test.questions.length;
     final correct = calculateCorrectCount();
     final wrong = total - correct;
 
-    final question = widget.test.questions[selectedIndex];
-    final userAnswer = widget.userAnswers[question.id];
-    final correctAnswer = question.correctAnswer;
+    final q = widget.test.questions[selectedIndex];
+    final userAnswer = widget.userAnswers[q.id];
+    final correctAnswer = q.correctAnswer;
 
     final isWide = MediaQuery.of(context).size.width > 950;
 
@@ -66,7 +68,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
         actions: [
           Row(
             children: [
-              const Text("Show values"),
+              const Text("Values"),
               Switch.adaptive(
                 value: showPointsValue,
                 onChanged: (v) => setState(() => showPointsValue = v),
@@ -83,39 +85,41 @@ class _ReviewScreenState extends State<ReviewScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 350,
+              width: 360,
               child: Column(
                 children: [
-                  _buildSummary(correct, wrong, total),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: _buildGrid(total),
-                  ),
+                  _summaryCard(cs, correct, wrong, total),
+                  const SizedBox(height: 16),
+                  Expanded(child: _grid(cs, total)),
                 ],
               ),
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 16),
             Expanded(
-              child: _buildDetail(
-                  question,
-                  userAnswer,
-                  correctAnswer,
-                  selectedIndex),
+              child: _detailCard(
+                cs,
+                q,
+                userAnswer,
+                correctAnswer,
+                selectedIndex,
+              ),
             ),
           ],
         )
             : Column(
           children: [
-            _buildSummary(correct, wrong, total),
-            const SizedBox(height: 15),
-            SizedBox(height: 110, child: _buildGrid(total)),
-            const SizedBox(height: 15),
+            _summaryCard(cs, correct, wrong, total),
+            const SizedBox(height: 14),
+            SizedBox(height: 110, child: _grid(cs, total)),
+            const SizedBox(height: 14),
             Expanded(
-              child: _buildDetail(
-                  question,
-                  userAnswer,
-                  correctAnswer,
-                  selectedIndex),
+              child: _detailCard(
+                cs,
+                q,
+                userAnswer,
+                correctAnswer,
+                selectedIndex,
+              ),
             ),
           ],
         ),
@@ -123,31 +127,29 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  Widget _buildSummary(int correct, int wrong, int total) {
+  Widget _summaryCard(ColorScheme cs, int correct, int wrong, int total) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28),
-        gradient: LinearGradient(
-          colors: [
-            Colors.blue.shade50,
-            Colors.blue.shade100,
-          ],
-        ),
+        borderRadius: BorderRadius.circular(26),
+        color: cs.surface,
+        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
+            color: Colors.black.withOpacity(
+              Theme.of(context).brightness == Brightness.dark ? 0.25 : 0.06,
+            ),
+            blurRadius: 18,
+            offset: const Offset(0, 10),
           )
         ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _stat("Correct", correct.toString(), Colors.green),
-          _stat("Wrong", wrong.toString(), Colors.red),
-          _stat("Total", total.toString(), Colors.blue),
+          _stat("Correct", "$correct", Colors.green),
+          _stat("Wrong", "$wrong", Colors.red),
+          _stat("Total", "$total", cs.primary),
         ],
       ),
     );
@@ -157,60 +159,56 @@ class _ReviewScreenState extends State<ReviewScreen> {
     return Column(
       children: [
         Text(title),
-        const SizedBox(height: 5),
+        const SizedBox(height: 6),
         Text(
           value,
           style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: color),
+            fontSize: 22,
+            fontWeight: FontWeight.w900,
+            color: color,
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildGrid(int total) {
+  Widget _grid(ColorScheme cs, int total) {
     return GridView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: total,
-      gridDelegate:
-      const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),
       itemBuilder: (context, index) {
-        bool correct = isCorrectAt(index);
-        bool answered = isAnsweredAt(index);
-        bool selected = selectedIndex == index;
+        final answered = isAnsweredAt(index);
+        final correct = isCorrectAt(index);
+        final selected = selectedIndex == index;
 
-        Color color;
+        Color tileColor;
         if (!answered) {
-          color = Colors.grey.shade400;
+          tileColor = cs.outlineVariant.withOpacity(0.55);
         } else if (correct) {
-          color = Colors.green;
+          tileColor = Colors.green;
         } else {
-          color = Colors.red;
+          tileColor = Colors.red;
         }
 
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
+        return InkWell(
+          onTap: () => setState(() => selectedIndex = index),
+          borderRadius: BorderRadius.circular(20),
+          child: Ink(
             decoration: BoxDecoration(
-              color: color,
+              color: tileColor,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: selected ? Colors.blue : Colors.transparent,
+                color: selected ? cs.primary : Colors.transparent,
                 width: 3,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: color.withOpacity(0.3),
+                  color: tileColor.withOpacity(0.25),
                   blurRadius: 10,
                   offset: const Offset(0, 6),
                 )
@@ -223,15 +221,18 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   Text(
                     "${index + 1}",
                     style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                   if (showPointsValue)
                     Text(
                       "${getQuestionPoints(index + 1)} pts",
                       style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10),
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                 ],
               ),
@@ -242,90 +243,90 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  Widget _buildDetail(
-      question, userAnswer, correctAnswer, int index) {
+  Widget _detailCard(ColorScheme cs, dynamic question, String? userAnswer,
+      String correctAnswer, int index) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        color: Colors.white,
+        borderRadius: BorderRadius.circular(28),
+        color: cs.surface,
+        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 25,
-            offset: const Offset(0, 12),
+            color: Colors.black.withOpacity(
+              Theme.of(context).brightness == Brightness.dark ? 0.25 : 0.06,
+            ),
+            blurRadius: 18,
+            offset: const Offset(0, 10),
           )
         ],
       ),
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment:
-          CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Question ${index + 1}",
               style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                fontSize: 18,
+                fontWeight: FontWeight.w900,
+              ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
+
             Center(
               child: ConstrainedBox(
-                constraints:
-                const BoxConstraints(maxHeight: 450),
+                constraints: const BoxConstraints(maxHeight: 480),
                 child: ClipRRect(
-                  borderRadius:
-                  BorderRadius.circular(20),
-                  child: InteractiveViewer(
-                    child: Image.asset(
-                      question.imagePath,
-                      fit: BoxFit.contain,
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    color: cs.surfaceContainerHighest.withOpacity(0.25),
+                    padding: const EdgeInsets.all(10),
+                    child: InteractiveViewer(
+                      child: Image.asset(
+                        question.imagePath,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 25),
-            ...question.options.map((option) {
-              bool isUser =
-                  userAnswer == option.id;
-              bool isCorrect =
-                  correctAnswer == option.id;
 
-              Color border = Colors.grey.shade300;
-              Color bg = Colors.grey.shade50;
+            const SizedBox(height: 20),
+
+            ...question.options.map((option) {
+              final isUser = userAnswer == option.id;
+              final isCorrect = correctAnswer == option.id;
+
+              Color border = cs.outlineVariant.withOpacity(0.35);
+              Color bg = cs.surfaceContainerHighest.withOpacity(0.25);
 
               if (isCorrect) {
                 border = Colors.green;
-                bg = Colors.green.withOpacity(0.08);
+                bg = Colors.green.withOpacity(0.10);
               }
-
               if (isUser && !isCorrect) {
                 border = Colors.red;
-                bg = Colors.red.withOpacity(0.08);
+                bg = Colors.red.withOpacity(0.10);
               }
 
               return Container(
-                margin: const EdgeInsets.symmetric(
-                    vertical: 6),
-                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.symmetric(vertical: 6),
+                padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  borderRadius:
-                  BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20),
                   color: bg,
-                  border: Border.all(
-                      color: border, width: 1.5),
+                  border: Border.all(color: border, width: 1.5),
                 ),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "${option.id}. ",
-                      style: const TextStyle(
-                          fontWeight:
-                          FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.w900),
                     ),
-                    Expanded(
-                        child: Text(option.text)),
+                    Expanded(child: Text(option.text)),
                   ],
                 ),
               );
