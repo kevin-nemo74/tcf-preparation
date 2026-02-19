@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
-import 'features/comprehension/screens/test_list_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:tcf_canada_preparation/features/comprehension/screens/test_list_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'app/theme_controller.dart';
+import 'core/theme/app_theme.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final themeController = ThemeController();
+  await themeController.loadThemeMode();
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => themeController,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,9 +24,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    final themeController = context.watch<ThemeController>();
+
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TestListScreen(),
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: themeController.themeMode,
+      home: const TestListScreen(),
     );
   }
 }
