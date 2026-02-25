@@ -16637,6 +16637,1317 @@
         "correctAnswer": "C"
       }
     ]
+  },
+  {
+    "id": "ce_38",
+    "title": "Compréhension Écrite – Test 38",
+    "type": "CE",
+    "durationMinutes": 60,
+    "questions": [
+      {
+        "id": "Q1",
+        "imagePath": "assets/images/ce/ce_38/1.png",
+        "options": [
+          { "id": "A", "text": "Au cinéma." },
+          { "id": "B", "text": "Au restaurant." },
+          { "id": "C", "text": "Chez son ami." },
+          { "id": "D", "text": "Dans un bar." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q2",
+        "imagePath": "assets/images/ce/ce_38/2.png",
+        "options": [
+          { "id": "A", "text": "Téléphoner au numéro donné." },
+          { "id": "B", "text": "Écrire un courriel de réponse." },
+          { "id": "C", "text": "Écouter le répondeur." },
+          { "id": "D", "text": "Contacter le standard." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q3",
+        "imagePath": "assets/images/ce/ce_38/3.png",
+        "options": [
+          { "id": "A", "text": "Par courrier." },
+          { "id": "B", "text": "Par téléphone." },
+          { "id": "C", "text": "Sur Internet." },
+          { "id": "D", "text": "Sur place." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q4",
+        "imagePath": "assets/images/ce/ce_38/4.png",
+        "options": [
+          { "id": "A", "text": "Ils apprennent la géographie." },
+          { "id": "B", "text": "Ils invitent des amis à l’école." },
+          { "id": "C", "text": "Ils pratiquent des langues étrangères." },
+          { "id": "D", "text": "Ils préparent un voyage de classe." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q5",
+        "imagePath": "assets/images/ce/ce_38/5.png",
+        "options": [
+          { "id": "A", "text": "Une adresse." },
+          { "id": "B", "text": "Une date." },
+          { "id": "C", "text": "Un horaire." },
+          { "id": "D", "text": "Un tarif." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q6",
+        "imagePath": "assets/images/ce/ce_38/6.png",
+        "options": [
+          { "id": "A", "text": "De cuisiner avec des professionnels." },
+          { "id": "B", "text": "De faire une réservation par Internet." },
+          { "id": "C", "text": "De gagner un repas gratuit pour deux." },
+          { "id": "D", "text": "De recevoir des recettes typiques." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q7",
+        "imagePath": "assets/images/ce/ce_38/7.png",
+        "options": [
+          { "id": "A", "text": "À un commerçant." },
+          { "id": "B", "text": "À un étudiant." },
+          { "id": "C", "text": "À un professeur." },
+          { "id": "D", "text": "À un propriétaire." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q8",
+        "imagePath": "assets/images/ce/ce_38/8.png",
+        "options": [
+          { "id": "A", "text": "Une formation adaptée pendant les vacances." },
+          { "id": "B", "text": "Une grande variété de cours intensifs." },
+          { "id": "C", "text": "Une promotion spéciale pour un voyage." },
+          { "id": "D", "text": "Une réduction sur des stages pendant." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q9",
+        "imagePath": "assets/images/ce/ce_38/9.png",
+        "options": [
+          { "id": "A", "text": "De participer à un concours." },
+          { "id": "B", "text": "De s’inscrire à un stage." },
+          { "id": "C", "text": "De tester des activités" },
+          { "id": "D", "text": "Voir un spectacle." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q10",
+        "imagePath": "assets/images/ce/ce_38/10.png",
+        "options": [
+          { "id": "A", "text": "Des visites de musées." },
+          { "id": "B", "text": "Des voyages en Europe." },
+          { "id": "C", "text": "Un mois de vacances." },
+          { "id": "D", "text": "Un semestre d’études." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q11",
+        "imagePath": "assets/images/ce/ce_38/11.png",
+        "options": [
+          { "id": "A", "text": "De dormir au milieu de la nature." },
+          { "id": "B", "text": "Faire un parcours dans les arbres." },
+          { "id": "C", "text": "De participer à une aventure sportive." },
+          { "id": "D", "text": "De passer une nuit sous la tente." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q12",
+        "imagePath": "assets/images/ce/ce_38/12.png",
+        "options": [
+          { "id": "A", "text": "Pour éviter de tomber malade." },
+          { "id": "B", "text": "Pour profiter de tarifs avantageux." },
+          { "id": "C", "text": "Pour protéger l’environnement." },
+          { "id": "D", "text": "Pour soutenir les paysans locaux." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q13",
+        "imagePath": "assets/images/ce/ce_38/13.png",
+        "options": [
+          { "id": "A", "text": "D’assister à un concert à Rouen." },
+          { "id": "B", "text": "De devenir membre de l’orchestre municipal." },
+          { "id": "C", "text": "De suivre des cours de musique à la rentrée." },
+          { "id": "D", "text": "De visiter le conservatoire." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q14",
+        "imagePath": "assets/images/ce/ce_38/14.png",
+        "options": [
+          { "id": "A", "text": "Assister à des spectacles." },
+          { "id": "B", "text": "Obtenir de meilleures places." },
+          { "id": "C", "text": "Rencontrer des comédiens." },
+          { "id": "D", "text": "Suivre des visites guidées." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q15",
+        "imagePath": "assets/images/ce/ce_38/15.png",
+        "options": [
+          { "id": "A", "text": "Des activités de loisir." },
+          { "id": "B", "text": "Des vacances à la campagne." },
+          { "id": "C", "text": "Un cours de natation." },
+          { "id": "D", "text": "Une promenade avec un guide." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q16",
+        "imagePath": "assets/images/ce/ce_38/16.png",
+        "options": [
+          { "id": "A", "text": "Aller dans un bar." },
+          { "id": "B", "text": "Assister à un spectacle." },
+          { "id": "C", "text": "Dîner au restaurant" },
+          { "id": "D", "text": "Voir une pièce de théâtre." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q17",
+        "imagePath": "assets/images/ce/ce_38/17.png",
+        "options": [
+          { "id": "A", "text": "Ils évitent de rayer les appareils à écran tactile." },
+          { "id": "B", "text": "Ils permettent un contact direct avec un écran tactile." },
+          { "id": "C", "text": "Ils sont équipés de capteurs reliés à un écran tactile." },
+          { "id": "D", "text": "Ils sont offerts lors de l’achat d’un écran tactile" }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q18",
+        "imagePath": "assets/images/ce/ce_38/18.png",
+        "options": [
+          { "id": "A", "text": "Des idées de stages en entreprise." },
+          { "id": "B", "text": "Un guide des démarches d’inscription." },
+          { "id": "C", "text": "Une méthode pour choisir une formation." },
+          { "id": "D", "text": "Une sélection des meilleures universités." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q19",
+        "imagePath": "assets/images/ce/ce_38/19.png",
+        "options": [
+          { "id": "A", "text": "L’origine historique de la recette" },
+          { "id": "B", "text": "Le secret d’une bonne préparation." },
+          { "id": "C", "text": "Les adresses où les consommer." },
+          { "id": "D", "text": "Les raisons de leur popularité." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q20",
+        "imagePath": "assets/images/ce/ce_38/20.png",
+        "options": [
+          { "id": "A", "text": "Des cours de rattrapage scolaire en sciences." },
+          { "id": "B", "text": "Des activités de découverte de la nature." },
+          { "id": "C", "text": "Des stages de travail en laboratoire." },
+          { "id": "D", "text": "Des séjours alliant détente et découvertes." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q21",
+        "imagePath": "assets/images/ce/ce_38/21.png",
+        "options": [
+          { "id": "A", "text": "La priorité donnée à l’aspect écologique." },
+          { "id": "B", "text": "La prise en compte de l’opinion publique." },
+          { "id": "C", "text": "Le caractère provisoire de l’installation." },
+          { "id": "D", "text": "Le choix des matériaux de fabrication." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q22",
+        "imagePath": "assets/images/ce/ce_38/22.png",
+        "options": [
+          { "id": "A", "text": "C’est possible à la campagne." },
+          { "id": "B", "text": "C’est possible avec du temps." },
+          { "id": "C", "text": "C’est possible mais pénible." },
+          { "id": "D", "text": "C’est possible pour tous." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q23",
+        "imagePath": "assets/images/ce/ce_38/23.png",
+        "options": [
+          { "id": "A", "text": "Pour améliorer leur situation financière." },
+          { "id": "B", "text": "Pour donner une bonne image d’eux." },
+          { "id": "C", "text": "Pour exécuter les ordres de la direction." },
+          { "id": "D", "text": "Pour quitter leur entreprise plus tôt." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q24",
+        "imagePath": "assets/images/ce/ce_38/24.png",
+        "options": [
+          { "id": "A", "text": "Découvrir le travail de recherche en laboratoire" },
+          { "id": "B", "text": "Faire découvrir les formations pour devenir ingénieur" },
+          { "id": "C", "text": "Inaugurer l’ouverture d’un campus universitaire" },
+          { "id": "D", "text": "Obtenir des conseils afin de créer une association" }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q25",
+        "imagePath": "assets/images/ce/ce_38/25.png",
+        "options": [
+          { "id": "A", "text": "Il demande une prise charge médicale." },
+          { "id": "B", "text": "Il peut s’étendre au domaine personnel." },
+          { "id": "C", "text": "Il suscite un consensus parmi les spécialistes." },
+          { "id": "D", "text": "Il touche surtout les aides-soignants." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q26",
+        "imagePath": "assets/images/ce/ce_38/26.png",
+        "options": [
+          { "id": "A", "text": "De l’éducation des plus jeunes." },
+          { "id": "B", "text": "De la transmission d’un savoir-faire." },
+          { "id": "C", "text": "De la volonté d’émancipation." },
+          { "id": "D", "text": "Du rapport entre les générations." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q27",
+        "imagePath": "assets/images/ce/ce_38/27.png",
+        "options": [
+          { "id": "A", "text": "Le coût des dispositifs pose un problème d’éthique." },
+          { "id": "B", "text": "Le respect de la déontologie médicale est primordial." },
+          { "id": "C", "text": "Les fabricants d’implants doivent signer une charte" },
+          { "id": "D", "text": "Les patients ont le devoir de s’informer davantage." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q28",
+        "imagePath": "assets/images/ce/ce_38/28.png",
+        "options": [
+          { "id": "A", "text": "C’est un état difficile à évaluer chez une personne." },
+          { "id": "B", "text": "Des outils ont été élaborés pour en estimer l’intensité." },
+          { "id": "C", "text": "Les enquêtes dont c’est le sujet sont innombrables." },
+          { "id": "D", "text": "Malgré des études sérieuses, l’analyse est impossible." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q29",
+        "imagePath": "assets/images/ce/ce_38/29.png",
+        "options": [
+          { "id": "A", "text": "Il commente une loi." },
+          { "id": "B", "text": "Il donne un conseil." },
+          { "id": "C", "text": "Il formule une plainte." },
+          { "id": "D", "text": "Il raconte une anecdote." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q30",
+        "imagePath": "assets/images/ce/ce_38/30.png",
+        "options": [
+          { "id": "A", "text": "Mémoriser des concepts sans les comprendre." },
+          { "id": "B", "text": "Multiplier les méthodes d’apprentissage." },
+          { "id": "C", "text": "S’autoriser des pauses fréquemment." },
+          { "id": "D", "text": "Se disperser dans de nombreuses activités" }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q31",
+        "imagePath": "assets/images/ce/ce_38/31.png",
+        "options": [
+          { "id": "A", "text": "Ils bouleversent les rapports d’autorité." },
+          { "id": "B", "text": "Ils évitent les postes à responsabilité." },
+          { "id": "C", "text": "Ils sont moins motivés que leurs aînés." },
+          { "id": "D", "text": "Ils tiennent à la stabilité de l’emploi." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q32",
+        "imagePath": "assets/images/ce/ce_38/32.png",
+        "options": [
+          { "id": "A", "text": "Développer leur esprit critique." },
+          { "id": "B", "text": "Encourager les débats entre eux." },
+          { "id": "C", "text": "Enrichir leur capacité mémorielle." },
+          { "id": "D", "text": "Évaluer régulièrement leurs acquis." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q33",
+        "imagePath": "assets/images/ce/ce_38/33.png",
+        "options": [
+          { "id": "A", "text": "L’absence de modèle comparatif de mobilité." },
+          { "id": "B", "text": "La déresponsabilisation des usagers." },
+          { "id": "C", "text": "Le déficit provoqué par son financement." },
+          { "id": "D", "text": "Le risque de saturation des réseaux." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q34",
+        "imagePath": "assets/images/ce/ce_38/34.png",
+        "options": [
+          { "id": "A", "text": "Convaincre la clientèle cible." },
+          { "id": "B", "text": "Former les spécialistes du secteur." },
+          { "id": "C", "text": "Rentabiliser les projets à venir." },
+          { "id": "D", "text": "Restaurer d’anciens bâtiments." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q35",
+        "imagePath": "assets/images/ce/ce_38/35.png",
+        "options": [
+          { "id": "A", "text": "Sa technique puise dans divers mouvements artistiques." },
+          { "id": "B", "text": "Ses œuvres se fondent dans leur environnement." },
+          { "id": "C", "text": "Son inspiration provient de ses nombreuses lectures." },
+          { "id": "D", "text": "Son savoir-faire met en valeur des proc connus." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q36",
+        "imagePath": "assets/images/ce/ce_38/36.png",
+        "options": [
+          { "id": "A", "text": "La primauté de l’apparence sur les compétences." },
+          { "id": "B", "text": "Le corporatisme poussé de certaines sociétés." },
+          { "id": "C", "text": "Le manque de formation aux nouvelles technologies." },
+          { "id": "D", "text": "Les principes actuels d’organisation du travail." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q37",
+        "imagePath": "assets/images/ce/ce_38/37.png",
+        "options": [
+          { "id": "A", "text": "Elle a accru la compétitivité industrielle." },
+          { "id": "B", "text": "Elle a amélioré les conditions de travail." },
+          { "id": "C", "text": "Elle a enrayé la hausse du chômage." },
+          { "id": "D", "text": "Elle a modifié l’organisation du travail." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q38",
+        "imagePath": "assets/images/ce/ce_38/38.png",
+        "options": [
+          { "id": "A", "text": "Améliorer la cohabitation entre les habitants et les noctambules." },
+          { "id": "B", "text": "Attirer les spectateurs parisiens vers les spectacles de rue." },
+          { "id": "C", "text": "Développer un nouveau concept de lieux silencieux." },
+          { "id": "D", "text": "Relancer la fréquentation nocturne des quartiers réservés." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q39",
+        "imagePath": "assets/images/ce/ce_38/39.png",
+        "options": [
+          { "id": "A", "text": "L’importance de la gestion des ressources humaines." },
+          { "id": "B", "text": "L’intérêt d’éviter les inconvénients liés à l’isolement." },
+          { "id": "C", "text": "La facilité de réaliser des projets communs à distance." },
+          { "id": "D", "text": "La nécessité de souder les équipes dans une entreprise." }
+        ],
+        "correctAnswer": "B"
+      }
+    ]
+  },
+  {
+    "id": "ce_39",
+    "title": "Compréhension Écrite – Test 39",
+    "type": "CE",
+    "durationMinutes": 60,
+    "questions": [
+      {
+        "id": "Q1",
+        "imagePath": "assets/images/ce/ce_39/1.png",
+        "options": [
+          { "id": "A", "text": "À un cours de pâtisserie." },
+          { "id": "B", "text": "À un déjeuner chez un ami." },
+          { "id": "C", "text": "À une fête d’anniversaire." },
+          { "id": "D", "text": "À une sortie en discothèque." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q2",
+        "imagePath": "assets/images/ce/ce_39/2.png",
+        "options": [
+          { "id": "A", "text": "Le bus." },
+          { "id": "B", "text": "Le métro." },
+          { "id": "C", "text": "Le train." },
+          { "id": "D", "text": "Le tramway." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q3",
+        "imagePath": "assets/images/ce/ce_39/3.png",
+        "options": [
+          { "id": "A", "text": "Acheter une voiture." },
+          { "id": "B", "text": "Aller chez Anthony." },
+          { "id": "C", "text": "Faire des courses samedi." },
+          { "id": "D", "text": "Travailler à Bordeaux." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q4",
+        "imagePath": "assets/images/ce/ce_39/4.png",
+        "options": [
+          { "id": "A", "text": "D’acheter du matériel en soldes." },
+          { "id": "B", "text": "De participer à un concours." },
+          { "id": "C", "text": "De rencontre des professionnels." },
+          { "id": "D", "text": "De suivre des cours débutants." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q5",
+        "imagePath": "assets/images/ce/ce_39/5.png",
+        "options": [
+          { "id": "A", "text": "D’aider à organiser une fête." },
+          { "id": "B", "text": "De devenir membre d’une association." },
+          { "id": "C", "text": "De distribuer des repas gratuits." },
+          { "id": "D", "text": "De participer à un événement sportif." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q6",
+        "imagePath": "assets/images/ce/ce_39/6.png",
+        "options": [
+          { "id": "A", "text": "D’écrire aux invités." },
+          { "id": "B", "text": "D’organiser la fête." },
+          { "id": "C", "text": "De garder des enfants." },
+          { "id": "D", "text": "De préparer des danses." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q7",
+        "imagePath": "assets/images/ce/ce_39/7.png",
+        "options": [
+          { "id": "A", "text": "Pour changer un horaire." },
+          { "id": "B", "text": "Pour organiser une fête." },
+          { "id": "C", "text": "Pour présenter des élèves." },
+          { "id": "D", "text": "Pour proposer une sortie." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q8",
+        "imagePath": "assets/images/ce/ce_39/8.png",
+        "options": [
+          { "id": "A", "text": "Ecrire un message." },
+          { "id": "B", "text": "Prendre un billet d’avion." },
+          { "id": "C", "text": "Réserver un hôtel." },
+          { "id": "D", "text": "S’inscrire à un jeu." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q9",
+        "imagePath": "assets/images/ce/ce_39/9.png",
+        "options": [
+          { "id": "A", "text": "De donner des cours." },
+          { "id": "B", "text": "De garder des enfants." },
+          { "id": "C", "text": "De rencontre des voisins." },
+          { "id": "D", "text": "De suivre des formations." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q10",
+        "imagePath": "assets/images/ce/ce_39/10.png",
+        "options": [
+          { "id": "A", "text": "À acheter sur internet." },
+          { "id": "B", "text": "À choisir ses produits." },
+          { "id": "C", "text": "À noter les magasins." },
+          { "id": "D", "text": "A trouver des recettes." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q11",
+        "imagePath": "assets/images/ce/ce_39/11.png",
+        "options": [
+          { "id": "A", "text": "C’est la destination préférée des touristes français." },
+          { "id": "B", "text": "De plus en plus de jeunes souhaitent s’y installer." },
+          { "id": "C", "text": "Elle réunit les caractéristiques de deux continents." },
+          { "id": "D", "text": "On y entend des langues du monde entier." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q12",
+        "imagePath": "assets/images/ce/ce_39/12.png",
+        "options": [
+          { "id": "A", "text": "D’aider des malades." },
+          { "id": "B", "text": "De faire un don." },
+          { "id": "C", "text": "De s’informer à la mairie." },
+          { "id": "D", "text": "De travailler l’été." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q13",
+        "imagePath": "assets/images/ce/ce_39/13.png",
+        "options": [
+          { "id": "A", "text": "D’envoyer très rapidement le devis." },
+          { "id": "B", "text": "D’interdire l’emploi de produits toxiques." },
+          { "id": "C", "text": "De libérer les lieux pendant les travaux." },
+          { "id": "D", "text": "De préciser la nature de l’intervention." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q14",
+        "imagePath": "assets/images/ce/ce_39/14.png",
+        "options": [
+          { "id": "A", "text": "Certains solariums font une discrimination anti-jeunes." },
+          { "id": "B", "text": "La majorité des solariums ne respecte pas du tout la loi." },
+          { "id": "C", "text": "La plupart des jeunes filles ignorent l’interdiction légale." },
+          { "id": "D", "text": "La plupart des parents ignorent les dangers des solariums." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q15",
+        "imagePath": "assets/images/ce/ce_39/15.png",
+        "options": [
+          { "id": "A", "text": "D’assister à une réunion." },
+          { "id": "B", "text": "De participer à un voyage." },
+          { "id": "C", "text": "De suivre une formation." },
+          { "id": "D", "text": "De travailler à l’étranger." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q16",
+        "imagePath": "assets/images/ce/ce_39/16.png",
+        "options": [
+          { "id": "A", "text": "De dormir en milieu naturel." },
+          { "id": "B", "text": "De faire une visite originale." },
+          { "id": "C", "text": "De participer à un stage aventure." },
+          { "id": "D", "text": "De passer la nuit dans un zoo." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q17",
+        "imagePath": "assets/images/ce/ce_39/17.png",
+        "options": [
+          { "id": "A", "text": "La pression de la société." },
+          { "id": "B", "text": "La réputation des clubs." },
+          { "id": "C", "text": "Les bienfaits pour la santé." },
+          { "id": "D", "text": "Les envies des adolescents." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q18",
+        "imagePath": "assets/images/ce/ce_39/18.png",
+        "options": [
+          { "id": "A", "text": "Corriger les mauvaises habitudes alimentaires des enfants." },
+          { "id": "B", "text": "Faire respecter la législation sur l’alimentation des enfants." },
+          { "id": "C", "text": "Mieux comprendre les préférences alimentaires des enfants." },
+          { "id": "D", "text": "Permettre aux enfants de découvrir de nouveaux aliments." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q19",
+        "imagePath": "assets/images/ce/ce_39/19.png",
+        "options": [
+          { "id": "A", "text": "Annoncer le lancement d’une nouvelle ligne ferroviaire." },
+          { "id": "B", "text": "Faire patienter les usagers de la SNCF pendant leur trajet." },
+          { "id": "C", "text": "Promouvoir d’autres offres commerciales de la SNCF." },
+          { "id": "D", "text": "Rappeler que le train permet de rallier toutes les villes." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q20",
+        "imagePath": "assets/images/ce/ce_39/20.png",
+        "options": [
+          { "id": "A", "text": "L’origine historique de la recette." },
+          { "id": "B", "text": "Le secret d’une bonne préparation." },
+          { "id": "C", "text": "Les adresses où les consommer." },
+          { "id": "D", "text": "Les raisons de leur popularité." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q21",
+        "imagePath": "assets/images/ce/ce_39/21.png",
+        "options": [
+          { "id": "A", "text": "Informer sur de nouvelles méthodes éducatives." },
+          { "id": "B", "text": "Montrer la vie de tous les jours d’un jeune couple." },
+          { "id": "C", "text": "Présenter les relations familiales avec humour." },
+          { "id": "D", "text": "Proposer de solutions a des situations de crise." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q22",
+        "imagePath": "assets/images/ce/ce_39/22.png",
+        "options": [
+          { "id": "A", "text": "C’est possible à la campagne." },
+          { "id": "B", "text": "C’est possible avec du temps." },
+          { "id": "C", "text": "C’est possible mais pénible." },
+          { "id": "D", "text": "C’est possible pour tous." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q23",
+        "imagePath": "assets/images/ce/ce_39/23.png",
+        "options": [
+          { "id": "A", "text": "Pour améliorer leur situation financière." },
+          { "id": "B", "text": "Pour donner une bonne image d’eux." },
+          { "id": "C", "text": "Pour exécuter les ordres de la direction." },
+          { "id": "D", "text": "Pour quitter leur entreprise plus tôt." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q24",
+        "imagePath": "assets/images/ce/ce_39/24.png",
+        "options": [
+          { "id": "A", "text": "Parce que la majorité des pays invités en a fait la demande." },
+          { "id": "B", "text": "Parce que la manifestation s’est centrée sur la région de Saint-Malo." },
+          { "id": "C", "text": "Parce que les partenaires ont réduit leurs subventions." },
+          { "id": "D", "text": "Parce que l’événement s’inscrit dans un principe d’universalité." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q25",
+        "imagePath": "assets/images/ce/ce_39/25.png",
+        "options": [
+          { "id": "A", "text": "L’urbanisation galopante des campagnes." },
+          { "id": "B", "text": "La faible étendue des réserves écologiques." },
+          { "id": "C", "text": "Le dérèglement climatique de la planète." },
+          { "id": "D", "text": "Les produits utilisés dans les cultures." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q26",
+        "imagePath": "assets/images/ce/ce_39/26.png",
+        "options": [
+          { "id": "A", "text": "L’esprit d’équipe est la clé de la réussite professionnelle." },
+          { "id": "B", "text": "La bonne humeur garantit de meilleures performances." },
+          { "id": "C", "text": "Le cadre de l’entreprise influe sur le moral des salariés." },
+          { "id": "D", "text": "Les primes contribuent à la motivation du personnel." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q27",
+        "imagePath": "assets/images/ce/ce_39/27.png",
+        "options": [
+          { "id": "A", "text": "L’image proposée par la publicité nuisait au fabricant." },
+          { "id": "B", "text": "Le produit vendu par la publicité était nocif pour la santé." },
+          { "id": "C", "text": "Le message véhiculé par la publicité était inacceptable." },
+          { "id": "D", "text": "L’usage du produit promu par la publicité était illicite." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q28",
+        "imagePath": "assets/images/ce/ce_39/28.png",
+        "options": [
+          { "id": "A", "text": "Ils améliorent leurs résultats dans toutes les matières." },
+          { "id": "B", "text": "Ils regrettent le manque de possibilités d’échanges." },
+          { "id": "C", "text": "Ils s’impliquent de façon responsable dans les cours." },
+          { "id": "D", "text": "Ils sont de plus en plus nombreux à choisir ce système." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q29",
+        "imagePath": "assets/images/ce/ce_39/29.png",
+        "options": [
+          { "id": "A", "text": "Comme un défaut d’honnêteté." },
+          { "id": "B", "text": "Comme un manque de confiance." },
+          { "id": "C", "text": "Comme une appréciation déguisée." },
+          { "id": "D", "text": "Comme une incitation à l’action." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q30",
+        "imagePath": "assets/images/ce/ce_39/30.png",
+        "options": [
+          { "id": "A", "text": "Demander à une cliente de payer l’intégralité de sa commande." },
+          { "id": "B", "text": "Prévenir une cliente que sa commande sera livrée en retard." },
+          { "id": "C", "text": "Confirmer à une cliente que sa commande a bien été expédiée." },
+          { "id": "D", "text": "Prévenir une cliente qu’elle devra payer 20 euros de frais d’envoi." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q31",
+        "imagePath": "assets/images/ce/ce_39/31.png",
+        "options": [
+          { "id": "A", "text": "Sur l’industrie des bois rares." },
+          { "id": "B", "text": "Sur la démographie dans ces zones." },
+          { "id": "C", "text": "Sur la pollution atmosphérique." },
+          { "id": "D", "text": "Sur la progression des cultures tropicales." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q32",
+        "imagePath": "assets/images/ce/ce_39/32.png",
+        "options": [
+          { "id": "A", "text": "Le dosage des produits chimiques dans les aliments." },
+          { "id": "B", "text": "Le manque de lisibilité des étiquettes." },
+          { "id": "C", "text": "Les arguments hypocrites avancés par les fabricants." },
+          { "id": "D", "text": "Les conséquences sanitaires des ajouts." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q33",
+        "imagePath": "assets/images/ce/ce_39/33.png",
+        "options": [
+          { "id": "A", "text": "C’est un handicap qui peut se transformer en atout." },
+          { "id": "B", "text": "Il décuple l’ensemble des aptitudes cérébrales." },
+          { "id": "C", "text": "Il est officiellement reconnu comme une maladie." },
+          { "id": "D", "text": "Ses effets touchent plus particulièrement les seniors." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q34",
+        "imagePath": "assets/images/ce/ce_39/34.png",
+        "options": [
+          { "id": "A", "text": "L’idée de démocratie est aujourd’hui plus controversée qu’avant." },
+          { "id": "B", "text": "La démocratie est affaiblie par la diversité de ses formes." },
+          { "id": "C", "text": "La mise en place de la démocratie résulte d’un long processus." },
+          { "id": "D", "text": "Les fondements théoriques de la démocratie sont utopiques." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q35",
+        "imagePath": "assets/images/ce/ce_39/35.png",
+        "options": [
+          { "id": "A", "text": "Ils se détériorent après un certain temps." },
+          { "id": "B", "text": "Ils sont dangereux pour la santé." },
+          { "id": "C", "text": "Ils sont nuisibles pour l’environnement." },
+          { "id": "D", "text": "Ils sont vendus à des prix élevés." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q36",
+        "imagePath": "assets/images/ce/ce_39/36.png",
+        "options": [
+          { "id": "A", "text": "L’influence de ses contemporains." },
+          { "id": "B", "text": "La singularité de ses portraits." },
+          { "id": "C", "text": "Son engouement pour la nature." },
+          { "id": "D", "text": "Son travail post-impressionniste." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q37",
+        "imagePath": "assets/images/ce/ce_39/37.png",
+        "options": [
+          { "id": "A", "text": "Elle a accru la compétitivité industrielle." },
+          { "id": "B", "text": "Elle a amélioré les conditions de travail." },
+          { "id": "C", "text": "Elle a enrayé la hausse du chômage." },
+          { "id": "D", "text": "Elle a modifié l’organisation du travail." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q38",
+        "imagePath": "assets/images/ce/ce_39/38.png",
+        "options": [
+          { "id": "A", "text": "La dégradation des relations sociales à cause d’Internet." },
+          { "id": "B", "text": "La multiplication des sources d’information." },
+          { "id": "C", "text": "La nocivité des écrans sur le développement des enfants." },
+          { "id": "D", "text": "La recrudescence d’informations mensongères." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q39",
+        "imagePath": "assets/images/ce/ce_39/39.png",
+        "options": [
+          { "id": "A", "text": "Il constitue une création artistique novatrice." },
+          { "id": "B", "text": "Il établit des ponts avec d’autres auteurs." },
+          { "id": "C", "text": "Il fait connaître les travaux d’un écrivain." },
+          { "id": "D", "text": "Il ouvre la voie à de prochaines réalisations." }
+        ],
+        "correctAnswer": "C"
+      }
+    ]
+  },
+  {
+    "id": "ce_40",
+    "title": "Compréhension Écrite – Test 40",
+    "type": "CE",
+    "durationMinutes": 60,
+    "questions": [
+      {
+        "id": "Q1",
+        "imagePath": "assets/images/ce/ce_40/1.png",
+        "options": [
+          { "id": "A", "text": "Pour proposer une promenade en bateau." },
+          { "id": "B", "text": "Pour raconter son séjour en Bretagne." },
+          { "id": "C", "text": "Pour répondre à son cousin Benjamin." },
+          { "id": "D", "text": "Pour réserver une place dans un camping." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q2",
+        "imagePath": "assets/images/ce/ce_40/2.png",
+        "options": [
+          { "id": "A", "text": "Commander des médicaments." },
+          { "id": "B", "text": "Demander un remboursement." },
+          { "id": "C", "text": "Lire des résultats d’analyse." },
+          { "id": "D", "text": "Voir un docteur à distance." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q3",
+        "imagePath": "assets/images/ce/ce_40/3.png",
+        "options": [
+          { "id": "A", "text": "De faire un achat." },
+          { "id": "B", "text": "De préparer un repas." },
+          { "id": "C", "text": "De réserver un restaurant." },
+          { "id": "D", "text": "De trouver une recette." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q4",
+        "imagePath": "assets/images/ce/ce_40/4.png",
+        "options": [
+          { "id": "A", "text": "De l’aide pour un événement." },
+          { "id": "B", "text": "De l’argent pour un concours." },
+          { "id": "C", "text": "Des artistes pour monter sur scène." },
+          { "id": "D", "text": "Des guides pour des visites de la ville." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q5",
+        "imagePath": "assets/images/ce/ce_40/5.png",
+        "options": [
+          { "id": "A", "text": "Un repas au restaurant." },
+          { "id": "B", "text": "Un séjour à l’hôtel." },
+          { "id": "C", "text": "Une commande de matériel." },
+          { "id": "D", "text": "Une location de voiture." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q6",
+        "imagePath": "assets/images/ce/ce_40/6.png",
+        "options": [
+          { "id": "A", "text": "Aider des familles en difficulté." },
+          { "id": "B", "text": "Donner un vélo à des élèves." },
+          { "id": "C", "text": "Ouvrir de nouveaux collèges." },
+          { "id": "D", "text": "Réparer de vieilles bicyclettes." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q7",
+        "imagePath": "assets/images/ce/ce_40/7.png",
+        "options": [
+          { "id": "A", "text": "D’apprendre à cuisiner des plats." },
+          { "id": "B", "text": "De faire de nouvelles rencontres." },
+          { "id": "C", "text": "De faire une promenade dans un parc." },
+          { "id": "D", "text": "De prendre des cours de langue." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q8",
+        "imagePath": "assets/images/ce/ce_40/8.png",
+        "options": [
+          { "id": "A", "text": "Pour annoncer son déménagement." },
+          { "id": "B", "text": "Pour donner de ses nouvelles." },
+          { "id": "C", "text": "Pour inviter Lucie en vacances." },
+          { "id": "D", "text": "Pour remercier son amie." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q9",
+        "imagePath": "assets/images/ce/ce_40/9.png",
+        "options": [
+          { "id": "A", "text": "De participer à un concours." },
+          { "id": "B", "text": "De s’inscrire à un stage." },
+          { "id": "C", "text": "De tester des activités" },
+          { "id": "D", "text": "Voir un spectacle." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q10",
+        "imagePath": "assets/images/ce/ce_40/10.png",
+        "options": [
+          { "id": "A", "text": "Dessiner des bâtiments publics originaux." },
+          { "id": "B", "text": "Donner le goût du voyage aux habitants" },
+          { "id": "C", "text": "Inventer une ville facile à vivre pour tous." },
+          { "id": "D", "text": "Prévoir de nouveaux moyens de transport." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q11",
+        "imagePath": "assets/images/ce/ce_40/11.png",
+        "options": [
+          { "id": "A", "text": "De dormir au milieu de la nature." },
+          { "id": "B", "text": "Faire un parcours dans les arbres." },
+          { "id": "C", "text": "De participer à une aventure sportive." },
+          { "id": "D", "text": "De passer une nuit sous la tente." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q12",
+        "imagePath": "assets/images/ce/ce_40/12.png",
+        "options": [
+          { "id": "A", "text": "De participer à un jeu." },
+          { "id": "B", "text": "De préparer un repas." },
+          { "id": "C", "text": "De recevoir de l’argent." },
+          { "id": "D", "text": "De remplir un formulaire." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q13",
+        "imagePath": "assets/images/ce/ce_40/13.png",
+        "options": [
+          { "id": "A", "text": "De participer à la vie de l’entreprise." },
+          { "id": "B", "text": "De poser leurs jours de vacances." },
+          { "id": "C", "text": "De remplir un formulaire en ligne." },
+          { "id": "D", "text": "De respecter les règles de sécurité." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q14",
+        "imagePath": "assets/images/ce/ce_40/14.png",
+        "options": [
+          { "id": "A", "text": "Demander de l’aide." },
+          { "id": "B", "text": "Informer le gardien." },
+          { "id": "C", "text": "Inviter à une soirée." },
+          { "id": "D", "text": "Remercier les locataires." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q15",
+        "imagePath": "assets/images/ce/ce_40/15.png",
+        "options": [
+          { "id": "A", "text": "Acheter un billet d’avion." },
+          { "id": "B", "text": "Organiser des vacances." },
+          { "id": "C", "text": "Réserver un parking." },
+          { "id": "D", "text": "Transporter des personnes." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q16",
+        "imagePath": "assets/images/ce/ce_40/16.png",
+        "options": [
+          { "id": "A", "text": "Il dispose de chambres spacieuses." },
+          { "id": "B", "text": "Il est proche des lieux à visiter." },
+          { "id": "C", "text": "Il propose la location de bicyclettes." },
+          { "id": "D", "text": "Il se trouve en plein centre-ville." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q17",
+        "imagePath": "assets/images/ce/ce_40/17.png",
+        "options": [
+          { "id": "A", "text": "D’acheter des médicaments sans ordonnance." },
+          { "id": "B", "text": "D’avoir le choix entre différents spécialistes." },
+          { "id": "C", "text": "De prendre rapidement rendez-vous." },
+          { "id": "D", "text": "De traiter seul des affections bénignes." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q18",
+        "imagePath": "assets/images/ce/ce_40/18.png",
+        "options": [
+          { "id": "A", "text": "Le rôle joué par les historiens." },
+          { "id": "B", "text": "Le rythme de son avancement." },
+          { "id": "C", "text": "Le succès auprès du public." },
+          { "id": "D", "text": "Les personnes qui y travaillent." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q19",
+        "imagePath": "assets/images/ce/ce_40/19.png",
+        "options": [
+          { "id": "A", "text": "La compagnie aérienne a annulé le vol en Grèce." },
+          { "id": "B", "text": "Les billets comportaient une faute d’orthographe." },
+          { "id": "C", "text": "Les clients ont fait un mauvais choix lors de l’achat." },
+          { "id": "D", "text": "Un agent de l’aéroport a mal renseigné les touristes." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q20",
+        "imagePath": "assets/images/ce/ce_40/20.png",
+        "options": [
+          { "id": "A", "text": "Il a avalé un mauvais morceau de fromage." },
+          { "id": "B", "text": "Il a trouvé quelque chose dans son fromage." },
+          { "id": "C", "text": "Il est tombé malade en mangeant du fromage." },
+          { "id": "D", "text": "Il s’est fait mal aux dents avec le fromage." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q21",
+        "imagePath": "assets/images/ce/ce_40/21.png",
+        "options": [
+          { "id": "A", "text": "Accéder à la propriété privée." },
+          { "id": "B", "text": "Avoir un mode de vie économique." },
+          { "id": "C", "text": "Participer à la vie associative." },
+          { "id": "D", "text": "Tenter une nouvelle aventure." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q22",
+        "imagePath": "assets/images/ce/ce_40/22.png",
+        "options": [
+          { "id": "A", "text": "Parce qu’il y a eu des pluies importantes." },
+          { "id": "B", "text": "Parce que les femelles ont moins pondu." },
+          { "id": "C", "text": "Parce que les larves ont beaucoup mangé." },
+          { "id": "D", "text": "Parce qu’ils ont hiberné plus longtemps." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q23",
+        "imagePath": "assets/images/ce/ce_40/23.png",
+        "options": [
+          { "id": "A", "text": "D’analyser les moyens de séduire les jeunes." },
+          { "id": "B", "text": "De moderniser le contenu des expositions." },
+          { "id": "C", "text": "De s’inspirer des approches pédagogiques scolaires." },
+          { "id": "D", "text": "De systématiser l’accès gratuit pour les adolescents." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q24",
+        "imagePath": "assets/images/ce/ce_40/24.png",
+        "options": [
+          { "id": "A", "text": "Ils doivent être attentifs aux risques de l’isolement." },
+          { "id": "B", "text": "Ils intensifient les échanges entre collaborateurs." },
+          { "id": "C", "text": "Ils jonglent entre vie privée et vie professionnelle." },
+          { "id": "D", "text": "Ils sont plus productifs que les collègues au bureau." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q25",
+        "imagePath": "assets/images/ce/ce_40/25.png",
+        "options": [
+          { "id": "A", "text": "Développer une identité commune." },
+          { "id": "B", "text": "Récompenser les plus beaux sites." },
+          { "id": "C", "text": "Sauvegarder le patrimoine français." },
+          { "id": "D", "text": "Valoriser la diversité des langues." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q26",
+        "imagePath": "assets/images/ce/ce_40/26.png",
+        "options": [
+          { "id": "A", "text": "La lutte pour le maintien du niveau des salaires." },
+          { "id": "B", "text": "La volonté de déménager à l’âge adulte." },
+          { "id": "C", "text": "L’attachement aux valeurs de l’entreprise." },
+          { "id": "D", "text": "Le désir d’évolution durant la vie active." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q27",
+        "imagePath": "assets/images/ce/ce_40/27.png",
+        "options": [
+          { "id": "A", "text": "D’un rassemblement de clients mécontents." },
+          { "id": "B", "text": "D’une opération de vente promotionnelle." },
+          { "id": "C", "text": "De l’inauguration d’un nouvel établissement." },
+          { "id": "D", "text": "De l’organisation d’une animation clandestine." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q28",
+        "imagePath": "assets/images/ce/ce_40/28.png",
+        "options": [
+          { "id": "A", "text": "Commencer une thérapie." },
+          { "id": "B", "text": "Multiplier les passe-temps." },
+          { "id": "C", "text": "Rechercher l’âme sœur." },
+          { "id": "D", "text": "Travailler sur soi-même." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q29",
+        "imagePath": "assets/images/ce/ce_40/29.png",
+        "options": [
+          { "id": "A", "text": "Il est stimulé en phase d’apprentissage du langage." },
+          { "id": "B", "text": "À chaque activité correspond une région précise." },
+          { "id": "C", "text": "Les neurones sont concentrés dans quelques zones." },
+          { "id": "D", "text": "Son développement est lié au caractère d’un individu." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q30",
+        "imagePath": "assets/images/ce/ce_40/30.png",
+        "options": [
+          { "id": "A", "text": "L’information est trop rarement contrôlée à sa source." },
+          { "id": "B", "text": "La population est insuffisamment formée aux médias." },
+          { "id": "C", "text": "Les fausses nouvelles sont facilement diffusées en ligne." },
+          { "id": "D", "text": "Les images influencent en permanence les consommateurs." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q31",
+        "imagePath": "assets/images/ce/ce_40/31.png",
+        "options": [
+          { "id": "A", "text": "Elle devrait être réservée aux périodes de congés." },
+          { "id": "B", "text": "Elle est préconisée par la médecine." },
+          { "id": "C", "text": "Elle peine à se répandre en milieu professionnel." },
+          { "id": "D", "text": "Elle serait néfaste pour le rendement." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q32",
+        "imagePath": "assets/images/ce/ce_40/32.png",
+        "options": [
+          { "id": "A", "text": "Développer leur esprit critique." },
+          { "id": "B", "text": "Encourager les débats entre eux." },
+          { "id": "C", "text": "Enrichir leur capacité mémorielle." },
+          { "id": "D", "text": "Évaluer régulièrement leurs acquis." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q33",
+        "imagePath": "assets/images/ce/ce_40/33.png",
+        "options": [
+          { "id": "A", "text": "Il critique la méthodologie utilisée." },
+          { "id": "B", "text": "Il discute la pertinence des exemples." },
+          { "id": "C", "text": "Il nuance les prévisions alarmistes." },
+          { "id": "D", "text": "Il confirme les résultats de l’étude." }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q34",
+        "imagePath": "assets/images/ce/ce_40/34.png",
+        "options": [
+          { "id": "A", "text": "Elles bénéficient d’un effet de mode." },
+          { "id": "B", "text": "Elles inquiètent les jeunes enfants." },
+          { "id": "C", "text": "Elles relèvent d’un genre spécifique." },
+          { "id": "D", "text": "Elles symbolisent la peur de l’inconnu." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q35",
+        "imagePath": "assets/images/ce/ce_40/35.png",
+        "options": [
+          { "id": "A", "text": "Il se sentait trop vieux pour les tournées." },
+          { "id": "B", "text": "Il voulait fuir son image d’idole des jeunes." },
+          { "id": "C", "text": "Le public préférait l’écrivain au chanteur." },
+          { "id": "D", "text": "Ses chansons étaient passées de mode." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q36",
+        "imagePath": "assets/images/ce/ce_40/36.png",
+        "options": [
+          { "id": "A", "text": "Leur capacité à négocier." },
+          { "id": "B", "text": "Leur esprit belliqueux." },
+          { "id": "C", "text": "Leur sens de l’esthétique." },
+          { "id": "D", "text": "Leur talent d’agriculteurs." }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q37",
+        "imagePath": "assets/images/ce/ce_40/37.png",
+        "options": [
+          { "id": "A", "text": "Ils étouffent le libre-arbitre." },
+          { "id": "B", "text": "Ils livrent des informations douteuses." },
+          { "id": "C", "text": "Ils multiplient les résultats." },
+          { "id": "D", "text": "Ils sont envahis d’annonces publicitaires." }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q38",
+        "imagePath": "assets/images/ce/ce_40/38.png",
+        "options": [
+          { "id": "A", "text": "Les évolutions des régimes alimentaires." },
+          { "id": "B", "text": "Les mesures contre le gaspillage." },
+          { "id": "C", "text": "Les normes imposées aux entreprises." },
+          { "id": "D", "text": "Les stratégies de communication." }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q39",
+        "imagePath": "assets/images/ce/ce_40/39.png",
+        "options": [
+          { "id": "A", "text": "La diversité de ses enquêtes." },
+          { "id": "B", "text": "La finesse de ses raisonnements." },
+          { "id": "C", "text": "La longévité de sa carrière." },
+          { "id": "D", "text": "La vivacité de ses mouvements." }
+        ],
+        "correctAnswer": "B"
+      }
+    ]
   }
 
 ]
