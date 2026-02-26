@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.4
   provider: ^6.1.5+1
+  just_audio: ^0.10.5
+  just_audio_web: ^0.4.16
 
 dev_dependencies:
   flutter_test:
@@ -101,7 +103,9 @@ flutter:
     - assets/images/ce/ce_38/
     - assets/images/ce/ce_39/
     - assets/images/ce/ce_40/
+    - assets/images/co/co_01/
     - assets/audio/
+    - assets/audio/co/co_01/
     - assets/data/
 
   # An image asset can refer to one or more resolution-specific "variants", see
