@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -19,6 +20,8 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
   Duration _duration = Duration.zero;
   Duration _position = Duration.zero;
 
+  String? _error;
+
   @override
   void initState() {
     super.initState();
@@ -26,19 +29,38 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
   }
 
   Future<void> _load() async {
+    setState(() => _error = null);
+
     try {
-      await _player.setAsset(widget.audioAssetPath);
+      await _player.stop();
+      await _player.seek(Duration.zero);
+
+      // Ensure volume is not low
+      await _player.setVolume(1.0);
+
+      // ✅ IMPORTANT: Web should use setUrl for assets
+      if (kIsWeb) {
+        // Flutter web serves assets at /assets/...
+        // This relative path works: "assets/audio/co/co_01/q1.mp3"
+        await _player.setUrl(widget.audioAssetPath);
+      } else {
+        await _player.setAsset(widget.audioAssetPath);
+      }
+
       _duration = _player.duration ?? Duration.zero;
 
       _player.durationStream.listen((d) {
+        if (!mounted) return;
         if (d != null) setState(() => _duration = d);
       });
 
       _player.positionStream.listen((p) {
+        if (!mounted) return;
         setState(() => _position = p);
       });
-    } catch (_) {
-      // If asset path is wrong, you'll see this in debug console
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _error = "Audio load failed: $e");
     }
   }
 
@@ -46,8 +68,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
   void didUpdateWidget(covariant AudioPlayerWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.audioAssetPath != widget.audioAssetPath) {
-      _player.stop();
-      _player.setAsset(widget.audioAssetPath);
+      _load();
     }
   }
 
@@ -76,6 +97,18 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
       ),
       child: Column(
         children: [
+          if (_error != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                _error!,
+                style: TextStyle(
+                  color: cs.error,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+
           StreamBuilder<PlayerState>(
             stream: _player.playerStateStream,
             builder: (context, snapshot) {
@@ -85,12 +118,16 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               return Row(
                 children: [
                   IconButton(
-                    iconSize: 36,
-                    onPressed: () {
+                    iconSize: 42,
+                    onPressed: () async {
+                      if (_error != null) {
+                        await _load();
+                        return;
+                      }
                       if (playing) {
-                        _player.pause();
+                        await _player.pause();
                       } else {
-                        _player.play();
+                        await _player.play();
                       }
                     },
                     icon: Icon(
@@ -98,7 +135,9 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                       color: cs.primary,
                     ),
                   ),
+
                   const SizedBox(width: 8),
+
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,12 +156,22 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(_fmt(_position)),
-                            Text(_fmt(_duration)),
+                            Text(_fmt(_position),
+                                style: const TextStyle(fontWeight: FontWeight.w700)),
+                            Text(_fmt(_duration),
+                                style: const TextStyle(fontWeight: FontWeight.w700)),
                           ],
                         ),
                       ],
                     ),
+                  ),
+
+                  const SizedBox(width: 6),
+
+                  IconButton(
+                    tooltip: "Restart",
+                    onPressed: () => _player.seek(Duration.zero),
+                    icon: Icon(Icons.replay_rounded, color: cs.primary),
                   ),
                 ],
               );

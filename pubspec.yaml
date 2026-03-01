@@ -103,9 +103,30 @@ flutter:
     - assets/images/ce/ce_38/
     - assets/images/ce/ce_39/
     - assets/images/ce/ce_40/
+
+
+
     - assets/images/co/co_01/
+    - assets/images/co/co_02/
+    - assets/images/co/co_03/
+    - assets/images/co/co_04/
+    - assets/images/co/co_05/
+    - assets/images/co/co_06/
+    - assets/images/co/co_07/
+    - assets/images/co/co_08/
+    - assets/images/co/co_09/
+    - assets/images/co/co_10/
     - assets/audio/
     - assets/audio/co/co_01/
+    - assets/audio/co/co_02/
+    - assets/audio/co/co_03/
+    - assets/audio/co/co_04/
+    - assets/audio/co/co_05/
+    - assets/audio/co/co_06/
+    - assets/audio/co/co_07/
+    - assets/audio/co/co_08/
+    - assets/audio/co/co_09/
+    - assets/audio/co/co_10/
     - assets/data/
 
   # An image asset can refer to one or more resolution-specific "variants", see
