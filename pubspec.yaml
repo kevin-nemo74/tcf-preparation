@@ -116,6 +116,16 @@ flutter:
     - assets/images/co/co_08/
     - assets/images/co/co_09/
     - assets/images/co/co_10/
+    - assets/images/co/co_11/
+    - assets/images/co/co_12/
+    - assets/images/co/co_13/
+    - assets/images/co/co_14/
+    - assets/images/co/co_15/
+    - assets/images/co/co_16/
+    - assets/images/co/co_17/
+    - assets/images/co/co_18/
+    - assets/images/co/co_19/
+    - assets/images/co/co_20/
     - assets/audio/
     - assets/audio/co/co_01/
     - assets/audio/co/co_02/
@@ -127,6 +137,16 @@ flutter:
     - assets/audio/co/co_08/
     - assets/audio/co/co_09/
     - assets/audio/co/co_10/
+    - assets/audio/co/co_11/
+    - assets/audio/co/co_12/
+    - assets/audio/co/co_13/
+    - assets/audio/co/co_14/
+    - assets/audio/co/co_15/
+    - assets/audio/co/co_16/
+    - assets/audio/co/co_17/
+    - assets/audio/co/co_18/
+    - assets/audio/co/co_19/
+    - assets/audio/co/co_20/
     - assets/data/
 
   # An image asset can refer to one or more resolution-specific "variants", see
