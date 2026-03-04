@@ -25847,6 +25847,5450 @@
         "correctAnswer": "B"
       }
     ]
+  },
+  {
+    "id": "co_30",
+    "title": "Compréhension Orale – Test 30",
+    "type": "CO",
+    "durationMinutes": 35,
+    "questions": [
+      {
+        "id": "Q1",
+        "audioPath": "assets/audio/co/co_30/1.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C",
+        "imagePath": "assets/images/co/co_30/1.png"
+      },
+      {
+        "id": "Q2",
+        "audioPath": "assets/audio/co/co_30/2.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q3",
+        "audioPath": "assets/audio/co/co_30/3.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q4",
+        "audioPath": "assets/audio/co/co_30/4.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q5",
+        "audioPath": "assets/audio/co/co_30/5.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q6",
+        "audioPath": "assets/audio/co/co_30/6.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q7",
+        "audioPath": "assets/audio/co/co_30/7.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q8",
+        "audioPath": "assets/audio/co/co_30/8.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q9",
+        "audioPath": "assets/audio/co/co_30/9.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q10",
+        "audioPath": "assets/audio/co/co_30/10.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La communication avec ses clients."
+          },
+          {
+            "id": "B",
+            "text": "La recherche d’un nouveau travail."
+          },
+          {
+            "id": "C",
+            "text": "L’achat d’un nouveau téléphone fixe."
+          },
+          {
+            "id": "D",
+            "text": "L’utilisation de son ordinateur portable."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q11",
+        "audioPath": "assets/audio/co/co_30/11.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La mode."
+          },
+          {
+            "id": "B",
+            "text": "La nature."
+          },
+          {
+            "id": "C",
+            "text": "Les saisons."
+          },
+          {
+            "id": "D",
+            "text": "Les vacances."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q12",
+        "audioPath": "assets/audio/co/co_30/12.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De leur voyage en Argentine."
+          },
+          {
+            "id": "B",
+            "text": "Des résultats des examens."
+          },
+          {
+            "id": "C",
+            "text": "Du cout de la vie en ville."
+          },
+          {
+            "id": "D",
+            "text": "D’un séjour linguistique."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q13",
+        "audioPath": "assets/audio/co/co_30/13.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a été très agréablement surpris."
+          },
+          {
+            "id": "B",
+            "text": "Il préfère attendre pour se prononcer."
+          },
+          {
+            "id": "C",
+            "text": "Il aurait aimé se mettre déjà au travail."
+          },
+          {
+            "id": "D",
+            "text": "Il a trouvé son supérieur peu disponible."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q14",
+        "audioPath": "assets/audio/co/co_30/14.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De visiter le sud de la France."
+          },
+          {
+            "id": "B",
+            "text": "De partir ensemble à l’étranger."
+          },
+          {
+            "id": "C",
+            "text": "De partir chacun de leur côté."
+          },
+          {
+            "id": "D",
+            "text": "D’aller pêcher avec d’autres amis."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q15",
+        "audioPath": "assets/audio/co/co_30/15.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour conseiller un livre."
+          },
+          {
+            "id": "B",
+            "text": "Pour discuter d’écologie."
+          },
+          {
+            "id": "C",
+            "text": "Pour parler de sa ville."
+          },
+          {
+            "id": "D",
+            "text": "Pour raconter un voyage."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q16",
+        "audioPath": "assets/audio/co/co_30/16.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La crise de l’économie mondiale."
+          },
+          {
+            "id": "B",
+            "text": "L’accroissement de la population."
+          },
+          {
+            "id": "C",
+            "text": "Les nouvelles règles d’hygiène."
+          },
+          {
+            "id": "D",
+            "text": "Les récentes découvertes médicales."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q17",
+        "audioPath": "assets/audio/co/co_30/17.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour avoir un logement plus grand et peu cher."
+          },
+          {
+            "id": "B",
+            "text": "Pour louer des chambres à des étudiants."
+          },
+          {
+            "id": "C",
+            "text": "Pour partager les tâches ménagères."
+          },
+          {
+            "id": "D",
+            "text": "Pour rencontrer de nouvelles personnes."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q18",
+        "audioPath": "assets/audio/co/co_30/18.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Avoir de l’expérience dans la vente."
+          },
+          {
+            "id": "B",
+            "text": "Habiter près de Sainton-les-Tonges."
+          },
+          {
+            "id": "C",
+            "text": "Pratiquer régulièrement un sport."
+          },
+          {
+            "id": "D",
+            "text": "Savoir gérer un site internet."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q19",
+        "audioPath": "assets/audio/co/co_30/19.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a peu de diplômes."
+          },
+          {
+            "id": "B",
+            "text": "Il est déjà trop âgé."
+          },
+          {
+            "id": "C",
+            "text": "Il est mauvais en langues."
+          },
+          {
+            "id": "D",
+            "text": "Il manque d’expérience."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q20",
+        "audioPath": "assets/audio/co/co_30/20.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Le recrutement se fonde sur l’expérience."
+          },
+          {
+            "id": "B",
+            "text": "Les salaires à l’embauche sont très élevés."
+          },
+          {
+            "id": "C",
+            "text": "L’évolution professionnelle est très lente."
+          },
+          {
+            "id": "D",
+            "text": "L’obtention d’un premier emploi est aisée."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q21",
+        "audioPath": "assets/audio/co/co_30/21.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle veut faire du vélo."
+          },
+          {
+            "id": "B",
+            "text": "Elle a horreur du volley."
+          },
+          {
+            "id": "C",
+            "text": "Elle trouve le vent trop fort."
+          },
+          {
+            "id": "D",
+            "text": "Elle se sent fatiguée."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q22",
+        "audioPath": "assets/audio/co/co_30/22.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Des habitants ont voté pour un maire écologiste."
+          },
+          {
+            "id": "B",
+            "text": "Les écologistes refusent la construction d’une autoroute."
+          },
+          {
+            "id": "C",
+            "text": "L’Union européenne veut faire construire une autoroute."
+          },
+          {
+            "id": "D",
+            "text": "Un maire propose d’ouvrir une réserve naturelle."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q23",
+        "audioPath": "assets/audio/co/co_30/23.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "L’atmosphère détendue."
+          },
+          {
+            "id": "B",
+            "text": "La souplesse des horaires."
+          },
+          {
+            "id": "C",
+            "text": "L’efficacité de son équipe."
+          },
+          {
+            "id": "D",
+            "text": "Les opportunités de carrière."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q24",
+        "audioPath": "assets/audio/co/co_30/24.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour conserver le poisson."
+          },
+          {
+            "id": "B",
+            "text": "Pour ranger leur matériel."
+          },
+          {
+            "id": "C",
+            "text": "Pour se réchauffer."
+          },
+          {
+            "id": "D",
+            "text": "Pour se reposer."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q25",
+        "audioPath": "assets/audio/co/co_30/25.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils aiment passer leurs vieux jours dans le sud de la France."
+          },
+          {
+            "id": "B",
+            "text": "Ils osent davantage partir à l’étranger qu’auparavant."
+          },
+          {
+            "id": "C",
+            "text": "Ils payent plus d’impôts que les autres citoyens européens."
+          },
+          {
+            "id": "D",
+            "text": "Ils prennent des cours de langue pour améliorer leur niveau."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q26",
+        "audioPath": "assets/audio/co/co_30/26.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils annulent leurs activités."
+          },
+          {
+            "id": "B",
+            "text": "Ils partent à la montagne."
+          },
+          {
+            "id": "C",
+            "text": "Ils préfèrent sortir la nuit."
+          },
+          {
+            "id": "D",
+            "text": "Ils restent au frais à l’intérieur."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q27",
+        "audioPath": "assets/audio/co/co_30/27.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils espèrent obtenir une allocation de l’État."
+          },
+          {
+            "id": "B",
+            "text": "Ils voient leur futur de manière positive."
+          },
+          {
+            "id": "C",
+            "text": "Ils comptent sur le soutien de leurs proches."
+          },
+          {
+            "id": "D",
+            "text": "Ils refusent d’habiter chez leurs parents."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q28",
+        "audioPath": "assets/audio/co/co_30/28.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils devront demander le remboursement de leur billet par écrit."
+          },
+          {
+            "id": "B",
+            "text": "Ils devront descendre en gare de Valence suite à une panne."
+          },
+          {
+            "id": "C",
+            "text": "Ils devront patienter à leur place jusqu’à l’arrêt complet du train."
+          },
+          {
+            "id": "D",
+            "text": "Ils devront présenter leur billet à leur descente du train."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q29",
+        "audioPath": "assets/audio/co/co_30/29.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De maigrir plus rapidement."
+          },
+          {
+            "id": "B",
+            "text": "De manger sans compter."
+          },
+          {
+            "id": "C",
+            "text": "De s’entraîner moins souvent."
+          },
+          {
+            "id": "D",
+            "text": "De vivre plus longtemps."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q30",
+        "audioPath": "assets/audio/co/co_30/30.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "L’absence de formation sur l’élaboration d’un budget."
+          },
+          {
+            "id": "B",
+            "text": "Le désintérêt des jeunes pour les questions financières."
+          },
+          {
+            "id": "C",
+            "text": "Le manque de cours d’économie à l’université."
+          },
+          {
+            "id": "D",
+            "text": "Le peu d’informations des banques sur les crédits."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q31",
+        "audioPath": "assets/audio/co/co_30/31.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "L’attitude des touristes accélère sa dégradation."
+          },
+          {
+            "id": "B",
+            "text": "Le financement des travaux d’entretien est menacé."
+          },
+          {
+            "id": "C",
+            "text": "Les autorités restaurent actuellement les vestiges."
+          },
+          {
+            "id": "D",
+            "text": "L’intérêt pour l’architecture des lieux est en déclin."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q32",
+        "audioPath": "assets/audio/co/co_30/32.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle peut rompre les branches."
+          },
+          {
+            "id": "B",
+            "text": "Elle peut geler les racines."
+          },
+          {
+            "id": "C",
+            "text": "Elle peut surcharger les branches."
+          },
+          {
+            "id": "D",
+            "text": "Elle peut empêcher la lumière du soleil."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q33",
+        "audioPath": "assets/audio/co/co_30/33.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils nagent en plein air dans la capitale."
+          },
+          {
+            "id": "B",
+            "text": "Ils s’amusent dans un parc d’attractions."
+          },
+          {
+            "id": "C",
+            "text": "Ils se retrouvent à la piscine municipale."
+          },
+          {
+            "id": "D",
+            "text": "Ils sont en vacances au bord de la mer."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q34",
+        "audioPath": "assets/audio/co/co_30/34.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De la particularité de sa voix."
+          },
+          {
+            "id": "B",
+            "text": "De la reprise d’une œuvre."
+          },
+          {
+            "id": "C",
+            "text": "De sa nouvelle tournée."
+          },
+          {
+            "id": "D",
+            "text": "De son dernier rôle au cinéma."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q35",
+        "audioPath": "assets/audio/co/co_30/35.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour accélérer la rénovation d’anciennes constructions."
+          },
+          {
+            "id": "B",
+            "text": "Pour comparer les styles des maisons nord-américaines."
+          },
+          {
+            "id": "C",
+            "text": "Pour conserver la trace du patrimoine architectural."
+          },
+          {
+            "id": "D",
+            "text": "Pour dénoncer la dégradation des logements urbains."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q36",
+        "audioPath": "assets/audio/co/co_30/36.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il conditionne l’humeur."
+          },
+          {
+            "id": "B",
+            "text": "Il dope l’énergie."
+          },
+          {
+            "id": "C",
+            "text": "Il minimise l’angoisse."
+          },
+          {
+            "id": "D",
+            "text": "Il stimule la créativité."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q37",
+        "audioPath": "assets/audio/co/co_30/37.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La relation liant Camille Claudel et Rodin."
+          },
+          {
+            "id": "B",
+            "text": "La richesse du musée Auguste Rodin."
+          },
+          {
+            "id": "C",
+            "text": "Les difficultés rencontrées par Rodin."
+          },
+          {
+            "id": "D",
+            "text": "Les sources d’inspiration de Rodin."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q38",
+        "audioPath": "assets/audio/co/co_30/38.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La pénibilité au travail est d’ordre physique."
+          },
+          {
+            "id": "B",
+            "text": "Moins de travail physique, plus de stress explique le malaise."
+          },
+          {
+            "id": "C",
+            "text": "Augmentation de la pénibilité physique et psychique."
+          },
+          {
+            "id": "D",
+            "text": "Le malaise vient de plus de travail dans le privé."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q39",
+        "audioPath": "assets/audio/co/co_30/39.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pratiquer des exercices mentaux."
+          },
+          {
+            "id": "B",
+            "text": "Exprimer ses sentiments."
+          },
+          {
+            "id": "C",
+            "text": "Se montrer chaleureux."
+          },
+          {
+            "id": "D",
+            "text": "Se retirer régulièrement au calme."
+          }
+        ],
+        "correctAnswer": "C"
+      }
+    ]
+  },
+  {
+    "id": "co_31",
+    "title": "Compréhension Orale – Test 31",
+    "type": "CO",
+    "durationMinutes": 35,
+    "questions": [
+      {
+        "id": "Q1",
+        "audioPath": "assets/audio/co/co_31/1.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "D",
+        "imagePath": "assets/images/co/co_31/1.jpg"
+      },
+      {
+        "id": "Q2",
+        "audioPath": "assets/audio/co/co_31/2.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C",
+        "imagePath": "assets/images/co/co_31/2.jpg"
+      },
+      {
+        "id": "Q3",
+        "audioPath": "assets/audio/co/co_31/3.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A",
+        "imagePath": "assets/images/co/co_31/3.jpg"
+      },
+      {
+        "id": "Q4",
+        "audioPath": "assets/audio/co/co_31/4.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q5",
+        "audioPath": "assets/audio/co/co_31/5.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q6",
+        "audioPath": "assets/audio/co/co_31/6.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q7",
+        "audioPath": "assets/audio/co/co_31/7.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q8",
+        "audioPath": "assets/audio/co/co_31/8.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q9",
+        "audioPath": "assets/audio/co/co_31/9.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle coûte très cher à réparer."
+          },
+          {
+            "id": "B",
+            "text": "Elle est restée au garage."
+          },
+          {
+            "id": "C",
+            "text": "Elle fait un bruit anormal."
+          },
+          {
+            "id": "D",
+            "text": "Elle vient de tomber en panne."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q10",
+        "audioPath": "assets/audio/co/co_31/10.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Dormir plus longtemps."
+          },
+          {
+            "id": "B",
+            "text": "Faire un bilan de santé."
+          },
+          {
+            "id": "C",
+            "text": "Manger équilibré."
+          },
+          {
+            "id": "D",
+            "text": "Pratiquer un sport."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q11",
+        "audioPath": "assets/audio/co/co_31/11.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Un bouquet."
+          },
+          {
+            "id": "B",
+            "text": "Un gâteau."
+          },
+          {
+            "id": "C",
+            "text": "Un roman."
+          },
+          {
+            "id": "D",
+            "text": "Un vêtement."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q12",
+        "audioPath": "assets/audio/co/co_31/12.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a été très agréablement surpris."
+          },
+          {
+            "id": "B",
+            "text": "Il préfère attendre pour se prononcer."
+          },
+          {
+            "id": "C",
+            "text": "Il aurait aimé se mettre déjà au travail."
+          },
+          {
+            "id": "D",
+            "text": "Il a trouvé son supérieur peu disponible."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q13",
+        "audioPath": "assets/audio/co/co_31/13.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Un chapeau de soleil."
+          },
+          {
+            "id": "B",
+            "text": "Un maillot de foot."
+          },
+          {
+            "id": "C",
+            "text": "Un sac de sport."
+          },
+          {
+            "id": "D",
+            "text": "Un vêtement de plage."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q14",
+        "audioPath": "assets/audio/co/co_31/14.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Rentrer en France."
+          },
+          {
+            "id": "B",
+            "text": "Remplir un dossier."
+          },
+          {
+            "id": "C",
+            "text": "Se rendre à l’ambassade."
+          },
+          {
+            "id": "D",
+            "text": "Prendre contact avec sa banque."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q15",
+        "audioPath": "assets/audio/co/co_31/15.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle n’existe plus depuis un moment."
+          },
+          {
+            "id": "B",
+            "text": "Il n’est pas dans la bonne rue."
+          },
+          {
+            "id": "C",
+            "text": "Il s’est trompé d’adresse et de nom."
+          },
+          {
+            "id": "D",
+            "text": "Le passant ignore où elle se trouve."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q16",
+        "audioPath": "assets/audio/co/co_31/16.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a détesté le mauvais temps."
+          },
+          {
+            "id": "B",
+            "text": "Il a dû changer ses habitudes."
+          },
+          {
+            "id": "C",
+            "text": "Il avait du mal à s’intégrer."
+          },
+          {
+            "id": "D",
+            "text": "Il connaissait peu le pays."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q17",
+        "audioPath": "assets/audio/co/co_31/17.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’acheter des médicaments."
+          },
+          {
+            "id": "B",
+            "text": "D’aller au travail ensemble."
+          },
+          {
+            "id": "C",
+            "text": "De faire une promenade."
+          },
+          {
+            "id": "D",
+            "text": "De manger au restaurant."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q18",
+        "audioPath": "assets/audio/co/co_31/18.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a été déçu par le concert de rap."
+          },
+          {
+            "id": "B",
+            "text": "Il a payé ses billets trop cher."
+          },
+          {
+            "id": "C",
+            "text": "La banque a refusé son règlement."
+          },
+          {
+            "id": "D",
+            "text": "Le spectacle a été annulé."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q19",
+        "audioPath": "assets/audio/co/co_31/19.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "C’est une interprète sincère."
+          },
+          {
+            "id": "B",
+            "text": "Des danseurs l’accompagnent."
+          },
+          {
+            "id": "C",
+            "text": "Elle répète très régulièrement."
+          },
+          {
+            "id": "D",
+            "text": "Son répertoire est romantique."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q20",
+        "audioPath": "assets/audio/co/co_31/20.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle va assister à un match de rugby."
+          },
+          {
+            "id": "B",
+            "text": "Elle va faire une promenade à vélo."
+          },
+          {
+            "id": "C",
+            "text": "Elle va passer la soirée à la maison."
+          },
+          {
+            "id": "D",
+            "text": "Elle va voir un ami malade à l’hôpital."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q21",
+        "audioPath": "assets/audio/co/co_31/21.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Le comportement des habitants."
+          },
+          {
+            "id": "B",
+            "text": "Le sentiment de solitude."
+          },
+          {
+            "id": "C",
+            "text": "Les conditions météorologiques."
+          },
+          {
+            "id": "D",
+            "text": "Les obstacles linguistiques."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q22",
+        "audioPath": "assets/audio/co/co_31/22.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il fait des compliments."
+          },
+          {
+            "id": "B",
+            "text": "Il formule une invitation."
+          },
+          {
+            "id": "C",
+            "text": "Il cherche à convaincre."
+          },
+          {
+            "id": "D",
+            "text": "Il donne des conseils."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q23",
+        "audioPath": "assets/audio/co/co_31/23.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Acquérir son logement."
+          },
+          {
+            "id": "B",
+            "text": "Épargner de l’argent."
+          },
+          {
+            "id": "C",
+            "text": "Exercer un autre métier."
+          },
+          {
+            "id": "D",
+            "text": "Fonder un foyer."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q24",
+        "audioPath": "assets/audio/co/co_31/24.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Développer le marché du livre de jeunesse en Autriche."
+          },
+          {
+            "id": "B",
+            "text": "Faire découvrir aux élèves la culture française."
+          },
+          {
+            "id": "C",
+            "text": "Favoriser la création artistique en classe de langue."
+          },
+          {
+            "id": "D",
+            "text": "Utiliser la littérature comme un support pédagogique."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q25",
+        "audioPath": "assets/audio/co/co_31/25.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a quatre ans d’expérience."
+          },
+          {
+            "id": "B",
+            "text": "Il a travaillé dans un commerce."
+          },
+          {
+            "id": "C",
+            "text": "Il accepte de travailler l’été."
+          },
+          {
+            "id": "D",
+            "text": "Il est très motivé par la formation."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q26",
+        "audioPath": "assets/audio/co/co_31/26.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Parce que la salle est en travaux aujourd’hui."
+          },
+          {
+            "id": "B",
+            "text": "Parce qu’un vol a eu lieu dans cette salle."
+          },
+          {
+            "id": "C",
+            "text": "Parce que le personnel procède au nettoyage."
+          },
+          {
+            "id": "D",
+            "text": "Parce qu’il manque du personnel aujourd’hui."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q27",
+        "audioPath": "assets/audio/co/co_31/27.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La peur de faire de la peine à leur entourage familial."
+          },
+          {
+            "id": "B",
+            "text": "Le confort que leur procure leur structure familiale."
+          },
+          {
+            "id": "C",
+            "text": "Le plaisir de voir leur famille comme ils le souhaitent."
+          },
+          {
+            "id": "D",
+            "text": "L’obligation de soutenir financièrement leur famille."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q28",
+        "audioPath": "assets/audio/co/co_31/28.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’établir un diagnostic en ligne."
+          },
+          {
+            "id": "B",
+            "text": "D’éviter des pertes de temps."
+          },
+          {
+            "id": "C",
+            "text": "De réduire les frais de santé."
+          },
+          {
+            "id": "D",
+            "text": "De vérifier la qualité des soins."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q29",
+        "audioPath": "assets/audio/co/co_31/29.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Accroître la mixité sociale dans les grandes villes."
+          },
+          {
+            "id": "B",
+            "text": "Décrocher des financements pour ses activités."
+          },
+          {
+            "id": "C",
+            "text": "Modifier le fonctionnement des marchés aux puces."
+          },
+          {
+            "id": "D",
+            "text": "Obtenir un statut professionnel officiel pour les biffins."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q30",
+        "audioPath": "assets/audio/co/co_31/30.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il parle toujours anglais avec ses amis anglais."
+          },
+          {
+            "id": "B",
+            "text": "Il bavarde régulièrement avec son voisin anglais."
+          },
+          {
+            "id": "C",
+            "text": "Il va souvent au café avec un groupe d’amis anglais."
+          },
+          {
+            "id": "D",
+            "text": "Il fait beaucoup d’exercices avec un ami anglais."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q31",
+        "audioPath": "assets/audio/co/co_31/31.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "L’inégalité dans la répartition des tâches."
+          },
+          {
+            "id": "B",
+            "text": "La surabondance de sollicitations."
+          },
+          {
+            "id": "C",
+            "text": "Le manque de fonctionnalité des locaux."
+          },
+          {
+            "id": "D",
+            "text": "Les interventions des collègues."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q32",
+        "audioPath": "assets/audio/co/co_31/32.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’envisager des formations dans des secteurs de pointe."
+          },
+          {
+            "id": "B",
+            "text": "D’initier des programmes humanitaires."
+          },
+          {
+            "id": "C",
+            "text": "De concevoir des équipements technologiques."
+          },
+          {
+            "id": "D",
+            "text": "De prendre part à des expéditions scientifiques."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q33",
+        "audioPath": "assets/audio/co/co_31/33.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour illustrer des brochures touristiques."
+          },
+          {
+            "id": "B",
+            "text": "Pour s’imprégner des rencontres effectuées."
+          },
+          {
+            "id": "C",
+            "text": "Pour s’occuper pendant la durée des trajets."
+          },
+          {
+            "id": "D",
+            "text": "Pour repérer des itinéraires de promenade."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q34",
+        "audioPath": "assets/audio/co/co_31/34.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Avoir un bon salaire en fabriquant de beaux objets."
+          },
+          {
+            "id": "B",
+            "text": "Exercer une activité intellectuellement enrichissante."
+          },
+          {
+            "id": "C",
+            "text": "Rencontrer des célébrités et travailler avec elles."
+          },
+          {
+            "id": "D",
+            "text": "Travailler avec ses collègues et développer ses projets."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q35",
+        "audioPath": "assets/audio/co/co_31/35.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Un festival d’improvisations."
+          },
+          {
+            "id": "B",
+            "text": "Un récital de nouveautés."
+          },
+          {
+            "id": "C",
+            "text": "Une interprétation sincère."
+          },
+          {
+            "id": "D",
+            "text": "Une performance impeccable."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q36",
+        "audioPath": "assets/audio/co/co_31/36.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Des partitions musicales ponctuent les chapitres."
+          },
+          {
+            "id": "B",
+            "text": "Elle réunit des textes de musiciens sur le thème de la peur."
+          },
+          {
+            "id": "C",
+            "text": "L’éditeur a choisi d’accompagner le livre d’un DVD."
+          },
+          {
+            "id": "D",
+            "text": "Sa mise en page est comparable à celle du livret d’un disque."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q37",
+        "audioPath": "assets/audio/co/co_31/37.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’affiner l’écoute entre musiciens."
+          },
+          {
+            "id": "B",
+            "text": "D’exprimer l’originalité d’une interprétation."
+          },
+          {
+            "id": "C",
+            "text": "De faire varier le répertoire des concerts."
+          },
+          {
+            "id": "D",
+            "text": "De perfectionner la technique du violoniste."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q38",
+        "audioPath": "assets/audio/co/co_31/38.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle déplore le manque de structures pour accueillir et réunir les jeunes."
+          },
+          {
+            "id": "B",
+            "text": "Elle désapprouve la disparition d’endroits consacrés aux pratiques culturelles."
+          },
+          {
+            "id": "C",
+            "text": "Elle estime insuffisantes les tentatives des cinémas de mélanger les publics."
+          },
+          {
+            "id": "D",
+            "text": "Elle regrette le désintérêt des publics pour les espaces et les échanges culturels."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q39",
+        "audioPath": "assets/audio/co/co_31/39.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Un désir de changement face à l’immobilisme des élus."
+          },
+          {
+            "id": "B",
+            "text": "Un questionnement des pratiques du secteur industriel."
+          },
+          {
+            "id": "C",
+            "text": "Une convention écologique internationale."
+          },
+          {
+            "id": "D",
+            "text": "Une volonté d’aider les citoyens démunis."
+          }
+        ],
+        "correctAnswer": "A"
+      }
+    ]
+  },
+  {
+    "id": "co_32",
+    "title": "Compréhension Orale – Test 32",
+    "type": "CO",
+    "durationMinutes": 35,
+    "questions": [
+      {
+        "id": "Q1",
+        "audioPath": "assets/audio/co/co_32/1.mp3",
+        "imagePath": "assets/images/co/co_32/1.png",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q2",
+        "audioPath": "assets/audio/co/co_32/2.mp3",
+        "imagePath": "assets/images/co/co_32/2.png",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q3",
+        "audioPath": "assets/audio/co/co_32/3.mp3",
+        "imagePath": "assets/images/co/co_32/3.png",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q4",
+        "audioPath": "assets/audio/co/co_32/4.mp3",
+        "imagePath": "assets/images/co/co_32/4.png",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q5",
+        "audioPath": "assets/audio/co/co_32/5.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q6",
+        "audioPath": "assets/audio/co/co_32/6.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q7",
+        "audioPath": "assets/audio/co/co_32/7.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q8",
+        "audioPath": "assets/audio/co/co_32/8.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q9",
+        "audioPath": "assets/audio/co/co_32/9.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q10",
+        "audioPath": "assets/audio/co/co_32/10.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q11",
+        "audioPath": "assets/audio/co/co_32/11.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Un coiffeur."
+          },
+          {
+            "id": "B",
+            "text": "Un déménageur."
+          },
+          {
+            "id": "C",
+            "text": "Un garagiste."
+          },
+          {
+            "id": "D",
+            "text": "Un médecin."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q12",
+        "audioPath": "assets/audio/co/co_32/12.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De leurs derniers voyages."
+          },
+          {
+            "id": "B",
+            "text": "De leurs destinations préférées."
+          },
+          {
+            "id": "C",
+            "text": "De leurs prochaines vacances."
+          },
+          {
+            "id": "D",
+            "text": "De leurs traditions familiales."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q13",
+        "audioPath": "assets/audio/co/co_32/13.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La qualité du catalogue."
+          },
+          {
+            "id": "B",
+            "text": "Le prix des entrées."
+          },
+          {
+            "id": "C",
+            "text": "Les conditions de visite."
+          },
+          {
+            "id": "D",
+            "text": "Les œuvres présentées."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q14",
+        "audioPath": "assets/audio/co/co_32/14.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Rentrer en France."
+          },
+          {
+            "id": "B",
+            "text": "Remplir un dossier."
+          },
+          {
+            "id": "C",
+            "text": "Se rendre à l’ambassade."
+          },
+          {
+            "id": "D",
+            "text": "Prendre contact avec sa banque."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q15",
+        "audioPath": "assets/audio/co/co_32/15.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle a cassé son téléphone."
+          },
+          {
+            "id": "B",
+            "text": "Elle a raté un appel important."
+          },
+          {
+            "id": "C",
+            "text": "Elle n’a pas été invitée à un anniversaire."
+          },
+          {
+            "id": "D",
+            "text": "Elle n’a pas eu l’appel espéré."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q16",
+        "audioPath": "assets/audio/co/co_32/16.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle aime être en altitude."
+          },
+          {
+            "id": "B",
+            "text": "Elle désire accompagner un ami."
+          },
+          {
+            "id": "C",
+            "text": "Elle fait confiance à son guide."
+          },
+          {
+            "id": "D",
+            "text": "Elle veut prendre des risques."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q17",
+        "audioPath": "assets/audio/co/co_32/17.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il correspond à ses attentes."
+          },
+          {
+            "id": "B",
+            "text": "Il dure six mois au total."
+          },
+          {
+            "id": "C",
+            "text": "Il est proche de son domicile."
+          },
+          {
+            "id": "D",
+            "text": "Il offre un très bon salaire."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q18",
+        "audioPath": "assets/audio/co/co_32/18.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De créer un réseau étudiant pour échanger des services."
+          },
+          {
+            "id": "B",
+            "text": "De mettre en contact des personnes pour partager du matériel."
+          },
+          {
+            "id": "C",
+            "text": "De trouver une voiture pour transporter des affaires lourdes."
+          },
+          {
+            "id": "D",
+            "text": "D’employer des jeunes pour réparer de vieux objets."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q19",
+        "audioPath": "assets/audio/co/co_32/19.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’annuler une réunion."
+          },
+          {
+            "id": "B",
+            "text": "D’informer de son retard."
+          },
+          {
+            "id": "C",
+            "text": "De recevoir un client."
+          },
+          {
+            "id": "D",
+            "text": "De reporter un entretien."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q20",
+        "audioPath": "assets/audio/co/co_32/20.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Encourager la mobilité des étudiants."
+          },
+          {
+            "id": "B",
+            "text": "Favoriser l’intégration des étrangers."
+          },
+          {
+            "id": "C",
+            "text": "Mettre en relation des francophones."
+          },
+          {
+            "id": "D",
+            "text": "Offrir des emplois aux mères de famille."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q21",
+        "audioPath": "assets/audio/co/co_32/21.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De fixer les horaires de travail du comptable."
+          },
+          {
+            "id": "B",
+            "text": "De prendre rendez-vous avec le comptable."
+          },
+          {
+            "id": "C",
+            "text": "De préparer des documents pour le comptable."
+          },
+          {
+            "id": "D",
+            "text": "De remplir la fiche de salaire du comptable."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q22",
+        "audioPath": "assets/audio/co/co_32/22.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La visite d’un technicien."
+          },
+          {
+            "id": "B",
+            "text": "L’échange d’un article abîmé."
+          },
+          {
+            "id": "C",
+            "text": "Le conseil d’un professionnel."
+          },
+          {
+            "id": "D",
+            "text": "Le remboursement d’un produit."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q23",
+        "audioPath": "assets/audio/co/co_32/23.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La créativité."
+          },
+          {
+            "id": "B",
+            "text": "La disponibilité."
+          },
+          {
+            "id": "C",
+            "text": "La mobilité."
+          },
+          {
+            "id": "D",
+            "text": "La persuasion."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q24",
+        "audioPath": "assets/audio/co/co_32/24.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour conserver le poisson."
+          },
+          {
+            "id": "B",
+            "text": "Pour ranger leur matériel."
+          },
+          {
+            "id": "C",
+            "text": "Pour se réchauffer."
+          },
+          {
+            "id": "D",
+            "text": "Pour se reposer."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q25",
+        "audioPath": "assets/audio/co/co_32/25.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Parce que la consommation dépend avant tout du pouvoir d’achat."
+          },
+          {
+            "id": "B",
+            "text": "Parce que la création d’emploi restera rare dans ce secteur d’activité."
+          },
+          {
+            "id": "C",
+            "text": "Parce que les commerces font des bénéfices sur les ventes en semaine."
+          },
+          {
+            "id": "D",
+            "text": "Parce que les Français ne sont pas habitués à consommer le dimanche."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q26",
+        "audioPath": "assets/audio/co/co_32/26.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sa mauvaise gestion du temps."
+          },
+          {
+            "id": "B",
+            "text": "Ses dépenses excessives."
+          },
+          {
+            "id": "C",
+            "text": "Ses absences répétées."
+          },
+          {
+            "id": "D",
+            "text": "Ses résultats insuffisants."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q27",
+        "audioPath": "assets/audio/co/co_32/27.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Parce qu’elles ont beaucoup à apprendre d’eux."
+          },
+          {
+            "id": "B",
+            "text": "Parce qu’elles s’implanteront mieux ensuite à l’étranger."
+          },
+          {
+            "id": "C",
+            "text": "Parce qu’elles sont en manque de main-d’oeuvre."
+          },
+          {
+            "id": "D",
+            "text": "Parce qu’elles y sont contraintes par la mondialisation."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q28",
+        "audioPath": "assets/audio/co/co_32/28.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "En les incitant à travailler de manière collaborative."
+          },
+          {
+            "id": "B",
+            "text": "En les poussant à prendre des risques importants."
+          },
+          {
+            "id": "C",
+            "text": "En leur offrant des formations personnalisées."
+          },
+          {
+            "id": "D",
+            "text": "En leur proposant de participer à des compétitions."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q29",
+        "audioPath": "assets/audio/co/co_32/29.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il améliore significativement la condition physique."
+          },
+          {
+            "id": "B",
+            "text": "Il donne de l’énergie pour faire face aux épreuves."
+          },
+          {
+            "id": "C",
+            "text": "Il fait naître un fort sentiment de confiance en soi."
+          },
+          {
+            "id": "D",
+            "text": "Il renforce les compétences professionnelles."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q30",
+        "audioPath": "assets/audio/co/co_32/30.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle l’a beaucoup fasciné à ses débuts."
+          },
+          {
+            "id": "B",
+            "text": "Elle l’a conduit à la tête d’un grand magazine."
+          },
+          {
+            "id": "C",
+            "text": "Elle l’a laissé complètement indifférent."
+          },
+          {
+            "id": "D",
+            "text": "Elle l’a mis en danger pendant sa carrière."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q31",
+        "audioPath": "assets/audio/co/co_32/31.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’une compétition sportive."
+          },
+          {
+            "id": "B",
+            "text": "D’une croisière maritime."
+          },
+          {
+            "id": "C",
+            "text": "D’une histoire familiale."
+          },
+          {
+            "id": "D",
+            "text": "D’une rencontre amoureuse."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q32",
+        "audioPath": "assets/audio/co/co_32/32.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "C’est la reproduction d’un café du siècle dernier."
+          },
+          {
+            "id": "B",
+            "text": "Il contient un dépôt-vente de meubles design."
+          },
+          {
+            "id": "C",
+            "text": "C’est à la fois un restaurant et une galerie d’art."
+          },
+          {
+            "id": "D",
+            "text": "Il y organise un festival de musique électronique."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q33",
+        "audioPath": "assets/audio/co/co_32/33.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La notice était impossible à lire."
+          },
+          {
+            "id": "B",
+            "text": "La traduction était partielle."
+          },
+          {
+            "id": "C",
+            "text": "L’emballage était défectueux."
+          },
+          {
+            "id": "D",
+            "text": "Les céréales étaient périmées."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q34",
+        "audioPath": "assets/audio/co/co_32/34.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La perte de sa liberté intellectuelle."
+          },
+          {
+            "id": "B",
+            "text": "Les nombreux voyages à l’étranger."
+          },
+          {
+            "id": "C",
+            "text": "Un manque de reconnaissance."
+          },
+          {
+            "id": "D",
+            "text": "Une rémunération insuffisante."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q35",
+        "audioPath": "assets/audio/co/co_32/35.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a été découvert en Amérique avant d’être introduit en France."
+          },
+          {
+            "id": "B",
+            "text": "Il est cueilli uniquement en été pour être conforme aux normes."
+          },
+          {
+            "id": "C",
+            "text": "Il est utilisé dans de nombreux plats de la cuisine basque."
+          },
+          {
+            "id": "D",
+            "text": "Son exportation à l’étranger est fortement contrôlée."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q36",
+        "audioPath": "assets/audio/co/co_32/36.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Par l’originalité dont est marquée sa personnalité."
+          },
+          {
+            "id": "B",
+            "text": "Par la modernité avec laquelle il joue des airs célèbres."
+          },
+          {
+            "id": "C",
+            "text": "Par la place que la musique occupe dans son quotidien."
+          },
+          {
+            "id": "D",
+            "text": "Par le côté imprévisible des mélodies qu’il invente."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q37",
+        "audioPath": "assets/audio/co/co_32/37.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La communication entre les animaux."
+          },
+          {
+            "id": "B",
+            "text": "La place de l’être humain dans la nature."
+          },
+          {
+            "id": "C",
+            "text": "Le progrès des sciences naturelles."
+          },
+          {
+            "id": "D",
+            "text": "L’évolution de l’espèce humaine."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q38",
+        "audioPath": "assets/audio/co/co_32/38.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La fragilité de l’engagement."
+          },
+          {
+            "id": "B",
+            "text": "La multiplicité des contacts."
+          },
+          {
+            "id": "C",
+            "text": "La pauvreté des échanges."
+          },
+          {
+            "id": "D",
+            "text": "L’absence du face à face."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q39",
+        "audioPath": "assets/audio/co/co_32/39.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Le processus d’attractivité des cellules femelles."
+          },
+          {
+            "id": "B",
+            "text": "Les différences avec la reproduction des plantes terrestres."
+          },
+          {
+            "id": "C",
+            "text": "La constitution de certains organismes aquatiques."
+          },
+          {
+            "id": "D",
+            "text": "L’influence de la météorologie sur leur fécondation."
+          }
+        ],
+        "correctAnswer": "A"
+      }
+    ]
+  },
+  {
+    "id": "co_33",
+    "title": "Compréhension Orale – Test 33",
+    "type": "CO",
+    "durationMinutes": 35,
+    "questions": [
+      {
+        "id": "Q1",
+        "audioPath": "assets/audio/co/co_33/1.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A",
+        "imagePath": "assets/images/co/co_33/1.png"
+      },
+      {
+        "id": "Q2",
+        "audioPath": "assets/audio/co/co_33/2.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C",
+        "imagePath": "assets/images/co/co_33/2.png"
+      },
+      {
+        "id": "Q3",
+        "audioPath": "assets/audio/co/co_33/3.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q4",
+        "audioPath": "assets/audio/co/co_33/4.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q5",
+        "audioPath": "assets/audio/co/co_33/5.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q6",
+        "audioPath": "assets/audio/co/co_33/6.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q7",
+        "audioPath": "assets/audio/co/co_33/7.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q8",
+        "audioPath": "assets/audio/co/co_33/8.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q9",
+        "audioPath": "assets/audio/co/co_33/9.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q10",
+        "audioPath": "assets/audio/co/co_33/10.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q11",
+        "audioPath": "assets/audio/co/co_33/11.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’un prochain déménagement."
+          },
+          {
+            "id": "B",
+            "text": "De sport pour le week-end."
+          },
+          {
+            "id": "C",
+            "text": "De vacances en famille."
+          },
+          {
+            "id": "D",
+            "text": "D’un problème de santé"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q12",
+        "audioPath": "assets/audio/co/co_33/12.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Avoir une aide financière."
+          },
+          {
+            "id": "B",
+            "text": "Obtenir un logement."
+          },
+          {
+            "id": "C",
+            "text": "Participer à un échange."
+          },
+          {
+            "id": "D",
+            "text": "S’inscrire à un cours."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q13",
+        "audioPath": "assets/audio/co/co_33/13.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Dîner avec un ami."
+          },
+          {
+            "id": "B",
+            "text": "Regarder un film."
+          },
+          {
+            "id": "C",
+            "text": "Rentrer avec elle."
+          },
+          {
+            "id": "D",
+            "text": "Travailler tard."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q14",
+        "audioPath": "assets/audio/co/co_33/14.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La mission est sans intérêt."
+          },
+          {
+            "id": "B",
+            "text": "La société est loin de chez lui."
+          },
+          {
+            "id": "C",
+            "text": "Le contrat est temporaire."
+          },
+          {
+            "id": "D",
+            "text": "Le salaire est insuffisant."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q15",
+        "audioPath": "assets/audio/co/co_33/15.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De visiter le sud de la France."
+          },
+          {
+            "id": "B",
+            "text": "De partir ensemble à l’étranger."
+          },
+          {
+            "id": "C",
+            "text": "De partir chacun de leur côté."
+          },
+          {
+            "id": "D",
+            "text": "D’aller pêcher avec d’autres amis."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q16",
+        "audioPath": "assets/audio/co/co_33/16.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La crise de l’économie mondiale."
+          },
+          {
+            "id": "B",
+            "text": "L’accroissement de la population."
+          },
+          {
+            "id": "C",
+            "text": "Les nouvelles règles d’hygiène."
+          },
+          {
+            "id": "D",
+            "text": "Les récentes découvertes médicales."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q17",
+        "audioPath": "assets/audio/co/co_33/17.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle aurait aimé faire du tourisme."
+          },
+          {
+            "id": "B",
+            "text": "Elle aurait préféré se coucher tôt."
+          },
+          {
+            "id": "C",
+            "text": "Elle espérait avoir plus d’interlocuteurs."
+          },
+          {
+            "id": "D",
+            "text": "Elle s’attendait à un accueil plus favorable."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q18",
+        "audioPath": "assets/audio/co/co_33/18.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Comment diminuer la consommation d’énergie."
+          },
+          {
+            "id": "B",
+            "text": "Comment il faut appliquer les conseils des experts."
+          },
+          {
+            "id": "C",
+            "text": "Comment la santé est influencée par le calendrier."
+          },
+          {
+            "id": "D",
+            "text": "Comment se protège des maladies contagieuses."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q19",
+        "audioPath": "assets/audio/co/co_33/19.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’assister à une rencontre sportive."
+          },
+          {
+            "id": "B",
+            "text": "De fêter leur victoire entre copains."
+          },
+          {
+            "id": "C",
+            "text": "De jouer au basket-ball sans payer."
+          },
+          {
+            "id": "D",
+            "text": "De s’inscrire dans un nouveau club."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q20",
+        "audioPath": "assets/audio/co/co_33/20.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle est en congé."
+          },
+          {
+            "id": "B",
+            "text": "Elle est tombée malade."
+          },
+          {
+            "id": "C",
+            "text": "Elle travaille la nuit."
+          },
+          {
+            "id": "D",
+            "text": "Elle voyage souvent."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q21",
+        "audioPath": "assets/audio/co/co_33/21.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Des habitants ont voté pour un maire écologique."
+          },
+          {
+            "id": "B",
+            "text": "Les écologistes refusent la construction d’une autoroute."
+          },
+          {
+            "id": "C",
+            "text": "Le ministère des Transports veut faire construire une autoroute."
+          },
+          {
+            "id": "D",
+            "text": "Un maire propose d’ouvrir une réserve naturelle."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q22",
+        "audioPath": "assets/audio/co/co_33/22.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Un point de vue sur la situation mondiale aujourd’hui."
+          },
+          {
+            "id": "B",
+            "text": "Une analyse de l’actualité économique dans le monde."
+          },
+          {
+            "id": "C",
+            "text": "Une critique des conséquences de la mondialisation."
+          },
+          {
+            "id": "D",
+            "text": "Une réflexion sur les relations politiques mondiales."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q23",
+        "audioPath": "assets/audio/co/co_33/23.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’attribuer à la lecture le statut de loisir."
+          },
+          {
+            "id": "B",
+            "text": "De favoriser la lecture en autonomie."
+          },
+          {
+            "id": "C",
+            "text": "De limiter la lecture d’histoires illustrées."
+          },
+          {
+            "id": "D",
+            "text": "De sélectionner des lectures classiques."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q24",
+        "audioPath": "assets/audio/co/co_33/24.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils abusent de repas très caloriques."
+          },
+          {
+            "id": "B",
+            "text": "Ils consomment peu de produits frais."
+          },
+          {
+            "id": "C",
+            "text": "Ils ignorent l’origine de leurs plats."
+          },
+          {
+            "id": "D",
+            "text": "Ils refusent de manger des légumes."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q25",
+        "audioPath": "assets/audio/co/co_33/25.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La recherche d’un appartement est rapide."
+          },
+          {
+            "id": "B",
+            "text": "Le système de la colocation est encouragé."
+          },
+          {
+            "id": "C",
+            "text": "Les habitations proposées sont de qualité."
+          },
+          {
+            "id": "D",
+            "text": "Les logements sont bon marché en banlieue."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q26",
+        "audioPath": "assets/audio/co/co_33/26.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Avoir la liberté d’être son propre patron."
+          },
+          {
+            "id": "B",
+            "text": "Innover dans le domaine informatique."
+          },
+          {
+            "id": "C",
+            "text": "Mener un projet aux États-Unis."
+          },
+          {
+            "id": "D",
+            "text": "Mieux réussir que ses parents."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q27",
+        "audioPath": "assets/audio/co/co_33/27.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De la préparation des vacances."
+          },
+          {
+            "id": "B",
+            "text": "Des révisions d’un examen."
+          },
+          {
+            "id": "C",
+            "text": "D’un anniversaire surprise."
+          },
+          {
+            "id": "D",
+            "text": "D’un projet de visites culturelles."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q28",
+        "audioPath": "assets/audio/co/co_33/28.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Conseiller gratuitement des régimes minceur."
+          },
+          {
+            "id": "B",
+            "text": "Faciliter la consommation de produits sains."
+          },
+          {
+            "id": "C",
+            "text": "Livrer des spécialités régionales à domicile."
+          },
+          {
+            "id": "D",
+            "text": "Proposer une émission de cuisine sur internet."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q29",
+        "audioPath": "assets/audio/co/co_33/29.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Jouer aux cartes."
+          },
+          {
+            "id": "B",
+            "text": "Aller se promener."
+          },
+          {
+            "id": "C",
+            "text": "Regarder la télévision."
+          },
+          {
+            "id": "D",
+            "text": "Visiter la région."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q30",
+        "audioPath": "assets/audio/co/co_33/30.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a besoin d’être perfectionné."
+          },
+          {
+            "id": "B",
+            "text": "Il fonctionne pour les romans."
+          },
+          {
+            "id": "C",
+            "text": "Il peut adapter la ponctuation."
+          },
+          {
+            "id": "D",
+            "text": "Il sert aux spécialistes du métier."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q31",
+        "audioPath": "assets/audio/co/co_33/31.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Aujourd’hui, être à la mode est une préoccupation superficielle."
+          },
+          {
+            "id": "B",
+            "text": "Il faut porter des vêtements adaptés à toutes circonstances."
+          },
+          {
+            "id": "C",
+            "text": "La société actuelle donne trop de place à l’apparence."
+          },
+          {
+            "id": "D",
+            "text": "La tenue vestimentaire influence l’état psychologique."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q32",
+        "audioPath": "assets/audio/co/co_33/32.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La conférence qui a eu lieu est uniquement symbolique."
+          },
+          {
+            "id": "B",
+            "text": "La secrétaire d’État a fait part de son pessimisme."
+          },
+          {
+            "id": "C",
+            "text": "Les discussions s’annoncent longues et difficiles."
+          },
+          {
+            "id": "D",
+            "text": "Tous les points de l’accord ont déjà été traités sans succès."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q33",
+        "audioPath": "assets/audio/co/co_33/33.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sur l’amplitude de l’effet de la dette sur la croissance."
+          },
+          {
+            "id": "B",
+            "text": "Sur l’utilisation des recettes fiscales pour régler la dette."
+          },
+          {
+            "id": "C",
+            "text": "Sur l’acquittement de la dette par la vente du patrimoine de l’État."
+          },
+          {
+            "id": "D",
+            "text": "Sur le montant de la dette contractée par la province québécoise."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q34",
+        "audioPath": "assets/audio/co/co_33/34.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Une optimisation du confort auditif par des sons personnalisables."
+          },
+          {
+            "id": "B",
+            "text": "Une suppression intégrale des bruits mécaniques internes."
+          },
+          {
+            "id": "C",
+            "text": "Une diversification ludique de signaux sans objectif ergonomique."
+          },
+          {
+            "id": "D",
+            "text": "Une limitation réglementaire des nuisances sonores urbaines."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q35",
+        "audioPath": "assets/audio/co/co_33/35.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle peut rompre les branches."
+          },
+          {
+            "id": "B",
+            "text": "Elle peut geler les racines."
+          },
+          {
+            "id": "C",
+            "text": "Elle peut surcharger les branches."
+          },
+          {
+            "id": "D",
+            "text": "Elle peut empêcher la lumière du soleil."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q36",
+        "audioPath": "assets/audio/co/co_33/36.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il conditionne l’humeur."
+          },
+          {
+            "id": "B",
+            "text": "Il dope l’énergie."
+          },
+          {
+            "id": "C",
+            "text": "Il minimise l’angoisse."
+          },
+          {
+            "id": "D",
+            "text": "Il stimule la créativité."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q37",
+        "audioPath": "assets/audio/co/co_33/37.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il admet que les guérisons spontanées sont fréquentes."
+          },
+          {
+            "id": "B",
+            "text": "Il considère que la médecine a du mal à tout expliquer."
+          },
+          {
+            "id": "C",
+            "text": "Il déconseille l’utilisation de certains médicaments."
+          },
+          {
+            "id": "D",
+            "text": "Il est convaincu de l’efficacité des remèdes naturels."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q38",
+        "audioPath": "assets/audio/co/co_33/38.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Améliorer la présentation des produits."
+          },
+          {
+            "id": "B",
+            "text": "Augmenter le nombre de clients."
+          },
+          {
+            "id": "C",
+            "text": "Multiplier les points de vente."
+          },
+          {
+            "id": "D",
+            "text": "Maintenir des tarifs compétitifs."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q39",
+        "audioPath": "assets/audio/co/co_33/39.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "À l’occasion d’une entrevue."
+          },
+          {
+            "id": "B",
+            "text": "En côtoyant des auteurs connus."
+          },
+          {
+            "id": "C",
+            "text": "Grâce à des relations amicales."
+          },
+          {
+            "id": "D",
+            "text": "Lors d’une émission de radio."
+          }
+        ],
+        "correctAnswer": "A"
+      }
+    ]
+  },
+  {
+    "id": "co_34",
+    "title": "Compréhension Orale – Test 34",
+    "type": "CO",
+    "durationMinutes": 35,
+    "questions": [
+      {
+        "id": "Q1",
+        "audioPath": "assets/audio/co/co_34/1.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B",
+        "imagePath": "assets/images/co/co_34/1.jpg"
+      },
+      {
+        "id": "Q2",
+        "audioPath": "assets/audio/co/co_34/2.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q3",
+        "audioPath": "assets/audio/co/co_34/3.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q4",
+        "audioPath": "assets/audio/co/co_34/4.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q5",
+        "audioPath": "assets/audio/co/co_34/5.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q6",
+        "audioPath": "assets/audio/co/co_34/6.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q7",
+        "audioPath": "assets/audio/co/co_34/7.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q8",
+        "audioPath": "assets/audio/co/co_34/8.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Acheter un plan"
+          },
+          {
+            "id": "B",
+            "text": "Prendre un train"
+          },
+          {
+            "id": "C",
+            "text": "Trouver un hôtel"
+          },
+          {
+            "id": "D",
+            "text": "Visiter un musée"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q9",
+        "audioPath": "assets/audio/co/co_34/9.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La publication de son CV en ligne."
+          },
+          {
+            "id": "B",
+            "text": "Un remplacement dans son entreprise."
+          },
+          {
+            "id": "C",
+            "text": "Une formation gratuite à l’université."
+          },
+          {
+            "id": "D",
+            "text": "Une rencontre avec son patron."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q10",
+        "audioPath": "assets/audio/co/co_34/10.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La communication avec ses clients."
+          },
+          {
+            "id": "B",
+            "text": "La recherche d’un nouveau travail."
+          },
+          {
+            "id": "C",
+            "text": "L’achat d’un nouveau téléphone fixe."
+          },
+          {
+            "id": "D",
+            "text": "L’utilisation de son ordinateur portable."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q11",
+        "audioPath": "assets/audio/co/co_34/11.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle a oublié un objet important."
+          },
+          {
+            "id": "B",
+            "text": "Elle a raté son bus ce matin."
+          },
+          {
+            "id": "C",
+            "text": "Elle doit s’absenter du bureau."
+          },
+          {
+            "id": "D",
+            "text": "Elle est en retard à une réunion."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q12",
+        "audioPath": "assets/audio/co/co_34/12.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a été très agréablement surpris."
+          },
+          {
+            "id": "B",
+            "text": "Il préfère attendre pour se prononcer."
+          },
+          {
+            "id": "C",
+            "text": "Il aurait aimé se mettre déjà au travail."
+          },
+          {
+            "id": "D",
+            "text": "Il a trouvé son supérieur peu disponible."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q13",
+        "audioPath": "assets/audio/co/co_34/13.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Manger des plats typiques."
+          },
+          {
+            "id": "B",
+            "text": "Rencontrer sa famille."
+          },
+          {
+            "id": "C",
+            "text": "Travailler toute la journée."
+          },
+          {
+            "id": "D",
+            "text": "Voir une exposition."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q14",
+        "audioPath": "assets/audio/co/co_34/14.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La mission est sans intérêt."
+          },
+          {
+            "id": "B",
+            "text": "La société est loin de chez lui."
+          },
+          {
+            "id": "C",
+            "text": "Le contrat est temporaire."
+          },
+          {
+            "id": "D",
+            "text": "Le salaire est insuffisant."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q15",
+        "audioPath": "assets/audio/co/co_34/15.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour lui présenter un produit."
+          },
+          {
+            "id": "B",
+            "text": "Pour organiser un voyage."
+          },
+          {
+            "id": "C",
+            "text": "Pour suivre une formation."
+          },
+          {
+            "id": "D",
+            "text": "Pour visiter Lyon avec lui."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q16",
+        "audioPath": "assets/audio/co/co_34/16.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "L’histoire est compliquée."
+          },
+          {
+            "id": "B",
+            "text": "La musique est ennuyeuse."
+          },
+          {
+            "id": "C",
+            "text": "Le réalisateur est mauvais."
+          },
+          {
+            "id": "D",
+            "text": "Les acteurs sont inconnus."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q17",
+        "audioPath": "assets/audio/co/co_34/17.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Le bon de garantie."
+          },
+          {
+            "id": "B",
+            "text": "Le chèque cadeau."
+          },
+          {
+            "id": "C",
+            "text": "Le justificatif d’achat."
+          },
+          {
+            "id": "D",
+            "text": "Le mode d’emploi."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q18",
+        "audioPath": "assets/audio/co/co_34/18.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour confirmer un rendez-vous."
+          },
+          {
+            "id": "B",
+            "text": "Pour demander un entretien."
+          },
+          {
+            "id": "C",
+            "text": "Pour proposer un service."
+          },
+          {
+            "id": "D",
+            "text": "Pour signaler un retard."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q19",
+        "audioPath": "assets/audio/co/co_34/19.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a peu de diplômes."
+          },
+          {
+            "id": "B",
+            "text": "Il est déjà trop âgé."
+          },
+          {
+            "id": "C",
+            "text": "Il est mauvais en langues."
+          },
+          {
+            "id": "D",
+            "text": "Il manque d’expérience."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q20",
+        "audioPath": "assets/audio/co/co_34/20.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Le recrutement se fonde sur l’expérience."
+          },
+          {
+            "id": "B",
+            "text": "Les salaires à l’embauche sont très élevés."
+          },
+          {
+            "id": "C",
+            "text": "L’évolution professionnelle est très lente."
+          },
+          {
+            "id": "D",
+            "text": "L’obtention d’un premier emploi est aisée."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q21",
+        "audioPath": "assets/audio/co/co_34/21.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Interviewer un réalisateur."
+          },
+          {
+            "id": "B",
+            "text": "Participer à un festival."
+          },
+          {
+            "id": "C",
+            "text": "Tourner un film."
+          },
+          {
+            "id": "D",
+            "text": "Visiter des studios de cinéma."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q22",
+        "audioPath": "assets/audio/co/co_34/22.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Visiter des studios de cinéma."
+          },
+          {
+            "id": "B",
+            "text": "Lui apporter un livre."
+          },
+          {
+            "id": "C",
+            "text": "Lui présenter son travail."
+          },
+          {
+            "id": "D",
+            "text": "Lui proposer une interview."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q23",
+        "audioPath": "assets/audio/co/co_34/23.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Leur public est en diminution."
+          },
+          {
+            "id": "B",
+            "text": "Leur salaire est insuffisant."
+          },
+          {
+            "id": "C",
+            "text": "Leur savoir est peu transmis."
+          },
+          {
+            "id": "D",
+            "text": "Leur talent est dévalorisé."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q24",
+        "audioPath": "assets/audio/co/co_34/24.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a répondu à une demande de ses patients."
+          },
+          {
+            "id": "B",
+            "text": "Il consacre son temps à son nouveau métier."
+          },
+          {
+            "id": "C",
+            "text": "Il s’est remis en question suite à un échec."
+          },
+          {
+            "id": "D",
+            "text": "Il veut éviter toute publicité personnelle."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q25",
+        "audioPath": "assets/audio/co/co_34/25.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Augmenter le nombre des surfaces exploitables."
+          },
+          {
+            "id": "B",
+            "text": "Développer la production des fruits et légumes."
+          },
+          {
+            "id": "C",
+            "text": "Diffuser des procédés en accord avec la nature."
+          },
+          {
+            "id": "D",
+            "text": "Introduire la plantation de nouvelles espèces."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q26",
+        "audioPath": "assets/audio/co/co_34/26.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La recherche d’un appartement est rapide."
+          },
+          {
+            "id": "B",
+            "text": "Le système de la colocation est encouragé."
+          },
+          {
+            "id": "C",
+            "text": "Les habitations proposées sont de qualité."
+          },
+          {
+            "id": "D",
+            "text": "Les logements sont bon marché en banlieue."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q27",
+        "audioPath": "assets/audio/co/co_34/27.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De ses difficultés à se réveiller le matin."
+          },
+          {
+            "id": "B",
+            "text": "De son dernier salaire qui est insuffisant."
+          },
+          {
+            "id": "C",
+            "text": "De son emploi du temps professionnel."
+          },
+          {
+            "id": "D",
+            "text": "De son manque d’organisation habituel."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q28",
+        "audioPath": "assets/audio/co/co_34/28.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle est sortie en boîte de nuit."
+          },
+          {
+            "id": "B",
+            "text": "Elle a dîné avec sa famille."
+          },
+          {
+            "id": "C",
+            "text": "Elle est restée toute seule."
+          },
+          {
+            "id": "D",
+            "text": "Elle a vu un mauvais film."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q29",
+        "audioPath": "assets/audio/co/co_34/29.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Jouer aux cartes."
+          },
+          {
+            "id": "B",
+            "text": "Aller se promener."
+          },
+          {
+            "id": "C",
+            "text": "Regarder la télévision."
+          },
+          {
+            "id": "D",
+            "text": "Visiter la région."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q30",
+        "audioPath": "assets/audio/co/co_34/30.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a besoin d’être perfectionné."
+          },
+          {
+            "id": "B",
+            "text": "Il fonctionne pour les romans."
+          },
+          {
+            "id": "C",
+            "text": "Il peut adapter la ponctuation."
+          },
+          {
+            "id": "D",
+            "text": "Il sert aux spécialistes du métier."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q31",
+        "audioPath": "assets/audio/co/co_34/31.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Comparer les mouvements des galaxies."
+          },
+          {
+            "id": "B",
+            "text": "Étudier les trajectoires des déchets cosmiques."
+          },
+          {
+            "id": "C",
+            "text": "Prévenir les risques de chute de météorites."
+          },
+          {
+            "id": "D",
+            "text": "S’entrainer pour des voyages interplanétaires."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q32",
+        "audioPath": "assets/audio/co/co_34/32.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "L’absence de formes d’altruisme."
+          },
+          {
+            "id": "B",
+            "text": "La place accordée à l’apparence."
+          },
+          {
+            "id": "C",
+            "text": "La superficialité des relations."
+          },
+          {
+            "id": "D",
+            "text": "Le manque d’estime de soi."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q33",
+        "audioPath": "assets/audio/co/co_34/33.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Comme la possibilité de s’évader dans d’autres vies."
+          },
+          {
+            "id": "B",
+            "text": "Comme la réalisation d’un rêve d’enfance."
+          },
+          {
+            "id": "C",
+            "text": "Comme le moyen d’être le centre de l’attention."
+          },
+          {
+            "id": "D",
+            "text": "Comme le reflet d’un caractère authentique."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q34",
+        "audioPath": "assets/audio/co/co_34/34.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils concernent des investissements à long terme."
+          },
+          {
+            "id": "B",
+            "text": "Ils impliquent des associations à but non lucratif."
+          },
+          {
+            "id": "C",
+            "text": "Ils offrent des opportunités de bénéfices élevés."
+          },
+          {
+            "id": "D",
+            "text": "Ils prennent en considération le facteur social."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q35",
+        "audioPath": "assets/audio/co/co_34/35.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "L’action politique doit s’appuyer sur les conclusions scientifiques."
+          },
+          {
+            "id": "B",
+            "text": "La criminalité est en baisse dans les agglomérations modernes."
+          },
+          {
+            "id": "C",
+            "text": "La croissance urbaine est un danger pour l’écologie."
+          },
+          {
+            "id": "D",
+            "text": "La violence est indépendante de la densité humaine."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q36",
+        "audioPath": "assets/audio/co/co_34/36.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elles réapprennent certains gestes."
+          },
+          {
+            "id": "B",
+            "text": "Elles rencontrent d’autres joueurs."
+          },
+          {
+            "id": "C",
+            "text": "Elles se réintègrent à la communauté."
+          },
+          {
+            "id": "D",
+            "text": "Elles stimulent leurs facultés cérébrales."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q37",
+        "audioPath": "assets/audio/co/co_34/37.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour mettre en pratique ses connaissances."
+          },
+          {
+            "id": "B",
+            "text": "Pour opérer une reconversion professionnelle."
+          },
+          {
+            "id": "C",
+            "text": "Pour pouvoir rembourser son emprunt."
+          },
+          {
+            "id": "D",
+            "text": "Pour vivre quelques années à l’étranger."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q38",
+        "audioPath": "assets/audio/co/co_34/38.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sur l’étroite collaboration avec les équipes locales."
+          },
+          {
+            "id": "B",
+            "text": "Sur la formation des employés expatriés."
+          },
+          {
+            "id": "C",
+            "text": "Sur la prédominance de bénévoles dans chaque pays."
+          },
+          {
+            "id": "D",
+            "text": "Sur le montant élevé des bénéfices réalisés."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q39",
+        "audioPath": "assets/audio/co/co_34/39.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Acheter des livres sur le bonheur rend heureux."
+          },
+          {
+            "id": "B",
+            "text": "Chacun de nous est prédisposé au bonheur."
+          },
+          {
+            "id": "C",
+            "text": "Des cours de bonheur s’imposent dès l’enfance."
+          },
+          {
+            "id": "D",
+            "text": "L’accès au bonheur nécessite du travail."
+          }
+        ],
+        "correctAnswer": "C"
+      }
+    ]
+  },
+  {
+    "id": "co_35",
+    "title": "Compréhension Orale – Test 35",
+    "type": "CO",
+    "durationMinutes": 35,
+    "questions": [
+      {
+        "id": "Q1",
+        "audioPath": "assets/audio/co/co_35/1.mp3",
+        "imagePath": "assets/images/co/co_35/1.png",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q2",
+        "audioPath": "assets/audio/co/co_35/2.mp3",
+        "imagePath": "assets/images/co/co_35/2.png",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q3",
+        "audioPath": "assets/audio/co/co_35/3.mp3",
+        "imagePath": "assets/images/co/co_35/3.png",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q4",
+        "audioPath": "assets/audio/co/co_35/4.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q5",
+        "audioPath": "assets/audio/co/co_35/5.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q6",
+        "audioPath": "assets/audio/co/co_35/6.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q7",
+        "audioPath": "assets/audio/co/co_35/7.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q8",
+        "audioPath": "assets/audio/co/co_35/8.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "A"
+          },
+          {
+            "id": "B",
+            "text": "B"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "D"
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q9",
+        "audioPath": "assets/audio/co/co_35/9.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "À l’opéra."
+          },
+          {
+            "id": "B",
+            "text": "Au cabaret."
+          },
+          {
+            "id": "C",
+            "text": "Au cinéma."
+          },
+          {
+            "id": "D",
+            "text": "Au théâtre."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q10",
+        "audioPath": "assets/audio/co/co_35/10.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Acheter un plan."
+          },
+          {
+            "id": "B",
+            "text": "Prendre un train."
+          },
+          {
+            "id": "C",
+            "text": "Trouver un hôtel."
+          },
+          {
+            "id": "D",
+            "text": "Visiter un musée."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q11",
+        "audioPath": "assets/audio/co/co_35/11.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "S’inscrire sur place."
+          },
+          {
+            "id": "B",
+            "text": "Téléphoner."
+          },
+          {
+            "id": "C",
+            "text": "Envoyer un courrier."
+          },
+          {
+            "id": "D",
+            "text": "Utiliser internet."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q12",
+        "audioPath": "assets/audio/co/co_35/12.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Utiliser la salle informatique."
+          },
+          {
+            "id": "B",
+            "text": "Mettre à jour sa carte d’étudiant."
+          },
+          {
+            "id": "C",
+            "text": "Prendre une photo pour sa carte d’étudiant."
+          },
+          {
+            "id": "D",
+            "text": "Trouver le code d’accès à la salle."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q13",
+        "audioPath": "assets/audio/co/co_35/13.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour lui conseiller d’aller voir un médecin."
+          },
+          {
+            "id": "B",
+            "text": "Pour lui dire qu’elle sera un peu en retard."
+          },
+          {
+            "id": "C",
+            "text": "Pour lui proposer un film qu’elle veut voir."
+          },
+          {
+            "id": "D",
+            "text": "Pour lui rappeler une chose importante."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q14",
+        "audioPath": "assets/audio/co/co_35/14.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Être inscrit dans une université."
+          },
+          {
+            "id": "B",
+            "text": "Avoir le Baccalauréat."
+          },
+          {
+            "id": "C",
+            "text": "Avoir terminé des études de master."
+          },
+          {
+            "id": "D",
+            "text": "Avoir une expérience professionnelle préalable."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q15",
+        "audioPath": "assets/audio/co/co_35/15.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Au bureau."
+          },
+          {
+            "id": "B",
+            "text": "Au cinéma."
+          },
+          {
+            "id": "C",
+            "text": "Au restaurant."
+          },
+          {
+            "id": "D",
+            "text": "Au théâtre."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q16",
+        "audioPath": "assets/audio/co/co_35/16.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour commander un nouveau canapé-lit."
+          },
+          {
+            "id": "B",
+            "text": "Pour exiger l’annulation de sa commande."
+          },
+          {
+            "id": "C",
+            "text": "Pour demander un échange de marchandise."
+          },
+          {
+            "id": "D",
+            "text": "Pour se plaindre d’une commande non livrée."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q17",
+        "audioPath": "assets/audio/co/co_35/17.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Comment diminuer la consommation d’énergie."
+          },
+          {
+            "id": "B",
+            "text": "Comment il faut appliquer les conseils des experts."
+          },
+          {
+            "id": "C",
+            "text": "Comment la santé est influencée par le calendrier."
+          },
+          {
+            "id": "D",
+            "text": "Comment se protège des maladies contagieuses."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q18",
+        "audioPath": "assets/audio/co/co_35/18.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’annuler une réunion."
+          },
+          {
+            "id": "B",
+            "text": "D’informer de son retard."
+          },
+          {
+            "id": "C",
+            "text": "De recevoir un client."
+          },
+          {
+            "id": "D",
+            "text": "De reporter un entretien."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q19",
+        "audioPath": "assets/audio/co/co_35/19.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Les conditions de recrutement sont plus difficiles aujourd’hui."
+          },
+          {
+            "id": "B",
+            "text": "Les étudiants ignorent le fonctionnement de l’entreprise."
+          },
+          {
+            "id": "C",
+            "text": "Les jeunes étaient préparés plus sérieusement dans le passé."
+          },
+          {
+            "id": "D",
+            "text": "Les patrons actuels ont un degré d’exigence trop élevé."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q20",
+        "audioPath": "assets/audio/co/co_35/20.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il est possible qu’il soit renvoyé."
+          },
+          {
+            "id": "B",
+            "text": "Il est renvoyé définitivement."
+          },
+          {
+            "id": "C",
+            "text": "Il va commencer sa période d’essai."
+          },
+          {
+            "id": "D",
+            "text": "Il va être embauché définitivement."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q21",
+        "audioPath": "assets/audio/co/co_35/21.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Le promoteur a oublié de prévenir la compagnie de téléphone."
+          },
+          {
+            "id": "B",
+            "text": "Le réseau téléphonique du nouvel immeuble est déjà saturé."
+          },
+          {
+            "id": "C",
+            "text": "Les travaux nécessaires ne sont pas encore achevés."
+          },
+          {
+            "id": "D",
+            "text": "La compagnie de téléphone manque de personnel pour le faire."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q22",
+        "audioPath": "assets/audio/co/co_35/22.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elle accepte de garder le chien."
+          },
+          {
+            "id": "B",
+            "text": "Elle refuse de garder le chien."
+          },
+          {
+            "id": "C",
+            "text": "Elle propose de trouver une autre solution."
+          },
+          {
+            "id": "D",
+            "text": "Elle demande des excuses."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q23",
+        "audioPath": "assets/audio/co/co_35/23.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Que l’homme soit parti seul en vacances."
+          },
+          {
+            "id": "B",
+            "text": "Que l’homme ait progressé au golf."
+          },
+          {
+            "id": "C",
+            "text": "Que l’homme lui ait envoyé une carte."
+          },
+          {
+            "id": "D",
+            "text": "Que l’homme se soit mis à faire du sport."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q24",
+        "audioPath": "assets/audio/co/co_35/24.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "L’écologie."
+          },
+          {
+            "id": "B",
+            "text": "La puissance."
+          },
+          {
+            "id": "C",
+            "text": "La sécurité."
+          },
+          {
+            "id": "D",
+            "text": "Les équipements."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q25",
+        "audioPath": "assets/audio/co/co_35/25.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pour limiter le temps passé devant la télévision."
+          },
+          {
+            "id": "B",
+            "text": "Pour améliorer les performances scolaires de l’enfant."
+          },
+          {
+            "id": "C",
+            "text": "Pour respecter les obligations légales de parentalité."
+          },
+          {
+            "id": "D",
+            "text": "Pour façonner la personnalité de l’enfant."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q26",
+        "audioPath": "assets/audio/co/co_35/26.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il trouve que cela lui coûte trop cher."
+          },
+          {
+            "id": "B",
+            "text": "Il pense que cela ne lui est plus utile."
+          },
+          {
+            "id": "C",
+            "text": "Il trouve que l’augmentation est injustifiée."
+          },
+          {
+            "id": "D",
+            "text": "Il pense qu’il aurait dû être prévenu."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q27",
+        "audioPath": "assets/audio/co/co_35/27.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "L’envie de dénoncer la situation de l’école."
+          },
+          {
+            "id": "B",
+            "text": "La nostalgie de l’école de leur jeunesse."
+          },
+          {
+            "id": "C",
+            "text": "Le constat d’une école fermée sur elle-même."
+          },
+          {
+            "id": "D",
+            "text": "L’approche identique de la question de l’école."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q28",
+        "audioPath": "assets/audio/co/co_35/28.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Attendre que le client demande conseil."
+          },
+          {
+            "id": "B",
+            "text": "Être serviable avec discrétion."
+          },
+          {
+            "id": "C",
+            "text": "Pousser le client à consommer."
+          },
+          {
+            "id": "D",
+            "text": "Toujours accompagner le client."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q29",
+        "audioPath": "assets/audio/co/co_35/29.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "De maigrir plus rapidement."
+          },
+          {
+            "id": "B",
+            "text": "De manger sans compter."
+          },
+          {
+            "id": "C",
+            "text": "De s’entraîner moins souvent."
+          },
+          {
+            "id": "D",
+            "text": "De vivre plus longtemps."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q30",
+        "audioPath": "assets/audio/co/co_35/30.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils habitent plus longtemps en location."
+          },
+          {
+            "id": "B",
+            "text": "Ils perçoivent un salaire plus élevé."
+          },
+          {
+            "id": "C",
+            "text": "Ils s’investissent dans des associations."
+          },
+          {
+            "id": "D",
+            "text": "Ils sont tentés par les dépenses."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q31",
+        "audioPath": "assets/audio/co/co_35/31.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Avant le match."
+          },
+          {
+            "id": "B",
+            "text": "Pendant le match."
+          },
+          {
+            "id": "C",
+            "text": "À la mi-temps."
+          },
+          {
+            "id": "D",
+            "text": "Après le match."
+          }
+        ],
+        "correctAnswer": "D"
+      },
+      {
+        "id": "Q32",
+        "audioPath": "assets/audio/co/co_35/32.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La mise en vente illégale d’albums musicaux contrefaits."
+          },
+          {
+            "id": "B",
+            "text": "Les copies gratuites de fichiers musicaux sur Internet."
+          },
+          {
+            "id": "C",
+            "text": "Les détournements de droits d’auteur sur les disques vendus."
+          },
+          {
+            "id": "D",
+            "text": "Les enregistrements clandestins pendant les concerts."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q33",
+        "audioPath": "assets/audio/co/co_35/33.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Il a des répercussions jusque dans le quotidien des Québécois."
+          },
+          {
+            "id": "B",
+            "text": "Il modifie le calendrier annuel des compétitions de ski de fond."
+          },
+          {
+            "id": "C",
+            "text": "Il présente des bénéfices économiques méconnus des populations."
+          },
+          {
+            "id": "D",
+            "text": "Il se ressent surtout dans les régions situées au nord du Canada."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q34",
+        "audioPath": "assets/audio/co/co_35/34.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils émettent quelques réserves sur leur intégration."
+          },
+          {
+            "id": "B",
+            "text": "Ils regrettent les festivités culturelles parisiennes."
+          },
+          {
+            "id": "C",
+            "text": "Ils s’indignent des prix du marché de l’immobilier."
+          },
+          {
+            "id": "D",
+            "text": "Ils se soucient du manque de transports en commun."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q35",
+        "audioPath": "assets/audio/co/co_35/35.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "La multiplication des intervenants nuit à l’efficacité de sa communication."
+          },
+          {
+            "id": "B",
+            "text": "Les actions d’information ont rouvert le dialogue avec les Québécois."
+          },
+          {
+            "id": "C",
+            "text": "Les habitants sont indifférents à l’une des richesses du Québec."
+          },
+          {
+            "id": "D",
+            "text": "L’expansion urbaine contrarie l’exploitation industrielle du bois."
+          }
+        ],
+        "correctAnswer": "C"
+      },
+      {
+        "id": "Q36",
+        "audioPath": "assets/audio/co/co_35/36.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Installer des fontaines d’eau purifiée dans les villages."
+          },
+          {
+            "id": "B",
+            "text": "Encadrer les projets locaux pour créer des activités économiques."
+          },
+          {
+            "id": "C",
+            "text": "Distribuer gratuitement de l’eau potable."
+          },
+          {
+            "id": "D",
+            "text": "Construire des infrastructures de santé."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q37",
+        "audioPath": "assets/audio/co/co_35/37.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "D’un citadin original."
+          },
+          {
+            "id": "B",
+            "text": "D’un cuisinier renommé."
+          },
+          {
+            "id": "C",
+            "text": "D’un historien passionné."
+          },
+          {
+            "id": "D",
+            "text": "D’un homme préhistorique."
+          }
+        ],
+        "correctAnswer": "A"
+      },
+      {
+        "id": "Q38",
+        "audioPath": "assets/audio/co/co_35/38.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ils font l’objet de manipulations douteuses par les pollueurs."
+          },
+          {
+            "id": "B",
+            "text": "Ils répondent à des critères insuffisamment exigeants."
+          },
+          {
+            "id": "C",
+            "text": "Ils sont destinés à justifier les politiques économiques."
+          },
+          {
+            "id": "D",
+            "text": "Ils sont publiés par des organismes liés aux entreprises."
+          }
+        ],
+        "correctAnswer": "B"
+      },
+      {
+        "id": "Q39",
+        "audioPath": "assets/audio/co/co_35/39.mp3",
+        "options": [
+          {
+            "id": "A",
+            "text": "Améliorer la présentation des produits."
+          },
+          {
+            "id": "B",
+            "text": "Augmenter le nombre de clients."
+          },
+          {
+            "id": "C",
+            "text": "Multiplier les points de vente."
+          },
+          {
+            "id": "D",
+            "text": "Maintenir des tarifs compétitifs."
+          }
+        ],
+        "correctAnswer": "D"
+      }
+    ]
   }
 ]
 
