@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.4
   provider: ^6.1.5+1
+  just_audio: ^0.10.5
+  just_audio_web: ^0.4.16
 
 dev_dependencies:
   flutter_test:
@@ -101,7 +103,90 @@ flutter:
     - assets/images/ce/ce_38/
     - assets/images/ce/ce_39/
     - assets/images/ce/ce_40/
+
+
+
+    - assets/images/co/co_01/
+    - assets/images/co/co_02/
+    - assets/images/co/co_03/
+    - assets/images/co/co_04/
+    - assets/images/co/co_05/
+    - assets/images/co/co_06/
+    - assets/images/co/co_07/
+    - assets/images/co/co_08/
+    - assets/images/co/co_09/
+    - assets/images/co/co_10/
+    - assets/images/co/co_11/
+    - assets/images/co/co_12/
+    - assets/images/co/co_13/
+    - assets/images/co/co_14/
+    - assets/images/co/co_15/
+    - assets/images/co/co_16/
+    - assets/images/co/co_17/
+    - assets/images/co/co_18/
+    - assets/images/co/co_19/
+    - assets/images/co/co_20/
+    - assets/images/co/co_21/
+    - assets/images/co/co_22/
+    - assets/images/co/co_23/
+    - assets/images/co/co_24/
+    - assets/images/co/co_25/
+    - assets/images/co/co_26/
+    - assets/images/co/co_27/
+    - assets/images/co/co_28/
+    - assets/images/co/co_29/
+    - assets/images/co/co_30/
+    - assets/images/co/co_31/
+    - assets/images/co/co_32/
+    - assets/images/co/co_33/
+    - assets/images/co/co_34/
+    - assets/images/co/co_35/
+    - assets/images/co/co_36/
+    - assets/images/co/co_37/
+    - assets/images/co/co_38/
+    - assets/images/co/co_39/
+    - assets/images/co/co_40/
     - assets/audio/
+    - assets/audio/co/co_01/
+    - assets/audio/co/co_02/
+    - assets/audio/co/co_03/
+    - assets/audio/co/co_04/
+    - assets/audio/co/co_05/
+    - assets/audio/co/co_06/
+    - assets/audio/co/co_07/
+    - assets/audio/co/co_08/
+    - assets/audio/co/co_09/
+    - assets/audio/co/co_10/
+    - assets/audio/co/co_11/
+    - assets/audio/co/co_12/
+    - assets/audio/co/co_13/
+    - assets/audio/co/co_14/
+    - assets/audio/co/co_15/
+    - assets/audio/co/co_16/
+    - assets/audio/co/co_17/
+    - assets/audio/co/co_18/
+    - assets/audio/co/co_19/
+    - assets/audio/co/co_20/
+    - assets/audio/co/co_21/
+    - assets/audio/co/co_22/
+    - assets/audio/co/co_23/
+    - assets/audio/co/co_24/
+    - assets/audio/co/co_25/
+    - assets/audio/co/co_26/
+    - assets/audio/co/co_27/
+    - assets/audio/co/co_28/
+    - assets/audio/co/co_29/
+    - assets/audio/co/co_30/
+    - assets/audio/co/co_31/
+    - assets/audio/co/co_32/
+    - assets/audio/co/co_33/
+    - assets/audio/co/co_34/
+    - assets/audio/co/co_35/
+    - assets/audio/co/co_36/
+    - assets/audio/co/co_37/
+    - assets/audio/co/co_38/
+    - assets/audio/co/co_39/
+    - assets/audio/co/co_40/
     - assets/data/
 
   # An image asset can refer to one or more resolution-specific "variants", see
