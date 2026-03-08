@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'app/theme_controller.dart';
 import 'core/theme/app_theme.dart';
-import 'features/dashboard/comprehension_hub_screen.dart';
+import 'features/dashboard/exam_portal_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeController.themeMode,
-      home: const ComprehensionHubScreen(),
+      home: const ExamPortalScreen(),
     );
   }
 }

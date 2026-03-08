@@ -12,6 +12,7 @@ class OralTestListScreen extends StatefulWidget {
 
 class _OralTestListScreenState extends State<OralTestListScreen> {
   late Future<List<OralTestModel>> testsFuture;
+  OralTestModel? selectedTest;
 
   @override
   void initState() {
@@ -21,7 +22,8 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isWide = MediaQuery.of(context).size.width > 900;
+    final cs = Theme.of(context).colorScheme;
+    final isWide = MediaQuery.of(context).size.width >= 980;
 
     return FutureBuilder<List<OralTestModel>>(
       future: testsFuture,
@@ -30,115 +32,167 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
-          return Center(child: Text("Error: ${snapshot.error}"));
+          return Center(child: Text("Failed to load CO tests:\n${snapshot.error}"));
         }
 
         final tests = snapshot.data ?? [];
         if (tests.isEmpty) {
-          return const Center(child: Text("No oral tests found."));
+          return const Center(child: Text("No oral tests available"));
         }
 
-        return Padding(
-          padding: const EdgeInsets.all(16),
-          child: isWide
-              ? GridView.builder(
-                  itemCount: tests.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 1.35,
+        selectedTest ??= tests.first;
+
+        if (!isWide) {
+          return ListView.separated(
+            padding: const EdgeInsets.all(16),
+            itemCount: tests.length,
+            separatorBuilder: (_, __) => const SizedBox(height: 10),
+            itemBuilder: (context, index) {
+              final test = tests[index];
+              return _TestRow(
+                title: test.title,
+                subtitle: "${test.questions.length} questions • ${test.durationMinutes} min",
+                leading: _testNumberFromId(test.id),
+                isSelected: false,
+                onTap: () => _start(context, test),
+              );
+            },
+          );
+        }
+
+        return Row(
+          children: [
+            SizedBox(
+              width: 430,
+              child: ListView.separated(
+                padding: const EdgeInsets.all(16),
+                itemCount: tests.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 10),
+                itemBuilder: (context, index) {
+                  final test = tests[index];
+                  final isSelected = selectedTest?.id == test.id;
+
+                  return _TestRow(
+                    title: test.title,
+                    subtitle: "${test.questions.length} questions • ${test.durationMinutes} min",
+                    leading: _testNumberFromId(test.id),
+                    isSelected: isSelected,
+                    onTap: () => setState(() => selectedTest = test),
+                  );
+                },
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: cs.surface,
+                    border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
                   ),
-                  itemBuilder: (_, i) => _OralTestCard(
-                    test: tests[i],
-                    onStart: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => OralQuestionScreen(test: tests[i]),
-                        ),
-                      );
-                    },
-                  ),
-                )
-              : ListView.separated(
-                  itemCount: tests.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 12),
-                  itemBuilder: (_, i) => _OralTestCard(
-                    test: tests[i],
-                    onStart: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => OralQuestionScreen(test: tests[i]),
-                        ),
-                      );
-                    },
+                  child: _DetailsPanel(
+                    test: selectedTest!,
+                    onStart: () => _start(context, selectedTest!),
                   ),
                 ),
+              ),
+            ),
+          ],
         );
       },
     );
   }
+
+  void _start(BuildContext context, OralTestModel test) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => OralQuestionScreen(test: test)),
+    );
+  }
+
+  String _testNumberFromId(String id) {
+    final parts = id.split('_');
+    if (parts.length >= 2) return parts[1].toUpperCase();
+    return id.toUpperCase();
+  }
 }
 
-class _OralTestCard extends StatelessWidget {
-  final OralTestModel test;
-  final VoidCallback onStart;
+class _TestRow extends StatelessWidget {
+  final String leading;
+  final String title;
+  final String subtitle;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  const _OralTestCard({required this.test, required this.onStart});
+  const _TestRow({
+    required this.leading,
+    required this.title,
+    required this.subtitle,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return InkWell(
-      onTap: onStart,
-      borderRadius: BorderRadius.circular(26),
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(14),
       child: Ink(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(26),
-          color: cs.surface,
-          border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
-              blurRadius: 18,
-              offset: const Offset(0, 10),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(14),
+          color: isSelected ? cs.primaryContainer.withOpacity(0.45) : cs.surface,
+          border: Border.all(
+            color: isSelected
+                ? cs.primary.withOpacity(0.55)
+                : cs.outlineVariant.withOpacity(0.35),
+          ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
-            Text(
-              test.title,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
-            ),
-            Row(
-              children: [
-                _Chip(icon: Icons.quiz, text: "${test.questions.length} Q"),
-                const SizedBox(width: 10),
-                _Chip(icon: Icons.timer, text: "${test.durationMinutes} min"),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: FilledButton(
-                onPressed: onStart,
-                style: FilledButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                ),
-                child: const Text("Start"),
+            Container(
+              width: 46,
+              height: 46,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: cs.surfaceContainerHighest.withOpacity(0.55),
+                border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+              ),
+              child: Text(
+                leading,
+                style: const TextStyle(fontWeight: FontWeight.w900),
               ),
             ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.w900),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 10),
+            Icon(Icons.chevron_right_rounded,
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)),
           ],
         ),
       ),
@@ -146,29 +200,77 @@ class _OralTestCard extends StatelessWidget {
   }
 }
 
-class _Chip extends StatelessWidget {
-  final IconData icon;
-  final String text;
+class _DetailsPanel extends StatelessWidget {
+  final OralTestModel test;
+  final VoidCallback onStart;
 
-  const _Chip({required this.icon, required this.text});
+  const _DetailsPanel({
+    required this.test,
+    required this.onStart,
+  });
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: cs.surfaceContainerHighest.withOpacity(0.55),
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 14, color: cs.primary),
-          const SizedBox(width: 6),
-          Text(text, style: const TextStyle(fontWeight: FontWeight.w800)),
-        ],
+
+    const bestScoreText = "Best: — / 699";
+
+    return Padding(
+      padding: const EdgeInsets.all(18),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              test.title,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "${test.questions.length} questions • ${test.durationMinutes} minutes",
+              style: TextStyle(
+                color: cs.onSurface.withOpacity(0.65),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                color: cs.surfaceContainerHighest.withOpacity(0.55),
+                border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.emoji_events_rounded, color: cs.primary),
+                  const SizedBox(width: 10),
+                  Text(
+                    bestScoreText,
+                    style: const TextStyle(fontWeight: FontWeight.w900),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 18),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: onStart,
+                icon: const Icon(Icons.play_arrow_rounded),
+                label: const Text("Start Test"),
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
