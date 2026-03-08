@@ -21,70 +21,63 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
     final isWide = MediaQuery.of(context).size.width > 900;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Compréhension Orale"),
-      ),
-      body: FutureBuilder<List<OralTestModel>>(
-        future: testsFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return Center(child: Text("Error: ${snapshot.error}"));
-          }
+    return FutureBuilder<List<OralTestModel>>(
+      future: testsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text("Error: ${snapshot.error}"));
+        }
 
-          final tests = snapshot.data ?? [];
-          if (tests.isEmpty) {
-            return const Center(child: Text("No oral tests found."));
-          }
+        final tests = snapshot.data ?? [];
+        if (tests.isEmpty) {
+          return const Center(child: Text("No oral tests found."));
+        }
 
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: isWide
-                ? GridView.builder(
-              itemCount: tests.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 1.35,
-              ),
-              itemBuilder: (_, i) => _OralTestCard(
-                test: tests[i],
-                onStart: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => OralQuestionScreen(test: tests[i]),
-                    ),
-                  );
-                },
-              ),
-            )
-                : ListView.separated(
-              itemCount: tests.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 12),
-              itemBuilder: (_, i) => _OralTestCard(
-                test: tests[i],
-                onStart: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => OralQuestionScreen(test: tests[i]),
-                    ),
-                  );
-                },
-              ),
-            ),
-          );
-        },
-      ),
-      backgroundColor: cs.surface,
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: isWide
+              ? GridView.builder(
+                  itemCount: tests.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 1.35,
+                  ),
+                  itemBuilder: (_, i) => _OralTestCard(
+                    test: tests[i],
+                    onStart: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => OralQuestionScreen(test: tests[i]),
+                        ),
+                      );
+                    },
+                  ),
+                )
+              : ListView.separated(
+                  itemCount: tests.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 12),
+                  itemBuilder: (_, i) => _OralTestCard(
+                    test: tests[i],
+                    onStart: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => OralQuestionScreen(test: tests[i]),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+        );
+      },
     );
   }
 }
@@ -93,10 +86,7 @@ class _OralTestCard extends StatelessWidget {
   final OralTestModel test;
   final VoidCallback onStart;
 
-  const _OralTestCard({
-    required this.test,
-    required this.onStart,
-  });
+  const _OralTestCard({required this.test, required this.onStart});
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +107,7 @@ class _OralTestCard extends StatelessWidget {
               color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
               blurRadius: 18,
               offset: const Offset(0, 10),
-            )
+            ),
           ],
         ),
         child: Column(

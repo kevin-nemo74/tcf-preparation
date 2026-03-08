@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tcf_canada_preparation/features/comprehension/screens/test_list_screen.dart';
-import 'package:tcf_canada_preparation/features/oral/screens/oral_test_list_screen.dart';
 
 import 'app/theme_controller.dart';
 import 'core/theme/app_theme.dart';
+import 'features/dashboard/comprehension_hub_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeController.themeMode,
-      home: const OralTestListScreen(),
+      home: const ComprehensionHubScreen(),
     );
   }
 }
