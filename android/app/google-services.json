@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "545457065698",
+    "project_id": "tcf-preparation",
+    "storage_bucket": "tcf-preparation.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545457065698:android:676cc9514ed8ccb0bb18bb",
+        "android_client_info": {
+          "package_name": "com.tcfcan.tcf_canada_preparation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEA7IxiT-R4CucW1Vmg4UR8qwcGdmgQzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

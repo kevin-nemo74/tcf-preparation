@@ -1,13 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tcf_canada_preparation/firebase_options.dart';
 
 import 'app/theme_controller.dart';
 import 'core/theme/app_theme.dart';
-import 'features/dashboard/exam_portal_screen.dart';
+import 'features/auth/auth_gate.dart';
+
+// If you used FlutterFire CLI, you'll have this file:
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // ✅ Initialize Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // ✅ Load theme preference
   final themeController = ThemeController();
   await themeController.loadThemeMode();
 
@@ -31,7 +41,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeController.themeMode,
-      home: const ExamPortalScreen(),
+      home: const AuthGate(),
     );
   }
 }
