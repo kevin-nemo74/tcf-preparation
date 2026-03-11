@@ -1,76 +1,128 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../app/theme_controller.dart';
+
+import '../auth/auth_service.dart';
+import '../profile/profile_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeController = context.watch<ThemeController>();
+    final cs = Theme.of(context).colorScheme;
+    final user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       appBar: AppBar(title: const Text("Settings")),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Appearance",
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+        children: [
+          // Account card
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              color: cs.surface,
+              border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
             ),
-            const SizedBox(height: 12),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 22,
+                  backgroundColor: cs.primaryContainer.withOpacity(0.7),
+                  child: Icon(Icons.person_rounded, color: cs.onPrimaryContainer),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        user?.displayName ?? "User",
+                        style: const TextStyle(fontWeight: FontWeight.w900),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        user?.email ?? "",
+                        style: TextStyle(
+                          color: cs.onSurface.withOpacity(0.65),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(Icons.chevron_right_rounded, color: cs.onSurface.withOpacity(0.6)),
+              ],
+            ),
+          ),
 
-            _ThemeRadioTile(
-              title: "System Default",
-              value: ThemeMode.system,
-              groupValue: themeController.themeMode,
-              onChanged: themeController.setThemeMode,
+          const SizedBox(height: 12),
+
+          // Profile navigation
+          ListTile(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            tileColor: cs.surfaceContainerHighest.withOpacity(0.35),
+            leading: const Icon(Icons.account_circle_rounded),
+            title: const Text("Profile"),
+            subtitle: const Text("View account details"),
+            trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProfileScreen()),
+              );
+            },
+          ),
+
+          const SizedBox(height: 12),
+
+          // Logout
+          ListTile(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            tileColor: cs.surfaceContainerHighest.withOpacity(0.35),
+            leading: Icon(Icons.logout_rounded, color: cs.error),
+            title: Text(
+              "Logout",
+              style: TextStyle(color: cs.error, fontWeight: FontWeight.w800),
             ),
-            _ThemeRadioTile(
-              title: "Light",
-              value: ThemeMode.light,
-              groupValue: themeController.themeMode,
-              onChanged: themeController.setThemeMode,
-            ),
-            _ThemeRadioTile(
-              title: "Dark",
-              value: ThemeMode.dark,
-              groupValue: themeController.themeMode,
-              onChanged: themeController.setThemeMode,
-            ),
-          ],
-        ),
+            subtitle: const Text("Sign out of your account"),
+            onTap: () async {
+              final ok = await _confirmLogout(context);
+              if (!ok) return;
+
+              await AuthService.logout();
+
+              if (!context.mounted) return;
+
+              // ✅ Immediately return to root (AuthGate),
+              // which will show LoginScreen since user is signed out
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            },
+          ),
+        ],
       ),
     );
   }
-}
 
-class _ThemeRadioTile extends StatelessWidget {
-  final String title;
-  final ThemeMode value;
-  final ThemeMode groupValue;
-  final Future<void> Function(ThemeMode) onChanged;
-
-  const _ThemeRadioTile({
-    required this.title,
-    required this.value,
-    required this.groupValue,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return RadioListTile<ThemeMode>(
-      title: Text(title),
-      value: value,
-      groupValue: groupValue,
-      onChanged: (v) {
-        if (v != null) onChanged(v);
-      },
-    );
+  Future<bool> _confirmLogout(BuildContext context) async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("Logout"),
+        content: const Text("Are you sure you want to sign out?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text("Cancel"),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text("Logout"),
+          ),
+        ],
+      ),
+    ) ??
+        false;
   }
 }
