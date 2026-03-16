@@ -22,13 +22,10 @@ class LocalTestsData {
         questions: (test['questions'] as List).map((q) {
           return QuestionModel(
             id: q['id'],
-            imagePath: q['imagePath'],
+            imageUrl: q['imageUrl'],
             correctAnswer: q['correctAnswer'],
             options: (q['options'] as List).map((o) {
-              return OptionModel(
-                id: o['id'],
-                text: o['text'],
-              );
+              return OptionModel(id: o['id'], text: o['text']);
             }).toList(),
           );
         }).toList(),

@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/features/comprehension/screens/question_grid_screen.dart';
 
 import '../data/models/oral_test_model.dart';
 import '../data/models/oral_question_model.dart';
 import '../widgets/audio_player_widget.dart';
 import 'oral_result_screen.dart';
-import '../../comprehension/screens/question_grid_screen.dart';
-// We reuse your existing grid screen (it only needs ids Q1..Q39 + maps/sets)
+
+// Reuse your existing grid screen (CE) because it already supports flags/answers
+
 
 class OralQuestionScreen extends StatefulWidget {
   final OralTestModel test;
@@ -30,10 +32,7 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
   void initState() {
     super.initState();
     remainingSeconds = widget.test.durationMinutes * 60;
-    _startTimer();
-  }
 
-  void _startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (remainingSeconds <= 0) {
         t.cancel();
@@ -178,8 +177,8 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
                       child: _OptionsPanel(
                         question: question,
                         selectedAnswer: selectedAnswer,
-                        onSelect: (optId) => setState(() {
-                          userAnswers[question.id] = optId;
+                        onSelect: (id) => setState(() {
+                          userAnswers[question.id] = id;
                         }),
                         footer: _BottomControls(
                           isLastQuestion: isLast,
@@ -204,8 +203,8 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
                       child: _OptionsPanel(
                         question: question,
                         selectedAnswer: selectedAnswer,
-                        onSelect: (optId) => setState(() {
-                          userAnswers[question.id] = optId;
+                        onSelect: (id) => setState(() {
+                          userAnswers[question.id] = id;
                         }),
                         footer: _BottomControls(
                           isLastQuestion: isLast,
@@ -253,13 +252,13 @@ class _OralMediaPanel extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Audio player always present
-          AudioPlayerWidget(audioAssetPath: question.audioPath),
+          // ✅ URL audio
+          AudioPlayerWidget(audioUrl: question.audioUrl),
 
           const SizedBox(height: 12),
 
-          // Optional image (Q1/Q2)
-          if (question.imagePath != null)
+          // ✅ Optional URL image
+          if (question.imageUrl != null)
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(18),
@@ -269,11 +268,25 @@ class _OralMediaPanel extends StatelessWidget {
                   child: InteractiveViewer(
                     minScale: 0.8,
                     maxScale: 4.0,
-                    child: Image.asset(
-                      question.imagePath!,
+                    child: Image.network(
+                      question.imageUrl!,
                       fit: BoxFit.contain,
                       width: double.infinity,
                       height: double.infinity,
+                      loadingBuilder: (context, child, progress) {
+                        if (progress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: progress.expectedTotalBytes == null
+                                ? null
+                                : progress.cumulativeBytesLoaded /
+                                progress.expectedTotalBytes!,
+                          ),
+                        );
+                      },
+                      errorBuilder: (_, __, ___) => const Center(
+                        child: Text("Failed to load image"),
+                      ),
                     ),
                   ),
                 ),
@@ -392,67 +405,27 @@ class _OptionsPanel extends StatelessWidget {
                           color: border,
                           width: isSelected ? 2.4 : 1.2,
                         ),
-                        boxShadow: isSelected
-                            ? [
-                          BoxShadow(
-                            color: cs.primary.withOpacity(isDark ? 0.35 : 0.20),
-                            blurRadius: 16,
-                            offset: const Offset(0, 8),
-                          )
-                        ]
-                            : [],
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: 34,
-                            height: 34,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: isSelected
-                                  ? cs.primary.withOpacity(isDark ? 0.25 : 0.15)
-                                  : Colors.transparent,
-                              border: Border.all(
-                                color: isSelected
-                                    ? cs.primary.withOpacity(0.75)
-                                    : cs.outlineVariant.withOpacity(0.35),
-                              ),
-                            ),
-                            child: Text(
-                              option.id,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                color: textColor,
-                              ),
+                          Text(
+                            "${option.id}. ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              color: textColor,
                             ),
                           ),
-                          const SizedBox(width: 12),
                           Expanded(
                             child: Text(
                               option.text,
-                              style: TextStyle(
-                                height: 1.25,
-                                color: textColor,
-                                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                              ),
+                              style: TextStyle(height: 1.25, color: textColor),
                             ),
                           ),
                           const SizedBox(width: 10),
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 160),
-                            child: isSelected
-                                ? Icon(Icons.check_circle_rounded,
-                                key: const ValueKey("selected"),
-                                color: cs.primary,
-                                size: 22)
-                                : const SizedBox(
-                              key: ValueKey("empty"),
-                              width: 22,
-                              height: 22,
-                            ),
-                          ),
+                          if (isSelected)
+                            Icon(Icons.check_circle_rounded,
+                                color: cs.primary, size: 22),
                         ],
                       ),
                     ),
@@ -501,7 +474,9 @@ class _BottomControls extends StatelessWidget {
         Expanded(
           child: FilledButton.icon(
             onPressed: onNextOrSubmit,
-            icon: Icon(isLastQuestion ? Icons.check_circle_rounded : Icons.arrow_forward_rounded),
+            icon: Icon(isLastQuestion
+                ? Icons.check_circle_rounded
+                : Icons.arrow_forward_rounded),
             label: Text(isLastQuestion ? "Submit" : "Next"),
             style: FilledButton.styleFrom(
               shape: RoundedRectangleBorder(

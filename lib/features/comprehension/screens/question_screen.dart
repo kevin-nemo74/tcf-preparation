@@ -29,10 +29,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
   void initState() {
     super.initState();
     remainingSeconds = widget.test.durationMinutes * 60;
-    _startTimer();
-  }
-
-  void _startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (remainingSeconds <= 0) {
         t.cancel();
@@ -49,15 +45,18 @@ class _QuestionScreenState extends State<QuestionScreen> {
     super.dispose();
   }
 
+  String _formatTime(int seconds) {
+    final m = seconds ~/ 60;
+    final s = seconds % 60;
+    return "${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}";
+  }
+
   void _submitExam() {
     timer?.cancel();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (_) => ResultScreen(
-          test: widget.test,
-          userAnswers: userAnswers,
-        ),
+        builder: (_) => ResultScreen(test: widget.test, userAnswers: userAnswers),
       ),
     );
   }
@@ -74,31 +73,20 @@ class _QuestionScreenState extends State<QuestionScreen> {
         ),
       ),
     );
-
-    if (selectedIndex != null) {
-      setState(() => currentIndex = selectedIndex);
-    }
-  }
-
-  String _formatTime(int seconds) {
-    final m = seconds ~/ 60;
-    final s = seconds % 60;
-    return "${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}";
+    if (selectedIndex != null) setState(() => currentIndex = selectedIndex);
   }
 
   void _toggleFlag(String questionId) {
     setState(() {
-      if (flaggedQuestions.contains(questionId)) {
-        flaggedQuestions.remove(questionId);
-      } else {
-        flaggedQuestions.add(questionId);
-      }
+      flaggedQuestions.contains(questionId)
+          ? flaggedQuestions.remove(questionId)
+          : flaggedQuestions.add(questionId);
     });
   }
 
   void _goNextOrSubmit() {
-    final lastIndex = widget.test.questions.length - 1;
-    if (currentIndex == lastIndex) {
+    final last = widget.test.questions.length - 1;
+    if (currentIndex == last) {
       _submitExam();
     } else {
       setState(() => currentIndex++);
@@ -113,9 +101,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
     final QuestionModel question = widget.test.questions[currentIndex];
     final selectedAnswer = userAnswers[question.id];
     final isFlagged = flaggedQuestions.contains(question.id);
-
-    final bool isLastQuestion =
-        currentIndex == widget.test.questions.length - 1;
+    final isLast = currentIndex == widget.test.questions.length - 1;
 
     return Scaffold(
       appBar: AppBar(
@@ -146,10 +132,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
               children: [
                 Icon(Icons.timer_rounded, size: 16, color: cs.primary),
                 const SizedBox(width: 6),
-                Text(
-                  _formatTime(remainingSeconds),
-                  style: const TextStyle(fontWeight: FontWeight.w900),
-                ),
+                Text(_formatTime(remainingSeconds),
+                    style: const TextStyle(fontWeight: FontWeight.w900)),
               ],
             ),
           ),
@@ -169,23 +153,16 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ? Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      flex: 6,
-                      child: _QuestionImagePanel(
-                        imagePath: question.imagePath,
-                      ),
-                    ),
+                    Expanded(flex: 6, child: _ImagePanel(imageUrl: question.imageUrl)),
                     const SizedBox(width: 16),
                     Expanded(
                       flex: 5,
                       child: _OptionsPanel(
                         question: question,
                         selectedAnswer: selectedAnswer,
-                        onSelect: (optId) => setState(() {
-                          userAnswers[question.id] = optId;
-                        }),
+                        onSelect: (id) => setState(() => userAnswers[question.id] = id),
                         footer: _BottomControls(
-                          isLastQuestion: isLastQuestion,
+                          isLastQuestion: isLast,
                           onPrev: currentIndex > 0
                               ? () => setState(() => currentIndex--)
                               : null,
@@ -197,23 +174,16 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 )
                     : Column(
                   children: [
-                    Expanded(
-                      flex: 6,
-                      child: _QuestionImagePanel(
-                        imagePath: question.imagePath,
-                      ),
-                    ),
+                    Expanded(flex: 6, child: _ImagePanel(imageUrl: question.imageUrl)),
                     const SizedBox(height: 14),
                     Expanded(
                       flex: 7,
                       child: _OptionsPanel(
                         question: question,
                         selectedAnswer: selectedAnswer,
-                        onSelect: (optId) => setState(() {
-                          userAnswers[question.id] = optId;
-                        }),
+                        onSelect: (id) => setState(() => userAnswers[question.id] = id),
                         footer: _BottomControls(
-                          isLastQuestion: isLastQuestion,
+                          isLastQuestion: isLast,
                           onPrev: currentIndex > 0
                               ? () => setState(() => currentIndex--)
                               : null,
@@ -232,10 +202,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 }
 
-class _QuestionImagePanel extends StatelessWidget {
-  final String imagePath;
-
-  const _QuestionImagePanel({required this.imagePath});
+class _ImagePanel extends StatelessWidget {
+  final String imageUrl;
+  const _ImagePanel({required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -263,11 +232,24 @@ class _QuestionImagePanel extends StatelessWidget {
           child: InteractiveViewer(
             minScale: 0.8,
             maxScale: 4.0,
-            child: Image.asset(
-              imagePath,
+            child: Image.network(
+              imageUrl,
               fit: BoxFit.contain,
               width: double.infinity,
               height: double.infinity,
+              loadingBuilder: (context, child, progress) {
+                if (progress == null) return child;
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: progress.expectedTotalBytes == null
+                        ? null
+                        : progress.cumulativeBytesLoaded / progress.expectedTotalBytes!,
+                  ),
+                );
+              },
+              errorBuilder: (_, __, ___) => const Center(
+                child: Text("Failed to load image"),
+              ),
             ),
           ),
         ),
@@ -310,7 +292,6 @@ class _OptionsPanel extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // ✅ Only show after user selects (saves space)
           if (selectedAnswer != null)
             Container(
               width: double.infinity,
@@ -325,17 +306,11 @@ class _OptionsPanel extends StatelessWidget {
                 children: [
                   Icon(Icons.check_circle_rounded, size: 18, color: cs.primary),
                   const SizedBox(width: 8),
-                  Text(
-                    "Selected: $selectedAnswer",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      color: cs.onPrimaryContainer,
-                    ),
-                  ),
+                  Text("Selected: $selectedAnswer",
+                      style: TextStyle(fontWeight: FontWeight.w900, color: cs.onPrimaryContainer)),
                 ],
               ),
             ),
-
           Expanded(
             child: ListView(
               children: question.options.map((option) {
@@ -345,12 +320,8 @@ class _OptionsPanel extends StatelessWidget {
                     ? cs.primaryContainer.withOpacity(isDark ? 0.60 : 0.85)
                     : cs.surfaceContainerHighest.withOpacity(isDark ? 0.20 : 0.40);
 
-                final border = isSelected
-                    ? cs.primary
-                    : cs.outlineVariant.withOpacity(0.35);
-
-                final textColor =
-                isSelected ? cs.onPrimaryContainer : cs.onSurface;
+                final border = isSelected ? cs.primary : cs.outlineVariant.withOpacity(0.35);
+                final textColor = isSelected ? cs.onPrimaryContainer : cs.onSurface;
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6),
@@ -363,72 +334,19 @@ class _OptionsPanel extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(22),
                         color: bg,
-                        border: Border.all(
-                          color: border,
-                          width: isSelected ? 2.4 : 1.2,
-                        ),
-                        boxShadow: isSelected
-                            ? [
-                          BoxShadow(
-                            color: cs.primary.withOpacity(isDark ? 0.35 : 0.20),
-                            blurRadius: 16,
-                            offset: const Offset(0, 8),
-                          )
-                        ]
-                            : [],
+                        border: Border.all(color: border, width: isSelected ? 2.4 : 1.2),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: 34,
-                            height: 34,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: isSelected
-                                  ? cs.primary.withOpacity(isDark ? 0.25 : 0.15)
-                                  : Colors.transparent,
-                              border: Border.all(
-                                color: isSelected
-                                    ? cs.primary.withOpacity(0.75)
-                                    : cs.outlineVariant.withOpacity(0.35),
-                              ),
-                            ),
-                            child: Text(
-                              option.id,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                color: textColor,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
+                          Text("${option.id}. ",
+                              style: TextStyle(fontWeight: FontWeight.w900, color: textColor)),
                           Expanded(
-                            child: Text(
-                              option.text,
-                              style: TextStyle(
-                                height: 1.25,
-                                color: textColor,
-                                fontWeight:
-                                isSelected ? FontWeight.w700 : FontWeight.w500,
-                              ),
-                            ),
+                            child: Text(option.text,
+                                style: TextStyle(height: 1.25, color: textColor)),
                           ),
                           const SizedBox(width: 10),
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 160),
-                            child: isSelected
-                                ? Icon(Icons.check_circle_rounded,
-                                key: const ValueKey("selected"),
-                                color: Theme.of(context).colorScheme.primary,
-                                size: 22)
-                                : const SizedBox(
-                              key: ValueKey("empty"),
-                              width: 22,
-                              height: 22,
-                            ),
-                          )
+                          if (isSelected) Icon(Icons.check_circle_rounded, color: cs.primary, size: 22),
                         ],
                       ),
                     ),
@@ -466,9 +384,7 @@ class _BottomControls extends StatelessWidget {
             icon: const Icon(Icons.arrow_back_rounded),
             label: const Text("Previous"),
             style: OutlinedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
           ),
@@ -480,9 +396,7 @@ class _BottomControls extends StatelessWidget {
             icon: Icon(isLastQuestion ? Icons.check_circle_rounded : Icons.arrow_forward_rounded),
             label: Text(isLastQuestion ? "Submit" : "Next"),
             style: FilledButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
           ),

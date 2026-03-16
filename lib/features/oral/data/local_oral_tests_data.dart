@@ -21,14 +21,11 @@ class LocalOralTestsData {
         questions: (test['questions'] as List).map((q) {
           return OralQuestionModel(
             id: q['id'],
-            audioPath: q['audioPath'],
-            imagePath: q['imagePath'], // null if missing
+            audioUrl: q['audioUrl'],
+            imageUrl: q['imageUrl'], // may be null/missing
             correctAnswer: q['correctAnswer'],
             options: (q['options'] as List).map((o) {
-              return OralOptionModel(
-                id: o['id'],
-                text: o['text'],
-              );
+              return OralOptionModel(id: o['id'], text: o['text']);
             }).toList(),
           );
         }).toList(),
