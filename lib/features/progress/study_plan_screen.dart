@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 import 'package:tcf_canada_preparation/features/progress/study_plan_generator.dart';
 
@@ -41,11 +42,15 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Study Plan Setup')),
-      body: Form(
-        key: _formKey,
-        child: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: Responsive.formMaxWidth(context)),
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              padding: Responsive.pagePadding(context, vertical: 16),
+              children: [
             TextFormField(
               initialValue: '500',
               keyboardType: TextInputType.number,
@@ -96,7 +101,9 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
               onPressed: _saving ? null : _save,
               child: Text(_saving ? 'Saving...' : 'Save plan'),
             ),
-          ],
+              ],
+            ),
+          ),
         ),
       ),
     );

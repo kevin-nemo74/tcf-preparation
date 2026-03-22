@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import '../data/models/oral_question_model.dart';
 import '../data/models/oral_test_model.dart';
 
@@ -51,13 +53,13 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
     final userAnswer = widget.userAnswers[q.id];
     final correctAnswer = q.correctAnswer;
 
-    final isWide = MediaQuery.of(context).size.width > 950;
+    final isWide = Responsive.isWideReview(context);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Review Answers"),
       ),
-      body: Padding(
+      body: ResponsiveFrame(
         padding: const EdgeInsets.all(16),
         child: isWide
             ? Row(

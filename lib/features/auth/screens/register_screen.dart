@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 
@@ -74,7 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final isWide = MediaQuery.of(context).size.width >= 900;
+    final isWide = Responsive.isAuthWideLayout(context);
 
     return Scaffold(
       body: Container(

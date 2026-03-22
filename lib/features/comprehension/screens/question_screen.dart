@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/question_model.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
 
@@ -102,7 +104,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final isWide = MediaQuery.of(context).size.width >= 980;
+    final isWide = Responsive.isSplitLayout(context);
 
     final QuestionModel question = widget.test.questions[currentIndex];
     final selectedAnswer = userAnswers[question.id];
@@ -145,9 +147,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
+      body: ResponsiveFrame(
+        child: SafeArea(
+          child: Column(
+            children: [
             TweenAnimationBuilder<double>(
               tween: Tween<double>(
                 end: (currentIndex + 1) / widget.test.questions.length,
@@ -233,6 +236,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );

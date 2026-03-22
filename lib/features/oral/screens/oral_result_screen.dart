@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
@@ -101,8 +102,10 @@ class _OralResultScreenState extends State<OralResultScreen> {
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
-          child: AnimatedFadeSlide(
-            child: Container(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: Responsive.formMaxWidth(context)),
+            child: AnimatedFadeSlide(
+              child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 32),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(28),
@@ -164,6 +167,7 @@ class _OralResultScreenState extends State<OralResultScreen> {
                   ),
                 ],
               ),
+            ),
             ),
           ),
         ),

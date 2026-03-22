@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
@@ -30,7 +31,7 @@ class _TestListScreenState extends State<TestListScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final isWide = MediaQuery.of(context).size.width >= 980;
+    final isWide = Responsive.isSplitLayout(context);
     final uid = ProgressRepository.currentUid;
 
     return FutureBuilder<List<TestModel>>(
@@ -125,7 +126,12 @@ class _TestListScreenState extends State<TestListScreen> {
             // RIGHT DETAILS (scroll-safe)
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                padding: EdgeInsets.fromLTRB(
+                  0,
+                  isWide ? 8 : 16,
+                  isWide ? 12 : 16,
+                  isWide ? 8 : 16,
+                ),
                 child: AnimatedSwitcher(
                   duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
                   switchInCurve: AppMotion.curve,
@@ -282,64 +288,65 @@ class _DetailsPanel extends StatelessWidget {
     const bestScoreText = "Best: — / 699";
 
     return Padding(
-      padding: const EdgeInsets.all(18),
-      child: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                test.title,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "${test.questions.length} questions • ${test.durationMinutes} minutes",
-                style: TextStyle(
-                  color: cs.onSurface.withOpacity(0.65),
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  color: cs.surfaceContainerHighest.withOpacity(0.55),
-                  border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.emoji_events_rounded, color: cs.primary),
-                    const SizedBox(width: 10),
-                    Text(
-                      bestScoreText,
-                      style: const TextStyle(fontWeight: FontWeight.w900),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 18),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  onPressed: onStart,
-                  icon: const Icon(Icons.play_arrow_rounded),
-                  label: const Text("Start Test"),
-                  style: FilledButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    test.title,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w900,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "${test.questions.length} questions • ${test.durationMinutes} minutes",
+                    style: TextStyle(
+                      color: cs.onSurface.withOpacity(0.65),
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ),
+                  const SizedBox(height: 14),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      color: cs.surfaceContainerHighest.withOpacity(0.55),
+                      border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.emoji_events_rounded, color: cs.primary),
+                        const SizedBox(width: 10),
+                        Text(
+                          bestScoreText,
+                          style: const TextStyle(fontWeight: FontWeight.w900),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+          const SizedBox(height: 12),
+          FilledButton.icon(
+            onPressed: onStart,
+            icon: const Icon(Icons.play_arrow_rounded),
+            label: const Text("Start Test"),
+            style: FilledButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

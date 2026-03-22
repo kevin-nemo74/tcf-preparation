@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
+import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 
 import '../comprehension/screens/test_list_screen.dart';
 import '../oral/screens/oral_test_list_screen.dart';
@@ -10,13 +12,13 @@ class ComprehensionHubScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final isWide = MediaQuery.of(context).size.width > 900;
+    final isWide = Responsive.isAuthWideLayout(context);
 
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         body: SafeArea(
-          child: Padding(
+          child: ResponsiveFrame(
             padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

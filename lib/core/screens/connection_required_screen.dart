@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 
 class ConnectionRequiredScreen extends StatelessWidget {
   final VoidCallback onRetry;
@@ -11,7 +12,8 @@ class ConnectionRequiredScreen extends StatelessWidget {
 
     return Scaffold(
       body: Center(
-        child: Padding(
+        child: ResponsiveFrame(
+          maxWidth: 440,
           padding: const EdgeInsets.all(24),
           child: Container(
             padding: const EdgeInsets.all(22),

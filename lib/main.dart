@@ -5,6 +5,7 @@ import 'package:tcf_canada_preparation/firebase_options.dart';
 
 import 'app/theme_controller.dart';
 import 'core/theme/app_theme.dart';
+import 'core/widgets/app_scroll_behavior.dart';
 import 'features/auth/auth_gate.dart';
 
 // If you used FlutterFire CLI, you'll have this file:
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      scrollBehavior: const AppScrollBehavior(),
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeController.themeMode,

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
+import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
+
 import '../auth_service.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -50,12 +53,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Reset Password")),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            padding: Responsive.pagePadding(context, vertical: 20),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight - 40),
+              child: ResponsiveCentered(
+                maxWidth: Responsive.formMaxWidth(context),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
               Text(
                 "Enter your email and we’ll send you a reset link.",
                 style: TextStyle(
@@ -92,9 +102,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       : const Text("Send reset link"),
                 ),
               ),
-            ],
-          ),
-        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

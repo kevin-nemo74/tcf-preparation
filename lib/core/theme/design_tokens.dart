@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'motion.dart';
 
+/// Static spacing / radii. For breakpoints and max widths (web + mobile), see
+/// `lib/core/layout/responsive.dart`.
 class DesignTokens {
   static const EdgeInsets pagePadding = EdgeInsets.all(16);
   static const EdgeInsets cardPadding = EdgeInsets.all(14);

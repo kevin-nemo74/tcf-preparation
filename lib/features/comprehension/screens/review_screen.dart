@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/question_model.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
-
 
 class ReviewScreen extends StatefulWidget {
   final TestModel test;
@@ -63,7 +64,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     final userAnswer = widget.userAnswers[q.id];
     final correctAnswer = q.correctAnswer;
 
-    final isWide = MediaQuery.of(context).size.width > 950;
+    final isWide = Responsive.isWideReview(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -78,56 +79,56 @@ class _ReviewScreenState extends State<ReviewScreen> {
               ),
               const SizedBox(width: 10),
             ],
-          )
+          ),
         ],
       ),
-      body: Padding(
+      body: ResponsiveFrame(
         padding: const EdgeInsets.all(16),
         child: isWide
             ? Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 360,
-              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 360,
+                    child: Column(
+                      children: [
+                        _summaryCard(cs, correct, wrong, total),
+                        const SizedBox(height: 16),
+                        Expanded(child: _grid(cs, total)),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _animatedDetail(
+                      context,
+                      cs,
+                      q,
+                      userAnswer,
+                      correctAnswer,
+                      selectedIndex,
+                    ),
+                  ),
+                ],
+              )
+            : Column(
                 children: [
                   _summaryCard(cs, correct, wrong, total),
-                  const SizedBox(height: 16),
-                  Expanded(child: _grid(cs, total)),
+                  const SizedBox(height: 14),
+                  SizedBox(height: 110, child: _grid(cs, total)),
+                  const SizedBox(height: 14),
+                  Expanded(
+                    child: _animatedDetail(
+                      context,
+                      cs,
+                      q,
+                      userAnswer,
+                      correctAnswer,
+                      selectedIndex,
+                    ),
+                  ),
                 ],
               ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: _animatedDetail(
-                context,
-                cs,
-                q,
-                userAnswer,
-                correctAnswer,
-                selectedIndex,
-              ),
-            ),
-          ],
-        )
-            : Column(
-          children: [
-            _summaryCard(cs, correct, wrong, total),
-            const SizedBox(height: 14),
-            SizedBox(height: 110, child: _grid(cs, total)),
-            const SizedBox(height: 14),
-            Expanded(
-              child: _animatedDetail(
-                context,
-                cs,
-                q,
-                userAnswer,
-                correctAnswer,
-                selectedIndex,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -146,7 +147,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             ),
             blurRadius: 18,
             offset: const Offset(0, 10),
-          )
+          ),
         ],
       ),
       child: Row(
@@ -186,30 +187,29 @@ class _ReviewScreenState extends State<ReviewScreen> {
     int index,
   ) {
     return AnimatedSwitcher(
-      duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
+      duration: contextReducedMotion(context)
+          ? Duration.zero
+          : AppMotion.medium,
       switchInCurve: AppMotion.curve,
       switchOutCurve: AppMotion.curve,
       transitionBuilder: (child, animation) {
         return FadeTransition(
           opacity: animation,
           child: SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0.03, 0),
-              end: Offset.zero,
-            ).animate(CurvedAnimation(parent: animation, curve: AppMotion.curve)),
+            position:
+                Tween<Offset>(
+                  begin: const Offset(0.03, 0),
+                  end: Offset.zero,
+                ).animate(
+                  CurvedAnimation(parent: animation, curve: AppMotion.curve),
+                ),
             child: child,
           ),
         );
       },
       child: KeyedSubtree(
         key: ValueKey<int>(index),
-        child: _detailCard(
-          cs,
-          question,
-          userAnswer,
-          correctAnswer,
-          index,
-        ),
+        child: _detailCard(cs, question, userAnswer, correctAnswer, index),
       ),
     );
   }
@@ -253,7 +253,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   color: tileColor.withOpacity(0.25),
                   blurRadius: 10,
                   offset: const Offset(0, 6),
-                )
+                ),
               ],
             ),
             child: Center(
@@ -285,8 +285,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  Widget _detailCard(ColorScheme cs, QuestionModel question, String? userAnswer,
-      String correctAnswer, int index) {
+  Widget _detailCard(
+    ColorScheme cs,
+    QuestionModel question,
+    String? userAnswer,
+    String correctAnswer,
+    int index,
+  ) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -300,7 +305,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             ),
             blurRadius: 18,
             offset: const Offset(0, 10),
-          )
+          ),
         ],
       ),
       child: SingleChildScrollView(
@@ -309,10 +314,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
           children: [
             Text(
               "Question ${index + 1}",
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w900,
-              ),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 16),
 
@@ -325,7 +327,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     color: cs.surfaceContainerHighest.withOpacity(0.25),
                     padding: const EdgeInsets.all(10),
                     child: InteractiveViewer(
-                      child: Image.asset(
+                      child: Image.network(
                         question.imageUrl,
                         fit: BoxFit.contain,
                       ),

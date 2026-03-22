@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -42,9 +43,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final cs = Theme.of(context).colorScheme;
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: Responsive.width(context) < Responsive.breakpointMedium
+                  ? Responsive.width(context)
+                  : 560,
+            ),
+            child: Padding(
+              padding: Responsive.pagePadding(context, vertical: 20),
+              child: Column(
             children: [
               Align(
                 alignment: Alignment.centerRight,
@@ -125,8 +133,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   },
                   child: Text(_index == _pages.length - 1 ? 'Start' : 'Next'),
                 ),
-              )
+              ),
             ],
+              ),
+            ),
           ),
         ),
       ),

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import 'package:tcf_canada_preparation/features/comprehension/screens/test_list_screen.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
-import 'package:tcf_canada_preparation/features/progress/study_plan_screen.dart';
 
-import '../settings/settings_screen.dart';
 import '../oral/screens/oral_test_list_screen.dart';
+import '../settings/settings_screen.dart';
+import 'study_plan_portal_card.dart';
 
 class ExamPortalScreen extends StatelessWidget {
   const ExamPortalScreen({super.key});
@@ -16,6 +18,7 @@ class ExamPortalScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final uid = ProgressRepository.currentUid;
+    final wide = Responsive.isSplitLayout(context);
 
     return DefaultTabController(
       length: 2,
@@ -82,24 +85,33 @@ class ExamPortalScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: Column(
-          children: [
+        body: Padding(
+          padding: Responsive.horizontalInset(context),
+          child: ResponsiveFrame(
+            child: Column(
+              children: [
             if (uid != null)
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+                padding: EdgeInsets.fromLTRB(16, wide ? 6 : 12, 16, wide ? 2 : 4),
                 child: StreamBuilder<UserProgressSummary>(
                   stream: ProgressRepository.streamSummary(uid),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting &&
                         !snapshot.hasData) {
-                      return const ShimmerSkeleton(height: 76, borderRadius: 14);
+                      return ShimmerSkeleton(
+                        height: wide ? 64 : 76,
+                        borderRadius: 14,
+                      );
                     }
                     final summary = snapshot.data ?? UserProgressSummary.empty();
                     return AnimatedFadeSlide(
                       duration: AppMotion.fast,
                       child: Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.all(14),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: wide ? 10 : 14,
+                        ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
@@ -120,105 +132,7 @@ class ExamPortalScreen extends StatelessWidget {
                   },
                 ),
               ),
-            if (uid != null)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-                child: StreamBuilder<StudyPlan?>(
-                  stream: ProgressRepository.streamStudyPlan(uid),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting &&
-                        !snapshot.hasData) {
-                      return const ShimmerSkeleton(height: 120, borderRadius: 16);
-                    }
-                    final plan = snapshot.data;
-                    final hasPlan = plan != null;
-                    return AnimatedFadeSlide(
-                      delay: const Duration(milliseconds: 40),
-                      duration: AppMotion.fast,
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: cs.surface,
-                          border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: cs.shadow.withValues(alpha: 0.04),
-                              blurRadius: 12,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.event_note_rounded, size: 20, color: cs.primary),
-                                const SizedBox(width: 8),
-                                const Expanded(
-                                  child: Text(
-                                    'Study Plan',
-                                    style: TextStyle(fontWeight: FontWeight.w900),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      AppRoutes.fadeSlide(const StudyPlanScreen()),
-                                    );
-                                  },
-                                  child: Text(hasPlan ? 'Edit' : 'Setup'),
-                                )
-                              ],
-                            ),
-                            if (!hasPlan)
-                              Text(
-                                'Set your target score and get daily tasks.',
-                                style: TextStyle(
-                                  color: cs.onSurface.withValues(alpha: 0.72),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            if (hasPlan) ...[
-                              Text(
-                                'Target: ${plan.targetScore} (${plan.targetLevel})',
-                                style: const TextStyle(fontWeight: FontWeight.w700),
-                              ),
-                              const SizedBox(height: 8),
-                              // Tasks live in a scrollable, height-capped region so the portal
-                              // Column (above TabBarView) never overflows the screen.
-                              ConstrainedBox(
-                                constraints: const BoxConstraints(maxHeight: 240),
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  physics: const ClampingScrollPhysics(),
-                                  itemCount: plan.todayTasks.length,
-                                  separatorBuilder: (context, index) =>
-                                      const SizedBox(height: 2),
-                                  itemBuilder: (context, i) {
-                                    final t = plan.todayTasks[i];
-                                    return CheckboxListTile(
-                                      dense: true,
-                                      visualDensity: VisualDensity.compact,
-                                      contentPadding: EdgeInsets.zero,
-                                      value: t.done,
-                                      title: Text(t.title),
-                                      onChanged: (_) =>
-                                          ProgressRepository.toggleTask(uid, t.id),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ]
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+            if (uid != null) StudyPlanPortalCard(uid: uid),
             const Expanded(
               child: TabBarView(
                 children: [
@@ -227,7 +141,9 @@ class ExamPortalScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ],
+              ],
+            ),
+          ),
         ),
       ),
     );

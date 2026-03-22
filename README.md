@@ -44,6 +44,14 @@ If you need macOS/Linux support, regenerate Firebase config:
 flutterfire configure
 ```
 
+## Web and responsive layout
+
+- **Viewport**: `web/index.html` includes a proper `viewport` meta tag for mobile browsers and desktop scaling.
+- **Scrolling**: `AppScrollBehavior` (in `main.dart`) enables mouse / trackpad drag scrolling on web, not only touch.
+- **Breakpoints**: `lib/core/layout/responsive.dart` centralizes widths (`splitLayoutBreakpoint` ≈920px for master/detail, `canvasMaxWidth` for large screens, `formMaxWidth` for auth/forms).
+- **Widgets**: `ResponsiveFrame` / `ResponsiveCentered` (`lib/core/widgets/responsive_frame.dart`) center content and cap width on wide monitors.
+- **Run web**: `flutter run -d chrome` or `flutter build web`.
+
 ## Common Commands
 
 - Run analyzer:

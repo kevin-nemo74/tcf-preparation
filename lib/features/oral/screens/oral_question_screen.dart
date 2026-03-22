@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import 'package:tcf_canada_preparation/features/comprehension/screens/question_grid_screen.dart';
 
 import '../data/models/oral_test_model.dart';
@@ -111,7 +113,7 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final isWide = MediaQuery.of(context).size.width >= 980;
+    final isWide = Responsive.isSplitLayout(context);
 
     final OralQuestionModel question = widget.test.questions[currentIndex];
     final selectedAnswer = userAnswers[question.id];
@@ -156,9 +158,10 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
+      body: ResponsiveFrame(
+        child: SafeArea(
+          child: Column(
+            children: [
             TweenAnimationBuilder<double>(
               tween: Tween<double>(
                 end: (currentIndex + 1) / widget.test.questions.length,
@@ -254,6 +257,7 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );

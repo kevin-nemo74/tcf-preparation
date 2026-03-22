@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/design_tokens.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
@@ -17,11 +18,15 @@ class SettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Settings")),
-      body: ListView(
-        padding: DesignTokens.pagePadding,
-        children: [
-          // Account card
-          AnimatedFadeSlide(
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: Responsive.canvasMaxWidth(context)),
+          child: ListView(
+            padding: Responsive.pagePadding(context, vertical: 16),
+            children: [
+              // Account card
+              AnimatedFadeSlide(
             child: Container(
               padding: DesignTokens.cardPadding,
               decoration: BoxDecoration(
@@ -60,12 +65,12 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+              ),
 
-          const SizedBox(height: 12),
+              const SizedBox(height: 12),
 
-          // Profile navigation
-          AnimatedFadeSlide(
+              // Profile navigation
+              AnimatedFadeSlide(
             delay: const Duration(milliseconds: 60),
             child: Semantics(
               button: true,
@@ -86,12 +91,12 @@ class SettingsScreen extends StatelessWidget {
                 },
               ),
             ),
-          ),
+              ),
 
-          const SizedBox(height: 12),
+              const SizedBox(height: 12),
 
-          // Logout
-          AnimatedFadeSlide(
+              // Logout
+              AnimatedFadeSlide(
             delay: const Duration(milliseconds: 110),
             child: Semantics(
               button: true,
@@ -120,8 +125,10 @@ class SettingsScreen extends StatelessWidget {
                 },
               ),
             ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

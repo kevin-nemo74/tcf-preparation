@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 
@@ -68,9 +69,13 @@ class ProfileScreen extends StatelessWidget {
           final weeklyAverage = _readDouble(data, const ['weeklyAverage']) ?? 0;
 
           return AnimatedFadeSlide(
-            child: ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: Responsive.canvasMaxWidth(context)),
+                child: ListView(
+                  padding: Responsive.pagePadding(context, vertical: 16),
+                  children: [
                 Container(
                   padding: const EdgeInsets.all(18),
                   decoration: BoxDecoration(
@@ -200,7 +205,9 @@ class ProfileScreen extends StatelessWidget {
                   );
                 },
               ),
-              ],
+                  ],
+                ),
+              ),
             ),
           );
         },
