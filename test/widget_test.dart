@@ -1,30 +1,60 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:tcf_canada_preparation/main.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:tcf_canada_preparation/features/auth/auth_gate.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('shows login when unauthenticated and online', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: AuthGate.testable(
+          checkConnectivity: () async => ConnectivityResult.wifi,
+          connectivityChanges: Stream<List<ConnectivityResult>>.value(
+            <ConnectivityResult>[ConnectivityResult.wifi],
+          ),
+          authStatusChanges: Stream<bool>.value(false),
+          unauthenticatedWidget: const Scaffold(body: Text('LOGIN_SCREEN')),
+        ),
+      ),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
+    expect(find.text('LOGIN_SCREEN'), findsOneWidget);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('shows exam portal when authenticated and online', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: AuthGate.testable(
+          checkConnectivity: () async => ConnectivityResult.mobile,
+          connectivityChanges: Stream<List<ConnectivityResult>>.value(
+            <ConnectivityResult>[ConnectivityResult.mobile],
+          ),
+          authStatusChanges: Stream<bool>.value(true),
+          authenticatedWidget: const Scaffold(body: Text('EXAM_PORTAL')),
+        ),
+      ),
+    );
+
+    await tester.pump();
+    expect(find.text('EXAM_PORTAL'), findsOneWidget);
+  });
+
+  testWidgets('shows offline screen when there is no connectivity', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: AuthGate.testable(
+          checkConnectivity: () async => ConnectivityResult.none,
+          connectivityChanges: Stream<List<ConnectivityResult>>.value(
+            <ConnectivityResult>[ConnectivityResult.none],
+          ),
+          authStatusChanges: Stream<bool>.value(false),
+          offlineBuilder: (_) => const Scaffold(body: Text('OFFLINE_SCREEN')),
+        ),
+      ),
+    );
+
+    await tester.pump();
+    expect(find.text('OFFLINE_SCREEN'), findsOneWidget);
   });
 }

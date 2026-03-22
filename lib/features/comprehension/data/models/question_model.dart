@@ -5,11 +5,13 @@ class QuestionModel {
   final String imageUrl;
   final List<OptionModel> options;
   final String correctAnswer;
+  final String explanation;
 
   QuestionModel({
     required this.id,
     required this.imageUrl,
     required this.options,
     required this.correctAnswer,
+    this.explanation = '',
   });
 }

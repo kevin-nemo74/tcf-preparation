@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/theme/motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/features/comprehension/data/models/question_model.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
 
 
@@ -96,7 +99,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
             ),
             const SizedBox(width: 16),
             Expanded(
-              child: _detailCard(
+              child: _animatedDetail(
+                context,
                 cs,
                 q,
                 userAnswer,
@@ -113,7 +117,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
             SizedBox(height: 110, child: _grid(cs, total)),
             const SizedBox(height: 14),
             Expanded(
-              child: _detailCard(
+              child: _animatedDetail(
+                context,
                 cs,
                 q,
                 userAnswer,
@@ -169,6 +174,43 @@ class _ReviewScreenState extends State<ReviewScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _animatedDetail(
+    BuildContext context,
+    ColorScheme cs,
+    QuestionModel question,
+    String? userAnswer,
+    String correctAnswer,
+    int index,
+  ) {
+    return AnimatedSwitcher(
+      duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
+      switchInCurve: AppMotion.curve,
+      switchOutCurve: AppMotion.curve,
+      transitionBuilder: (child, animation) {
+        return FadeTransition(
+          opacity: animation,
+          child: SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0.03, 0),
+              end: Offset.zero,
+            ).animate(CurvedAnimation(parent: animation, curve: AppMotion.curve)),
+            child: child,
+          ),
+        );
+      },
+      child: KeyedSubtree(
+        key: ValueKey<int>(index),
+        child: _detailCard(
+          cs,
+          question,
+          userAnswer,
+          correctAnswer,
+          index,
+        ),
+      ),
     );
   }
 
@@ -243,7 +285,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  Widget _detailCard(ColorScheme cs, dynamic question, String? userAnswer,
+  Widget _detailCard(ColorScheme cs, QuestionModel question, String? userAnswer,
       String correctAnswer, int index) {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -284,7 +326,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     padding: const EdgeInsets.all(10),
                     child: InteractiveViewer(
                       child: Image.asset(
-                        question.imagePath,
+                        question.imageUrl,
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -331,6 +373,25 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 ),
               );
             }).toList(),
+            const SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: cs.surfaceContainerHighest.withOpacity(0.22),
+                border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+              ),
+              child: Text(
+                question.explanation.isEmpty
+                    ? "Explanation: This item is added to your review queue when answered incorrectly or flagged."
+                    : "Explanation: ${question.explanation}",
+                style: TextStyle(
+                  color: cs.onSurface.withOpacity(0.8),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
           ],
         ),
       ),

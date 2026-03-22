@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
+import 'package:tcf_canada_preparation/core/theme/motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 import '../data/local_oral_tests_data.dart';
 import '../data/models/oral_test_model.dart';
 import 'oral_question_screen.dart';
@@ -24,12 +28,18 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final isWide = MediaQuery.of(context).size.width >= 980;
+    final uid = ProgressRepository.currentUid;
 
     return FutureBuilder<List<OralTestModel>>(
       future: testsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return ListView.separated(
+            padding: const EdgeInsets.all(16),
+            itemCount: 8,
+            separatorBuilder: (_, __) => const SizedBox(height: 10),
+            itemBuilder: (_, __) => const ShimmerSkeleton(height: 72),
+          );
         }
         if (snapshot.hasError) {
           return Center(child: Text("Failed to load CO tests:\n${snapshot.error}"));
@@ -43,18 +53,29 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
         selectedTest ??= tests.first;
 
         if (!isWide) {
-          return ListView.separated(
-            padding: const EdgeInsets.all(16),
-            itemCount: tests.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 10),
-            itemBuilder: (context, index) {
-              final test = tests[index];
-              return _TestRow(
-                title: test.title,
-                subtitle: "${test.questions.length} questions • ${test.durationMinutes} min",
-                leading: _testNumberFromId(test.id),
-                isSelected: false,
-                onTap: () => _start(context, test),
+          return StreamBuilder<UserProgressSummary>(
+            stream: uid == null ? null : ProgressRepository.streamSummary(uid),
+            builder: (context, summarySnap) {
+              final summary = summarySnap.data ?? UserProgressSummary.empty();
+              return ListView.separated(
+                padding: const EdgeInsets.all(16),
+                itemCount: tests.length + 1,
+                separatorBuilder: (_, __) => const SizedBox(height: 10),
+                itemBuilder: (context, index) {
+                  if (index == 0) return _AdaptiveHeader(summary: summary);
+                  final test = tests[index - 1];
+                  final row = _TestRow(
+                    title: test.title,
+                    subtitle: "${test.questions.length} questions • ${test.durationMinutes} min • Best ${summary.bestScore}/699",
+                    leading: _testNumberFromId(test.id),
+                    isSelected: false,
+                    onTap: () => _start(context, test),
+                  );
+                  return AnimatedFadeSlide(
+                    delay: AppMotion.fast + Duration(milliseconds: 40 * (index - 1)),
+                    child: row,
+                  );
+                },
               );
             },
           );
@@ -64,20 +85,30 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
           children: [
             SizedBox(
               width: 430,
-              child: ListView.separated(
-                padding: const EdgeInsets.all(16),
-                itemCount: tests.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemBuilder: (context, index) {
-                  final test = tests[index];
-                  final isSelected = selectedTest?.id == test.id;
-
-                  return _TestRow(
-                    title: test.title,
-                    subtitle: "${test.questions.length} questions • ${test.durationMinutes} min",
-                    leading: _testNumberFromId(test.id),
-                    isSelected: isSelected,
-                    onTap: () => setState(() => selectedTest = test),
+              child: StreamBuilder<UserProgressSummary>(
+                stream: uid == null ? null : ProgressRepository.streamSummary(uid),
+                builder: (context, summarySnap) {
+                  final summary = summarySnap.data ?? UserProgressSummary.empty();
+                  return ListView.separated(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: tests.length + 1,
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (context, index) {
+                      if (index == 0) return _AdaptiveHeader(summary: summary);
+                      final test = tests[index - 1];
+                      final isSelected = selectedTest?.id == test.id;
+                      final row = _TestRow(
+                        title: test.title,
+                        subtitle: "${test.questions.length} questions • ${test.durationMinutes} min • Last ${summary.lastScore}/699",
+                        leading: _testNumberFromId(test.id),
+                        isSelected: isSelected,
+                        onTap: () => setState(() => selectedTest = test),
+                      );
+                      return AnimatedFadeSlide(
+                        delay: AppMotion.fast + Duration(milliseconds: 40 * (index - 1)),
+                        child: row,
+                      );
+                    },
                   );
                 },
               ),
@@ -85,15 +116,31 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    color: cs.surface,
-                    border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
-                  ),
-                  child: _DetailsPanel(
-                    test: selectedTest!,
-                    onStart: () => _start(context, selectedTest!),
+                child: AnimatedSwitcher(
+                  duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
+                  switchInCurve: AppMotion.curve,
+                  switchOutCurve: AppMotion.curve,
+                  transitionBuilder: (child, animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                  child: KeyedSubtree(
+                    key: ValueKey<String>(selectedTest!.id),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: cs.surface,
+                        border: Border.all(
+                          color: cs.outlineVariant.withValues(alpha: 0.35),
+                        ),
+                      ),
+                      child: _DetailsPanel(
+                        test: selectedTest!,
+                        onStart: () => _start(context, selectedTest!),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -107,7 +154,7 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
   void _start(BuildContext context, OralTestModel test) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => OralQuestionScreen(test: test)),
+      AppRoutes.fadeSlide(OralQuestionScreen(test: test)),
     );
   }
 
@@ -137,18 +184,19 @@ class _TestRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
 
-    return InkWell(
+    return PressableScale(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
-      child: Ink(
+      child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
-          color: isSelected ? cs.primaryContainer.withOpacity(0.45) : cs.surface,
+          color: isSelected
+              ? cs.primaryContainer.withValues(alpha: 0.45)
+              : cs.surface,
           border: Border.all(
             color: isSelected
-                ? cs.primary.withOpacity(0.55)
-                : cs.outlineVariant.withOpacity(0.35),
+                ? cs.primary.withValues(alpha: 0.55)
+                : cs.outlineVariant.withValues(alpha: 0.35),
           ),
         ),
         child: Row(
@@ -159,8 +207,10 @@ class _TestRow extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: cs.surfaceContainerHighest.withOpacity(0.55),
-                border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+                color: cs.surfaceContainerHighest.withValues(alpha: 0.55),
+                border: Border.all(
+                  color: cs.outlineVariant.withValues(alpha: 0.25),
+                ),
               ),
               child: Text(
                 leading,
@@ -182,7 +232,9 @@ class _TestRow extends StatelessWidget {
                   Text(
                     subtitle,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
+                      color: Theme.of(context).colorScheme.onSurface.withValues(
+                            alpha: 0.65,
+                          ),
                       fontWeight: FontWeight.w600,
                       fontSize: 12.5,
                     ),
@@ -191,8 +243,12 @@ class _TestRow extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            Icon(Icons.chevron_right_rounded,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Theme.of(context).colorScheme.onSurface.withValues(
+                    alpha: 0.6,
+                  ),
+            ),
           ],
         ),
       ),
@@ -271,6 +327,39 @@ class _DetailsPanel extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _AdaptiveHeader extends StatelessWidget {
+  final UserProgressSummary summary;
+  const _AdaptiveHeader({required this.summary});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final needsPractice = summary.lastScore > 0 && summary.lastScore < summary.bestScore;
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(14),
+        color: cs.surfaceContainerHighest.withOpacity(0.35),
+        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.auto_awesome_rounded, color: cs.primary),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              needsPractice
+                  ? "Adaptive: prioritize oral weak areas from recent attempts."
+                  : "Adaptive: take a few oral sets to calibrate.",
+              style: const TextStyle(fontWeight: FontWeight.w700),
+            ),
+          ),
+        ],
       ),
     );
   }

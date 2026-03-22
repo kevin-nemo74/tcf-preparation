@@ -6,6 +6,7 @@ class OralQuestionModel {
   final String? imageUrl;
   final List<OralOptionModel> options;
   final String correctAnswer;
+  final String explanation;
 
   OralQuestionModel({
     required this.id,
@@ -13,5 +14,6 @@ class OralQuestionModel {
     this.imageUrl,
     required this.options,
     required this.correctAnswer,
+    this.explanation = '',
   });
 }

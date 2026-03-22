@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/theme/motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import '../data/models/oral_question_model.dart';
 import '../data/models/oral_test_model.dart';
 
 class OralReviewScreen extends StatefulWidget {
@@ -71,7 +74,9 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
               ),
             ),
             const SizedBox(width: 16),
-            Expanded(child: _detailCard(context, cs, q, userAnswer, correctAnswer)),
+            Expanded(
+              child: _animatedDetail(context, cs, q, userAnswer, correctAnswer, selectedIndex),
+            ),
           ],
         )
             : Column(
@@ -80,7 +85,9 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
             const SizedBox(height: 14),
             SizedBox(height: 110, child: _grid(cs, total)),
             const SizedBox(height: 14),
-            Expanded(child: _detailCard(context, cs, q, userAnswer, correctAnswer)),
+            Expanded(
+              child: _animatedDetail(context, cs, q, userAnswer, correctAnswer, selectedIndex),
+            ),
           ],
         ),
       ),
@@ -129,6 +136,37 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _animatedDetail(
+    BuildContext context,
+    ColorScheme cs,
+    OralQuestionModel question,
+    String? userAnswer,
+    String correctAnswer,
+    int index,
+  ) {
+    return AnimatedSwitcher(
+      duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
+      switchInCurve: AppMotion.curve,
+      switchOutCurve: AppMotion.curve,
+      transitionBuilder: (child, animation) {
+        return FadeTransition(
+          opacity: animation,
+          child: SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0.03, 0),
+              end: Offset.zero,
+            ).animate(CurvedAnimation(parent: animation, curve: AppMotion.curve)),
+            child: child,
+          ),
+        );
+      },
+      child: KeyedSubtree(
+        key: ValueKey<int>(index),
+        child: _detailCard(context, cs, question, userAnswer, correctAnswer),
+      ),
     );
   }
 
@@ -189,7 +227,13 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
     );
   }
 
-  Widget _detailCard(BuildContext context, ColorScheme cs, dynamic question, String? userAnswer, String correctAnswer) {
+  Widget _detailCard(
+    BuildContext context,
+    ColorScheme cs,
+    OralQuestionModel question,
+    String? userAnswer,
+    String correctAnswer,
+  ) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
@@ -217,7 +261,7 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
             const SizedBox(height: 14),
 
             // Optional image (Q1/Q2 only)
-            if (question.imagePath != null) ...[
+            if (question.imageUrl != null) ...[
               Center(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxHeight: 360),
@@ -228,7 +272,7 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
                       padding: const EdgeInsets.all(10),
                       child: InteractiveViewer(
                         child: Image.asset(
-                          question.imagePath!,
+                          question.imageUrl!,
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -274,6 +318,25 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
                 ),
               );
             }).toList(),
+            const SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: cs.surfaceContainerHighest.withOpacity(0.22),
+                border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+              ),
+              child: Text(
+                question.explanation.isEmpty
+                    ? "Explanation: Wrong or flagged items are automatically added to your review queue."
+                    : "Explanation: ${question.explanation}",
+                style: TextStyle(
+                  color: cs.onSurface.withOpacity(0.8),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
           ],
         ),
       ),

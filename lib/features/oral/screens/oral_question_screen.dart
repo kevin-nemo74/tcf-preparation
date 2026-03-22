@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/theme/motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/comprehension/screens/question_grid_screen.dart';
 
 import '../data/models/oral_test_model.dart';
@@ -91,6 +93,7 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
         builder: (_) => OralResultScreen(
           test: widget.test,
           userAnswers: userAnswers,
+          flaggedQuestionIds: flaggedQuestions,
         ),
       ),
     );
@@ -156,66 +159,97 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            LinearProgressIndicator(
-              value: (currentIndex + 1) / widget.test.questions.length,
-              backgroundColor: cs.surfaceContainerHighest.withOpacity(0.45),
+            TweenAnimationBuilder<double>(
+              tween: Tween<double>(
+                end: (currentIndex + 1) / widget.test.questions.length,
+              ),
+              duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
+              curve: AppMotion.curve,
+              builder: (context, value, _) => LinearProgressIndicator(
+                value: value,
+                backgroundColor: cs.surfaceContainerHighest.withValues(alpha: 0.45),
+              ),
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: isWide
-                    ? Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 6,
-                      child: _OralMediaPanel(question: question),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      flex: 5,
-                      child: _OptionsPanel(
-                        question: question,
-                        selectedAnswer: selectedAnswer,
-                        onSelect: (id) => setState(() {
-                          userAnswers[question.id] = id;
-                        }),
-                        footer: _BottomControls(
-                          isLastQuestion: isLast,
-                          onPrev: currentIndex > 0
-                              ? () => setState(() => currentIndex--)
-                              : null,
-                          onNextOrSubmit: _goNextOrSubmit,
+                child: AnimatedSwitcher(
+                  duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
+                  switchInCurve: AppMotion.curve,
+                  switchOutCurve: AppMotion.curve,
+                  layoutBuilder: (currentChild, previousChildren) => Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      ...previousChildren,
+                      if (currentChild != null) currentChild,
+                    ],
+                  ),
+                  transitionBuilder: (child, animation) {
+                    final offset = Tween<Offset>(
+                      begin: const Offset(0.04, 0),
+                      end: Offset.zero,
+                    ).animate(CurvedAnimation(parent: animation, curve: AppMotion.curve));
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SlideTransition(position: offset, child: child),
+                    );
+                  },
+                  child: isWide
+                      ? Row(
+                          key: ValueKey<String>(question.id),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 6,
+                              child: _OralMediaPanel(question: question),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              flex: 5,
+                              child: _OptionsPanel(
+                                question: question,
+                                selectedAnswer: selectedAnswer,
+                                onSelect: (id) => setState(() {
+                                  userAnswers[question.id] = id;
+                                }),
+                                footer: _BottomControls(
+                                  isLastQuestion: isLast,
+                                  onPrev: currentIndex > 0
+                                      ? () => setState(() => currentIndex--)
+                                      : null,
+                                  onNextOrSubmit: _goNextOrSubmit,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Column(
+                          key: ValueKey<String>(question.id),
+                          children: [
+                            Expanded(
+                              flex: 6,
+                              child: _OralMediaPanel(question: question),
+                            ),
+                            const SizedBox(height: 14),
+                            Expanded(
+                              flex: 7,
+                              child: _OptionsPanel(
+                                question: question,
+                                selectedAnswer: selectedAnswer,
+                                onSelect: (id) => setState(() {
+                                  userAnswers[question.id] = id;
+                                }),
+                                footer: _BottomControls(
+                                  isLastQuestion: isLast,
+                                  onPrev: currentIndex > 0
+                                      ? () => setState(() => currentIndex--)
+                                      : null,
+                                  onNextOrSubmit: _goNextOrSubmit,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                  ],
-                )
-                    : Column(
-                  children: [
-                    Expanded(
-                      flex: 6,
-                      child: _OralMediaPanel(question: question),
-                    ),
-                    const SizedBox(height: 14),
-                    Expanded(
-                      flex: 7,
-                      child: _OptionsPanel(
-                        question: question,
-                        selectedAnswer: selectedAnswer,
-                        onSelect: (id) => setState(() {
-                          userAnswers[question.id] = id;
-                        }),
-                        footer: _BottomControls(
-                          isLastQuestion: isLast,
-                          onPrev: currentIndex > 0
-                              ? () => setState(() => currentIndex--)
-                              : null,
-                          onNextOrSubmit: _goNextOrSubmit,
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ),

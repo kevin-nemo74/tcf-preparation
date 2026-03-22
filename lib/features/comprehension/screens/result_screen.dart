@@ -1,29 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
+import 'package:tcf_canada_preparation/core/theme/motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
+import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 import 'review_screen.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends StatefulWidget {
   final TestModel test;
   final Map<String, String> userAnswers;
+  final Set<String> flaggedQuestionIds;
 
   const ResultScreen({
     super.key,
     required this.test,
     required this.userAnswers,
+    required this.flaggedQuestionIds,
   });
+
+  @override
+  State<ResultScreen> createState() => _ResultScreenState();
+}
+
+class _ResultScreenState extends State<ResultScreen> {
+  bool _saved = false;
 
   int calculateScore() {
     int totalScore = 0;
 
-    for (int i = 0; i < test.questions.length; i++) {
-      final question = test.questions[i];
+    for (int i = 0; i < widget.test.questions.length; i++) {
+      final question = widget.test.questions[i];
 
-      if (userAnswers[question.id] == question.correctAnswer) {
+      if (widget.userAnswers[question.id] == question.correctAnswer) {
         totalScore += getQuestionPoints(i + 1);
       }
     }
 
     return totalScore;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _persistProgress();
+  }
+
+  Future<void> _persistProgress() async {
+    if (_saved) return;
+    _saved = true;
+    final uid = ProgressRepository.currentUid;
+    if (uid == null) return;
+
+    final correctMap = <String, String>{
+      for (final q in widget.test.questions) q.id: q.correctAnswer,
+    };
+    var correctCount = 0;
+    for (final q in widget.test.questions) {
+      if (widget.userAnswers[q.id] == q.correctAnswer) correctCount++;
+    }
+
+    await ProgressRepository.recordAttempt(
+      uid: uid,
+      testId: widget.test.id,
+      testTitle: widget.test.title,
+      moduleType: 'CE',
+      score: calculateScore(),
+      totalQuestions: widget.test.questions.length,
+      correctAnswers: correctCount,
+      flaggedQuestionIds: widget.flaggedQuestionIds,
+      userAnswers: widget.userAnswers,
+      correctAnswersByQuestion: correctMap,
+    );
   }
 
   int getQuestionPoints(int questionNumber) {
@@ -49,56 +96,84 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int score = calculateScore();
-    String level = getNCLCLevel(score);
+    final score = calculateScore();
+    final level = getNCLCLevel(score);
+    final cs = Theme.of(context).colorScheme;
+    final reduced = contextReducedMotion(context);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Exam Result"),
       ),
       body: Center(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Your Score",
-                style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w500),
+          child: AnimatedFadeSlide(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 32),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(28),
+                color: cs.surface,
+                border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
+                boxShadow: [
+                  BoxShadow(
+                    color: cs.shadow.withValues(alpha: 0.08),
+                    blurRadius: 24,
+                    offset: const Offset(0, 12),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              Text(
-                "$score / 699",
-                style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                level,
-                style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue),
-              ),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ReviewScreen(
-                        test: test,
-                        userAnswers: userAnswers,
-                      ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.emoji_events_rounded, size: 48, color: cs.primary),
+                  const SizedBox(height: 12),
+                  Text(
+                    "Your Score",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                  ),
+                  const SizedBox(height: 12),
+                  TweenAnimationBuilder<int>(
+                    tween: IntTween(begin: 0, end: score),
+                    duration: reduced ? Duration.zero : AppMotion.slow,
+                    curve: AppMotion.curve,
+                    builder: (context, value, _) => Text(
+                      "$value / 699",
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            fontWeight: FontWeight.w900,
+                          ),
                     ),
-                  );
-                },
-                child: const Text("Review Answers"),
+                  ),
+                  const SizedBox(height: 16),
+                  AnimatedDefaultTextStyle(
+                    duration: reduced ? Duration.zero : AppMotion.medium,
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontWeight: FontWeight.w900,
+                          color: cs.primary,
+                        ),
+                    child: Text(level),
+                  ),
+                  const SizedBox(height: 28),
+                  FilledButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        AppRoutes.fadeSlide(
+                          ReviewScreen(
+                            test: widget.test,
+                            userAnswers: widget.userAnswers,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.rate_review_rounded),
+                    label: const Text("Review Answers"),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

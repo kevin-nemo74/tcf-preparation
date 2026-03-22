@@ -1,64 +1,152 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
+  static const Color _seedTeal = Color(0xFF136B7A);
+  static const Color _accentAmber = Color(0xFFE8A42E);
+  static const Color _lightBg = Color(0xFFF4F2EE);
+  static const Color _darkBg = Color(0xFF0E1216);
+
   static ThemeData light() {
+    final baseScheme = ColorScheme.fromSeed(
+      seedColor: _seedTeal,
+      brightness: Brightness.light,
+    );
+    final scheme = baseScheme.copyWith(
+      secondary: _accentAmber,
+      onSecondary: const Color(0xFF1C1508),
+      tertiary: const Color(0xFF8B6914),
+      surface: const Color(0xFFFFFBF7),
+    );
+
     final base = ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.blue,
-        brightness: Brightness.light,
-      ),
+      colorScheme: scheme,
+      splashFactory: InkSparkle.splashFactory,
+      pageTransitionsTheme: _pageTransitions,
     );
 
     return base.copyWith(
-      scaffoldBackgroundColor: const Color(0xFFF7F7FB),
-
-      // ✅ FIX: CardThemeData (Material 3)
+      scaffoldBackgroundColor: _lightBg,
       cardTheme: CardThemeData(
-        color: Colors.white,
-        elevation: 2,
+        color: scheme.surface,
+        elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(22),
+          side: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.35)),
         ),
       ),
-
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w800,
+          color: scheme.onSurface,
+        ),
       ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      textTheme: _textTheme(base.textTheme, scheme.onSurface),
     );
   }
 
   static ThemeData dark() {
+    final baseScheme = ColorScheme.fromSeed(
+      seedColor: _seedTeal,
+      brightness: Brightness.dark,
+    );
+    final scheme = baseScheme.copyWith(
+      secondary: _accentAmber,
+      onSecondary: const Color(0xFF1C1508),
+      surface: const Color(0xFF151A20),
+    );
+
     final base = ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.blue,
-        brightness: Brightness.dark,
-      ),
+      colorScheme: scheme,
+      splashFactory: InkSparkle.splashFactory,
+      pageTransitionsTheme: _pageTransitions,
     );
 
     return base.copyWith(
-      scaffoldBackgroundColor: const Color(0xFF0F1115),
-
-      // ✅ FIX: CardThemeData (Material 3)
+      scaffoldBackgroundColor: _darkBg,
       cardTheme: CardThemeData(
-        color: const Color(0xFF171A21),
-        elevation: 1,
+        color: scheme.surface,
+        elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(22),
+          side: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.35)),
         ),
       ),
-
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w800,
+          color: scheme.onSurface,
+        ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      textTheme: _textTheme(base.textTheme, scheme.onSurface),
+    );
+  }
+
+  static final PageTransitionsTheme _pageTransitions = PageTransitionsTheme(
+    builders: {
+      TargetPlatform.android: const FadeUpwardsPageTransitionsBuilder(),
+      TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
+      TargetPlatform.macOS: const CupertinoPageTransitionsBuilder(),
+      TargetPlatform.linux: const FadeUpwardsPageTransitionsBuilder(),
+      TargetPlatform.windows: const FadeUpwardsPageTransitionsBuilder(),
+      TargetPlatform.fuchsia: const FadeUpwardsPageTransitionsBuilder(),
+    },
+  );
+
+  static TextTheme _textTheme(TextTheme base, Color onSurface) {
+    return base.copyWith(
+      headlineSmall: base.headlineSmall?.copyWith(
+        fontWeight: FontWeight.w800,
+        letterSpacing: -0.3,
+        height: 1.2,
+      ),
+      titleLarge: base.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+      titleMedium: base.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+      bodyLarge: base.bodyLarge?.copyWith(
+        fontSize: 16,
+        height: 1.45,
+        fontWeight: FontWeight.w500,
+        color: onSurface.withValues(alpha: 0.92),
+      ),
+      bodyMedium: base.bodyMedium?.copyWith(
+        height: 1.42,
+        fontWeight: FontWeight.w500,
+        color: onSurface.withValues(alpha: 0.88),
       ),
     );
   }
