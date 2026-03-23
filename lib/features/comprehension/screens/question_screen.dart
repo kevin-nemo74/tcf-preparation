@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
+import 'package:tcf_canada_preparation/core/theme/design_tokens.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
@@ -115,6 +116,20 @@ class _QuestionScreenState extends State<QuestionScreen> {
       appBar: AppBar(
         title: Text(widget.test.title),
         actions: [
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(999),
+                color: cs.surfaceContainerHighest.withValues(alpha: 0.45),
+              ),
+              child: Text(
+                'Q ${currentIndex + 1}/${widget.test.questions.length}',
+                style: const TextStyle(fontWeight: FontWeight.w800),
+              ),
+            ),
+          ),
           IconButton(
             tooltip: "Question Grid",
             icon: const Icon(Icons.grid_view_rounded),
@@ -133,15 +148,24 @@ class _QuestionScreenState extends State<QuestionScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
-              color: cs.surfaceContainerHighest.withOpacity(0.55),
+              color: remainingSeconds < 120
+                  ? cs.errorContainer.withValues(alpha: 0.55)
+                  : cs.surfaceContainerHighest.withOpacity(0.55),
               border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
             ),
             child: Row(
               children: [
-                Icon(Icons.timer_rounded, size: 16, color: cs.primary),
+                Icon(
+                  Icons.timer_rounded,
+                  size: 16,
+                  color: remainingSeconds < 120 ? cs.error : cs.primary,
+                ),
                 const SizedBox(width: 6),
                 Text(_formatTime(remainingSeconds),
-                    style: const TextStyle(fontWeight: FontWeight.w900)),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      color: remainingSeconds < 120 ? cs.error : null,
+                    )),
               ],
             ),
           ),
@@ -250,24 +274,12 @@ class _ImagePanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(26),
-        color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
-            blurRadius: 18,
-            offset: const Offset(0, 10),
-          )
-        ],
-      ),
+      decoration: DesignTokens.cardDecoration(cs),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: DesignTokens.cardBorderRadius(),
         child: Container(
           color: cs.surfaceContainerHighest.withOpacity(0.25),
           child: InteractiveViewer(
@@ -319,18 +331,7 @@ class _OptionsPanel extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(26),
-        color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
-            blurRadius: 18,
-            offset: const Offset(0, 10),
-          )
-        ],
-      ),
+      decoration: DesignTokens.cardDecoration(cs),
       child: Column(
         children: [
           if (selectedAnswer != null)

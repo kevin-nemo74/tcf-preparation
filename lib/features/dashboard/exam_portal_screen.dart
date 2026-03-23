@@ -342,6 +342,11 @@ class _ProgressInsights extends StatelessWidget {
           stream: ProgressRepository.streamReviewQueue(uid, limit: 40),
           builder: (context, reviewSnap) {
             final queueCount = reviewSnap.data?.length ?? 0;
+            final nextAction = _nextActionText(
+              queueCount: queueCount,
+              trendText: trendText,
+              attemptsCount: attempts.length,
+            );
             return Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -361,6 +366,34 @@ class _ProgressInsights extends StatelessWidget {
                   const Text(
                     'Progress Insights',
                     style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primaryContainer
+                          .withValues(alpha: 0.35),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.bolt_rounded,
+                          size: 18,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            nextAction,
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Wrap(
@@ -403,6 +436,23 @@ class _ProgressInsights extends StatelessWidget {
       },
     );
   }
+}
+
+String _nextActionText({
+  required int queueCount,
+  required String trendText,
+  required int attemptsCount,
+}) {
+  if (queueCount >= 8) {
+    return 'Next action: clear at least 3 review queue items before a new test.';
+  }
+  if (trendText == 'dropping') {
+    return 'Next action: retake one weak module with timed conditions.';
+  }
+  if (attemptsCount == 0) {
+    return 'Next action: complete your first practice test to build a baseline.';
+  }
+  return 'Next action: run one mixed set and finish today\'s study plan tasks.';
 }
 
 class _InsightChip extends StatelessWidget {

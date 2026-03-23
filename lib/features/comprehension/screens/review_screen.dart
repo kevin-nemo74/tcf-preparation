@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
+import 'package:tcf_canada_preparation/core/theme/design_tokens.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
@@ -24,6 +25,7 @@ class ReviewScreen extends StatefulWidget {
 class _ReviewScreenState extends State<ReviewScreen> {
   int selectedIndex = 0;
   bool showPointsValue = false;
+  bool showMissedOnly = false;
 
   int getQuestionPoints(int questionNumber) {
     if (questionNumber >= 1 && questionNumber <= 4) return 3;
@@ -61,6 +63,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     final total = widget.test.questions.length;
     final correct = calculateCorrectCount();
     final wrong = total - correct;
+    final completionPct = total == 0 ? 0 : (correct / total * 100).round();
 
     final q = widget.test.questions[selectedIndex];
     final userAnswer = widget.userAnswers[q.id];
@@ -75,6 +78,15 @@ class _ReviewScreenState extends State<ReviewScreen> {
       appBar: AppBar(
         title: const Text("Review Answers"),
         actions: [
+          Row(
+            children: [
+              const Text("Missed only"),
+              Switch.adaptive(
+                value: showMissedOnly,
+                onChanged: (v) => setState(() => showMissedOnly = v),
+              ),
+            ],
+          ),
           Row(
             children: [
               const Text("Values"),
@@ -97,7 +109,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     width: 360,
                     child: Column(
                       children: [
-                        _summaryCard(cs, correct, wrong, total),
+                        _summaryCard(cs, correct, wrong, total, completionPct),
                         const SizedBox(height: 16),
                         if (isWeb)
                           SizedBox(
@@ -131,7 +143,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
               )
             : Column(
                 children: [
-                  _summaryCard(cs, correct, wrong, total),
+                  _summaryCard(cs, correct, wrong, total, completionPct),
                   const SizedBox(height: 14),
                   SizedBox(
                     height: narrowGridHeight,
@@ -159,29 +171,40 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  Widget _summaryCard(ColorScheme cs, int correct, int wrong, int total) {
+  Widget _summaryCard(
+    ColorScheme cs,
+    int correct,
+    int wrong,
+    int total,
+    int completionPct,
+  ) {
     return Container(
       padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(26),
-        color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(
-              Theme.of(context).brightness == Brightness.dark ? 0.25 : 0.06,
-            ),
-            blurRadius: 18,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      decoration: DesignTokens.cardDecoration(cs),
+      child: Column(
         children: [
-          _stat("Correct", "$correct", Colors.green),
-          _stat("Wrong", "$wrong", Colors.red),
-          _stat("Total", "$total", cs.primary),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _stat("Correct", "$correct", Colors.green),
+              _stat("Wrong", "$wrong", Colors.red),
+              _stat("Total", "$total", cs.primary),
+            ],
+          ),
+          const SizedBox(height: 12),
+          LinearProgressIndicator(
+            value: completionPct / 100,
+            minHeight: 8,
+            borderRadius: BorderRadius.circular(999),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '$completionPct% correct',
+            style: TextStyle(
+              color: cs.onSurface.withValues(alpha: 0.72),
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ],
       ),
     );
@@ -334,9 +357,23 @@ class _ReviewScreenState extends State<ReviewScreen> {
     ValueChanged<int>? onIndexSelected,
   }) {
 
+    final filteredIndexes = List<int>.generate(total, (i) => i)
+        .where((i) => !showMissedOnly || !isCorrectAt(i))
+        .toList();
+    if (filteredIndexes.isEmpty) {
+      return Center(
+        child: Text(
+          'No missed questions to review.',
+          style: TextStyle(
+            color: cs.onSurface.withValues(alpha: 0.7),
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      );
+    }
     return GridView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: total,
+      itemCount: filteredIndexes.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         childAspectRatio: childAspectRatio,
@@ -344,9 +381,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
         crossAxisSpacing: 10,
       ),
       itemBuilder: (context, index) {
-        final answered = isAnsweredAt(index);
-        final correct = isCorrectAt(index);
-        final selected = selectedIndex == index;
+        final sourceIndex = filteredIndexes[index];
+        final answered = isAnsweredAt(sourceIndex);
+        final correct = isCorrectAt(sourceIndex);
+        final selected = selectedIndex == sourceIndex;
 
         Color tileColor;
         if (!answered) {
@@ -359,8 +397,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
         return InkWell(
           onTap: () {
-            setState(() => selectedIndex = index);
-            onIndexSelected?.call(index);
+            setState(() => selectedIndex = sourceIndex);
+            onIndexSelected?.call(sourceIndex);
           },
           borderRadius: BorderRadius.circular(20),
           child: Ink(
@@ -384,7 +422,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "${index + 1}",
+                    "${sourceIndex + 1}",
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w900,
@@ -392,7 +430,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ),
                   if (showPointsValue)
                     Text(
-                      "${getQuestionPoints(index + 1)} pts",
+                      "${getQuestionPoints(sourceIndex + 1)} pts",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 10,

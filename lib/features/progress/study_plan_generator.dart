@@ -91,13 +91,14 @@ class StudyPlanGenerator {
         ),
       );
     }
+    final prioritizedTasks = _prioritizeTasks(tasks, weakModule: weakModule);
     return StudyPlan(
       targetScore: targetScore,
       targetLevel: targetLevel,
       targetDate: targetDate,
       weeklyCadence: weeklyCadence,
       planDateKey: taskSeed,
-      todayTasks: tasks,
+      todayTasks: prioritizedTasks,
     );
   }
 
@@ -156,6 +157,23 @@ class StudyPlanGenerator {
       return 'Spaced review: split your queue into 2 passes (morning/evening)';
     }
     return 'Spaced review: revisit weak questions once today and once tomorrow';
+  }
+
+  static List<StudyTask> _prioritizeTasks(
+    List<StudyTask> tasks, {
+    required String weakModule,
+  }) {
+    final sorted = [...tasks];
+    int score(StudyTask task) {
+      if (task.type == 'REVIEW' || task.type == 'REVIEW_SPACED') return 100;
+      if (task.type == weakModule) return 80;
+      if (task.type == 'MIXED') return 60;
+      if (task.type == 'BASELINE') return 40;
+      return 20;
+    }
+
+    sorted.sort((a, b) => score(b).compareTo(score(a)));
+    return sorted;
   }
 }
 

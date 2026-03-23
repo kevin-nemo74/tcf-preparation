@@ -20,6 +20,12 @@ typedef ReviewQueueStreamFactory = Stream<List<ReviewQueueItem>> Function(
 });
 typedef ReviewQueueMutation = Future<void> Function(String uid, String itemId);
 
+int reviewQueuePriority(ReviewQueueItem item) {
+  if (item.lastUserAnswer == null || item.lastUserAnswer!.isEmpty) return 3;
+  if (item.lastUserAnswer != item.correctAnswer) return 2;
+  return 1;
+}
+
 class ReviewQueueScreen extends StatelessWidget {
   final String uid;
   final ReviewQueueStreamFactory queueStream;
@@ -61,7 +67,8 @@ class ReviewQueueScreen extends StatelessWidget {
                 );
               }
 
-              final items = snapshot.data ?? const <ReviewQueueItem>[];
+              final items = [...(snapshot.data ?? const <ReviewQueueItem>[])]
+                ..sort((a, b) => reviewQueuePriority(b).compareTo(reviewQueuePriority(a)));
               if (items.isEmpty) {
                 return const _EmptyQueue();
               }
@@ -69,7 +76,10 @@ class ReviewQueueScreen extends StatelessWidget {
               return ListView(
                 padding: Responsive.pagePadding(context, vertical: 16),
                 children: [
-                  _QueueHeader(count: items.length),
+                  _QueueHeader(
+                    count: items.length,
+                    highPriorityCount: items.where((e) => reviewQueuePriority(e) >= 2).length,
+                  ),
                   const SizedBox(height: 12),
                   ...items.map(
                     (item) => Padding(
@@ -96,8 +106,9 @@ class ReviewQueueScreen extends StatelessWidget {
 
 class _QueueHeader extends StatelessWidget {
   final int count;
+  final int highPriorityCount;
 
-  const _QueueHeader({required this.count});
+  const _QueueHeader({required this.count, required this.highPriorityCount});
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +130,21 @@ class _QueueHeader extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.w800),
             ),
           ),
+          if (highPriorityCount > 0)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(999),
+                color: cs.errorContainer.withValues(alpha: 0.6),
+              ),
+              child: Text(
+                '$highPriorityCount priority',
+                style: TextStyle(
+                  color: cs.onErrorContainer,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -195,6 +221,7 @@ class _QueueCardState extends State<_QueueCard> {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final item = widget.item;
+    final priority = reviewQueuePriority(item);
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -230,6 +257,23 @@ class _QueueCardState extends State<_QueueCard> {
                   style: const TextStyle(fontWeight: FontWeight.w900),
                 ),
               ),
+              if (priority >= 2)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(999),
+                    color: priority == 3
+                        ? cs.tertiaryContainer.withValues(alpha: 0.7)
+                        : cs.errorContainer.withValues(alpha: 0.6),
+                  ),
+                  child: Text(
+                    priority == 3 ? 'Flagged' : 'Missed',
+                    style: TextStyle(
+                      color: priority == 3 ? cs.onTertiaryContainer : cs.onErrorContainer,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
             ],
           ),
           const SizedBox(height: 10),

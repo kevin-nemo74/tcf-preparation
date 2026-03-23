@@ -10,6 +10,33 @@ import 'package:tcf_canada_preparation/features/progress/progress_repository.dar
 import 'package:tcf_canada_preparation/features/progress/review_queue_screen.dart';
 
 void main() {
+  test('priority helper ranks flagged highest then missed', () {
+    const flagged = ReviewQueueItem(
+      id: '1',
+      questionId: 'Q1',
+      moduleType: 'CE',
+      testId: 't1',
+      testTitle: 'T1',
+      lastUserAnswer: '',
+      correctAnswer: 'A',
+      needsReview: true,
+      lastUpdatedAt: null,
+    );
+    const missed = ReviewQueueItem(
+      id: '2',
+      questionId: 'Q2',
+      moduleType: 'CE',
+      testId: 't1',
+      testTitle: 'T1',
+      lastUserAnswer: 'B',
+      correctAnswer: 'A',
+      needsReview: true,
+      lastUpdatedAt: null,
+    );
+
+    expect(reviewQueuePriority(flagged), greaterThan(reviewQueuePriority(missed)));
+  });
+
   testWidgets('shows empty state when review queue has no items', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -68,6 +95,7 @@ void main() {
     expect(find.text('CO Test 1'), findsOneWidget);
     expect(find.text('Comprehension'), findsOneWidget);
     expect(find.text('Oral'), findsOneWidget);
+    expect(find.text('2 priority'), findsOneWidget);
   });
 
   testWidgets('can open a queued comprehension review item', (tester) async {

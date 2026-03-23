@@ -49,6 +49,11 @@ void main() {
       plan.todayTasks.any((task) => task.title.contains('recover')),
       isTrue,
     );
+    expect(
+      plan.todayTasks.first.type == 'REVIEW' ||
+          plan.todayTasks.first.type == 'REVIEW_SPACED',
+      isTrue,
+    );
   });
 
   test('needsRefresh returns true when plan date is not today', () {
