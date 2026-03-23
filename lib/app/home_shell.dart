@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import '../core/layout/responsive.dart';
 import '../core/widgets/responsive_frame.dart';
@@ -24,7 +25,9 @@ class _HomeShellState extends State<HomeShell> {
 
   @override
   Widget build(BuildContext context) {
-    final useRail = Responsive.isSplitLayout(context);
+    final useRail = kIsWeb
+        ? Responsive.isTabletWeb(context)
+        : Responsive.isSplitLayout(context);
 
     if (useRail) {
       return Scaffold(
@@ -56,10 +59,8 @@ class _HomeShellState extends State<HomeShell> {
             const VerticalDivider(width: 1, thickness: 1),
             Expanded(
               child: ResponsiveFrame(
-                child: IndexedStack(
-                  index: _index,
-                  children: _pages,
-                ),
+                expandToViewport: true,
+                child: IndexedStack(index: _index, children: _pages),
               ),
             ),
           ],

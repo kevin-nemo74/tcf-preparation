@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:tcf_canada_preparation/firebase_options.dart';
 import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
+import 'app/locale_controller.dart';
 import 'app/theme_controller.dart';
 import 'core/theme/app_theme.dart';
 import 'core/widgets/app_scroll_behavior.dart';
@@ -20,9 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // ✅ Initialize Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   PlatformDispatcher.instance.onError = (error, stack) {
@@ -33,10 +32,15 @@ void main() async {
   // ✅ Load theme preference
   final themeController = ThemeController();
   await themeController.loadThemeMode();
+  final localeController = LocaleController();
+  await localeController.loadLocaleMode();
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => themeController,
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => themeController),
+        ChangeNotifierProvider(create: (_) => localeController),
+      ],
       child: const MyApp(),
     ),
   );
@@ -48,6 +52,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeController = context.watch<ThemeController>();
+    final localeController = context.watch<LocaleController>();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -55,6 +60,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeController.themeMode,
+      locale: localeController.locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

@@ -71,7 +71,6 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
     final isWide = Responsive.isWideReview(context);
 
-    const double webGridCompactHeight = 170.0;
     const double narrowGridHeight = 110.0;
 
     return Scaffold(
@@ -106,25 +105,22 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 360,
+                    width: Responsive.reviewPaneWidth(context),
                     child: Column(
                       children: [
                         _summaryCard(cs, correct, wrong, total, completionPct),
                         const SizedBox(height: 16),
-                        if (isWeb)
-                          SizedBox(
-                            height: webGridCompactHeight,
-                            child: _webQuestionPicker(cs, total),
-                          )
-                        else
-                          Expanded(
-                            child: _grid(
-                              cs,
-                              total,
-                              crossAxisCount: 2,
-                              childAspectRatio: 1.25,
-                            ),
+                        Expanded(
+                          child: _grid(
+                            cs,
+                            total,
+                            crossAxisCount: isWeb ? 4 : 2,
+                            childAspectRatio: isWeb ? 1.15 : 1.25,
+                            scrollDirection: isWeb
+                                ? Axis.vertical
+                                : Axis.horizontal,
                           ),
+                        ),
                       ],
                     ),
                   ),
@@ -263,103 +259,18 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  Future<void> _openFullQuestionPicker(ColorScheme cs, int total) async {
-    await showDialog<int>(
-      context: context,
-      builder: (dialogContext) {
-        final media = MediaQuery.of(dialogContext);
-        final maxW = media.size.width * 0.92;
-        final maxH = media.size.height * 0.82;
-
-        return Dialog(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: maxW,
-              maxHeight: maxH,
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 8, 8),
-                  child: Row(
-                    children: [
-                      const Expanded(
-                        child: Text(
-                          "Select question",
-                          style: TextStyle(fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                      IconButton(
-                        tooltip: "Close",
-                        icon: const Icon(Icons.close_rounded),
-                        onPressed: () => Navigator.of(dialogContext).pop(),
-                      ),
-                    ],
-                  ),
-                ),
-                const Divider(height: 1),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: _grid(
-                      cs,
-                      total,
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.25,
-                      onIndexSelected: (index) =>
-                          Navigator.of(dialogContext).pop(index),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _webQuestionPicker(ColorScheme cs, int total) {
-    // Compact picker: grid stays short; "All" opens the full selector dialog.
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8, bottom: 44),
-          child: _grid(
-            cs,
-            total,
-            crossAxisCount: 2,
-            childAspectRatio: 1.35,
-          ),
-        ),
-        Positioned(
-          right: 0,
-          bottom: 0,
-          child: OutlinedButton.icon(
-            onPressed: () => _openFullQuestionPicker(cs, total),
-            icon: const Icon(Icons.grid_view_rounded, size: 16),
-            label: const Text("All"),
-            style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              minimumSize: Size.zero,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _grid(
     ColorScheme cs,
     int total, {
     required int crossAxisCount,
     required double childAspectRatio,
+    Axis scrollDirection = Axis.horizontal,
     ValueChanged<int>? onIndexSelected,
   }) {
-
-    final filteredIndexes = List<int>.generate(total, (i) => i)
-        .where((i) => !showMissedOnly || !isCorrectAt(i))
-        .toList();
+    final filteredIndexes = List<int>.generate(
+      total,
+      (i) => i,
+    ).where((i) => !showMissedOnly || !isCorrectAt(i)).toList();
     if (filteredIndexes.isEmpty) {
       return Center(
         child: Text(
@@ -372,7 +283,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
       );
     }
     return GridView.builder(
-      scrollDirection: Axis.horizontal,
+      scrollDirection: scrollDirection,
       itemCount: filteredIndexes.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
@@ -481,7 +392,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
             Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 480),
+                constraints: BoxConstraints(maxHeight: kIsWeb ? 640 : 480),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
@@ -502,13 +413,12 @@ class _ReviewScreenState extends State<ReviewScreen> {
                               value: progress.expectedTotalBytes == null
                                   ? null
                                   : progress.cumulativeBytesLoaded /
-                                  progress.expectedTotalBytes!,
+                                        progress.expectedTotalBytes!,
                             ),
                           );
                         },
-                        errorBuilder: (_, __, ___) => const Center(
-                          child: Text("Failed to load image"),
-                        ),
+                        errorBuilder: (_, __, ___) =>
+                            const Center(child: Text("Failed to load image")),
                       ),
                     ),
                   ),

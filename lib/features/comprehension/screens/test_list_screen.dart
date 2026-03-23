@@ -47,7 +47,9 @@ class _TestListScreenState extends State<TestListScreen> {
           );
         }
         if (snapshot.hasError) {
-          return Center(child: Text("Failed to load CE tests:\n${snapshot.error}"));
+          return Center(
+            child: Text("Failed to load CE tests:\n${snapshot.error}"),
+          );
         }
 
         final tests = snapshot.data ?? [];
@@ -62,15 +64,20 @@ class _TestListScreenState extends State<TestListScreen> {
               ? Stream.value(const <Map<String, dynamic>>[])
               : ProgressRepository.streamRecentAttempts(uid, limit: 100),
           builder: (context, attemptsSnap) {
-            final attempts = attemptsSnap.data ?? const <Map<String, dynamic>>[];
+            final attempts =
+                attemptsSnap.data ?? const <Map<String, dynamic>>[];
             final bestScores = _bestScoreByTestId(attempts);
             final latestScores = _latestScoreByTestId(attempts);
+            final listPaneWidth = Responsive.splitListPaneWidth(context);
 
             if (!isWide) {
               return StreamBuilder<UserProgressSummary>(
-                stream: uid == null ? null : ProgressRepository.streamSummary(uid),
+                stream: uid == null
+                    ? null
+                    : ProgressRepository.streamSummary(uid),
                 builder: (context, progressSnap) {
-                  final summary = progressSnap.data ?? UserProgressSummary.empty();
+                  final summary =
+                      progressSnap.data ?? UserProgressSummary.empty();
                   return ListView.separated(
                     padding: const EdgeInsets.all(16),
                     itemCount: tests.length + 1,
@@ -89,7 +96,8 @@ class _TestListScreenState extends State<TestListScreen> {
                         onTap: () => _start(context, test),
                       );
                       return AnimatedFadeSlide(
-                        delay: AppMotion.fast +
+                        delay:
+                            AppMotion.fast +
                             Duration(milliseconds: 40 * (index - 1)),
                         child: row,
                       );
@@ -102,11 +110,14 @@ class _TestListScreenState extends State<TestListScreen> {
             return Row(
               children: [
                 SizedBox(
-                  width: 430,
+                  width: listPaneWidth,
                   child: StreamBuilder<UserProgressSummary>(
-                    stream: uid == null ? null : ProgressRepository.streamSummary(uid),
+                    stream: uid == null
+                        ? null
+                        : ProgressRepository.streamSummary(uid),
                     builder: (context, progressSnap) {
-                      final summary = progressSnap.data ?? UserProgressSummary.empty();
+                      final summary =
+                          progressSnap.data ?? UserProgressSummary.empty();
                       return ListView.separated(
                         padding: const EdgeInsets.all(16),
                         itemCount: tests.length + 1,
@@ -126,7 +137,8 @@ class _TestListScreenState extends State<TestListScreen> {
                             onTap: () => setState(() => selectedTest = test),
                           );
                           return AnimatedFadeSlide(
-                            delay: AppMotion.fast +
+                            delay:
+                                AppMotion.fast +
                                 Duration(milliseconds: 40 * (index - 1)),
                             child: row,
                           );
@@ -139,9 +151,9 @@ class _TestListScreenState extends State<TestListScreen> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(
                       0,
-                      isWide ? 8 : 16,
-                      isWide ? 12 : 16,
-                      isWide ? 8 : 16,
+                      isWide ? 10 : 16,
+                      isWide ? 16 : 16,
+                      isWide ? 10 : 16,
                     ),
                     child: AnimatedSwitcher(
                       duration: contextReducedMotion(context)
@@ -150,10 +162,7 @@ class _TestListScreenState extends State<TestListScreen> {
                       switchInCurve: AppMotion.curve,
                       switchOutCurve: AppMotion.curve,
                       transitionBuilder: (child, animation) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: child,
-                        );
+                        return FadeTransition(opacity: animation, child: child);
                       },
                       child: KeyedSubtree(
                         key: ValueKey<String>(selectedTest!.id),
@@ -185,10 +194,7 @@ class _TestListScreenState extends State<TestListScreen> {
 
   void _start(BuildContext context, TestModel test) {
     AppAnalytics.logTestStarted(moduleType: 'CE', testId: test.id);
-    Navigator.push(
-      context,
-      AppRoutes.fadeSlide(QuestionScreen(test: test)),
-    );
+    Navigator.push(context, AppRoutes.fadeSlide(QuestionScreen(test: test)));
   }
 
   String _testNumberFromId(String id) {
@@ -265,9 +271,9 @@ class _TestRow extends StatelessWidget {
                   Text(
                     subtitle,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface.withValues(
-                            alpha: 0.65,
-                          ),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.65),
                       fontWeight: FontWeight.w600,
                       fontSize: 12.5,
                     ),
@@ -278,9 +284,9 @@ class _TestRow extends StatelessWidget {
             const SizedBox(width: 10),
             Icon(
               Icons.chevron_right_rounded,
-              color: Theme.of(context).colorScheme.onSurface.withValues(
-                    alpha: 0.6,
-                  ),
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.6),
             ),
           ],
         ),
@@ -317,8 +323,8 @@ class _DetailsPanel extends StatelessWidget {
                   Text(
                     test.title,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w900,
-                        ),
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -334,7 +340,9 @@ class _DetailsPanel extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(14),
                       color: cs.surfaceContainerHighest.withOpacity(0.55),
-                      border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+                      border: Border.all(
+                        color: cs.outlineVariant.withOpacity(0.25),
+                      ),
                     ),
                     child: Row(
                       children: [
@@ -377,7 +385,8 @@ class _AdaptiveHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final needsPractice = summary.lastScore > 0 && summary.lastScore < summary.bestScore;
+    final needsPractice =
+        summary.lastScore > 0 && summary.lastScore < summary.bestScore;
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(

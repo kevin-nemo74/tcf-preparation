@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
@@ -12,7 +13,6 @@ import '../widgets/audio_player_widget.dart';
 import 'oral_result_screen.dart';
 
 // Reuse your existing grid screen (CE) because it already supports flags/answers
-
 
 class OralQuestionScreen extends StatefulWidget {
   final OralTestModel test;
@@ -113,7 +113,9 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final isWide = Responsive.isSplitLayout(context);
+    final isWide = kIsWeb
+        ? Responsive.isTabletWeb(context)
+        : Responsive.isSplitLayout(context);
 
     final OralQuestionModel question = widget.test.questions[currentIndex];
     final selectedAnswer = userAnswers[question.id];
@@ -162,102 +164,116 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
         child: SafeArea(
           child: Column(
             children: [
-            TweenAnimationBuilder<double>(
-              tween: Tween<double>(
-                end: (currentIndex + 1) / widget.test.questions.length,
-              ),
-              duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
-              curve: AppMotion.curve,
-              builder: (context, value, _) => LinearProgressIndicator(
-                value: value,
-                backgroundColor: cs.surfaceContainerHighest.withValues(alpha: 0.45),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: AnimatedSwitcher(
-                  duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
-                  switchInCurve: AppMotion.curve,
-                  switchOutCurve: AppMotion.curve,
-                  layoutBuilder: (currentChild, previousChildren) => Stack(
-                    alignment: Alignment.center,
-                    children: <Widget>[
-                      ...previousChildren,
-                      if (currentChild != null) currentChild,
-                    ],
+              TweenAnimationBuilder<double>(
+                tween: Tween<double>(
+                  end: (currentIndex + 1) / widget.test.questions.length,
+                ),
+                duration: contextReducedMotion(context)
+                    ? Duration.zero
+                    : AppMotion.medium,
+                curve: AppMotion.curve,
+                builder: (context, value, _) => LinearProgressIndicator(
+                  value: value,
+                  backgroundColor: cs.surfaceContainerHighest.withValues(
+                    alpha: 0.45,
                   ),
-                  transitionBuilder: (child, animation) {
-                    final offset = Tween<Offset>(
-                      begin: const Offset(0.04, 0),
-                      end: Offset.zero,
-                    ).animate(CurvedAnimation(parent: animation, curve: AppMotion.curve));
-                    return FadeTransition(
-                      opacity: animation,
-                      child: SlideTransition(position: offset, child: child),
-                    );
-                  },
-                  child: isWide
-                      ? Row(
-                          key: ValueKey<String>(question.id),
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 6,
-                              child: _OralMediaPanel(question: question),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              flex: 5,
-                              child: _OptionsPanel(
-                                question: question,
-                                selectedAnswer: selectedAnswer,
-                                onSelect: (id) => setState(() {
-                                  userAnswers[question.id] = id;
-                                }),
-                                footer: _BottomControls(
-                                  isLastQuestion: isLast,
-                                  onPrev: currentIndex > 0
-                                      ? () => setState(() => currentIndex--)
-                                      : null,
-                                  onNextOrSubmit: _goNextOrSubmit,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      : Column(
-                          key: ValueKey<String>(question.id),
-                          children: [
-                            Expanded(
-                              flex: 6,
-                              child: _OralMediaPanel(question: question),
-                            ),
-                            const SizedBox(height: 14),
-                            Expanded(
-                              flex: 7,
-                              child: _OptionsPanel(
-                                question: question,
-                                selectedAnswer: selectedAnswer,
-                                onSelect: (id) => setState(() {
-                                  userAnswers[question.id] = id;
-                                }),
-                                footer: _BottomControls(
-                                  isLastQuestion: isLast,
-                                  onPrev: currentIndex > 0
-                                      ? () => setState(() => currentIndex--)
-                                      : null,
-                                  onNextOrSubmit: _goNextOrSubmit,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                 ),
               ),
-            ),
-          ],
-        ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(
+                    Responsive.isDesktopWeb(context) ? 20 : 16,
+                  ),
+                  child: AnimatedSwitcher(
+                    duration: contextReducedMotion(context)
+                        ? Duration.zero
+                        : AppMotion.medium,
+                    switchInCurve: AppMotion.curve,
+                    switchOutCurve: AppMotion.curve,
+                    layoutBuilder: (currentChild, previousChildren) => Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        ...previousChildren,
+                        if (currentChild != null) currentChild,
+                      ],
+                    ),
+                    transitionBuilder: (child, animation) {
+                      final offset =
+                          Tween<Offset>(
+                            begin: const Offset(0.04, 0),
+                            end: Offset.zero,
+                          ).animate(
+                            CurvedAnimation(
+                              parent: animation,
+                              curve: AppMotion.curve,
+                            ),
+                          );
+                      return FadeTransition(
+                        opacity: animation,
+                        child: SlideTransition(position: offset, child: child),
+                      );
+                    },
+                    child: isWide
+                        ? Row(
+                            key: ValueKey<String>(question.id),
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: Responsive.isDesktopWeb(context) ? 7 : 6,
+                                child: _OralMediaPanel(question: question),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                flex: Responsive.isDesktopWeb(context) ? 6 : 5,
+                                child: _OptionsPanel(
+                                  question: question,
+                                  selectedAnswer: selectedAnswer,
+                                  onSelect: (id) => setState(() {
+                                    userAnswers[question.id] = id;
+                                  }),
+                                  footer: _BottomControls(
+                                    isLastQuestion: isLast,
+                                    onPrev: currentIndex > 0
+                                        ? () => setState(() => currentIndex--)
+                                        : null,
+                                    onNextOrSubmit: _goNextOrSubmit,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Column(
+                            key: ValueKey<String>(question.id),
+                            children: [
+                              Expanded(
+                                flex: 6,
+                                child: _OralMediaPanel(question: question),
+                              ),
+                              const SizedBox(height: 14),
+                              Expanded(
+                                flex: 7,
+                                child: _OptionsPanel(
+                                  question: question,
+                                  selectedAnswer: selectedAnswer,
+                                  onSelect: (id) => setState(() {
+                                    userAnswers[question.id] = id;
+                                  }),
+                                  footer: _BottomControls(
+                                    isLastQuestion: isLast,
+                                    onPrev: currentIndex > 0
+                                        ? () => setState(() => currentIndex--)
+                                        : null,
+                                    onNextOrSubmit: _goNextOrSubmit,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -285,7 +301,7 @@ class _OralMediaPanel extends StatelessWidget {
             color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
             blurRadius: 18,
             offset: const Offset(0, 10),
-          )
+          ),
         ],
       ),
       child: Column(
@@ -318,13 +334,12 @@ class _OralMediaPanel extends StatelessWidget {
                             value: progress.expectedTotalBytes == null
                                 ? null
                                 : progress.cumulativeBytesLoaded /
-                                progress.expectedTotalBytes!,
+                                      progress.expectedTotalBytes!,
                           ),
                         );
                       },
-                      errorBuilder: (_, __, ___) => const Center(
-                        child: Text("Failed to load image"),
-                      ),
+                      errorBuilder: (_, __, ___) =>
+                          const Center(child: Text("Failed to load image")),
                     ),
                   ),
                 ),
@@ -337,7 +352,9 @@ class _OralMediaPanel extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   color: cs.surfaceContainerHighest.withOpacity(0.20),
-                  border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+                  border: Border.all(
+                    color: cs.outlineVariant.withOpacity(0.25),
+                  ),
                 ),
                 child: Text(
                   "Audio question",
@@ -383,7 +400,7 @@ class _OptionsPanel extends StatelessWidget {
             color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
             blurRadius: 18,
             offset: const Offset(0, 10),
-          )
+          ),
         ],
       ),
       child: Column(
@@ -419,14 +436,17 @@ class _OptionsPanel extends StatelessWidget {
 
                 final bg = isSelected
                     ? cs.primaryContainer.withOpacity(isDark ? 0.60 : 0.85)
-                    : cs.surfaceContainerHighest.withOpacity(isDark ? 0.20 : 0.40);
+                    : cs.surfaceContainerHighest.withOpacity(
+                        isDark ? 0.20 : 0.40,
+                      );
 
                 final border = isSelected
                     ? cs.primary
                     : cs.outlineVariant.withOpacity(0.35);
 
-                final textColor =
-                isSelected ? cs.onPrimaryContainer : cs.onSurface;
+                final textColor = isSelected
+                    ? cs.onPrimaryContainer
+                    : cs.onSurface;
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6),
@@ -462,8 +482,11 @@ class _OptionsPanel extends StatelessWidget {
                           ),
                           const SizedBox(width: 10),
                           if (isSelected)
-                            Icon(Icons.check_circle_rounded,
-                                color: cs.primary, size: 22),
+                            Icon(
+                              Icons.check_circle_rounded,
+                              color: cs.primary,
+                              size: 22,
+                            ),
                         ],
                       ),
                     ),
@@ -512,9 +535,11 @@ class _BottomControls extends StatelessWidget {
         Expanded(
           child: FilledButton.icon(
             onPressed: onNextOrSubmit,
-            icon: Icon(isLastQuestion
-                ? Icons.check_circle_rounded
-                : Icons.arrow_forward_rounded),
+            icon: Icon(
+              isLastQuestion
+                  ? Icons.check_circle_rounded
+                  : Icons.arrow_forward_rounded,
+            ),
             label: Text(isLastQuestion ? "Submit" : "Next"),
             style: FilledButton.styleFrom(
               shape: RoundedRectangleBorder(

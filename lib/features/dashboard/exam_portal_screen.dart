@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
@@ -25,7 +26,10 @@ class ExamPortalScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final resolvedUid = uid ?? ProgressRepository.currentUid;
-    final wide = Responsive.isSplitLayout(context);
+    final wide = kIsWeb
+        ? Responsive.isTabletWeb(context)
+        : Responsive.isSplitLayout(context);
+    final webDesktopDashboard = kIsWeb && wide;
 
     return DefaultTabController(
       length: 2,
@@ -37,7 +41,8 @@ class ExamPortalScreen extends StatelessWidget {
               IconButton(
                 tooltip: "Dashboard",
                 icon: const Icon(Icons.dashboard_customize_rounded),
-                onPressed: () => _openMobileDashboardSheet(context, resolvedUid),
+                onPressed: () =>
+                    _openMobileDashboardSheet(context, resolvedUid),
               ),
             IconButton(
               tooltip: "Settings",
@@ -51,16 +56,25 @@ class ExamPortalScreen extends StatelessWidget {
             ),
           ],
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(64),
+            preferredSize: Size.fromHeight(
+              Responsive.isDesktopWeb(context) ? 70 : 64,
+            ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+              padding: EdgeInsets.fromLTRB(
+                Responsive.isDesktopWeb(context) ? 24 : 16,
+                0,
+                Responsive.isDesktopWeb(context) ? 24 : 16,
+                12,
+              ),
               child: Container(
-                height: 52,
+                height: Responsive.isDesktopWeb(context) ? 56 : 52,
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: cs.surfaceContainerHighest.withValues(alpha: 0.55),
-                  border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
+                  border: Border.all(
+                    color: cs.outlineVariant.withValues(alpha: 0.35),
+                  ),
                 ),
                 child: TabBar(
                   isScrollable: false,
@@ -101,20 +115,51 @@ class ExamPortalScreen extends StatelessWidget {
         body: Padding(
           padding: Responsive.horizontalInset(context),
           child: ResponsiveFrame(
-            child: wide
+            child: webDesktopDashboard
+                ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (resolvedUid != null)
+                        SizedBox(
+                          width: Responsive.splitListPaneWidth(context),
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                _PortalSummary(uid: resolvedUid),
+                                const SizedBox(height: 10),
+                                _PortalActions(uid: resolvedUid, compact: true),
+                                const SizedBox(height: 10),
+                                StudyPlanPortalCard(uid: resolvedUid),
+                                const SizedBox(height: 10),
+                                _ProgressInsights(
+                                  uid: resolvedUid,
+                                  compact: true,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      if (resolvedUid != null) const SizedBox(width: 14),
+                      const Expanded(child: _DesktopTabPanel()),
+                    ],
+                  )
+                : wide
                 ? Column(
                     children: [
                       if (resolvedUid != null)
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 6, 16, 2),
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
                           child: _PortalSummary(uid: resolvedUid),
                         ),
                       if (resolvedUid != null)
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 2, 16, 6),
+                          padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
                           child: _PortalActions(uid: resolvedUid),
                         ),
-                      if (resolvedUid != null) StudyPlanPortalCard(uid: resolvedUid),
+                      if (resolvedUid != null)
+                        StudyPlanPortalCard(uid: resolvedUid),
                       if (resolvedUid != null)
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 4, 16, 10),
@@ -161,9 +206,9 @@ Future<void> _openMobileDashboardSheet(BuildContext context, String uid) {
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
                 child: Text(
                   'Dashboard',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w900,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
                 ),
               ),
               Padding(
@@ -201,10 +246,7 @@ class _PortalSummary extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting &&
             !snapshot.hasData) {
-          return ShimmerSkeleton(
-            height: wide ? 64 : 76,
-            borderRadius: 14,
-          );
+          return ShimmerSkeleton(height: wide ? 64 : 76, borderRadius: 14);
         }
         final summary = snapshot.data ?? UserProgressSummary.empty();
         return AnimatedFadeSlide(
@@ -218,7 +260,9 @@ class _PortalSummary extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
-              border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
+              border: Border.all(
+                color: cs.outlineVariant.withValues(alpha: 0.35),
+              ),
             ),
             child: Wrap(
               alignment: WrapAlignment.spaceBetween,
@@ -245,18 +289,20 @@ class _PortalSummary extends StatelessWidget {
 
 class _PortalActions extends StatelessWidget {
   final String uid;
+  final bool compact;
 
-  const _PortalActions({required this.uid});
+  const _PortalActions({required this.uid, this.compact = false});
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 10,
-      runSpacing: 10,
+      spacing: compact ? 8 : 10,
+      runSpacing: compact ? 8 : 10,
       children: [
         _ActionButton(
           label: 'Study Plan',
           icon: Icons.event_note_rounded,
+          compact: compact,
           onTap: () {
             Navigator.push(
               context,
@@ -267,6 +313,7 @@ class _PortalActions extends StatelessWidget {
         _ActionButton(
           label: 'Review Queue',
           icon: Icons.assignment_late_rounded,
+          compact: compact,
           onTap: () {
             Navigator.push(
               context,
@@ -277,11 +324,9 @@ class _PortalActions extends StatelessWidget {
         _ActionButton(
           label: 'Profile',
           icon: Icons.account_circle_rounded,
+          compact: compact,
           onTap: () {
-            Navigator.push(
-              context,
-              AppRoutes.fadeSlide(const ProfileScreen()),
-            );
+            Navigator.push(context, AppRoutes.fadeSlide(const ProfileScreen()));
           },
         ),
       ],
@@ -293,11 +338,13 @@ class _ActionButton extends StatelessWidget {
   final String label;
   final IconData icon;
   final VoidCallback onTap;
+  final bool compact;
 
   const _ActionButton({
     required this.label,
     required this.icon,
     required this.onTap,
+    this.compact = false,
   });
 
   @override
@@ -306,7 +353,10 @@ class _ActionButton extends StatelessWidget {
     return PressableScale(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        padding: EdgeInsets.symmetric(
+          horizontal: compact ? 10 : 14,
+          vertical: compact ? 10 : 12,
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: cs.surface,
@@ -316,8 +366,14 @@ class _ActionButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon, size: 18, color: cs.primary),
-            const SizedBox(width: 8),
-            Text(label, style: const TextStyle(fontWeight: FontWeight.w800)),
+            SizedBox(width: compact ? 6 : 8),
+            Text(
+              label,
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: compact ? 12.5 : 14,
+              ),
+            ),
           ],
         ),
       ),
@@ -327,8 +383,9 @@ class _ActionButton extends StatelessWidget {
 
 class _ProgressInsights extends StatelessWidget {
   final String uid;
+  final bool compact;
 
-  const _ProgressInsights({required this.uid});
+  const _ProgressInsights({required this.uid, this.compact = false});
 
   @override
   Widget build(BuildContext context) {
@@ -349,15 +406,14 @@ class _ProgressInsights extends StatelessWidget {
             );
             return Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(compact ? 12 : 16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 color: Theme.of(context).colorScheme.surface,
                 border: Border.all(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .outlineVariant
-                      .withValues(alpha: 0.35),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outlineVariant.withValues(alpha: 0.35),
                 ),
               ),
               child: Column(
@@ -370,13 +426,15 @@ class _ProgressInsights extends StatelessWidget {
                   const SizedBox(height: 8),
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primaryContainer
-                          .withValues(alpha: 0.35),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primaryContainer.withValues(alpha: 0.35),
                     ),
                     child: Row(
                       children: [
@@ -412,28 +470,52 @@ class _ProgressInsights extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: compact ? 8 : 12),
                   if (attempts.isEmpty)
                     Text(
                       'Complete your first test to unlock recent attempt history.',
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.7),
                         fontWeight: FontWeight.w600,
                       ),
                     )
                   else
-                    ...attempts.take(4).map(
-                      (attempt) => Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: _AttemptRow(attempt: attempt),
-                      ),
-                    ),
+                    ...attempts
+                        .take(compact ? 3 : 4)
+                        .map(
+                          (attempt) => Padding(
+                            padding: EdgeInsets.only(bottom: compact ? 6 : 8),
+                            child: _AttemptRow(attempt: attempt),
+                          ),
+                        ),
                 ],
               ),
             );
           },
         );
       },
+    );
+  }
+}
+
+class _DesktopTabPanel extends StatelessWidget {
+  const _DesktopTabPanel();
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 12, 12, 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        color: cs.surface,
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
+      ),
+      child: const TabBarView(
+        children: [TestListScreen(showHeader: false), OralTestListScreen()],
+      ),
     );
   }
 }
@@ -483,7 +565,8 @@ class _AttemptRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final module = (attempt['moduleType'] ?? 'CE').toString();
-    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Practice set').toString();
+    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Practice set')
+        .toString();
     final score = _asNum(attempt['score']).toStringAsFixed(0);
     return Container(
       padding: const EdgeInsets.all(12),
@@ -501,7 +584,10 @@ class _AttemptRow extends StatelessWidget {
           Expanded(
             child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
           ),
-          Text('$score / 699', style: const TextStyle(fontWeight: FontWeight.w900)),
+          Text(
+            '$score / 699',
+            style: const TextStyle(fontWeight: FontWeight.w900),
+          ),
         ],
       ),
     );
@@ -523,7 +609,10 @@ class _Kpi extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(color: cs.onSurface.withValues(alpha: 0.68), fontSize: 12),
+            style: TextStyle(
+              color: cs.onSurface.withValues(alpha: 0.68),
+              fontSize: 12,
+            ),
           ),
           Text(value, style: const TextStyle(fontWeight: FontWeight.w900)),
         ],
@@ -556,7 +645,11 @@ Map<String, double> _moduleAverages(List<Map<String, dynamic>> attempts) {
 String _trendText(List<Map<String, dynamic>> attempts) {
   if (attempts.length < 2) return 'baseline';
   final latest = attempts.take(2).map((e) => _asNum(e['score'])).toList();
-  final earlier = attempts.skip(2).take(2).map((e) => _asNum(e['score'])).toList();
+  final earlier = attempts
+      .skip(2)
+      .take(2)
+      .map((e) => _asNum(e['score']))
+      .toList();
   if (earlier.isEmpty) return 'baseline';
   final latestAvg = latest.reduce((a, b) => a + b) / latest.length;
   final earlierAvg = earlier.reduce((a, b) => a + b) / earlier.length;
