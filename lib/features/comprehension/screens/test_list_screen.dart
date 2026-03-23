@@ -56,43 +56,17 @@ class _TestListScreenState extends State<TestListScreen> {
 
         selectedTest ??= tests.first;
 
-        if (!isWide) {
-          return StreamBuilder<UserProgressSummary>(
-            stream: uid == null ? null : ProgressRepository.streamSummary(uid),
-            builder: (context, progressSnap) {
-              final summary = progressSnap.data ?? UserProgressSummary.empty();
-              return ListView.separated(
-                padding: const EdgeInsets.all(16),
-                itemCount: tests.length + 1,
-                separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return _AdaptiveHeader(summary: summary);
-                  }
-                  final test = tests[index - 1];
-                  final row = _TestRow(
-                    title: test.title,
-                    subtitle: "${test.questions.length} questions • ${test.durationMinutes} min • Best ${summary.bestScore}/699",
-                    leading: _testNumberFromId(test.id),
-                    isSelected: false,
-                    onTap: () => _start(context, test),
-                  );
-                  return AnimatedFadeSlide(
-                    delay: AppMotion.fast + Duration(milliseconds: 40 * (index - 1)),
-                    child: row,
-                  );
-                },
-              );
-            },
-          );
-        }
+        return StreamBuilder<List<Map<String, dynamic>>>(
+          stream: uid == null
+              ? Stream.value(const <Map<String, dynamic>>[])
+              : ProgressRepository.streamRecentAttempts(uid, limit: 100),
+          builder: (context, attemptsSnap) {
+            final attempts = attemptsSnap.data ?? const <Map<String, dynamic>>[];
+            final bestScores = _bestScoreByTestId(attempts);
+            final latestScores = _latestScoreByTestId(attempts);
 
-        return Row(
-          children: [
-            // LEFT LIST
-            SizedBox(
-              width: 430,
-              child: StreamBuilder<UserProgressSummary>(
+            if (!isWide) {
+              return StreamBuilder<UserProgressSummary>(
                 stream: uid == null ? null : ProgressRepository.streamSummary(uid),
                 builder: (context, progressSnap) {
                   final summary = progressSnap.data ?? UserProgressSummary.empty();
@@ -105,63 +79,104 @@ class _TestListScreenState extends State<TestListScreen> {
                         return _AdaptiveHeader(summary: summary);
                       }
                       final test = tests[index - 1];
-                      final isSelected = selectedTest?.id == test.id;
                       final row = _TestRow(
                         title: test.title,
-                        subtitle: "${test.questions.length} questions • ${test.durationMinutes} min • Last ${summary.lastScore}/699",
+                        subtitle:
+                            "${test.questions.length} questions • ${test.durationMinutes} min • Best ${_scoreText(bestScores[test.id])}",
                         leading: _testNumberFromId(test.id),
-                        isSelected: isSelected,
-                        onTap: () => setState(() => selectedTest = test),
+                        isSelected: false,
+                        onTap: () => _start(context, test),
                       );
                       return AnimatedFadeSlide(
-                        delay: AppMotion.fast + Duration(milliseconds: 40 * (index - 1)),
+                        delay: AppMotion.fast +
+                            Duration(milliseconds: 40 * (index - 1)),
                         child: row,
                       );
                     },
                   );
                 },
-              ),
-            ),
+              );
+            }
 
-            // RIGHT DETAILS (scroll-safe)
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                  0,
-                  isWide ? 8 : 16,
-                  isWide ? 12 : 16,
-                  isWide ? 8 : 16,
+            return Row(
+              children: [
+                SizedBox(
+                  width: 430,
+                  child: StreamBuilder<UserProgressSummary>(
+                    stream: uid == null ? null : ProgressRepository.streamSummary(uid),
+                    builder: (context, progressSnap) {
+                      final summary = progressSnap.data ?? UserProgressSummary.empty();
+                      return ListView.separated(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: tests.length + 1,
+                        separatorBuilder: (_, __) => const SizedBox(height: 10),
+                        itemBuilder: (context, index) {
+                          if (index == 0) {
+                            return _AdaptiveHeader(summary: summary);
+                          }
+                          final test = tests[index - 1];
+                          final isSelected = selectedTest?.id == test.id;
+                          final row = _TestRow(
+                            title: test.title,
+                            subtitle:
+                                "${test.questions.length} questions • ${test.durationMinutes} min • Best ${_scoreText(bestScores[test.id])} • Last ${_scoreText(latestScores[test.id])}",
+                            leading: _testNumberFromId(test.id),
+                            isSelected: isSelected,
+                            onTap: () => setState(() => selectedTest = test),
+                          );
+                          return AnimatedFadeSlide(
+                            delay: AppMotion.fast +
+                                Duration(milliseconds: 40 * (index - 1)),
+                            child: row,
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
-                child: AnimatedSwitcher(
-                  duration: contextReducedMotion(context) ? Duration.zero : AppMotion.medium,
-                  switchInCurve: AppMotion.curve,
-                  switchOutCurve: AppMotion.curve,
-                  transitionBuilder: (child, animation) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                  child: KeyedSubtree(
-                    key: ValueKey<String>(selectedTest!.id),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: cs.surface,
-                        border: Border.all(
-                          color: cs.outlineVariant.withValues(alpha: 0.35),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      0,
+                      isWide ? 8 : 16,
+                      isWide ? 12 : 16,
+                      isWide ? 8 : 16,
+                    ),
+                    child: AnimatedSwitcher(
+                      duration: contextReducedMotion(context)
+                          ? Duration.zero
+                          : AppMotion.medium,
+                      switchInCurve: AppMotion.curve,
+                      switchOutCurve: AppMotion.curve,
+                      transitionBuilder: (child, animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                      child: KeyedSubtree(
+                        key: ValueKey<String>(selectedTest!.id),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            color: cs.surface,
+                            border: Border.all(
+                              color: cs.outlineVariant.withValues(alpha: 0.35),
+                            ),
+                          ),
+                          child: _DetailsPanel(
+                            test: selectedTest!,
+                            bestScore: bestScores[selectedTest!.id],
+                            onStart: () => _start(context, selectedTest!),
+                          ),
                         ),
-                      ),
-                      child: _DetailsPanel(
-                        test: selectedTest!,
-                        onStart: () => _start(context, selectedTest!),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         );
       },
     );
@@ -274,18 +289,18 @@ class _TestRow extends StatelessWidget {
 
 class _DetailsPanel extends StatelessWidget {
   final TestModel test;
+  final int? bestScore;
   final VoidCallback onStart;
 
   const _DetailsPanel({
     required this.test,
+    required this.bestScore,
     required this.onStart,
   });
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-
-    const bestScoreText = "Best: — / 699";
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
@@ -324,7 +339,7 @@ class _DetailsPanel extends StatelessWidget {
                         Icon(Icons.emoji_events_rounded, color: cs.primary),
                         const SizedBox(width: 10),
                         Text(
-                          bestScoreText,
+                          "Best: ${_scoreText(bestScore)}",
                           style: const TextStyle(fontWeight: FontWeight.w900),
                         ),
                       ],
@@ -354,6 +369,7 @@ class _DetailsPanel extends StatelessWidget {
 
 class _AdaptiveHeader extends StatelessWidget {
   final UserProgressSummary summary;
+
   const _AdaptiveHeader({required this.summary});
 
   @override
@@ -383,4 +399,37 @@ class _AdaptiveHeader extends StatelessWidget {
       ),
     );
   }
+}
+
+Map<String, int> _bestScoreByTestId(List<Map<String, dynamic>> attempts) {
+  final bestScores = <String, int>{};
+  for (final attempt in attempts) {
+    final testId = (attempt['testId'] ?? '').toString();
+    if (testId.isEmpty) continue;
+    final score = _asInt(attempt['score']);
+    final current = bestScores[testId];
+    if (current == null || score > current) {
+      bestScores[testId] = score;
+    }
+  }
+  return bestScores;
+}
+
+Map<String, int> _latestScoreByTestId(List<Map<String, dynamic>> attempts) {
+  final latestScores = <String, int>{};
+  for (final attempt in attempts) {
+    final testId = (attempt['testId'] ?? '').toString();
+    if (testId.isEmpty || latestScores.containsKey(testId)) continue;
+    latestScores[testId] = _asInt(attempt['score']);
+  }
+  return latestScores;
+}
+
+String _scoreText(int? score) => score == null ? "- / 699" : "$score/699";
+
+int _asInt(dynamic value) {
+  if (value is int) return value;
+  if (value is num) return value.toInt();
+  if (value is String) return int.tryParse(value) ?? 0;
+  return 0;
 }
