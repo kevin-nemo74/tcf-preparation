@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
+import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
+import 'package:tcf_canada_preparation/features/progress/review_queue_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -194,14 +196,74 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 18),
-              StreamBuilder<List<Map<String, dynamic>>>(
+              StreamBuilder<List<ReviewQueueItem>>(
                 stream: ProgressRepository.streamReviewQueue(uid, limit: 20),
                 builder: (context, qSnap) {
-                  final count = qSnap.data?.length ?? 0;
-                  return _StatsTile(
-                    icon: Icons.assignment_late_rounded,
-                    title: "Review queue",
-                    value: "$count question(s) to revisit",
+                  final items = qSnap.data ?? const <ReviewQueueItem>[];
+                  return Column(
+                    children: [
+                      _StatsTile(
+                        icon: Icons.assignment_late_rounded,
+                        title: "Review queue",
+                        value: "${items.length} question(s) to revisit",
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            AppRoutes.fadeSlide(ReviewQueueScreen(uid: uid)),
+                          );
+                        },
+                      ),
+                      if (items.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Latest queued: ${items.first.testTitle} / ${items.first.questionId}",
+                              style: TextStyle(
+                                color: cs.onSurface.withOpacity(0.7),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 18),
+              Text(
+                "Recent attempts",
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 8),
+              StreamBuilder<List<Map<String, dynamic>>>(
+                stream: ProgressRepository.streamRecentAttempts(uid, limit: 6),
+                builder: (context, attemptSnap) {
+                  final attempts = attemptSnap.data ?? const <Map<String, dynamic>>[];
+                  if (attempts.isEmpty) {
+                    return _StatsTile(
+                      icon: Icons.history_rounded,
+                      title: "Recent attempts",
+                      value: "No attempts yet",
+                    );
+                  }
+                  final ceAverage = _moduleAverage(attempts, 'CE');
+                  final coAverage = _moduleAverage(attempts, 'CO');
+                  return Column(
+                    children: [
+                      _StatsTile(
+                        icon: Icons.analytics_rounded,
+                        title: "Module averages",
+                        value:
+                            "CE ${ceAverage.toStringAsFixed(1)} / CO ${coAverage.toStringAsFixed(1)}",
+                      ),
+                      ...attempts.take(4).map(
+                        (attempt) => _AttemptTile(attempt: attempt),
+                      ),
+                    ],
                   );
                 },
               ),
@@ -314,47 +376,111 @@ class _StatsTile extends StatelessWidget {
   final IconData icon;
   final String title;
   final String value;
+  final VoidCallback? onTap;
 
   const _StatsTile({
     required this.icon,
     required this.title,
     required this.value,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(18),
+      child: Container(
+        margin: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          color: cs.surfaceContainerHighest.withOpacity(0.35),
+          border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: cs.primary),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: cs.onSurface.withOpacity(0.8),
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+            Text(
+              value,
+              style: const TextStyle(
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            if (onTap != null) ...[
+              const SizedBox(width: 8),
+              Icon(Icons.chevron_right_rounded, color: cs.onSurface.withOpacity(0.55)),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AttemptTile extends StatelessWidget {
+  final Map<String, dynamic> attempt;
+
+  const _AttemptTile({required this.attempt});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final module = (attempt['moduleType'] ?? 'CE').toString();
+    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Practice set').toString();
+    final score = _readAttemptScore(attempt);
     return Container(
       margin: const EdgeInsets.only(top: 10),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        color: cs.surfaceContainerHighest.withOpacity(0.35),
+        color: cs.surface,
         border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
       ),
       child: Row(
         children: [
-          Icon(icon, color: cs.primary),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              title,
-              style: TextStyle(
-                color: cs.onSurface.withOpacity(0.8),
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
           Text(
-            value,
-            style: const TextStyle(
-              fontWeight: FontWeight.w900,
-            ),
+            module,
+            style: TextStyle(fontWeight: FontWeight.w900, color: cs.primary),
           ),
+          const SizedBox(width: 10),
+          Expanded(child: Text(title)),
+          Text('$score / 699', style: const TextStyle(fontWeight: FontWeight.w900)),
         ],
       ),
     );
   }
+}
+
+double _moduleAverage(List<Map<String, dynamic>> attempts, String moduleType) {
+  final filtered = attempts
+      .where((attempt) => (attempt['moduleType'] ?? 'CE').toString() == moduleType)
+      .toList();
+  if (filtered.isEmpty) return 0;
+  final total = filtered.fold<double>(
+    0,
+    (sum, attempt) => sum + _readAttemptScore(attempt),
+  );
+  return total / filtered.length;
+}
+
+int _readAttemptScore(Map<String, dynamic> attempt) {
+  final value = attempt['score'];
+  if (value is int) return value;
+  if (value is num) return value.toInt();
+  if (value is String) return int.tryParse(value) ?? 0;
+  return 0;
 }
 
 class _BadgeChip extends StatelessWidget {

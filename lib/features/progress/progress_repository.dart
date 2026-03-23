@@ -60,6 +60,48 @@ class UserProgressSummary {
   }
 }
 
+class ReviewQueueItem {
+  final String id;
+  final String questionId;
+  final String moduleType;
+  final String testId;
+  final String testTitle;
+  final String? lastUserAnswer;
+  final String correctAnswer;
+  final bool needsReview;
+  final DateTime? lastUpdatedAt;
+
+  const ReviewQueueItem({
+    required this.id,
+    required this.questionId,
+    required this.moduleType,
+    required this.testId,
+    required this.testTitle,
+    required this.lastUserAnswer,
+    required this.correctAnswer,
+    required this.needsReview,
+    required this.lastUpdatedAt,
+  });
+
+  factory ReviewQueueItem.fromDoc(
+    String id,
+    Map<String, dynamic> map,
+  ) {
+    final updatedAt = map['lastUpdatedAt'];
+    return ReviewQueueItem(
+      id: id,
+      questionId: (map['questionId'] ?? '').toString(),
+      moduleType: (map['moduleType'] ?? '').toString(),
+      testId: (map['testId'] ?? '').toString(),
+      testTitle: (map['testTitle'] ?? '').toString(),
+      lastUserAnswer: map['lastUserAnswer']?.toString(),
+      correctAnswer: (map['correctAnswer'] ?? '').toString(),
+      needsReview: map['needsReview'] == true,
+      lastUpdatedAt: updatedAt is Timestamp ? updatedAt.toDate() : null,
+    );
+  }
+}
+
 class StudyTask {
   final String id;
   final String title;
@@ -93,6 +135,7 @@ class StudyPlan {
   final String targetLevel;
   final DateTime targetDate;
   final int weeklyCadence;
+  final String planDateKey;
   final List<StudyTask> todayTasks;
 
   const StudyPlan({
@@ -100,6 +143,7 @@ class StudyPlan {
     required this.targetLevel,
     required this.targetDate,
     required this.weeklyCadence,
+    required this.planDateKey,
     required this.todayTasks,
   });
 
@@ -115,6 +159,7 @@ class StudyPlan {
       targetLevel: (map['targetLevel'] ?? 'NCLC 7').toString(),
       targetDate: targetDate is Timestamp ? targetDate.toDate() : DateTime.now(),
       weeklyCadence: _asInt(map['weeklyCadence']),
+      planDateKey: (map['planDateKey'] ?? _dateKey(DateTime.now())).toString(),
       todayTasks: tasks,
     );
   }
@@ -124,6 +169,7 @@ class StudyPlan {
         'targetLevel': targetLevel,
         'targetDate': Timestamp.fromDate(targetDate),
         'weeklyCadence': weeklyCadence,
+        'planDateKey': planDateKey,
         'todayTasks': todayTasks.map((e) => e.toMap()).toList(),
         'updatedAt': FieldValue.serverTimestamp(),
       };
@@ -175,6 +221,23 @@ class ProgressRepository {
           plan.toMap(),
           SetOptions(merge: true),
         );
+  }
+
+  static Future<StudyPlan?> refreshStudyPlanIfNeeded(
+    String uid, {
+    required Future<StudyPlan> Function(StudyPlan existingPlan) rebuild,
+  }) async {
+    final ref = _userDoc(uid).collection('meta').doc('studyPlan');
+    final snap = await ref.get();
+    final data = snap.data();
+    if (data == null) return null;
+    final plan = StudyPlan.fromMap(data);
+    if (plan.planDateKey == _dateKey(DateTime.now())) {
+      return plan;
+    }
+    final refreshed = await rebuild(plan);
+    await saveStudyPlan(uid, refreshed);
+    return refreshed;
   }
 
   static Future<void> toggleTask(String uid, String taskId) async {
@@ -272,6 +335,8 @@ class ProgressRepository {
 
     await _storeReviewQueue(
       uid: uid,
+      testId: testId,
+      testTitle: testTitle,
       moduleType: moduleType,
       userAnswers: userAnswers,
       correctAnswersByQuestion: correctAnswersByQuestion,
@@ -281,6 +346,8 @@ class ProgressRepository {
 
   static Future<void> _storeReviewQueue({
     required String uid,
+    required String testId,
+    required String testTitle,
     required String moduleType,
     required Map<String, String> userAnswers,
     required Map<String, String> correctAnswersByQuestion,
@@ -294,10 +361,14 @@ class ProgressRepository {
     ids.addAll(flaggedQuestionIds);
 
     for (final id in ids) {
-      await _reviewQueueCol(uid).doc('$moduleType:$id').set(
+      await _reviewQueueCol(uid).doc('$moduleType:$testId:$id').set(
         {
           'questionId': id,
           'moduleType': moduleType,
+          'testId': testId,
+          'testTitle': testTitle,
+          'lastUserAnswer': userAnswers[id],
+          'correctAnswer': correctAnswersByQuestion[id],
           'needsReview': true,
           'lastUpdatedAt': FieldValue.serverTimestamp(),
         },
@@ -314,12 +385,42 @@ class ProgressRepository {
         .map((snap) => snap.docs.map((e) => e.data()).toList());
   }
 
-  static Stream<List<Map<String, dynamic>>> streamReviewQueue(String uid, {int limit = 20}) {
+  static Stream<List<ReviewQueueItem>> streamReviewQueue(String uid, {int limit = 20}) {
     return _reviewQueueCol(uid)
         .where('needsReview', isEqualTo: true)
         .limit(limit)
         .snapshots()
-        .map((snap) => snap.docs.map((e) => e.data()).toList());
+        .map(
+          (snap) => snap.docs
+              .map((e) => ReviewQueueItem.fromDoc(e.id, e.data()))
+              .toList()
+            ..sort((a, b) {
+              final left = a.lastUpdatedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+              final right = b.lastUpdatedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+              return right.compareTo(left);
+            }),
+        );
+  }
+
+  static Future<void> markReviewQueueItemDone(String uid, String itemId) async {
+    await _reviewQueueCol(uid).doc(itemId).set(
+      {
+        'needsReview': false,
+        'completedAt': FieldValue.serverTimestamp(),
+        'lastUpdatedAt': FieldValue.serverTimestamp(),
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  static Future<void> restoreReviewQueueItem(String uid, String itemId) async {
+    await _reviewQueueCol(uid).doc(itemId).set(
+      {
+        'needsReview': true,
+        'lastUpdatedAt': FieldValue.serverTimestamp(),
+      },
+      SetOptions(merge: true),
+    );
   }
 
   static Future<bool> isOnboardingDone({String? uid}) async {
@@ -353,6 +454,11 @@ class ProgressRepository {
     if (diff == 1) return oldStreak + 1;
     return 1;
   }
+}
+
+String _dateKey(DateTime value) {
+  final normalized = DateTime(value.year, value.month, value.day);
+  return normalized.toIso8601String().split('T').first;
 }
 
 int _asInt(dynamic value) {

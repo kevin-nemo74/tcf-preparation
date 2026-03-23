@@ -25,12 +25,14 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
     if (uid == null) return;
     setState(() => _saving = true);
     final recent = await ProgressRepository.streamRecentAttempts(uid, limit: 20).first;
+    final reviewQueue = await ProgressRepository.streamReviewQueue(uid, limit: 100).first;
     final plan = StudyPlanGenerator.generate(
       targetScore: _targetScore,
       targetLevel: _targetLevel,
       targetDate: _targetDate,
       weeklyCadence: _weeklyCadence,
       recentAttempts: recent,
+      pendingReviewCount: reviewQueue.length,
     );
     await ProgressRepository.saveStudyPlan(uid, plan);
     if (!mounted) return;
@@ -51,6 +53,21 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
             child: ListView(
               padding: Responsive.pagePadding(context, vertical: 16),
               children: [
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                color: Theme.of(context)
+                    .colorScheme
+                    .surfaceContainerHighest
+                    .withOpacity(0.3),
+              ),
+              child: const Text(
+                'Your daily tasks adapt to recent attempts, review-queue size, target date, and weekly cadence.',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+            ),
+            const SizedBox(height: 14),
             TextFormField(
               initialValue: '500',
               keyboardType: TextInputType.number,

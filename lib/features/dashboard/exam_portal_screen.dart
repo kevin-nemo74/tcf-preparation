@@ -5,7 +5,10 @@ import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import 'package:tcf_canada_preparation/features/comprehension/screens/test_list_screen.dart';
+import 'package:tcf_canada_preparation/features/profile/profile_screen.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
+import 'package:tcf_canada_preparation/features/progress/review_queue_screen.dart';
+import 'package:tcf_canada_preparation/features/progress/study_plan_screen.dart';
 
 import '../oral/screens/oral_test_list_screen.dart';
 import '../settings/settings_screen.dart';
@@ -28,6 +31,12 @@ class ExamPortalScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text("TCF Canada Simulator"),
           actions: [
+            if (!wide && resolvedUid != null)
+              IconButton(
+                tooltip: "Dashboard",
+                icon: const Icon(Icons.dashboard_customize_rounded),
+                onPressed: () => _openMobileDashboardSheet(context, resolvedUid),
+              ),
             IconButton(
               tooltip: "Settings",
               icon: const Icon(Icons.settings_rounded),
@@ -90,63 +99,358 @@ class ExamPortalScreen extends StatelessWidget {
         body: Padding(
           padding: Responsive.horizontalInset(context),
           child: ResponsiveFrame(
-            child: Column(
-              children: [
-            if (resolvedUid != null)
-              Padding(
-                padding: EdgeInsets.fromLTRB(16, wide ? 6 : 12, 16, wide ? 2 : 4),
-                child: StreamBuilder<UserProgressSummary>(
-                  stream: ProgressRepository.streamSummary(resolvedUid),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting &&
-                        !snapshot.hasData) {
-                      return ShimmerSkeleton(
-                        height: wide ? 64 : 76,
-                        borderRadius: 14,
-                      );
-                    }
-                    final summary = snapshot.data ?? UserProgressSummary.empty();
-                    return AnimatedFadeSlide(
-                      duration: AppMotion.fast,
-                      child: Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: wide ? 10 : 14,
+            child: wide
+                ? Column(
+                    children: [
+                      if (resolvedUid != null)
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 6, 16, 2),
+                          child: _PortalSummary(uid: resolvedUid),
                         ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
-                          border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
+                      if (resolvedUid != null)
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 2, 16, 6),
+                          child: _PortalActions(uid: resolvedUid),
                         ),
-                        child: Wrap(
-                          alignment: WrapAlignment.spaceBetween,
-                          runSpacing: 8,
+                      if (resolvedUid != null) StudyPlanPortalCard(uid: resolvedUid),
+                      if (resolvedUid != null)
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 4, 16, 10),
+                          child: _ProgressInsights(uid: resolvedUid),
+                        ),
+                      const Expanded(
+                        child: TabBarView(
                           children: [
-                            _Kpi(label: 'Best', value: '${summary.bestScore} / 699'),
-                            _Kpi(label: 'Last', value: '${summary.lastScore} / 699'),
-                            _Kpi(label: 'Attempts', value: '${summary.attemptsCount}'),
-                            _Kpi(label: 'Streak', value: '${summary.currentStreak} d'),
+                            TestListScreen(showHeader: false),
+                            OralTestListScreen(),
                           ],
                         ),
                       ),
-                    );
-                  },
+                    ],
+                  )
+                : const TabBarView(
+                    children: [
+                      TestListScreen(showHeader: false),
+                      OralTestListScreen(),
+                    ],
+                  ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Future<void> _openMobileDashboardSheet(BuildContext context, String uid) {
+  return showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    useSafeArea: true,
+    showDragHandle: true,
+    builder: (context) {
+      return FractionallySizedBox(
+        heightFactor: 0.9,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                child: Text(
+                  'Dashboard',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w900,
+                      ),
                 ),
               ),
-            if (resolvedUid != null) StudyPlanPortalCard(uid: resolvedUid),
-            const Expanded(
-              child: TabBarView(
-                children: [
-                  TestListScreen(showHeader: false),
-                  OralTestListScreen(),
-                ],
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: _PortalSummary(uid: uid),
               ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: _PortalActions(uid: uid),
+              ),
+              StudyPlanPortalCard(uid: uid),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                child: _ProgressInsights(uid: uid),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+class _PortalSummary extends StatelessWidget {
+  final String uid;
+
+  const _PortalSummary({required this.uid});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final wide = Responsive.isSplitLayout(context);
+    return StreamBuilder<UserProgressSummary>(
+      stream: ProgressRepository.streamSummary(uid),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting &&
+            !snapshot.hasData) {
+          return ShimmerSkeleton(
+            height: wide ? 64 : 76,
+            borderRadius: 14,
+          );
+        }
+        final summary = snapshot.data ?? UserProgressSummary.empty();
+        return AnimatedFadeSlide(
+          duration: AppMotion.fast,
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+              horizontal: 14,
+              vertical: wide ? 10 : 14,
             ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
+              border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
+            ),
+            child: Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              runSpacing: 8,
+              children: [
+                _Kpi(label: 'Best', value: '${summary.bestScore} / 699'),
+                _Kpi(label: 'Last', value: '${summary.lastScore} / 699'),
+                _Kpi(
+                  label: 'Average',
+                  value: summary.averageScore == 0
+                      ? '0'
+                      : summary.averageScore.toStringAsFixed(1),
+                ),
+                _Kpi(label: 'Attempts', value: '${summary.attemptsCount}'),
+                _Kpi(label: 'Streak', value: '${summary.currentStreak} d'),
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+}
+
+class _PortalActions extends StatelessWidget {
+  final String uid;
+
+  const _PortalActions({required this.uid});
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 10,
+      runSpacing: 10,
+      children: [
+        _ActionButton(
+          label: 'Study Plan',
+          icon: Icons.event_note_rounded,
+          onTap: () {
+            Navigator.push(
+              context,
+              AppRoutes.fadeSlide(const StudyPlanScreen()),
+            );
+          },
         ),
+        _ActionButton(
+          label: 'Review Queue',
+          icon: Icons.assignment_late_rounded,
+          onTap: () {
+            Navigator.push(
+              context,
+              AppRoutes.fadeSlide(ReviewQueueScreen(uid: uid)),
+            );
+          },
+        ),
+        _ActionButton(
+          label: 'Profile',
+          icon: Icons.account_circle_rounded,
+          onTap: () {
+            Navigator.push(
+              context,
+              AppRoutes.fadeSlide(const ProfileScreen()),
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _ActionButton({
+    required this.label,
+    required this.icon,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return PressableScale(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: cs.surface,
+          border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 18, color: cs.primary),
+            const SizedBox(width: 8),
+            Text(label, style: const TextStyle(fontWeight: FontWeight.w800)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ProgressInsights extends StatelessWidget {
+  final String uid;
+
+  const _ProgressInsights({required this.uid});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<List<Map<String, dynamic>>>(
+      stream: ProgressRepository.streamRecentAttempts(uid, limit: 8),
+      builder: (context, attemptsSnap) {
+        final attempts = attemptsSnap.data ?? const <Map<String, dynamic>>[];
+        final moduleAverages = _moduleAverages(attempts);
+        final trendText = _trendText(attempts);
+        return StreamBuilder<List<ReviewQueueItem>>(
+          stream: ProgressRepository.streamReviewQueue(uid, limit: 40),
+          builder: (context, reviewSnap) {
+            final queueCount = reviewSnap.data?.length ?? 0;
+            return Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                color: Theme.of(context).colorScheme.surface,
+                border: Border.all(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .outlineVariant
+                      .withValues(alpha: 0.35),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Progress Insights',
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                  ),
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      _InsightChip(label: 'Review queue: $queueCount'),
+                      _InsightChip(label: 'Trend: $trendText'),
+                      _InsightChip(
+                        label:
+                            "CE avg: ${moduleAverages['CE']?.toStringAsFixed(1) ?? '0.0'}",
+                      ),
+                      _InsightChip(
+                        label:
+                            "CO avg: ${moduleAverages['CO']?.toStringAsFixed(1) ?? '0.0'}",
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  if (attempts.isEmpty)
+                    Text(
+                      'Complete your first test to unlock recent attempt history.',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  else
+                    ...attempts.take(4).map(
+                      (attempt) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: _AttemptRow(attempt: attempt),
+                      ),
+                    ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class _InsightChip extends StatelessWidget {
+  final String label;
+
+  const _InsightChip({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        color: cs.surfaceContainerHighest.withValues(alpha: 0.45),
+      ),
+      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w700)),
+    );
+  }
+}
+
+class _AttemptRow extends StatelessWidget {
+  final Map<String, dynamic> attempt;
+
+  const _AttemptRow({required this.attempt});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final module = (attempt['moduleType'] ?? 'CE').toString();
+    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Practice set').toString();
+    final score = _asNum(attempt['score']).toStringAsFixed(0);
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(14),
+        color: cs.surfaceContainerHighest.withValues(alpha: 0.3),
+      ),
+      child: Row(
+        children: [
+          Text(
+            module,
+            style: TextStyle(fontWeight: FontWeight.w900, color: cs.primary),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
+          ),
+          Text('$score / 699', style: const TextStyle(fontWeight: FontWeight.w900)),
+        ],
       ),
     );
   }
@@ -174,4 +478,43 @@ class _Kpi extends StatelessWidget {
       ),
     );
   }
+}
+
+Map<String, double> _moduleAverages(List<Map<String, dynamic>> attempts) {
+  double ceTotal = 0;
+  double coTotal = 0;
+  int ceCount = 0;
+  int coCount = 0;
+  for (final attempt in attempts) {
+    final score = _asNum(attempt['score']);
+    if ((attempt['moduleType'] ?? '').toString() == 'CO') {
+      coTotal += score;
+      coCount++;
+    } else {
+      ceTotal += score;
+      ceCount++;
+    }
+  }
+  return {
+    'CE': ceCount == 0 ? 0 : ceTotal / ceCount,
+    'CO': coCount == 0 ? 0 : coTotal / coCount,
+  };
+}
+
+String _trendText(List<Map<String, dynamic>> attempts) {
+  if (attempts.length < 2) return 'baseline';
+  final latest = attempts.take(2).map((e) => _asNum(e['score'])).toList();
+  final earlier = attempts.skip(2).take(2).map((e) => _asNum(e['score'])).toList();
+  if (earlier.isEmpty) return 'baseline';
+  final latestAvg = latest.reduce((a, b) => a + b) / latest.length;
+  final earlierAvg = earlier.reduce((a, b) => a + b) / earlier.length;
+  if (latestAvg >= earlierAvg + 15) return 'improving';
+  if (latestAvg <= earlierAvg - 15) return 'dropping';
+  return 'steady';
+}
+
+double _asNum(dynamic value) {
+  if (value is num) return value.toDouble();
+  if (value is String) return double.tryParse(value) ?? 0;
+  return 0;
 }

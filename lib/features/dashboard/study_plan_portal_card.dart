@@ -4,10 +4,11 @@ import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
+import 'package:tcf_canada_preparation/features/progress/study_plan_generator.dart';
 import 'package:tcf_canada_preparation/features/progress/study_plan_screen.dart';
 
-/// Collapsible study plan for the exam portal — **collapsed by default** on wide /
-/// split layouts (typical web) so test lists keep vertical space.
+/// Collapsible study plan for the exam portal, collapsed by default on wide
+/// layouts so the practice lists keep vertical space.
 class StudyPlanPortalCard extends StatefulWidget {
   const StudyPlanPortalCard({super.key, required this.uid});
 
@@ -19,6 +20,32 @@ class StudyPlanPortalCard extends StatefulWidget {
 
 class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
   @override
+  void initState() {
+    super.initState();
+    _refreshIfNeeded();
+  }
+
+  Future<void> _refreshIfNeeded() async {
+    await ProgressRepository.refreshStudyPlanIfNeeded(
+      widget.uid,
+      rebuild: (existingPlan) async {
+        final attempts =
+            await ProgressRepository.streamRecentAttempts(widget.uid, limit: 20).first;
+        final reviewQueue =
+            await ProgressRepository.streamReviewQueue(widget.uid, limit: 100).first;
+        return StudyPlanGenerator.generate(
+          targetScore: existingPlan.targetScore,
+          targetLevel: existingPlan.targetLevel,
+          targetDate: existingPlan.targetDate,
+          weeklyCadence: existingPlan.weeklyCadence,
+          recentAttempts: attempts,
+          pendingReviewCount: reviewQueue.length,
+        );
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final wide = Responsive.isSplitLayout(context);
@@ -27,7 +54,8 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
     return StreamBuilder<StudyPlan?>(
       stream: ProgressRepository.streamStudyPlan(widget.uid),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting && !snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.waiting &&
+            !snapshot.hasData) {
           return const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             child: ShimmerSkeleton(height: 52, borderRadius: 16),
@@ -37,14 +65,9 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
         final hasPlan = plan != null;
         final doneCount = hasPlan ? plan.todayTasks.where((t) => t.done).length : 0;
         final totalTasks = hasPlan ? plan.todayTasks.length : 0;
-
-        String subtitleText;
-        if (!hasPlan) {
-          subtitleText = 'Set a target score and daily tasks — expand for details';
-        } else {
-          subtitleText =
-              'Target ${plan.targetScore} (${plan.targetLevel}) · $doneCount/$totalTasks done today';
-        }
+        final subtitleText = !hasPlan
+            ? 'Set a target score and daily tasks - expand for details'
+            : 'Target ${plan.targetScore} (${plan.targetLevel}) - $doneCount/$totalTasks done today';
 
         return Padding(
           padding: EdgeInsets.fromLTRB(16, wide ? 2 : 4, 16, wide ? 4 : 8),
@@ -57,10 +80,10 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
             child: Theme(
               data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
-                // Web: start collapsed so test lists get height; mobile app: expand on narrow.
                 initiallyExpanded: kIsWeb ? false : !wide,
                 maintainState: true,
-                tilePadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                tilePadding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                 childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 10),
                 shape: const RoundedRectangleBorder(),
                 collapsedShape: const RoundedRectangleBorder(),
@@ -71,7 +94,10 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
                     const Expanded(
                       child: Text(
                         'Study Plan',
-                        style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 15,
+                        ),
                       ),
                     ),
                     TextButton(
@@ -103,8 +129,7 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 6),
                       child: Text(
-                        'Open Setup to choose your target NCLC band, test date, and weekly rhythm. '
-                        'Tasks appear here each day.',
+                        'Open Setup to choose your target NCLC band, test date, and weekly rhythm. Tasks appear here each day.',
                         style: TextStyle(
                           color: cs.onSurface.withValues(alpha: 0.78),
                           fontWeight: FontWeight.w500,
@@ -112,29 +137,45 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
                         ),
                       ),
                     ),
-                  if (hasPlan) ...[
+                  if (hasPlan && StudyPlanGenerator.needsRefresh(plan))
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Text(
+                        'This plan was generated for an earlier day. Open Setup to refresh today\'s tasks.',
+                        style: TextStyle(
+                          color: cs.onSurface.withValues(alpha: 0.78),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  if (hasPlan)
                     ConstrainedBox(
                       constraints: BoxConstraints(maxHeight: taskMaxHeight),
                       child: ListView.separated(
                         shrinkWrap: true,
                         physics: const ClampingScrollPhysics(),
                         itemCount: plan.todayTasks.length,
-                        separatorBuilder: (context, index) => const SizedBox(height: 2),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 2),
                         itemBuilder: (context, i) {
-                          final t = plan.todayTasks[i];
+                          final task = plan.todayTasks[i];
                           return CheckboxListTile(
                             dense: true,
                             visualDensity: VisualDensity.compact,
                             contentPadding: EdgeInsets.zero,
-                            value: t.done,
-                            title: Text(t.title, style: const TextStyle(fontSize: 13.5)),
-                            onChanged: (_) =>
-                                ProgressRepository.toggleTask(widget.uid, t.id),
+                            value: task.done,
+                            title: Text(
+                              task.title,
+                              style: const TextStyle(fontSize: 13.5),
+                            ),
+                            onChanged: (_) => ProgressRepository.toggleTask(
+                              widget.uid,
+                              task.id,
+                            ),
                           );
                         },
                       ),
                     ),
-                  ],
                 ],
               ),
             ),
