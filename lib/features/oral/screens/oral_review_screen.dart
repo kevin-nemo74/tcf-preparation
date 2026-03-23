@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
@@ -45,6 +46,7 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
 
+    final isWeb = kIsWeb;
     final total = widget.test.questions.length;
     final correct = calculateCorrectCount();
     final wrong = total - correct;
@@ -54,6 +56,9 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
     final correctAnswer = q.correctAnswer;
 
     final isWide = Responsive.isWideReview(context);
+
+    const double webGridCompactHeight = 160.0;
+    const double narrowGridHeight = 110.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +76,20 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
                 children: [
                   _summaryCard(context, cs, correct, wrong, total),
                   const SizedBox(height: 16),
-                  Expanded(child: _grid(cs, total)),
+                  if (isWeb)
+                    SizedBox(
+                      height: webGridCompactHeight,
+                      child: _webQuestionPicker(cs, total),
+                    )
+                  else
+                    Expanded(
+                      child: _grid(
+                        cs,
+                        total,
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.25,
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -85,7 +103,15 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
           children: [
             _summaryCard(context, cs, correct, wrong, total),
             const SizedBox(height: 14),
-            SizedBox(height: 110, child: _grid(cs, total)),
+            SizedBox(
+              height: narrowGridHeight,
+              child: _grid(
+                cs,
+                total,
+                crossAxisCount: 2,
+                childAspectRatio: 1.25,
+              ),
+            ),
             const SizedBox(height: 14),
             Expanded(
               child: _animatedDetail(context, cs, q, userAnswer, correctAnswer, selectedIndex),
@@ -172,12 +198,106 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
     );
   }
 
-  Widget _grid(ColorScheme cs, int total) {
+  Future<void> _openFullQuestionPicker(ColorScheme cs, int total) async {
+    await showDialog<int>(
+      context: context,
+      builder: (dialogContext) {
+        final media = MediaQuery.of(dialogContext);
+        final maxW = media.size.width * 0.92;
+        final maxH = media.size.height * 0.82;
+
+        return Dialog(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: maxW,
+              maxHeight: maxH,
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 8, 8),
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: Text(
+                          "Select question",
+                          style: TextStyle(fontWeight: FontWeight.w800),
+                        ),
+                      ),
+                      IconButton(
+                        tooltip: "Close",
+                        icon: const Icon(Icons.close_rounded),
+                        onPressed: () =>
+                            Navigator.of(dialogContext).pop(),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(height: 1),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: _grid(
+                      cs,
+                      total,
+                      crossAxisCount: 2,
+                      childAspectRatio: 1.25,
+                      onIndexSelected: (index) =>
+                          Navigator.of(dialogContext).pop(index),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _webQuestionPicker(ColorScheme cs, int total) {
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 8, bottom: 44),
+          child: _grid(
+            cs,
+            total,
+            crossAxisCount: 2,
+            childAspectRatio: 1.35,
+          ),
+        ),
+        Positioned(
+          right: 0,
+          bottom: 0,
+          child: OutlinedButton.icon(
+            onPressed: () => _openFullQuestionPicker(cs, total),
+            icon: const Icon(Icons.grid_view_rounded, size: 16),
+            label: const Text("All"),
+            style: OutlinedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              minimumSize: Size.zero,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _grid(
+    ColorScheme cs,
+    int total, {
+    required int crossAxisCount,
+    required double childAspectRatio,
+    ValueChanged<int>? onIndexSelected,
+  }) {
+
     return GridView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: total,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        childAspectRatio: childAspectRatio,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),
@@ -196,7 +316,10 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
         }
 
         return InkWell(
-          onTap: () => setState(() => selectedIndex = index),
+          onTap: () {
+            setState(() => selectedIndex = index);
+            onIndexSelected?.call(index);
+          },
           borderRadius: BorderRadius.circular(20),
           child: Ink(
             decoration: BoxDecoration(
@@ -273,9 +396,27 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
                       color: cs.surfaceContainerHighest.withOpacity(0.25),
                       padding: const EdgeInsets.all(10),
                       child: InteractiveViewer(
-                        child: Image.asset(
+                        minScale: 0.8,
+                        maxScale: 4.0,
+                        child: Image.network(
                           question.imageUrl!,
                           fit: BoxFit.contain,
+                          width: double.infinity,
+                          height: double.infinity,
+                          loadingBuilder: (context, child, progress) {
+                            if (progress == null) return child;
+                            return Center(
+                              child: CircularProgressIndicator(
+                                value: progress.expectedTotalBytes == null
+                                    ? null
+                                    : progress.cumulativeBytesLoaded /
+                                    progress.expectedTotalBytes!,
+                              ),
+                            );
+                          },
+                          errorBuilder: (_, __, ___) => const Center(
+                            child: Text("Failed to load image"),
+                          ),
                         ),
                       ),
                     ),

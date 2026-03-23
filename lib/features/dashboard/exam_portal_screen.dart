@@ -12,12 +12,14 @@ import '../settings/settings_screen.dart';
 import 'study_plan_portal_card.dart';
 
 class ExamPortalScreen extends StatelessWidget {
-  const ExamPortalScreen({super.key});
+  final String? uid;
+
+  const ExamPortalScreen({super.key, this.uid});
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final uid = ProgressRepository.currentUid;
+    final resolvedUid = uid ?? ProgressRepository.currentUid;
     final wide = Responsive.isSplitLayout(context);
 
     return DefaultTabController(
@@ -90,11 +92,11 @@ class ExamPortalScreen extends StatelessWidget {
           child: ResponsiveFrame(
             child: Column(
               children: [
-            if (uid != null)
+            if (resolvedUid != null)
               Padding(
                 padding: EdgeInsets.fromLTRB(16, wide ? 6 : 12, 16, wide ? 2 : 4),
                 child: StreamBuilder<UserProgressSummary>(
-                  stream: ProgressRepository.streamSummary(uid),
+                  stream: ProgressRepository.streamSummary(resolvedUid),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting &&
                         !snapshot.hasData) {
@@ -132,7 +134,7 @@ class ExamPortalScreen extends StatelessWidget {
                   },
                 ),
               ),
-            if (uid != null) StudyPlanPortalCard(uid: uid),
+            if (resolvedUid != null) StudyPlanPortalCard(uid: resolvedUid),
             const Expanded(
               child: TabBarView(
                 children: [

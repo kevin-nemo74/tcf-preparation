@@ -55,6 +55,7 @@ class AuthGate extends StatefulWidget {
 class _AuthGateState extends State<AuthGate> {
   bool _hasInternet = true;
   StreamSubscription<List<ConnectivityResult>>? _sub;
+  late Stream<User?> _userStream;
 
   @override
   void initState() {
@@ -65,6 +66,16 @@ class _AuthGateState extends State<AuthGate> {
       final online = results.isNotEmpty && !results.contains(ConnectivityResult.none);
       if (mounted) setState(() => _hasInternet = online);
     });
+
+    _userStream = widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
+  }
+
+  @override
+  void didUpdateWidget(covariant AuthGate oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.authStateChanges != widget.authStateChanges) {
+      _userStream = widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
+    }
   }
 
   Future<void> _checkConnectivity() async {
@@ -124,10 +135,12 @@ class _AuthGateState extends State<AuthGate> {
     }
 
     return StreamBuilder<User?>(
-      stream: widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges(),
+      stream: _userStream,
+      initialData: FirebaseAuth.instance.currentUser,
       builder: (context, snapshot) {
-        // Loading
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        // Loading (only show while we have no data yet).
+        if (!snapshot.hasData &&
+            snapshot.connectionState == ConnectionState.waiting) {
           return widget.loadingWidget ??
               const Scaffold(
                 body: Center(child: CircularProgressIndicator()),
@@ -142,9 +155,9 @@ class _AuthGateState extends State<AuthGate> {
         }
 
         // Logged in -> Onboarding (first run) -> App
-        final app = widget.authenticatedWidget ?? const ExamPortalScreen();
-        final onboardingFuture =
-            widget.onboardingDoneCheck ?? ProgressRepository.isOnboardingDone;
+        final app = widget.authenticatedWidget ?? ExamPortalScreen(uid: user.uid);
+        final onboardingFuture = widget.onboardingDoneCheck ??
+            () => ProgressRepository.isOnboardingDone(uid: user.uid);
         return FutureBuilder<bool>(
           future: onboardingFuture(),
           builder: (context, onboardSnap) {

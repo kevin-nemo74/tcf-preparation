@@ -14,17 +14,20 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final user = FirebaseAuth.instance.currentUser;
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        final user = snapshot.data;
 
-    return Scaffold(
-      appBar: AppBar(title: const Text("Settings")),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: Responsive.canvasMaxWidth(context)),
-          child: ListView(
-            padding: Responsive.pagePadding(context, vertical: 16),
-            children: [
+        return Scaffold(
+          appBar: AppBar(title: const Text("Settings")),
+          body: Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: Responsive.canvasMaxWidth(context)),
+              child: ListView(
+                padding: Responsive.pagePadding(context, vertical: 16),
+                children: [
               // Account card
               AnimatedFadeSlide(
             child: Container(
@@ -128,8 +131,10 @@ class SettingsScreen extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 

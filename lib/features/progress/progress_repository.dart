@@ -322,26 +322,26 @@ class ProgressRepository {
         .map((snap) => snap.docs.map((e) => e.data()).toList());
   }
 
-  static Future<bool> isOnboardingDone() async {
-    final uid = currentUid;
-    if (uid == null) return true;
+  static Future<bool> isOnboardingDone({String? uid}) async {
+    final resolvedUid = uid ?? currentUid;
+    if (resolvedUid == null) return true;
     final prefs = await SharedPreferences.getInstance();
-    final local = prefs.getBool('onboarding_done_$uid');
+    final local = prefs.getBool('onboarding_done_$resolvedUid');
     if (local == true) return true;
-    final snap = await _userDoc(uid).get();
+    final snap = await _userDoc(resolvedUid).get();
     final remote = snap.data()?['onboardingDone'] == true;
     if (remote) {
-      await prefs.setBool('onboarding_done_$uid', true);
+      await prefs.setBool('onboarding_done_$resolvedUid', true);
     }
     return remote;
   }
 
-  static Future<void> setOnboardingDone() async {
-    final uid = currentUid;
-    if (uid == null) return;
+  static Future<void> setOnboardingDone({String? uid}) async {
+    final resolvedUid = uid ?? currentUid;
+    if (resolvedUid == null) return;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('onboarding_done_$uid', true);
-    await _userDoc(uid).set({'onboardingDone': true}, SetOptions(merge: true));
+    await prefs.setBool('onboarding_done_$resolvedUid', true);
+    await _userDoc(resolvedUid).set({'onboardingDone': true}, SetOptions(merge: true));
   }
 
   static int _computeStreak(DateTime? lastAttempt, int oldStreak, DateTime now) {
