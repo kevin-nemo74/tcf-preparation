@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  analyze_and_test:
+  analyze_test_and_release_check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,3 +25,6 @@ jobs:
 
       - name: Test
         run: flutter test
+
+      - name: Android release compile check
+        run: flutter build apk --release

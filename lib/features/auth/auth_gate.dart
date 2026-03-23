@@ -67,14 +67,23 @@ class _AuthGateState extends State<AuthGate> {
       if (mounted) setState(() => _hasInternet = online);
     });
 
-    _userStream = widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
+    if (widget.authStatusChanges != null) {
+      _userStream = const Stream<User?>.empty();
+    } else {
+      _userStream = widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
+    }
   }
 
   @override
   void didUpdateWidget(covariant AuthGate oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.authStateChanges != widget.authStateChanges) {
-      _userStream = widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
+    if (oldWidget.authStateChanges != widget.authStateChanges ||
+        oldWidget.authStatusChanges != widget.authStatusChanges) {
+      if (widget.authStatusChanges != null) {
+        _userStream = const Stream<User?>.empty();
+      } else {
+        _userStream = widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
+      }
     }
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 import '../auth_service.dart';
 import 'login_screen.dart';
@@ -74,6 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final isWide = Responsive.isAuthWideLayout(context);
 
@@ -123,14 +125,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     Text(
-                      "Create account",
+                      l10n.registerTitle,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w900,
                           ),
                     ),
                     Text(
-                      "Register to unlock all tests and save progress",
+                      l10n.registerSubtitle,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: cs.onSurface.withValues(alpha: 0.65),
@@ -162,9 +164,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               TextFormField(
                                 controller: _username,
                                 textInputAction: TextInputAction.next,
-                                decoration: const InputDecoration(
-                                  labelText: "Username",
-                                  prefixIcon: Icon(Icons.badge_rounded),
+                                decoration: InputDecoration(
+                                  labelText: l10n.usernameLabel,
+                                  prefixIcon: const Icon(Icons.badge_rounded),
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
@@ -179,9 +181,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 controller: _email,
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
-                                decoration: const InputDecoration(
-                                  labelText: "Email",
-                                  prefixIcon: Icon(Icons.email_rounded),
+                                decoration: InputDecoration(
+                                  labelText: l10n.emailLabel,
+                                  prefixIcon: const Icon(Icons.email_rounded),
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
@@ -196,7 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 obscureText: _obscure,
                                 textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(
-                                  labelText: "Password",
+                                  labelText: l10n.passwordLabel,
                                   prefixIcon: const Icon(Icons.lock_rounded),
                                   suffixIcon: IconButton(
                                     onPressed: () => setState(() => _obscure = !_obscure),
@@ -217,9 +219,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 controller: _confirm,
                                 obscureText: _obscure,
                                 textInputAction: TextInputAction.done,
-                                decoration: const InputDecoration(
-                                  labelText: "Confirm Password",
-                                  prefixIcon: Icon(Icons.lock_outline_rounded),
+                                decoration: InputDecoration(
+                                  labelText: l10n.confirmPasswordLabel,
+                                  prefixIcon: const Icon(Icons.lock_outline_rounded),
                                 ),
                                 validator: (v) {
                                   final value = v ?? "";
@@ -239,7 +241,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           width: 20,
                                           child: CircularProgressIndicator(strokeWidth: 2),
                                         )
-                                      : const Text("Create account"),
+                                      : Text(l10n.createAccountCta),
                                 ),
                               ),
                               const SizedBox(height: 12),
@@ -247,7 +249,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Already have an account?",
+                                    l10n.alreadyHaveAccount,
                                     style: TextStyle(
                                       color: cs.onSurface.withValues(alpha: 0.7),
                                     ),

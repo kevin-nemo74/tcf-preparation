@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/local_tests_data.dart';
@@ -183,6 +184,7 @@ class _TestListScreenState extends State<TestListScreen> {
   }
 
   void _start(BuildContext context, TestModel test) {
+    AppAnalytics.logTestStarted(moduleType: 'CE', testId: test.id);
     Navigator.push(
       context,
       AppRoutes.fadeSlide(QuestionScreen(test: test)),

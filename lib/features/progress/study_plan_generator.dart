@@ -40,6 +40,18 @@ class StudyPlanGenerator {
           done: false,
         ),
       );
+      tasks.add(
+        StudyTask(
+          id: '${taskSeed}_spaced_review',
+          title: _spacedReviewTitle(
+            pendingReviewCount: pendingReviewCount,
+            accelerating: accelerating,
+            weeklyCadence: weeklyCadence,
+          ),
+          type: 'REVIEW_SPACED',
+          done: false,
+        ),
+      );
     }
     tasks.add(
       StudyTask(
@@ -130,6 +142,20 @@ class StudyPlanGenerator {
     if (latestAvg >= earlierAvg + 15) return _Trend.up;
     if (latestAvg <= earlierAvg - 15) return _Trend.down;
     return _Trend.flat;
+  }
+
+  static String _spacedReviewTitle({
+    required int pendingReviewCount,
+    required bool accelerating,
+    required int weeklyCadence,
+  }) {
+    if (accelerating || weeklyCadence >= 5) {
+      return 'Spaced review: revisit weak questions in 2 short sessions today';
+    }
+    if (pendingReviewCount >= 8) {
+      return 'Spaced review: split your queue into 2 passes (morning/evening)';
+    }
+    return 'Spaced review: revisit weak questions once today and once tomorrow';
   }
 }
 

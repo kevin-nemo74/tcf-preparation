@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/local_tests_data.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/question_model.dart';
@@ -17,12 +18,15 @@ typedef ReviewQueueStreamFactory = Stream<List<ReviewQueueItem>> Function(
   String uid, {
   int limit,
 });
+typedef ReviewQueueMutation = Future<void> Function(String uid, String itemId);
 
 class ReviewQueueScreen extends StatelessWidget {
   final String uid;
   final ReviewQueueStreamFactory queueStream;
   final Future<List<TestModel>> Function() loadComprehensionTests;
   final Future<List<OralTestModel>> Function() loadOralTests;
+  final ReviewQueueMutation markItemDone;
+  final ReviewQueueMutation restoreItem;
 
   const ReviewQueueScreen({
     super.key,
@@ -30,6 +34,8 @@ class ReviewQueueScreen extends StatelessWidget {
     this.queueStream = ProgressRepository.streamReviewQueue,
     this.loadComprehensionTests = LocalTestsData.loadTests,
     this.loadOralTests = LocalOralTestsData.loadTests,
+    this.markItemDone = ProgressRepository.markReviewQueueItemDone,
+    this.restoreItem = ProgressRepository.restoreReviewQueueItem,
   });
 
   @override
@@ -73,6 +79,8 @@ class ReviewQueueScreen extends StatelessWidget {
                         item: item,
                         loadComprehensionTests: loadComprehensionTests,
                         loadOralTests: loadOralTests,
+                        markItemDone: markItemDone,
+                        restoreItem: restoreItem,
                       ),
                     ),
                   ),
@@ -164,12 +172,16 @@ class _QueueCard extends StatefulWidget {
   final ReviewQueueItem item;
   final Future<List<TestModel>> Function() loadComprehensionTests;
   final Future<List<OralTestModel>> Function() loadOralTests;
+  final ReviewQueueMutation markItemDone;
+  final ReviewQueueMutation restoreItem;
 
   const _QueueCard({
     required this.uid,
     required this.item,
     required this.loadComprehensionTests,
     required this.loadOralTests,
+    required this.markItemDone,
+    required this.restoreItem,
   });
 
   @override
@@ -263,7 +275,8 @@ class _QueueCardState extends State<_QueueCard> {
 
   Future<void> _markDone() async {
     setState(() => _busy = true);
-    await ProgressRepository.markReviewQueueItemDone(widget.uid, widget.item.id);
+    await widget.markItemDone(widget.uid, widget.item.id);
+    await AppAnalytics.logReviewQueueCompleted();
     if (mounted) {
       setState(() => _busy = false);
     }
@@ -282,7 +295,7 @@ class _QueueCardState extends State<_QueueCard> {
             );
         if (!mounted) return;
         if (test == null) {
-          _showMissing(context);
+          await _handleMissing();
           return;
         }
 
@@ -291,7 +304,7 @@ class _QueueCardState extends State<_QueueCard> {
               orElse: () => null,
             );
         if (question == null) {
-          _showMissing(context);
+          await _handleMissing();
           return;
         }
 
@@ -318,7 +331,7 @@ class _QueueCardState extends State<_QueueCard> {
             );
         if (!mounted) return;
         if (test == null) {
-          _showMissing(context);
+          await _handleMissing();
           return;
         }
 
@@ -327,7 +340,7 @@ class _QueueCardState extends State<_QueueCard> {
               orElse: () => null,
             );
         if (question == null) {
-          _showMissing(context);
+          await _handleMissing();
           return;
         }
 
@@ -354,9 +367,56 @@ class _QueueCardState extends State<_QueueCard> {
     }
   }
 
-  void _showMissing(BuildContext context) {
+  Future<void> _handleMissing() async {
+    if (!mounted) return;
+    final action = await _showMissingAction(context);
+    if (action == _MissingAction.remove) {
+      await widget.markItemDone(widget.uid, widget.item.id);
+      await AppAnalytics.logReviewQueueCompleted();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Review item removed from queue.')),
+      );
+      return;
+    }
+    if (action == _MissingAction.requeue) {
+      await widget.restoreItem(widget.uid, widget.item.id);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Review item kept in queue for later.')),
+      );
+      return;
+    }
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('This review item could not be reopened.')),
     );
   }
+
+  Future<_MissingAction?> _showMissingAction(BuildContext context) {
+    return showDialog<_MissingAction>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Review source missing'),
+        content: const Text(
+          'The original question was not found. You can remove this item or keep it in your queue.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, _MissingAction.cancel),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, _MissingAction.requeue),
+            child: const Text('Keep'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, _MissingAction.remove),
+            child: const Text('Remove item'),
+          ),
+        ],
+      ),
+    );
+  }
 }
+
+enum _MissingAction { cancel, requeue, remove }

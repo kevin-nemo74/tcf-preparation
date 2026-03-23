@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 import '../auth_service.dart';
 import 'register_screen.dart';
@@ -72,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final isWide = Responsive.isAuthWideLayout(context);
 
@@ -121,14 +123,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     Text(
-                      "Welcome back",
+                      l10n.loginWelcomeBack,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w900,
                           ),
                     ),
                     Text(
-                      "Login to access all tests",
+                      l10n.loginAccessTests,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: cs.onSurface.withValues(alpha: 0.65),
@@ -160,9 +162,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               TextFormField(
                                 controller: _email,
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: const InputDecoration(
-                                  labelText: "Email",
-                                  prefixIcon: Icon(Icons.email_rounded),
+                                decoration: InputDecoration(
+                                  labelText: l10n.emailLabel,
+                                  prefixIcon: const Icon(Icons.email_rounded),
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
@@ -176,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 controller: _password,
                                 obscureText: _obscure,
                                 decoration: InputDecoration(
-                                  labelText: "Password",
+                                  labelText: l10n.passwordLabel,
                                   prefixIcon: const Icon(Icons.lock_rounded),
                                   suffixIcon: IconButton(
                                     onPressed: () => setState(() => _obscure = !_obscure),
@@ -204,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             AppRoutes.fadeSlide(const ForgotPasswordScreen()),
                                           );
                                         },
-                                  child: const Text("Forgot password?"),
+                                  child: Text(l10n.forgotPasswordCta),
                                 ),
                               ),
                               const SizedBox(height: 6),
@@ -218,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           width: 20,
                                           child: CircularProgressIndicator(strokeWidth: 2),
                                         )
-                                      : const Text("Login"),
+                                      : Text(l10n.loginCta),
                                 ),
                               ),
                               const SizedBox(height: 12),
@@ -226,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "No account?",
+                                    l10n.noAccount,
                                     style: TextStyle(
                                       color: cs.onSurface.withValues(alpha: 0.7),
                                     ),
@@ -240,7 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               AppRoutes.fadeSlide(const RegisterScreen()),
                                             );
                                           },
-                                    child: const Text("Create one"),
+                                    child: Text(l10n.createOne),
                                   ),
                                 ],
                               ),

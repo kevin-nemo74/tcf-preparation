@@ -139,4 +139,45 @@ void main() {
     expect(find.text('Review Answers'), findsOneWidget);
     expect(find.text('Question 1'), findsOneWidget);
   });
+
+  testWidgets('missing review source can be removed from queue', (tester) async {
+    var markedDone = false;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ReviewQueueScreen(
+          uid: 'uid-1',
+          queueStream: (_, {int limit = 20}) => Stream.value(
+            const [
+              ReviewQueueItem(
+                id: 'CE:Q9',
+                questionId: 'Q9',
+                moduleType: 'CE',
+                testId: 'ce_01',
+                testTitle: 'CE Test 1',
+                lastUserAnswer: 'B',
+                correctAnswer: 'A',
+                needsReview: true,
+                lastUpdatedAt: null,
+              ),
+            ],
+          ),
+          loadComprehensionTests: () async => [],
+          markItemDone: (uid, itemId) async {
+            markedDone = uid == 'uid-1' && itemId == 'CE:Q9';
+          },
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Open review'));
+    await tester.pumpAndSettle();
+    expect(find.text('Review source missing'), findsOneWidget);
+
+    await tester.tap(find.text('Remove item'));
+    await tester.pumpAndSettle();
+
+    expect(markedDone, isTrue);
+    expect(find.text('Review item removed from queue.'), findsOneWidget);
+  });
 }

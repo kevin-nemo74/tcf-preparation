@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/design_tokens.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
+import 'package:tcf_canada_preparation/app/theme_controller.dart';
 
 import '../auth/auth_service.dart';
 import '../profile/profile_screen.dart';
@@ -13,6 +16,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
@@ -20,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
         final user = snapshot.data;
 
         return Scaffold(
-          appBar: AppBar(title: const Text("Settings")),
+          appBar: AppBar(title: Text(l10n.settingsTitle)),
           body: Align(
             alignment: Alignment.topCenter,
             child: ConstrainedBox(
@@ -68,6 +72,13 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ),
             ),
+              ),
+
+              const SizedBox(height: 12),
+
+              AnimatedFadeSlide(
+                delay: const Duration(milliseconds: 40),
+                child: _ThemeModeCard(),
               ),
 
               const SizedBox(height: 12),
@@ -157,5 +168,62 @@ class SettingsScreen extends StatelessWidget {
       ),
     ) ??
         false;
+  }
+}
+
+class _ThemeModeCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final themeController = context.watch<ThemeController>();
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: cs.surfaceContainerHighest.withOpacity(0.35),
+        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Row(
+            children: [
+              Icon(Icons.palette_rounded),
+              SizedBox(width: 8),
+              Text(
+                "Theme",
+                style: TextStyle(fontWeight: FontWeight.w800),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          SegmentedButton<ThemeMode>(
+            segments: const [
+              ButtonSegment<ThemeMode>(
+                value: ThemeMode.system,
+                icon: Icon(Icons.phone_android_rounded),
+                label: Text("System"),
+              ),
+              ButtonSegment<ThemeMode>(
+                value: ThemeMode.light,
+                icon: Icon(Icons.light_mode_rounded),
+                label: Text("Light"),
+              ),
+              ButtonSegment<ThemeMode>(
+                value: ThemeMode.dark,
+                icon: Icon(Icons.dark_mode_rounded),
+                label: Text("Dark"),
+              ),
+            ],
+            selected: <ThemeMode>{themeController.themeMode},
+            onSelectionChanged: (selection) {
+              final mode = selection.first;
+              themeController.setThemeMode(mode);
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

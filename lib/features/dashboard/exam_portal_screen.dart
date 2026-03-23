@@ -4,6 +4,7 @@ import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 import 'package:tcf_canada_preparation/features/comprehension/screens/test_list_screen.dart';
 import 'package:tcf_canada_preparation/features/profile/profile_screen.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
@@ -21,6 +22,7 @@ class ExamPortalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final resolvedUid = uid ?? ProgressRepository.currentUid;
     final wide = Responsive.isSplitLayout(context);
@@ -29,7 +31,7 @@ class ExamPortalScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("TCF Canada Simulator"),
+          title: Text(l10n.appTitle),
           actions: [
             if (!wide && resolvedUid != null)
               IconButton(

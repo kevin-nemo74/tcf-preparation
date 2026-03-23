@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final Widget child;
@@ -14,23 +16,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _controller = PageController();
   int _index = 0;
 
-  static const _pages = [
-    (
-      title: 'How scoring works',
-      body: 'Each test is scored on a 699-point scale and mapped to NCLC bands.'
-    ),
-    (
-      title: 'Study rhythm',
-      body: 'Use daily tasks from your study plan and keep your streak alive.'
-    ),
-    (
-      title: 'Track your progress',
-      body: 'See best score, recent attempts, weak areas, and review queue.'
-    ),
-  ];
-
   Future<void> _finish() async {
     await ProgressRepository.setOnboardingDone();
+    await AppAnalytics.logOnboardingCompleted();
     if (!mounted) return;
     Navigator.pushReplacement(
       context,
@@ -40,7 +28,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
+    final pages = [
+      (
+        title: l10n.onboardingHowScoringTitle,
+        body: l10n.onboardingHowScoringBody,
+      ),
+      (
+        title: l10n.onboardingStudyRhythmTitle,
+        body: l10n.onboardingStudyRhythmBody,
+      ),
+      (
+        title: l10n.onboardingProgressTitle,
+        body: l10n.onboardingProgressBody,
+      ),
+    ];
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -58,16 +61,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: _finish,
-                  child: const Text('Skip'),
+                  child: Text(l10n.onboardingSkip),
                 ),
               ),
               Expanded(
                 child: PageView.builder(
                   controller: _controller,
-                  itemCount: _pages.length,
+                  itemCount: pages.length,
                   onPageChanged: (i) => setState(() => _index = i),
                   itemBuilder: (_, i) {
-                    final page = _pages[i];
+                    final page = pages[i];
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -105,7 +108,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
-                  _pages.length,
+                  pages.length,
                   (i) => Container(
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     width: i == _index ? 24 : 8,
@@ -122,7 +125,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 width: double.infinity,
                 child: FilledButton(
                   onPressed: () {
-                    if (_index == _pages.length - 1) {
+                    if (_index == pages.length - 1) {
                       _finish();
                       return;
                     }
@@ -131,7 +134,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       curve: Curves.easeOut,
                     );
                   },
-                  child: Text(_index == _pages.length - 1 ? 'Start' : 'Next'),
+                  child: Text(
+                    _index == pages.length - 1
+                        ? l10n.onboardingStart
+                        : l10n.onboardingNext,
+                  ),
                 ),
               ),
             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 import '../auth_service.dart';
 
@@ -49,10 +50,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Reset Password")),
+      appBar: AppBar(title: Text(l10n.resetPasswordTitle)),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -67,7 +69,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
               Text(
-                "Enter your email and we’ll send you a reset link.",
+                l10n.resetPasswordSubtitle,
                 style: TextStyle(
                   color: cs.onSurface.withOpacity(0.7),
                   fontWeight: FontWeight.w600,
@@ -77,9 +79,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               TextFormField(
                 controller: _email,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: "Email",
-                  prefixIcon: Icon(Icons.email_rounded),
+                decoration: InputDecoration(
+                  labelText: l10n.emailLabel,
+                  prefixIcon: const Icon(Icons.email_rounded),
                 ),
                 validator: (v) {
                   final value = (v ?? "").trim();
@@ -99,7 +101,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     width: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                      : const Text("Send reset link"),
+                      : Text(l10n.sendResetLink),
                 ),
               ),
                     ],

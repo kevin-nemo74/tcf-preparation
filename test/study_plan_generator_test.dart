@@ -42,6 +42,10 @@ void main() {
       isTrue,
     );
     expect(
+      plan.todayTasks.any((task) => task.type == 'REVIEW_SPACED'),
+      isTrue,
+    );
+    expect(
       plan.todayTasks.any((task) => task.title.contains('recover')),
       isTrue,
     );

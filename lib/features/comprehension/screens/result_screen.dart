@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
@@ -71,6 +72,11 @@ class _ResultScreenState extends State<ResultScreen> {
       flaggedQuestionIds: widget.flaggedQuestionIds,
       userAnswers: widget.userAnswers,
       correctAnswersByQuestion: correctMap,
+    );
+    await AppAnalytics.logTestSubmitted(
+      moduleType: 'CE',
+      testId: widget.test.id,
+      score: calculateScore(),
     );
   }
 

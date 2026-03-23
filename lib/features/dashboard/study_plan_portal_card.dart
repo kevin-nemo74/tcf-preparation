@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 import 'package:tcf_canada_preparation/features/progress/study_plan_generator.dart';
@@ -168,10 +169,15 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
                               task.title,
                               style: const TextStyle(fontSize: 13.5),
                             ),
-                            onChanged: (_) => ProgressRepository.toggleTask(
-                              widget.uid,
-                              task.id,
-                            ),
+                            onChanged: (_) async {
+                              await ProgressRepository.toggleTask(
+                                widget.uid,
+                                task.id,
+                              );
+                              await AppAnalytics.logStudyPlanTaskToggled(
+                                done: !task.done,
+                              );
+                            },
                           );
                         },
                       ),

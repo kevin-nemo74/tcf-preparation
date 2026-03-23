@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
@@ -177,6 +178,7 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
   }
 
   void _start(BuildContext context, OralTestModel test) {
+    AppAnalytics.logTestStarted(moduleType: 'CO', testId: test.id);
     Navigator.push(
       context,
       AppRoutes.fadeSlide(OralQuestionScreen(test: test)),
