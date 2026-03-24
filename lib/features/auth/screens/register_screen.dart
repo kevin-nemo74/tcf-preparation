@@ -48,6 +48,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         email: _email.text,
         password: _password.text,
       );
+      if (!mounted) return;
+      // Return to AuthGate (root). It will rebuild to the authenticated flow.
+      Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (e) {
       _showError(_friendlyError(e.toString()));
     } finally {
