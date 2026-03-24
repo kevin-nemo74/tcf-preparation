@@ -127,12 +127,12 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
         title: Text(widget.test.title),
         actions: [
           IconButton(
-            tooltip: "Question Grid",
+            tooltip: "Grille des questions",
             icon: const Icon(Icons.grid_view_rounded),
             onPressed: _openGrid,
           ),
           IconButton(
-            tooltip: isFlagged ? "Unflag" : "Flag",
+            tooltip: isFlagged ? "Retirer le drapeau" : "Signaler",
             icon: Icon(
               isFlagged ? Icons.flag_rounded : Icons.outlined_flag_rounded,
               color: isFlagged ? Colors.orange : null,
@@ -339,7 +339,7 @@ class _OralMediaPanel extends StatelessWidget {
                         );
                       },
                       errorBuilder: (_, __, ___) =>
-                          const Center(child: Text("Failed to load image")),
+                          const Center(child: Text("Echec du chargement de l'image")),
                     ),
                   ),
                 ),
@@ -357,7 +357,7 @@ class _OralMediaPanel extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  "Audio question",
+                  "Question audio",
                   style: TextStyle(
                     color: cs.onSurface.withOpacity(0.7),
                     fontWeight: FontWeight.w700,
@@ -420,7 +420,7 @@ class _OptionsPanel extends StatelessWidget {
                   Icon(Icons.check_circle_rounded, size: 18, color: cs.primary),
                   const SizedBox(width: 8),
                   Text(
-                    "Selected: $selectedAnswer",
+                    "Selection: $selectedAnswer",
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
                       color: cs.onPrimaryContainer,
@@ -522,7 +522,7 @@ class _BottomControls extends StatelessWidget {
           child: OutlinedButton.icon(
             onPressed: onPrev,
             icon: const Icon(Icons.arrow_back_rounded),
-            label: const Text("Previous"),
+            label: const Text("Precedent"),
             style: OutlinedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
@@ -540,7 +540,7 @@ class _BottomControls extends StatelessWidget {
                   ? Icons.check_circle_rounded
                   : Icons.arrow_forward_rounded,
             ),
-            label: Text(isLastQuestion ? "Submit" : "Next"),
+            label: Text(isLastQuestion ? "Soumettre" : "Suivant"),
             style: FilledButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),

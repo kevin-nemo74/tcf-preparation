@@ -5,14 +5,14 @@ import 'motion.dart';
 /// Static spacing / radii. For breakpoints and max widths (web + mobile), see
 /// `lib/core/layout/responsive.dart`.
 class DesignTokens {
-  static const EdgeInsets pagePadding = EdgeInsets.all(16);
-  static const EdgeInsets cardPadding = EdgeInsets.all(14);
-  static const double cardRadius = 18;
-  static const double cardRadiusLg = 24;
-  static const double chipRadius = 14;
+  static const EdgeInsets pagePadding = EdgeInsets.all(18);
+  static const EdgeInsets cardPadding = EdgeInsets.all(16);
+  static const double cardRadius = 20;
+  static const double cardRadiusLg = 26;
+  static const double chipRadius = 16;
   static const double minTouchTarget = 48;
-  static const double sectionGap = 14;
-  static const double itemGap = 10;
+  static const double sectionGap = 16;
+  static const double itemGap = 12;
   static const double subtleBorderOpacity = 0.35;
   static const double subtleSurfaceOpacity = 0.25;
 
@@ -31,7 +31,7 @@ class DesignTokens {
     return BoxDecoration(
       borderRadius: cardBorderRadiusLg(),
       color: highlighted
-          ? cs.surfaceContainerHighest.withValues(alpha: 0.35)
+          ? cs.primaryContainer.withValues(alpha: 0.28)
           : cs.surface,
       border: Border.all(color: cs.outlineVariant.withValues(alpha: subtleBorderOpacity)),
     );

@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
     final uid = FirebaseAuth.instance.currentUser!.uid;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Profile")),
+      appBar: AppBar(title: const Text("Profil")),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
         builder: (context, snapshot) {
@@ -37,11 +37,11 @@ class ProfileScreen extends StatelessWidget {
             );
           }
           if (snapshot.hasError) {
-            return Center(child: Text("Error: ${snapshot.error}"));
+            return Center(child: Text("Erreur: ${snapshot.error}"));
           }
 
           final data = snapshot.data?.data() ?? {};
-          final username = (data['username'] ?? FirebaseAuth.instance.currentUser?.displayName ?? "User").toString();
+          final username = (data['username'] ?? FirebaseAuth.instance.currentUser?.displayName ?? "Utilisateur").toString();
           final email = (data['email'] ?? FirebaseAuth.instance.currentUser?.email ?? "").toString();
 
           DateTime? createdAt;
@@ -120,28 +120,28 @@ class ProfileScreen extends StatelessWidget {
 
               _InfoTile(
                 icon: Icons.badge_rounded,
-                title: "Username",
+                title: "Nom d'utilisateur",
                 value: username,
               ),
               _InfoTile(
                 icon: Icons.email_rounded,
-                title: "Email",
+                title: "E-mail",
                 value: email,
               ),
               _InfoTile(
                 icon: Icons.calendar_month_rounded,
-                title: "Created",
+                title: "Date de creation",
                 value: createdAt == null ? "—" : _fmt(createdAt),
               ),
               _InfoTile(
                 icon: Icons.login_rounded,
-                title: "Last login",
+                title: "Derniere connexion",
                 value: lastLoginAt == null ? "—" : _fmt(lastLoginAt),
               ),
 
               const SizedBox(height: 20),
               Text(
-                "Progress",
+                "Progression",
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w900,
                 ),
@@ -149,37 +149,37 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 10),
               _StatsTile(
                 icon: Icons.checklist_rounded,
-                title: "Total attempts",
+                title: "Tentatives totales",
                 value: attemptsCount?.toString() ?? "0",
               ),
               _StatsTile(
                 icon: Icons.emoji_events_rounded,
-                title: "Best score",
+                title: "Meilleur score",
                 value: bestScore == null ? "— / 699" : "$bestScore / 699",
               ),
               _StatsTile(
                 icon: Icons.history_rounded,
-                title: "Latest attempt",
+                title: "Derniere tentative",
                 value: latestAttemptAt == null ? "—" : _fmt(latestAttemptAt),
               ),
               _StatsTile(
                 icon: Icons.local_fire_department_rounded,
-                title: "Current streak",
-                value: "$currentStreak day(s)",
+                title: "Serie en cours",
+                value: "$currentStreak jour(s)",
               ),
               _StatsTile(
                 icon: Icons.workspace_premium_rounded,
-                title: "Best streak",
-                value: "$bestStreak day(s)",
+                title: "Meilleure serie",
+                value: "$bestStreak jour(s)",
               ),
               _StatsTile(
                 icon: Icons.date_range_rounded,
-                title: "This week",
-                value: "$weeklyAttempts attempts • ${weeklyAverage.toStringAsFixed(1)} avg",
+                title: "Cette semaine",
+                value: "$weeklyAttempts tentatives • ${weeklyAverage.toStringAsFixed(1)} moy",
               ),
               const SizedBox(height: 18),
               Text(
-                "Milestones",
+                "Objectifs atteints",
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w900,
                     ),
@@ -189,10 +189,10 @@ class ProfileScreen extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  _BadgeChip(label: "First attempt", unlocked: (attemptsCount ?? 0) >= 1),
-                  _BadgeChip(label: "5 attempts", unlocked: (attemptsCount ?? 0) >= 5),
-                  _BadgeChip(label: "Best 500+", unlocked: (bestScore ?? 0) >= 500),
-                  _BadgeChip(label: "7-day streak", unlocked: currentStreak >= 7),
+                  _BadgeChip(label: "Premiere tentative", unlocked: (attemptsCount ?? 0) >= 1),
+                  _BadgeChip(label: "5 tentatives", unlocked: (attemptsCount ?? 0) >= 5),
+                  _BadgeChip(label: "Score 500+", unlocked: (bestScore ?? 0) >= 500),
+                  _BadgeChip(label: "Serie 7 jours", unlocked: currentStreak >= 7),
                 ],
               ),
               const SizedBox(height: 18),
@@ -204,8 +204,8 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       _StatsTile(
                         icon: Icons.assignment_late_rounded,
-                        title: "Review queue",
-                        value: "${items.length} question(s) to revisit",
+                        title: "File de revision",
+                        value: "${items.length} question(s) a revoir",
                         onTap: () {
                           Navigator.push(
                             context,
@@ -219,7 +219,7 @@ class ProfileScreen extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Latest queued: ${items.first.testTitle} / ${items.first.questionId}",
+                              "Derniere en file: ${items.first.testTitle} / ${items.first.questionId}",
                               style: TextStyle(
                                 color: cs.onSurface.withOpacity(0.7),
                                 fontWeight: FontWeight.w600,
@@ -233,7 +233,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 18),
               Text(
-                "Recent attempts",
+                "Tentatives recentes",
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w900,
                 ),
@@ -246,8 +246,8 @@ class ProfileScreen extends StatelessWidget {
                   if (attempts.isEmpty) {
                     return _StatsTile(
                       icon: Icons.history_rounded,
-                      title: "Recent attempts",
-                      value: "No attempts yet",
+                      title: "Tentatives recentes",
+                      value: "Aucune tentative pour le moment",
                     );
                   }
                   final ceAverage = _moduleAverage(attempts, 'CE');
@@ -256,7 +256,7 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       _StatsTile(
                         icon: Icons.analytics_rounded,
-                        title: "Module averages",
+                        title: "Moyennes par module",
                         value:
                             "CE ${ceAverage.toStringAsFixed(1)} / CO ${coAverage.toStringAsFixed(1)}",
                       ),
@@ -438,7 +438,7 @@ class _AttemptTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final module = (attempt['moduleType'] ?? 'CE').toString();
-    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Practice set').toString();
+    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Serie pratique').toString();
     final score = _readAttemptScore(attempt);
     return Container(
       margin: const EdgeInsets.only(top: 10),

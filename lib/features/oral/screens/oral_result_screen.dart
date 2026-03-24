@@ -104,7 +104,7 @@ class _OralResultScreenState extends State<OralResultScreen> {
     final reduced = contextReducedMotion(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Exam Result")),
+      appBar: AppBar(title: const Text("Resultat du test")),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -131,7 +131,7 @@ class _OralResultScreenState extends State<OralResultScreen> {
                   Icon(Icons.headphones_rounded, size: 44, color: cs.primary),
                   const SizedBox(height: 12),
                   Text(
-                    "Your Score",
+                    "Votre score",
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w900,
                         ),
@@ -169,7 +169,7 @@ class _OralResultScreenState extends State<OralResultScreen> {
                       );
                     },
                     icon: const Icon(Icons.rate_review_rounded),
-                    label: const Text("Review Answers"),
+                    label: const Text("Revoir les reponses"),
                   ),
                 ],
               ),

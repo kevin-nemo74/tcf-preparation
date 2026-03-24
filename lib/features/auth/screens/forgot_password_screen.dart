@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
+import 'package:tcf_canada_preparation/core/widgets/premium_ui.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
@@ -35,13 +36,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Password reset email sent.")),
+        const SnackBar(content: Text("E-mail de reinitialisation envoye.")),
       );
       Navigator.pop(context);
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed: ${e.toString()}")),
+        SnackBar(content: Text("Echec: ${e.toString()}")),
       );
     } finally {
       if (mounted) setState(() => _loading = false);
@@ -63,48 +64,50 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               constraints: BoxConstraints(minHeight: constraints.maxHeight - 40),
               child: ResponsiveCentered(
                 maxWidth: Responsive.formMaxWidth(context),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-              Text(
-                l10n.resetPasswordSubtitle,
-                style: TextStyle(
-                  color: cs.onSurface.withOpacity(0.7),
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 14),
-              TextFormField(
-                controller: _email,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  labelText: l10n.emailLabel,
-                  prefixIcon: const Icon(Icons.email_rounded),
-                ),
-                validator: (v) {
-                  final value = (v ?? "").trim();
-                  if (value.isEmpty) return "Email is required";
-                  if (!value.contains('@')) return "Enter a valid email";
-                  return null;
-                },
-              ),
-              const SizedBox(height: 18),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: _loading ? null : _submit,
-                  child: _loading
-                      ? const SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                      : Text(l10n.sendResetLink),
-                ),
-              ),
-                    ],
+                child: PremiumInfoCard(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          l10n.resetPasswordSubtitle,
+                          style: TextStyle(
+                            color: cs.onSurface.withValues(alpha: 0.7),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+                        TextFormField(
+                          controller: _email,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: l10n.emailLabel,
+                            prefixIcon: const Icon(Icons.email_rounded),
+                          ),
+                          validator: (v) {
+                            final value = (v ?? "").trim();
+                            if (value.isEmpty) return "L'e-mail est obligatoire";
+                            if (!value.contains('@')) return "Entrez un e-mail valide";
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 18),
+                        SizedBox(
+                          width: double.infinity,
+                          child: FilledButton(
+                            onPressed: _loading ? null : _submit,
+                            child: _loading
+                                ? const SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  )
+                                : Text(l10n.sendResetLink),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

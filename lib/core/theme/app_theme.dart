@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color _seedTeal = Color(0xFF136B7A);
-  static const Color _accentAmber = Color(0xFFE8A42E);
-  static const Color _lightBg = Color(0xFFF4F2EE);
-  static const Color _darkBg = Color(0xFF0E1216);
+  static const Color _seedTeal = Color(0xFF0E6B72);
+  static const Color _accentAmber = Color(0xFFE7A537);
+  static const Color _lightBg = Color(0xFFF5F7F8);
+  static const Color _darkBg = Color(0xFF0E1419);
 
   static ThemeData light() {
     final baseScheme = ColorScheme.fromSeed(
@@ -14,8 +14,8 @@ class AppTheme {
     final scheme = baseScheme.copyWith(
       secondary: _accentAmber,
       onSecondary: const Color(0xFF1C1508),
-      tertiary: const Color(0xFF8B6914),
-      surface: const Color(0xFFFFFBF7),
+      tertiary: const Color(0xFF5F8F95),
+      surface: const Color(0xFFFFFDFA),
     );
 
     final base = ThemeData(
@@ -32,7 +32,7 @@ class AppTheme {
         color: scheme.surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(24),
           side: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.35)),
         ),
       ),
@@ -42,7 +42,7 @@ class AppTheme {
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
         titleTextStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 21,
           fontWeight: FontWeight.w800,
           color: scheme.onSurface,
         ),
@@ -50,13 +50,13 @@ class AppTheme {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           elevation: 0,
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
       ),
       textTheme: _textTheme(base.textTheme, scheme.onSurface),
     );
@@ -70,7 +70,7 @@ class AppTheme {
     final scheme = baseScheme.copyWith(
       secondary: _accentAmber,
       onSecondary: const Color(0xFF1C1508),
-      surface: const Color(0xFF151A20),
+      surface: const Color(0xFF131C24),
     );
 
     final base = ThemeData(
@@ -87,7 +87,7 @@ class AppTheme {
         color: scheme.surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(24),
           side: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.35)),
         ),
       ),
@@ -97,7 +97,7 @@ class AppTheme {
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
         titleTextStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 21,
           fontWeight: FontWeight.w800,
           color: scheme.onSurface,
         ),
@@ -105,13 +105,13 @@ class AppTheme {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           elevation: 0,
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
       ),
       textTheme: _textTheme(base.textTheme, scheme.onSurface),
     );

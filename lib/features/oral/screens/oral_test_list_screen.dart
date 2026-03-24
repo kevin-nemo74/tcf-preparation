@@ -46,13 +46,13 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
         }
         if (snapshot.hasError) {
           return Center(
-            child: Text("Failed to load CO tests:\n${snapshot.error}"),
+            child: Text("Echec du chargement des tests CO:\n${snapshot.error}"),
           );
         }
 
         final tests = snapshot.data ?? [];
         if (tests.isEmpty) {
-          return const Center(child: Text("No oral tests available"));
+          return const Center(child: Text("Aucun test oral disponible"));
         }
 
         selectedTest ??= tests.first;
@@ -86,7 +86,7 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
                       final row = _TestRow(
                         title: test.title,
                         subtitle:
-                            "${test.questions.length} questions • ${test.durationMinutes} min • Best ${_scoreText(bestScores[test.id])}",
+                            "${test.questions.length} questions • ${test.durationMinutes} min • Meilleur ${_scoreText(bestScores[test.id])}",
                         leading: _testNumberFromId(test.id),
                         isSelected: false,
                         onTap: () => _start(context, test),
@@ -127,7 +127,7 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
                           final row = _TestRow(
                             title: test.title,
                             subtitle:
-                                "${test.questions.length} questions • ${test.durationMinutes} min • Best ${_scoreText(bestScores[test.id])} • Last ${_scoreText(latestScores[test.id])}",
+                                "${test.questions.length} questions • ${test.durationMinutes} min • Meilleur ${_scoreText(bestScores[test.id])} • Dernier ${_scoreText(latestScores[test.id])}",
                             leading: _testNumberFromId(test.id),
                             isSelected: isSelected,
                             onTap: () => setState(() => selectedTest = test),
@@ -348,7 +348,7 @@ class _DetailsPanel extends StatelessWidget {
                         Icon(Icons.emoji_events_rounded, color: cs.primary),
                         const SizedBox(width: 10),
                         Text(
-                          "Best: ${_scoreText(bestScore)}",
+                          "Meilleur: ${_scoreText(bestScore)}",
                           style: const TextStyle(fontWeight: FontWeight.w900),
                         ),
                       ],
@@ -362,7 +362,7 @@ class _DetailsPanel extends StatelessWidget {
           FilledButton.icon(
             onPressed: onStart,
             icon: const Icon(Icons.play_arrow_rounded),
-            label: const Text("Start Test"),
+            label: const Text("Commencer le test"),
             style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
@@ -400,8 +400,8 @@ class _AdaptiveHeader extends StatelessWidget {
           Expanded(
             child: Text(
               needsPractice
-                  ? "Adaptive: prioritize oral weak areas from recent attempts."
-                  : "Adaptive: take a few oral sets to calibrate.",
+                  ? "Adaptatif: priorisez les faiblesses orales recentes."
+                  : "Adaptatif: faites quelques series orales pour calibrer.",
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),
           ),

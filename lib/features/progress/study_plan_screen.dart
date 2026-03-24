@@ -43,7 +43,7 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Study Plan Setup')),
+      appBar: AppBar(title: const Text('Configuration du plan d\'etude')),
       body: Align(
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
@@ -63,7 +63,7 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
                     .withOpacity(0.3),
               ),
               child: const Text(
-                'Your daily tasks adapt to recent attempts, review-queue size, target date, and weekly cadence.',
+                'Les taches quotidiennes s\'adaptent aux tentatives recentes, a la file de revision, a la date cible et au rythme hebdomadaire.',
                 style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
@@ -71,10 +71,10 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
             TextFormField(
               initialValue: '500',
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Target score (out of 699)'),
+              decoration: const InputDecoration(labelText: 'Score cible (sur 699)'),
               validator: (v) {
                 final n = int.tryParse((v ?? '').trim());
-                if (n == null || n < 300 || n > 699) return 'Choose a score between 300 and 699';
+                if (n == null || n < 300 || n > 699) return 'Choisissez un score entre 300 et 699';
                 return null;
               },
               onSaved: (v) => _targetScore = int.parse(v!.trim()),
@@ -86,21 +86,21 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
                   .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                   .toList(),
               onChanged: (v) => setState(() => _targetLevel = v ?? 'NCLC 7'),
-              decoration: const InputDecoration(labelText: 'Target level'),
+              decoration: const InputDecoration(labelText: 'Niveau cible'),
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<int>(
               initialValue: _weeklyCadence,
               items: const [3, 4, 5, 6, 7]
-                  .map((e) => DropdownMenuItem(value: e, child: Text('$e sessions/week')))
+                  .map((e) => DropdownMenuItem(value: e, child: Text('$e sessions/semaine')))
                   .toList(),
               onChanged: (v) => setState(() => _weeklyCadence = v ?? 5),
-              decoration: const InputDecoration(labelText: 'Weekly cadence'),
+              decoration: const InputDecoration(labelText: 'Rythme hebdomadaire'),
             ),
             const SizedBox(height: 12),
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text('Target date'),
+              title: const Text('Date cible'),
               subtitle: Text('${_targetDate.year}-${_targetDate.month.toString().padLeft(2, '0')}-${_targetDate.day.toString().padLeft(2, '0')}'),
               trailing: const Icon(Icons.calendar_month_rounded),
               onTap: () async {
@@ -116,7 +116,7 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
             const SizedBox(height: 20),
             FilledButton(
               onPressed: _saving ? null : _save,
-              child: Text(_saving ? 'Saving...' : 'Save plan'),
+              child: Text(_saving ? 'Enregistrement...' : 'Enregistrer le plan'),
             ),
               ],
             ),

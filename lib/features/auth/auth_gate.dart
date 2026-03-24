@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 import '../../core/screens/connection_required_screen.dart';
 import '../dashboard/exam_portal_screen.dart';
+import '../marketing/screens/front_screen.dart';
 import '../onboarding/onboarding_screen.dart';
 import '../progress/progress_repository.dart';
-import 'screens/login_screen.dart';
 
 class AuthGate extends StatefulWidget {
   final Future<ConnectivityResult> Function()? checkConnectivity;
@@ -122,7 +122,7 @@ class _AuthGateState extends State<AuthGate> {
 
           final isAuthenticated = snapshot.data ?? false;
           if (!isAuthenticated) {
-            return widget.unauthenticatedWidget ?? const LoginScreen();
+            return widget.unauthenticatedWidget ?? const FrontScreen();
           }
           final app = widget.authenticatedWidget ?? const ExamPortalScreen();
           final onboardingCheck = widget.onboardingDoneCheck;
@@ -160,7 +160,7 @@ class _AuthGateState extends State<AuthGate> {
 
         // Not logged in -> Login
         if (user == null) {
-          return widget.unauthenticatedWidget ?? const LoginScreen();
+          return widget.unauthenticatedWidget ?? const FrontScreen();
         }
 
         // Logged in -> Onboarding (first run) -> App

@@ -110,7 +110,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Exam Result"),
+        title: const Text("Resultat du test"),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -138,7 +138,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   Icon(Icons.emoji_events_rounded, size: 48, color: cs.primary),
                   const SizedBox(height: 12),
                   Text(
-                    "Your Score",
+                    "Votre score",
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w700,
                         ),
@@ -178,7 +178,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       );
                     },
                     icon: const Icon(Icons.rate_review_rounded),
-                    label: const Text("Review Answers"),
+                    label: const Text("Revoir les reponses"),
                   ),
                 ],
               ),

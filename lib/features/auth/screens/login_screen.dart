@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/premium_ui.dart';
 import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 import '../auth_service.dart';
-import 'register_screen.dart';
 import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -63,12 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
   String _friendlyError(String raw) {
     final t = raw.toLowerCase();
     if (t.contains('wrong-password') || t.contains('invalid-credential')) {
-      return "Incorrect email or password.";
+      return "E-mail ou mot de passe incorrect.";
     }
-    if (t.contains('user-not-found')) return "No account found with this email.";
-    if (t.contains('network')) return "Network error. Please try again.";
-    if (t.contains('invalid-email')) return "Invalid email address.";
-    return "Login failed. Please try again.";
+    if (t.contains('user-not-found')) return "Aucun compte trouve avec cet e-mail.";
+    if (t.contains('network')) return "Erreur reseau. Veuillez reessayer.";
+    if (t.contains('invalid-email')) return "Adresse e-mail invalide.";
+    return "Connexion echouee. Veuillez reessayer.";
   }
 
   @override
@@ -101,27 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: StaggeredColumn(
                   spacing: 12,
                   children: [
-                    Hero(
-                      tag: 'auth_brand',
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Container(
-                          padding: const EdgeInsets.all(18),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: cs.primaryContainer.withValues(alpha: 0.85),
-                            boxShadow: [
-                              BoxShadow(
-                                color: cs.primary.withValues(alpha: 0.18),
-                                blurRadius: 24,
-                                offset: const Offset(0, 10),
-                              ),
-                            ],
-                          ),
-                          child: Icon(Icons.lock_rounded, size: 44, color: cs.primary),
-                        ),
-                      ),
-                    ),
+                    const PremiumBrandMark(large: true),
                     Text(
                       l10n.loginWelcomeBack,
                       textAlign: TextAlign.center,
@@ -140,20 +120,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 8),
                     AnimatedFadeSlide(
                       delay: const Duration(milliseconds: 120),
-                      child: Container(
+                      child: PremiumInfoCard(
                         padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          color: cs.surface,
-                          border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: cs.shadow.withValues(alpha: 0.06),
-                              blurRadius: 20,
-                              offset: const Offset(0, 8),
-                            ),
-                          ],
-                        ),
                         child: Form(
                           key: _formKey,
                           child: Column(
@@ -168,8 +136,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
-                                  if (value.isEmpty) return "Email is required";
-                                  if (!value.contains('@')) return "Enter a valid email";
+                                  if (value.isEmpty) return "L'e-mail est obligatoire";
+                                  if (!value.contains('@')) return "Entrez un e-mail valide";
                                   return null;
                                 },
                               ),
@@ -189,8 +157,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "");
-                                  if (value.isEmpty) return "Password is required";
-                                  if (value.length < 6) return "Minimum 6 characters";
+                                  if (value.isEmpty) return "Le mot de passe est obligatoire";
+                                  if (value.length < 6) return "Minimum 6 caracteres";
                                   return null;
                                 },
                               ),
@@ -222,29 +190,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                         )
                                       : Text(l10n.loginCta),
                                 ),
-                              ),
-                              const SizedBox(height: 12),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    l10n.noAccount,
-                                    style: TextStyle(
-                                      color: cs.onSurface.withValues(alpha: 0.7),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: _loading
-                                        ? null
-                                        : () {
-                                            Navigator.pushReplacement(
-                                              context,
-                                              AppRoutes.fadeSlide(const RegisterScreen()),
-                                            );
-                                          },
-                                    child: Text(l10n.createOne),
-                                  ),
-                                ],
                               ),
                             ],
                           ),

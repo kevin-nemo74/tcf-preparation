@@ -47,7 +47,7 @@ class ReviewQueueScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Review Queue')),
+      appBar: AppBar(title: const Text('File de revision')),
       body: Align(
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
@@ -126,7 +126,7 @@ class _QueueHeader extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              '$count question(s) need another pass.',
+              '$count question(s) necessitent une nouvelle revision.',
               style: const TextStyle(fontWeight: FontWeight.w800),
             ),
           ),
@@ -138,7 +138,7 @@ class _QueueHeader extends StatelessWidget {
                 color: cs.errorContainer.withValues(alpha: 0.6),
               ),
               child: Text(
-                '$highPriorityCount priority',
+                '$highPriorityCount prioritaire',
                 style: TextStyle(
                   color: cs.onErrorContainer,
                   fontWeight: FontWeight.w800,
@@ -173,12 +173,12 @@ class _EmptyQueue extends StatelessWidget {
               Icon(Icons.check_circle_rounded, size: 42, color: cs.primary),
               const SizedBox(height: 12),
               const Text(
-                'Your review queue is empty.',
+                'Votre file de revision est vide.',
                 style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
               ),
               const SizedBox(height: 8),
               Text(
-                'Wrong or flagged answers will appear here after each attempt.',
+                'Les reponses incorrectes ou signalees apparaitront ici apres chaque tentative.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: cs.onSurface.withOpacity(0.7),
@@ -243,7 +243,7 @@ class _QueueCardState extends State<_QueueCard> {
                   color: cs.primaryContainer.withOpacity(0.7),
                 ),
                 child: Text(
-                  item.moduleType == 'CO' ? 'Oral' : 'Comprehension',
+                  item.moduleType == 'CO' ? 'Orale' : 'Comprehension',
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     color: cs.onPrimaryContainer,
@@ -267,7 +267,7 @@ class _QueueCardState extends State<_QueueCard> {
                         : cs.errorContainer.withValues(alpha: 0.6),
                   ),
                   child: Text(
-                    priority == 3 ? 'Flagged' : 'Missed',
+                    priority == 3 ? 'Signalee' : 'Manquee',
                     style: TextStyle(
                       color: priority == 3 ? cs.onTertiaryContainer : cs.onErrorContainer,
                       fontWeight: FontWeight.w800,
@@ -287,8 +287,8 @@ class _QueueCardState extends State<_QueueCard> {
           const SizedBox(height: 6),
           Text(
             item.lastUserAnswer == null || item.lastUserAnswer!.isEmpty
-                ? 'You flagged this item for review.'
-                : 'Your last answer: ${item.lastUserAnswer} | Correct: ${item.correctAnswer}',
+                ? 'Vous avez signale cette question pour revision.'
+                : 'Votre derniere reponse: ${item.lastUserAnswer} | Correcte: ${item.correctAnswer}',
             style: TextStyle(
               color: cs.onSurface.withOpacity(0.72),
               fontWeight: FontWeight.w600,
@@ -301,14 +301,14 @@ class _QueueCardState extends State<_QueueCard> {
                 child: FilledButton.icon(
                   onPressed: _busy ? null : _openReview,
                   icon: const Icon(Icons.visibility_rounded),
-                  label: const Text('Open review'),
+                  label: const Text('Ouvrir la revision'),
                 ),
               ),
               const SizedBox(width: 10),
               OutlinedButton.icon(
                 onPressed: _busy ? null : _markDone,
                 icon: const Icon(Icons.done_rounded),
-                label: const Text('Done'),
+                label: const Text('Terminee'),
               ),
             ],
           ),
@@ -358,7 +358,7 @@ class _QueueCardState extends State<_QueueCard> {
             OralReviewScreen(
               test: OralTestModel(
                 id: test.id,
-                title: '${test.title} - Review',
+                title: '${test.title} - Revision',
                 type: test.type,
                 durationMinutes: test.durationMinutes,
                 questions: [question],
@@ -394,7 +394,7 @@ class _QueueCardState extends State<_QueueCard> {
             ReviewScreen(
               test: TestModel(
                 id: test.id,
-                title: '${test.title} - Review',
+                title: '${test.title} - Revision',
                 type: test.type,
                 durationMinutes: test.durationMinutes,
                 questions: [question],
@@ -419,7 +419,7 @@ class _QueueCardState extends State<_QueueCard> {
       await AppAnalytics.logReviewQueueCompleted();
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Review item removed from queue.')),
+        const SnackBar(content: Text('Element retire de la file de revision.')),
       );
       return;
     }
@@ -427,12 +427,12 @@ class _QueueCardState extends State<_QueueCard> {
       await widget.restoreItem(widget.uid, widget.item.id);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Review item kept in queue for later.')),
+        const SnackBar(content: Text('Element conserve dans la file pour plus tard.')),
       );
       return;
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('This review item could not be reopened.')),
+      const SnackBar(content: Text('Cet element de revision ne peut pas etre rouvert.')),
     );
   }
 
@@ -440,22 +440,22 @@ class _QueueCardState extends State<_QueueCard> {
     return showDialog<_MissingAction>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Review source missing'),
+        title: const Text('Source de revision introuvable'),
         content: const Text(
-          'The original question was not found. You can remove this item or keep it in your queue.',
+          'La question d\'origine est introuvable. Vous pouvez retirer cet element ou le conserver.',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, _MissingAction.cancel),
-            child: const Text('Cancel'),
+            child: const Text('Annuler'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, _MissingAction.requeue),
-            child: const Text('Keep'),
+            child: const Text('Conserver'),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, _MissingAction.remove),
-            child: const Text('Remove item'),
+            child: const Text('Retirer l\'element'),
           ),
         ],
       ),

@@ -75,11 +75,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Review Answers"),
+        title: const Text("Revoir les reponses"),
         actions: [
           Row(
             children: [
-              const Text("Missed only"),
+              const Text("Erreurs seulement"),
               Switch.adaptive(
                 value: showMissedOnly,
                 onChanged: (v) => setState(() => showMissedOnly = v),
@@ -88,7 +88,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
           ),
           Row(
             children: [
-              const Text("Values"),
+              const Text("Points"),
               Switch.adaptive(
                 value: showPointsValue,
                 onChanged: (v) => setState(() => showPointsValue = v),
@@ -182,8 +182,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _stat("Correct", "$correct", Colors.green),
-              _stat("Wrong", "$wrong", Colors.red),
+              _stat("Correctes", "$correct", Colors.green),
+              _stat("Incorrectes", "$wrong", Colors.red),
               _stat("Total", "$total", cs.primary),
             ],
           ),
@@ -195,7 +195,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
           ),
           const SizedBox(height: 6),
           Text(
-            '$completionPct% correct',
+            '$completionPct% correctes',
             style: TextStyle(
               color: cs.onSurface.withValues(alpha: 0.72),
               fontWeight: FontWeight.w700,
@@ -274,7 +274,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     if (filteredIndexes.isEmpty) {
       return Center(
         child: Text(
-          'No missed questions to review.',
+          'Aucune question manquee a revoir.',
           style: TextStyle(
             color: cs.onSurface.withValues(alpha: 0.7),
             fontWeight: FontWeight.w700,
@@ -418,7 +418,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           );
                         },
                         errorBuilder: (_, __, ___) =>
-                            const Center(child: Text("Failed to load image")),
+                            const Center(child: Text("Echec du chargement de l'image")),
                       ),
                     ),
                   ),
@@ -475,8 +475,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
               ),
               child: Text(
                 question.explanation.isEmpty
-                    ? "Explanation: This item is added to your review queue when answered incorrectly or flagged."
-                    : "Explanation: ${question.explanation}",
+                    ? "Explication: cet element est ajoute a la file de revision si la reponse est fausse ou signalee."
+                    : "Explication: ${question.explanation}",
                 style: TextStyle(
                   color: cs.onSurface.withOpacity(0.8),
                   fontWeight: FontWeight.w600,

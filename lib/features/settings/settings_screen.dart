@@ -64,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  user?.displayName ?? "User",
+                                  user?.displayName ?? "Utilisateur",
                                   style: const TextStyle(
                                     fontWeight: FontWeight.w900,
                                   ),
@@ -110,15 +110,15 @@ class SettingsScreen extends StatelessWidget {
                     delay: const Duration(milliseconds: 60),
                     child: Semantics(
                       button: true,
-                      label: 'Open profile details',
+                      label: 'Ouvrir les details du profil',
                       child: ListTile(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
                         tileColor: cs.surfaceContainerHighest.withOpacity(0.35),
                         leading: const Icon(Icons.account_circle_rounded),
-                        title: const Text("Profile"),
-                        subtitle: const Text("View account details"),
+                        title: const Text("Profil"),
+                        subtitle: const Text("Voir les details du compte"),
                         trailing: const Icon(
                           Icons.arrow_forward_ios_rounded,
                           size: 16,
@@ -141,7 +141,7 @@ class SettingsScreen extends StatelessWidget {
                     delay: const Duration(milliseconds: 110),
                     child: Semantics(
                       button: true,
-                      label: 'Logout from account',
+                      label: 'Se deconnecter du compte',
                       child: ListTile(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -149,13 +149,13 @@ class SettingsScreen extends StatelessWidget {
                         tileColor: cs.surfaceContainerHighest.withOpacity(0.35),
                         leading: Icon(Icons.logout_rounded, color: cs.error),
                         title: Text(
-                          "Logout",
+                          "Deconnexion",
                           style: TextStyle(
                             color: cs.error,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
-                        subtitle: const Text("Sign out of your account"),
+                        subtitle: const Text("Quitter votre compte"),
                         minVerticalPadding: 12,
                         onTap: () async {
                           final ok = await _confirmLogout(context);
@@ -187,16 +187,16 @@ class SettingsScreen extends StatelessWidget {
     return await showDialog<bool>(
           context: context,
           builder: (_) => AlertDialog(
-            title: const Text("Logout"),
-            content: const Text("Are you sure you want to sign out?"),
+            title: const Text("Deconnexion"),
+            content: const Text("Confirmez-vous la deconnexion ?"),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: const Text("Cancel"),
+                child: const Text("Annuler"),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: const Text("Logout"),
+                child: const Text("Se deconnecter"),
               ),
             ],
           ),
@@ -234,17 +234,17 @@ class _ThemeModeCard extends StatelessWidget {
               ButtonSegment<ThemeMode>(
                 value: ThemeMode.system,
                 icon: Icon(Icons.phone_android_rounded),
-                label: Text("System"),
+                label: Text("Systeme"),
               ),
               ButtonSegment<ThemeMode>(
                 value: ThemeMode.light,
                 icon: Icon(Icons.light_mode_rounded),
-                label: Text("Light"),
+                label: Text("Clair"),
               ),
               ButtonSegment<ThemeMode>(
                 value: ThemeMode.dark,
                 icon: Icon(Icons.dark_mode_rounded),
-                label: Text("Dark"),
+                label: Text("Sombre"),
               ),
             ],
             selected: <ThemeMode>{themeController.themeMode},
@@ -281,7 +281,7 @@ class _LanguageModeCard extends StatelessWidget {
             children: [
               Icon(Icons.language_rounded),
               SizedBox(width: 8),
-              Text("Language", style: TextStyle(fontWeight: FontWeight.w800)),
+              Text("Langue", style: TextStyle(fontWeight: FontWeight.w800)),
             ],
           ),
           const SizedBox(height: 12),
@@ -290,12 +290,12 @@ class _LanguageModeCard extends StatelessWidget {
               ButtonSegment<String>(
                 value: "system",
                 icon: Icon(Icons.settings_suggest_rounded),
-                label: Text("System"),
+                label: Text("Systeme"),
               ),
               ButtonSegment<String>(
                 value: "en",
                 icon: Icon(Icons.translate_rounded),
-                label: Text("English"),
+                label: Text("Anglais"),
               ),
               ButtonSegment<String>(
                 value: "fr",

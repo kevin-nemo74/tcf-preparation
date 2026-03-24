@@ -67,8 +67,8 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
         final doneCount = hasPlan ? plan.todayTasks.where((t) => t.done).length : 0;
         final totalTasks = hasPlan ? plan.todayTasks.length : 0;
         final subtitleText = !hasPlan
-            ? 'Set a target score and daily tasks - expand for details'
-            : 'Target ${plan.targetScore} (${plan.targetLevel}) - $doneCount/$totalTasks done today';
+            ? 'Definissez un score cible et des taches quotidiennes - ouvrez pour details'
+            : 'Objectif ${plan.targetScore} (${plan.targetLevel}) - $doneCount/$totalTasks realisees aujourd\'hui';
 
         return Padding(
           padding: EdgeInsets.fromLTRB(16, wide ? 2 : 4, 16, wide ? 4 : 8),
@@ -94,7 +94,7 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
                     const SizedBox(width: 8),
                     const Expanded(
                       child: Text(
-                        'Study Plan',
+                        'Plan d\'etude',
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 15,
@@ -108,7 +108,7 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
                           AppRoutes.fadeSlide(const StudyPlanScreen()),
                         );
                       },
-                      child: Text(hasPlan ? 'Edit' : 'Setup'),
+                      child: Text(hasPlan ? 'Modifier' : 'Configurer'),
                     ),
                   ],
                 ),
@@ -130,7 +130,7 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 6),
                       child: Text(
-                        'Open Setup to choose your target NCLC band, test date, and weekly rhythm. Tasks appear here each day.',
+                        'Ouvrez la configuration pour choisir le niveau NCLC, la date cible et le rythme hebdomadaire. Les taches s\'affichent ici chaque jour.',
                         style: TextStyle(
                           color: cs.onSurface.withValues(alpha: 0.78),
                           fontWeight: FontWeight.w500,
@@ -142,7 +142,7 @@ class _StudyPlanPortalCardState extends State<StudyPlanPortalCard> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(
-                        'This plan was generated for an earlier day. Open Setup to refresh today\'s tasks.',
+                        'Ce plan a ete genere pour un jour precedent. Ouvrez la configuration pour actualiser les taches du jour.',
                         style: TextStyle(
                           color: cs.onSurface.withValues(alpha: 0.78),
                           fontWeight: FontWeight.w600,

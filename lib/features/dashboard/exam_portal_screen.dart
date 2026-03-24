@@ -39,13 +39,13 @@ class ExamPortalScreen extends StatelessWidget {
           actions: [
             if (!wide && resolvedUid != null)
               IconButton(
-                tooltip: "Dashboard",
+                tooltip: "Tableau de bord",
                 icon: const Icon(Icons.dashboard_customize_rounded),
                 onPressed: () =>
                     _openMobileDashboardSheet(context, resolvedUid),
               ),
             IconButton(
-              tooltip: "Settings",
+              tooltip: "Parametres",
               icon: const Icon(Icons.settings_rounded),
               onPressed: () {
                 Navigator.push(
@@ -205,7 +205,7 @@ Future<void> _openMobileDashboardSheet(BuildContext context, String uid) {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
                 child: Text(
-                  'Dashboard',
+                  'Tableau de bord',
                   style: Theme.of(
                     context,
                   ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
@@ -268,16 +268,16 @@ class _PortalSummary extends StatelessWidget {
               alignment: WrapAlignment.spaceBetween,
               runSpacing: 8,
               children: [
-                _Kpi(label: 'Best', value: '${summary.bestScore} / 699'),
-                _Kpi(label: 'Last', value: '${summary.lastScore} / 699'),
+                _Kpi(label: 'Meilleur', value: '${summary.bestScore} / 699'),
+                _Kpi(label: 'Dernier', value: '${summary.lastScore} / 699'),
                 _Kpi(
-                  label: 'Average',
+                  label: 'Moyenne',
                   value: summary.averageScore == 0
                       ? '0'
                       : summary.averageScore.toStringAsFixed(1),
                 ),
-                _Kpi(label: 'Attempts', value: '${summary.attemptsCount}'),
-                _Kpi(label: 'Streak', value: '${summary.currentStreak} d'),
+                _Kpi(label: 'Tentatives', value: '${summary.attemptsCount}'),
+                _Kpi(label: 'Serie', value: '${summary.currentStreak} j'),
               ],
             ),
           ),
@@ -300,7 +300,7 @@ class _PortalActions extends StatelessWidget {
       runSpacing: compact ? 8 : 10,
       children: [
         _ActionButton(
-          label: 'Study Plan',
+          label: 'Plan d\'etude',
           icon: Icons.event_note_rounded,
           compact: compact,
           onTap: () {
@@ -311,7 +311,7 @@ class _PortalActions extends StatelessWidget {
           },
         ),
         _ActionButton(
-          label: 'Review Queue',
+          label: 'File de revision',
           icon: Icons.assignment_late_rounded,
           compact: compact,
           onTap: () {
@@ -322,7 +322,7 @@ class _PortalActions extends StatelessWidget {
           },
         ),
         _ActionButton(
-          label: 'Profile',
+          label: 'Profil',
           icon: Icons.account_circle_rounded,
           compact: compact,
           onTap: () {
@@ -420,7 +420,7 @@ class _ProgressInsights extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Progress Insights',
+                    'Analyse de progression',
                     style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
                   ),
                   const SizedBox(height: 8),
@@ -458,22 +458,20 @@ class _ProgressInsights extends StatelessWidget {
                     spacing: 8,
                     runSpacing: 8,
                     children: [
-                      _InsightChip(label: 'Review queue: $queueCount'),
-                      _InsightChip(label: 'Trend: $trendText'),
+                      _InsightChip(label: 'File de revision: $queueCount'),
+                      _InsightChip(label: 'Tendance: $trendText'),
                       _InsightChip(
-                        label:
-                            "CE avg: ${moduleAverages['CE']?.toStringAsFixed(1) ?? '0.0'}",
+                        label: "Moy CE: ${moduleAverages['CE']?.toStringAsFixed(1) ?? '0.0'}",
                       ),
                       _InsightChip(
-                        label:
-                            "CO avg: ${moduleAverages['CO']?.toStringAsFixed(1) ?? '0.0'}",
+                        label: "Moy CO: ${moduleAverages['CO']?.toStringAsFixed(1) ?? '0.0'}",
                       ),
                     ],
                   ),
                   SizedBox(height: compact ? 8 : 12),
                   if (attempts.isEmpty)
                     Text(
-                      'Complete your first test to unlock recent attempt history.',
+                      'Passez votre premier test pour afficher l\'historique recent.',
                       style: TextStyle(
                         color: Theme.of(
                           context,
@@ -526,15 +524,15 @@ String _nextActionText({
   required int attemptsCount,
 }) {
   if (queueCount >= 8) {
-    return 'Next action: clear at least 3 review queue items before a new test.';
+    return 'Action suivante: traitez au moins 3 elements de revision avant un nouveau test.';
   }
   if (trendText == 'dropping') {
-    return 'Next action: retake one weak module with timed conditions.';
+    return 'Action suivante: refaites un module faible en conditions chronometrees.';
   }
   if (attemptsCount == 0) {
-    return 'Next action: complete your first practice test to build a baseline.';
+    return 'Action suivante: passez un premier test pour etablir votre niveau.';
   }
-  return 'Next action: run one mixed set and finish today\'s study plan tasks.';
+  return 'Action suivante: faites une serie mixte et terminez le plan du jour.';
 }
 
 class _InsightChip extends StatelessWidget {
@@ -565,7 +563,7 @@ class _AttemptRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final module = (attempt['moduleType'] ?? 'CE').toString();
-    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Practice set')
+    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Serie pratique')
         .toString();
     final score = _asNum(attempt['score']).toStringAsFixed(0);
     return Container(
@@ -643,19 +641,19 @@ Map<String, double> _moduleAverages(List<Map<String, dynamic>> attempts) {
 }
 
 String _trendText(List<Map<String, dynamic>> attempts) {
-  if (attempts.length < 2) return 'baseline';
+  if (attempts.length < 2) return 'reference';
   final latest = attempts.take(2).map((e) => _asNum(e['score'])).toList();
   final earlier = attempts
       .skip(2)
       .take(2)
       .map((e) => _asNum(e['score']))
       .toList();
-  if (earlier.isEmpty) return 'baseline';
+  if (earlier.isEmpty) return 'reference';
   final latestAvg = latest.reduce((a, b) => a + b) / latest.length;
   final earlierAvg = earlier.reduce((a, b) => a + b) / earlier.length;
-  if (latestAvg >= earlierAvg + 15) return 'improving';
-  if (latestAvg <= earlierAvg - 15) return 'dropping';
-  return 'steady';
+  if (latestAvg >= earlierAvg + 15) return 'en hausse';
+  if (latestAvg <= earlierAvg - 15) return 'en baisse';
+  return 'stable';
 }
 
 double _asNum(dynamic value) {

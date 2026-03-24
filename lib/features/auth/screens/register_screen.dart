@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
+import 'package:tcf_canada_preparation/core/widgets/premium_ui.dart';
 import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 import '../auth_service.dart';
@@ -66,11 +67,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   String _friendlyError(String raw) {
     final t = raw.toLowerCase();
-    if (t.contains('email-already-in-use')) return "This email is already registered.";
-    if (t.contains('weak-password')) return "Password is too weak (min 6 characters).";
-    if (t.contains('invalid-email')) return "Invalid email address.";
-    if (t.contains('network')) return "Network error. Please try again.";
-    return "Registration failed. Please try again.";
+    if (t.contains('email-already-in-use')) return "Cet e-mail est deja utilise.";
+    if (t.contains('weak-password')) return "Mot de passe trop faible (min 6 caracteres).";
+    if (t.contains('invalid-email')) return "Adresse e-mail invalide.";
+    if (t.contains('network')) return "Erreur reseau. Veuillez reessayer.";
+    return "Inscription echouee. Veuillez reessayer.";
   }
 
   @override
@@ -103,27 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: StaggeredColumn(
                   spacing: 12,
                   children: [
-                    Hero(
-                      tag: 'auth_brand',
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Container(
-                          padding: const EdgeInsets.all(18),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: cs.secondaryContainer.withValues(alpha: 0.9),
-                            boxShadow: [
-                              BoxShadow(
-                                color: cs.secondary.withValues(alpha: 0.2),
-                                blurRadius: 24,
-                                offset: const Offset(0, 10),
-                              ),
-                            ],
-                          ),
-                          child: Icon(Icons.person_add_rounded, size: 44, color: cs.primary),
-                        ),
-                      ),
-                    ),
+                    const PremiumBrandMark(large: true),
                     Text(
                       l10n.registerTitle,
                       textAlign: TextAlign.center,
@@ -142,20 +123,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 8),
                     AnimatedFadeSlide(
                       delay: const Duration(milliseconds: 100),
-                      child: Container(
+                      child: PremiumInfoCard(
                         padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          color: cs.surface,
-                          border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: cs.shadow.withValues(alpha: 0.06),
-                              blurRadius: 20,
-                              offset: const Offset(0, 8),
-                            ),
-                          ],
-                        ),
                         child: Form(
                           key: _formKey,
                           child: Column(
@@ -170,9 +139,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
-                                  if (value.isEmpty) return "Username is required";
-                                  if (value.length < 3) return "Minimum 3 characters";
-                                  if (value.length > 20) return "Maximum 20 characters";
+                                  if (value.isEmpty) return "Le nom d'utilisateur est obligatoire";
+                                  if (value.length < 3) return "Minimum 3 caracteres";
+                                  if (value.length > 20) return "Maximum 20 caracteres";
                                   return null;
                                 },
                               ),
@@ -187,8 +156,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
-                                  if (value.isEmpty) return "Email is required";
-                                  if (!value.contains('@')) return "Enter a valid email";
+                                  if (value.isEmpty) return "L'e-mail est obligatoire";
+                                  if (!value.contains('@')) return "Entrez un e-mail valide";
                                   return null;
                                 },
                               ),
@@ -209,8 +178,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "");
-                                  if (value.isEmpty) return "Password is required";
-                                  if (value.length < 6) return "Minimum 6 characters";
+                                  if (value.isEmpty) return "Le mot de passe est obligatoire";
+                                  if (value.length < 6) return "Minimum 6 caracteres";
                                   return null;
                                 },
                               ),
@@ -225,8 +194,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 validator: (v) {
                                   final value = v ?? "";
-                                  if (value.isEmpty) return "Confirm your password";
-                                  if (value != _password.text) return "Passwords do not match";
+                                  if (value.isEmpty) return "Confirmez votre mot de passe";
+                                  if (value != _password.text) return "Les mots de passe ne correspondent pas";
                                   return null;
                                 },
                               ),
@@ -263,7 +232,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               AppRoutes.fadeSlide(const LoginScreen()),
                                             );
                                           },
-                                    child: const Text("Login"),
+                                    child: const Text("Connexion"),
                                   ),
                                 ],
                               ),

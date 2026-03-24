@@ -60,7 +60,7 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
     const double narrowGridHeight = 110.0;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Review Answers")),
+      appBar: AppBar(title: const Text("Revoir les reponses")),
       body: ResponsiveFrame(
         padding: const EdgeInsets.all(16),
         child: isWide
@@ -156,8 +156,8 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _stat("Correct", "$correct", Colors.green),
-          _stat("Wrong", "$wrong", Colors.red),
+          _stat("Correctes", "$correct", Colors.green),
+          _stat("Incorrectes", "$wrong", Colors.red),
           _stat("Total", "$total", cs.primary),
         ],
       ),
@@ -348,7 +348,7 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
                             );
                           },
                           errorBuilder: (_, __, ___) =>
-                              const Center(child: Text("Failed to load image")),
+                              const Center(child: Text("Echec du chargement de l'image")),
                         ),
                       ),
                     ),
@@ -404,8 +404,8 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
               ),
               child: Text(
                 question.explanation.isEmpty
-                    ? "Explanation: Wrong or flagged items are automatically added to your review queue."
-                    : "Explanation: ${question.explanation}",
+                    ? "Explication: les elements incorrects ou signales sont ajoutes a la file de revision."
+                    : "Explication: ${question.explanation}",
                 style: TextStyle(
                   color: cs.onSurface.withOpacity(0.8),
                   fontWeight: FontWeight.w600,
