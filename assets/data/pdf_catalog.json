@@ -1,0 +1,4 @@
+[
+    { "id": "guide_ce", "title": "Guide TCF - CE", "assetPath": "assets/pdfs/ecrite.pdf" },
+    { "id": "guide_co", "title": "Guide TCF - CO", "assetPath": "assets/pdfs/orale.pdf" }
+]

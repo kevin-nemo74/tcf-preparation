@@ -9,7 +9,7 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get appTitle => 'Simulateur TCF Canada';
+  String get appTitle => 'MapleTcf';
 
   @override
   String get settingsTitle => 'Parametres';

@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/screens/connection_required_screen.dart';
-import '../dashboard/exam_portal_screen.dart';
 import '../marketing/screens/front_screen.dart';
 import '../onboarding/onboarding_screen.dart';
+import '../../app/home_shell.dart';
 import '../progress/progress_repository.dart';
 
 class AuthGate extends StatefulWidget {
@@ -124,7 +124,7 @@ class _AuthGateState extends State<AuthGate> {
           if (!isAuthenticated) {
             return widget.unauthenticatedWidget ?? const FrontScreen();
           }
-          final app = widget.authenticatedWidget ?? const ExamPortalScreen();
+          final app = widget.authenticatedWidget ?? const HomeShell();
           final onboardingCheck = widget.onboardingDoneCheck;
           if (onboardingCheck == null) return app;
           return FutureBuilder<bool>(
@@ -164,7 +164,7 @@ class _AuthGateState extends State<AuthGate> {
         }
 
         // Logged in -> Onboarding (first run) -> App
-        final app = widget.authenticatedWidget ?? ExamPortalScreen(uid: user.uid);
+        final app = widget.authenticatedWidget ?? const HomeShell();
         final onboardingFuture = widget.onboardingDoneCheck ??
             () => ProgressRepository.isOnboardingDone(uid: user.uid);
         return FutureBuilder<bool>(
