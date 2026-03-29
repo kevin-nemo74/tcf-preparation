@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../layout/responsive.dart';
@@ -27,12 +29,17 @@ class ResponsiveFrame extends StatelessWidget {
         if (padding != null) {
           c = Padding(padding: padding!, child: c);
         }
+        // When expandToViewport is true, never let minWidth exceed maxWidth:
+        // on ultra-wide web, parent width can exceed canvasMaxWidth (e.g. 1663 vs cap 1600).
+        final minW = expandToViewport
+            ? math.min(constraints.maxWidth, cap)
+            : 0.0;
         return Align(
           alignment: Alignment.topCenter,
           child: ConstrainedBox(
             constraints: BoxConstraints(
               maxWidth: cap,
-              minWidth: expandToViewport ? constraints.maxWidth : 0,
+              minWidth: minW,
               maxHeight: constraints.hasBoundedHeight
                   ? constraints.maxHeight
                   : double.infinity,
