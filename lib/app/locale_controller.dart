@@ -40,8 +40,9 @@ class LocaleController extends ChangeNotifier {
       case "fr":
         return const Locale("fr");
       case "system":
-      default:
         return null;
+      default:
+        return const Locale("fr");
     }
   }
 }

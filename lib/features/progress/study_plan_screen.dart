@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 import 'package:tcf_canada_preparation/features/progress/study_plan_generator.dart';
 
@@ -35,6 +36,10 @@ class _StudyPlanScreenState extends State<StudyPlanScreen> {
       pendingReviewCount: reviewQueue.length,
     );
     await ProgressRepository.saveStudyPlan(uid, plan);
+    await AppAnalytics.logStudyPlanCreated(
+      targetScore: _targetScore,
+      targetLevel: _targetLevel,
+    );
     if (!mounted) return;
     setState(() => _saving = false);
     Navigator.pop(context);

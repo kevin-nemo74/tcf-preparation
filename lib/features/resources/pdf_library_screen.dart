@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
@@ -91,6 +92,7 @@ class PdfLibraryScreen extends StatelessWidget {
               return InkWell(
                 borderRadius: BorderRadius.circular(22),
                 onTap: () {
+                  AppAnalytics.logPdfOpened(pdfId: item.id);
                   Navigator.push(
                     context,
                     AppRoutes.fadeSlide(
@@ -126,8 +128,10 @@ class PdfLibraryScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Icon(Icons.chevron_right_rounded,
-                          color: cs.onSurface.withValues(alpha: 0.6)),
+                      Icon(
+                        Icons.chevron_right_rounded,
+                        color: cs.onSurface.withValues(alpha: 0.6),
+                      ),
                     ],
                   ),
                 ),

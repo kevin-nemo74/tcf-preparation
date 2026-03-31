@@ -6,6 +6,7 @@ import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 import 'review_screen.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -103,6 +104,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final score = calculateScore();
     final level = getNCLCLevel(score);
     final cs = Theme.of(context).colorScheme;
@@ -110,7 +112,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Resultat du test"),
+        title: Text(l10n.ceResultTitle),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -138,7 +140,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   Icon(Icons.emoji_events_rounded, size: 48, color: cs.primary),
                   const SizedBox(height: 12),
                   Text(
-                    "Votre score",
+                    l10n.ceResultYourScore,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w700,
                         ),
@@ -178,7 +180,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       );
                     },
                     icon: const Icon(Icons.rate_review_rounded),
-                    label: const Text("Revoir les reponses"),
+                    label: Text(l10n.ceReviewCta),
                   ),
                 ],
               ),

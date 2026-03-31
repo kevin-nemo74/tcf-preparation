@@ -1,11 +1,11 @@
 {
-     "name": "MapleTCF",
-     "short_name": "MapleTCF",
+     "name": "MapleTcf",
+     "short_name": "MapleTcf",
      "start_url": ".",
      "display": "standalone",
      "background_color": "#0175C2",
      "theme_color": "#0175C2",
-     "description": "A new Flutter project.",
+     "description": "MapleTcf — TCF Canada preparation platform.",
      "orientation": "portrait-primary",
      "prefer_related_applications": false,
      "icons": [

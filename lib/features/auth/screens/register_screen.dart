@@ -3,6 +3,7 @@ import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/premium_ui.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 import '../auth_service.dart';
@@ -41,6 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _loading = true);
+    await AppAnalytics.logSignupStarted();
 
     try {
       await AuthService.register(
@@ -48,6 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         email: _email.text,
         password: _password.text,
       );
+      await AppAnalytics.logSignupSuccess();
       if (!mounted) return;
       // Return to AuthGate (root). It will rebuild to the authenticated flow.
       Navigator.of(context).popUntil((route) => route.isFirst);

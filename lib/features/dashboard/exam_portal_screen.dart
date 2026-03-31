@@ -5,15 +5,11 @@ import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
-import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
-import 'package:tcf_canada_preparation/features/comprehension/screens/test_list_screen.dart';
 import 'package:tcf_canada_preparation/features/profile/profile_screen.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 import 'package:tcf_canada_preparation/features/progress/review_queue_screen.dart';
 import 'package:tcf_canada_preparation/features/progress/study_plan_screen.dart';
 
-import '../oral/screens/oral_test_list_screen.dart';
-import '../settings/settings_screen.dart';
 import 'study_plan_portal_card.dart';
 
 class ExamPortalScreen extends StatelessWidget {
@@ -23,213 +19,63 @@ class ExamPortalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final resolvedUid = uid ?? ProgressRepository.currentUid;
     final wide = kIsWeb
         ? Responsive.isTabletWeb(context)
         : Responsive.isSplitLayout(context);
-    final webDesktopDashboard = kIsWeb && wide;
 
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(l10n.appTitle),
-          actions: [
-            if (!wide && resolvedUid != null)
-              IconButton(
-                tooltip: "Tableau de bord",
-                icon: const Icon(Icons.dashboard_customize_rounded),
-                onPressed: () =>
-                    _openMobileDashboardSheet(context, resolvedUid),
-              ),
-            IconButton(
-              tooltip: "Parametres",
-              icon: const Icon(Icons.settings_rounded),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  AppRoutes.fadeSlide(const SettingsScreen()),
-                );
-              },
-            ),
-          ],
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(
-              Responsive.isDesktopWeb(context) ? 70 : 64,
-            ),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                Responsive.isDesktopWeb(context) ? 24 : 16,
-                0,
-                Responsive.isDesktopWeb(context) ? 24 : 16,
-                12,
-              ),
-              child: Container(
-                height: Responsive.isDesktopWeb(context) ? 56 : 52,
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: cs.surfaceContainerHighest.withValues(alpha: 0.55),
-                  border: Border.all(
-                    color: cs.outlineVariant.withValues(alpha: 0.35),
-                  ),
-                ),
-                child: TabBar(
-                  isScrollable: false,
-                  dividerColor: Colors.transparent,
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  indicatorAnimation: TabIndicatorAnimation.elastic,
-                  indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    color: cs.primaryContainer.withValues(alpha: 0.75),
-                  ),
-                  labelColor: cs.onPrimaryContainer,
-                  unselectedLabelColor: cs.onSurface.withValues(alpha: 0.75),
-                  labelStyle: const TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 13,
-                  ),
-                  unselectedLabelStyle: const TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 13,
-                  ),
-                  tabs: const [
-                    Tab(
-                      icon: Icon(Icons.menu_book_rounded, size: 18),
-                      text: "Écrite",
-                      iconMargin: EdgeInsets.only(bottom: 2),
-                    ),
-                    Tab(
-                      icon: Icon(Icons.headphones_rounded, size: 18),
-                      text: "Orale",
-                      iconMargin: EdgeInsets.only(bottom: 2),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        body: Padding(
-          padding: Responsive.horizontalInset(context),
-          child: ResponsiveFrame(
-            child: webDesktopDashboard
-                ? Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (resolvedUid != null)
-                        SizedBox(
-                          width: Responsive.splitListPaneWidth(context),
-                          child: SingleChildScrollView(
-                            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                _PortalSummary(uid: resolvedUid),
-                                const SizedBox(height: 10),
-                                _PortalActions(uid: resolvedUid, compact: true),
-                                const SizedBox(height: 10),
-                                StudyPlanPortalCard(uid: resolvedUid),
-                                const SizedBox(height: 10),
-                                _ProgressInsights(
-                                  uid: resolvedUid,
-                                  compact: true,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      if (resolvedUid != null) const SizedBox(width: 14),
-                      const Expanded(child: _DesktopTabPanel()),
-                    ],
-                  )
-                : wide
-                ? Column(
-                    children: [
-                      if (resolvedUid != null)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-                          child: _PortalSummary(uid: resolvedUid),
-                        ),
-                      if (resolvedUid != null)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-                          child: _PortalActions(uid: resolvedUid),
-                        ),
-                      if (resolvedUid != null)
-                        StudyPlanPortalCard(uid: resolvedUid),
-                      if (resolvedUid != null)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 4, 16, 10),
-                          child: _ProgressInsights(uid: resolvedUid),
-                        ),
-                      const Expanded(
-                        child: TabBarView(
-                          children: [
-                            TestListScreen(showHeader: false),
-                            OralTestListScreen(),
-                          ],
-                        ),
+    return Padding(
+      padding: Responsive.horizontalInset(context),
+      child: ResponsiveFrame(
+        child: resolvedUid != null
+            ? wide
+                  ? SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          _PortalSummary(uid: resolvedUid),
+                          const SizedBox(height: 10),
+                          _PortalActions(uid: resolvedUid, compact: true),
+                          const SizedBox(height: 10),
+                          StudyPlanPortalCard(uid: resolvedUid),
+                          const SizedBox(height: 10),
+                          _ProgressInsights(uid: resolvedUid, compact: true),
+                        ],
                       ),
-                    ],
-                  )
-                : const TabBarView(
-                    children: [
-                      TestListScreen(showHeader: false),
-                      OralTestListScreen(),
-                    ],
+                    )
+                  : ListView(
+                      padding: const EdgeInsets.all(16),
+                      children: [
+                        _PortalSummary(uid: resolvedUid),
+                        const SizedBox(height: 10),
+                        _PortalActions(uid: resolvedUid),
+                        const SizedBox(height: 10),
+                        StudyPlanPortalCard(uid: resolvedUid),
+                        const SizedBox(height: 10),
+                        _ProgressInsights(uid: resolvedUid),
+                      ],
+                    )
+            : Center(
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
                   ),
-          ),
-        ),
+                  child: Text(
+                    'Connectez-vous pour acceder au tableau de bord',
+                    style: TextStyle(
+                      color: cs.onSurface.withValues(alpha: 0.7),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
       ),
     );
   }
-}
-
-Future<void> _openMobileDashboardSheet(BuildContext context, String uid) {
-  return showModalBottomSheet<void>(
-    context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
-    showDragHandle: true,
-    builder: (context) {
-      return FractionallySizedBox(
-        heightFactor: 0.9,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-                child: Text(
-                  'Tableau de bord',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                child: _PortalSummary(uid: uid),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                child: _PortalActions(uid: uid),
-              ),
-              StudyPlanPortalCard(uid: uid),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-                child: _ProgressInsights(uid: uid),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
 }
 
 class _PortalSummary extends StatelessWidget {
@@ -461,10 +307,12 @@ class _ProgressInsights extends StatelessWidget {
                       _InsightChip(label: 'File de revision: $queueCount'),
                       _InsightChip(label: 'Tendance: $trendText'),
                       _InsightChip(
-                        label: "Moy CE: ${moduleAverages['CE']?.toStringAsFixed(1) ?? '0.0'}",
+                        label:
+                            "Moy CE: ${moduleAverages['CE']?.toStringAsFixed(1) ?? '0.0'}",
                       ),
                       _InsightChip(
-                        label: "Moy CO: ${moduleAverages['CO']?.toStringAsFixed(1) ?? '0.0'}",
+                        label:
+                            "Moy CO: ${moduleAverages['CO']?.toStringAsFixed(1) ?? '0.0'}",
                       ),
                     ],
                   ),
@@ -494,26 +342,6 @@ class _ProgressInsights extends StatelessWidget {
           },
         );
       },
-    );
-  }
-}
-
-class _DesktopTabPanel extends StatelessWidget {
-  const _DesktopTabPanel();
-
-  @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    return Container(
-      margin: const EdgeInsets.fromLTRB(0, 12, 12, 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-        color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
-      ),
-      child: const TabBarView(
-        children: [TestListScreen(showHeader: false), OralTestListScreen()],
-      ),
     );
   }
 }
@@ -563,8 +391,9 @@ class _AttemptRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final module = (attempt['moduleType'] ?? 'CE').toString();
-    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Serie pratique')
-        .toString();
+    final title =
+        (attempt['testTitle'] ?? attempt['testId'] ?? 'Serie pratique')
+            .toString();
     final score = _asNum(attempt['score']).toStringAsFixed(0);
     return Container(
       padding: const EdgeInsets.all(12),

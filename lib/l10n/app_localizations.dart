@@ -265,6 +265,282 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See best score, recent attempts, weak areas, and review queue.'**
   String get onboardingProgressBody;
+
+  /// No description provided for @landingBrandName.
+  ///
+  /// In en, this message translates to:
+  /// **'MapleTcf'**
+  String get landingBrandName;
+
+  /// No description provided for @landingHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'MapleTcf'**
+  String get landingHeroTitle;
+
+  /// No description provided for @landingHeroSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialized platform for TCF Canada preparation. Train with realistic tests and updated topics.'**
+  String get landingHeroSubtitle;
+
+  /// No description provided for @landingServicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get landingServicesTitle;
+
+  /// No description provided for @landingPricingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pricing'**
+  String get landingPricingTitle;
+
+  /// No description provided for @landingContactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get landingContactTitle;
+
+  /// No description provided for @landingCtaLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get landingCtaLogin;
+
+  /// No description provided for @landingCtaLoginShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get landingCtaLoginShort;
+
+  /// No description provided for @landingServicesSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'What MapleTcf currently offers'**
+  String get landingServicesSummary;
+
+  /// No description provided for @landingPricingSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparation plans'**
+  String get landingPricingSummary;
+
+  /// No description provided for @landingContactSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Talk with our team'**
+  String get landingContactSummary;
+
+  /// No description provided for @landingTagTcfCanada.
+  ///
+  /// In en, this message translates to:
+  /// **'TCF Canada'**
+  String get landingTagTcfCanada;
+
+  /// No description provided for @landingTagPreparation.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparation'**
+  String get landingTagPreparation;
+
+  /// No description provided for @landingTagWebPlatform.
+  ///
+  /// In en, this message translates to:
+  /// **'Web platform'**
+  String get landingTagWebPlatform;
+
+  /// No description provided for @landingResumeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick overview'**
+  String get landingResumeTitle;
+
+  /// No description provided for @landingPlanEssential.
+  ///
+  /// In en, this message translates to:
+  /// **'Essential access - 15 days'**
+  String get landingPlanEssential;
+
+  /// No description provided for @landingPlanStandard.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard access - 30 days'**
+  String get landingPlanStandard;
+
+  /// No description provided for @landingPlanPriceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Price: {price}'**
+  String landingPlanPriceLabel(Object price);
+
+  /// No description provided for @landingCheckWrittenTests.
+  ///
+  /// In en, this message translates to:
+  /// **'40 written tests adapted to TCF Canada format'**
+  String get landingCheckWrittenTests;
+
+  /// No description provided for @landingCheckOralTests.
+  ///
+  /// In en, this message translates to:
+  /// **'40 oral tests to strengthen your speaking'**
+  String get landingCheckOralTests;
+
+  /// No description provided for @landingCheckPdfResources.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF books for oral and written expression'**
+  String get landingCheckPdfResources;
+
+  /// No description provided for @landingCheckUpdatedTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'Regularly updated topics'**
+  String get landingCheckUpdatedTopics;
+
+  /// No description provided for @landingResumeLineEssential.
+  ///
+  /// In en, this message translates to:
+  /// **'Essential: 15 days - \$30'**
+  String get landingResumeLineEssential;
+
+  /// No description provided for @landingResumeLineStandard.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard: 30 days - \$55'**
+  String get landingResumeLineStandard;
+
+  /// No description provided for @landingResumeLineSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Direct contact by email and phone'**
+  String get landingResumeLineSupport;
+
+  /// No description provided for @landingEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email: hello@mapletcf.com'**
+  String get landingEmailLabel;
+
+  /// No description provided for @landingPhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone: +1 514 555 0147'**
+  String get landingPhoneLabel;
+
+  /// No description provided for @landingSupportLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Support: Monday to Friday - 9:00 to 18:00'**
+  String get landingSupportLabel;
+
+  /// No description provided for @ceStartTestCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Start test'**
+  String get ceStartTestCta;
+
+  /// No description provided for @ceHeaderAdviceNeedsPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Adaptive: focus on recent weak points.'**
+  String get ceHeaderAdviceNeedsPractice;
+
+  /// No description provided for @ceHeaderAdviceEstablishBaseline.
+  ///
+  /// In en, this message translates to:
+  /// **'Adaptive: continue exercises to establish a baseline.'**
+  String get ceHeaderAdviceEstablishBaseline;
+
+  /// No description provided for @ceLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load CE tests:'**
+  String get ceLoadError;
+
+  /// No description provided for @ceEmptyState.
+  ///
+  /// In en, this message translates to:
+  /// **'No test available'**
+  String get ceEmptyState;
+
+  /// No description provided for @coLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load CO tests:'**
+  String get coLoadError;
+
+  /// No description provided for @coEmptyState.
+  ///
+  /// In en, this message translates to:
+  /// **'No oral test available'**
+  String get coEmptyState;
+
+  /// No description provided for @ceResultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Test result'**
+  String get ceResultTitle;
+
+  /// No description provided for @ceResultYourScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Your score'**
+  String get ceResultYourScore;
+
+  /// No description provided for @ceResultBelowNclc4.
+  ///
+  /// In en, this message translates to:
+  /// **'Below NCLC 4'**
+  String get ceResultBelowNclc4;
+
+  /// No description provided for @ceReviewCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Review answers'**
+  String get ceReviewCta;
+
+  /// No description provided for @ceQuestionGridTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Question grid'**
+  String get ceQuestionGridTooltip;
+
+  /// No description provided for @ceFlagTooltipAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Flag'**
+  String get ceFlagTooltipAdd;
+
+  /// No description provided for @ceFlagTooltipRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove flag'**
+  String get ceFlagTooltipRemove;
+
+  /// No description provided for @ceImageLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load image'**
+  String get ceImageLoadError;
+
+  /// No description provided for @cePrevQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get cePrevQuestion;
+
+  /// No description provided for @ceNextQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get ceNextQuestion;
+
+  /// No description provided for @ceSubmitTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get ceSubmitTest;
 }
 
 class _AppLocalizationsDelegate

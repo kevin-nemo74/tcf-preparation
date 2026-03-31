@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
+import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/core/widgets/premium_ui.dart';
 import 'package:tcf_canada_preparation/features/auth/screens/login_screen.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 class FrontScreen extends StatelessWidget {
   const FrontScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isWebLayout = MediaQuery.sizeOf(context).width >= 1024;
     final cs = Theme.of(context).colorScheme;
 
@@ -36,8 +39,8 @@ class FrontScreen extends StatelessWidget {
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 1240),
                       child: isWebLayout
-                          ? const _WebLanding()
-                          : const _MobileLanding(),
+                          ? _WebLanding(l10n: l10n)
+                          : _MobileLanding(l10n: l10n),
                     ),
                   ),
                 ),
@@ -51,32 +54,33 @@ class FrontScreen extends StatelessWidget {
 }
 
 class _WebLanding extends StatelessWidget {
-  const _WebLanding();
+  const _WebLanding({required this.l10n});
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _WebTopBar(),
+        _WebTopBar(l10n: l10n),
         SizedBox(height: 18),
-        _WebHero(),
+        _WebHero(l10n: l10n),
         SizedBox(height: 14),
         _WebSection(
-          title: 'Services',
-          subtitle: 'Ce que MapleTcf propose actuellement',
+          title: l10n.landingServicesTitle,
+          subtitle: l10n.landingServicesSummary,
           child: _WebServicesRow(),
         ),
         SizedBox(height: 14),
         _WebSection(
-          title: 'Tarifs',
-          subtitle: 'Formules de preparation',
+          title: l10n.landingPricingTitle,
+          subtitle: l10n.landingPricingSummary,
           child: _WebPricingRow(),
         ),
         SizedBox(height: 14),
         _WebSection(
-          title: 'Contact',
-          subtitle: 'Parlez avec notre equipe',
+          title: l10n.landingContactTitle,
+          subtitle: l10n.landingContactSummary,
           child: _WebContactRow(),
         ),
       ],
@@ -85,7 +89,8 @@ class _WebLanding extends StatelessWidget {
 }
 
 class _WebTopBar extends StatelessWidget {
-  const _WebTopBar();
+  const _WebTopBar({required this.l10n});
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -97,20 +102,20 @@ class _WebTopBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.25)),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          PremiumBrandMark(),
+          const PremiumBrandMark(),
           SizedBox(width: 10),
           Text(
-            'MapleTcf',
+            l10n.landingBrandName,
             style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
           ),
-          Spacer(),
-          _TopChip(text: 'TCF Canada'),
+          const Spacer(),
+          _TopChip(text: l10n.landingTagTcfCanada),
           SizedBox(width: 8),
-          _TopChip(text: 'Preparation'),
+          _TopChip(text: l10n.landingTagPreparation),
           SizedBox(width: 8),
-          _TopChip(text: 'Plateforme web'),
+          _TopChip(text: l10n.landingTagWebPlatform),
         ],
       ),
     );
@@ -136,7 +141,8 @@ class _TopChip extends StatelessWidget {
 }
 
 class _WebHero extends StatelessWidget {
-  const _WebHero();
+  const _WebHero({required this.l10n});
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +173,7 @@ class _WebHero extends StatelessWidget {
                 const PremiumBrandMark(large: true),
                 const SizedBox(height: 14),
                 Text(
-                  'MapleTcf',
+                  l10n.landingHeroTitle,
                   style: tt.displaySmall?.copyWith(
                     fontWeight: FontWeight.w900,
                     letterSpacing: -0.8,
@@ -175,25 +181,23 @@ class _WebHero extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Plateforme specialisee dans la preparation au TCF Canada. Entrainez-vous avec des tests adaptes et des sujets mis a jour',
+                  l10n.landingHeroSubtitle,
                   style: tt.titleMedium?.copyWith(
                     color: cs.onSurface.withValues(alpha: 0.8),
                     height: 1.4,
                   ),
                 ),
                 const SizedBox(height: 18),
-                const _CheckLine(text: '40 tests ecrits et 40 tests oraux'),
+                _CheckLine(text: l10n.landingCheckWrittenTests),
                 const SizedBox(height: 8),
-                const _CheckLine(
-                  text: 'Livres PDF pour les expressions orale et ecrite',
-                ),
+                _CheckLine(text: l10n.landingCheckPdfResources),
                 const SizedBox(height: 8),
-                const _CheckLine(text: 'Sujets mis a jour'),
+                _CheckLine(text: l10n.landingCheckUpdatedTopics),
                 const SizedBox(height: 24),
                 FilledButton.icon(
                   onPressed: () => _goToLogin(context),
                   icon: const Icon(Icons.login_rounded),
-                  label: const Text('Se connecter'),
+                  label: Text(l10n.landingCtaLogin),
                 ),
               ],
             ),
@@ -207,19 +211,19 @@ class _WebHero extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 color: cs.surfaceContainerHighest.withValues(alpha: 0.35),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Resume rapide',
+                    l10n.landingResumeTitle,
                     style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
                   ),
                   SizedBox(height: 10),
-                  _CheckLine(text: 'Essentiel: 15 jours - 30\$'),
+                  _CheckLine(text: l10n.landingResumeLineEssential),
                   SizedBox(height: 8),
-                  _CheckLine(text: 'Standard: 30 jours - 55\$'),
+                  _CheckLine(text: l10n.landingResumeLineStandard),
                   SizedBox(height: 8),
-                  _CheckLine(text: 'Contact direct par e-mail et telephone'),
+                  _CheckLine(text: l10n.landingResumeLineSupport),
                 ],
               ),
             ),
@@ -485,14 +489,15 @@ class _ContactCard extends StatelessWidget {
 }
 
 class _MobileLanding extends StatelessWidget {
-  const _MobileLanding();
+  const _MobileLanding({required this.l10n});
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _MobileHero(),
+        _MobileHero(l10n: l10n),
         SizedBox(height: 16),
         _MobileServices(),
         SizedBox(height: 14),
@@ -505,7 +510,8 @@ class _MobileLanding extends StatelessWidget {
 }
 
 class _MobileHero extends StatelessWidget {
-  const _MobileHero();
+  const _MobileHero({required this.l10n});
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -524,13 +530,13 @@ class _MobileHero extends StatelessWidget {
           const PremiumBrandMark(),
           const SizedBox(height: 12),
           Text(
-            'MapleTcf',
+            l10n.landingHeroTitle,
             textAlign: TextAlign.center,
             style: tt.displaySmall?.copyWith(fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 8),
           Text(
-            'Plateforme specialisee dans la preparation au TCF Canada. Entrainez-vous avec des tests adaptes et des sujets mis a jour',
+            l10n.landingHeroSubtitle,
             textAlign: TextAlign.center,
             style: tt.titleMedium?.copyWith(
               color: cs.onSurface.withValues(alpha: 0.8),
@@ -541,7 +547,7 @@ class _MobileHero extends StatelessWidget {
           FilledButton.icon(
             onPressed: () => _goToLogin(context),
             icon: const Icon(Icons.login_rounded),
-            label: const Text('Se connecter'),
+            label: Text(l10n.landingCtaLogin),
           ),
         ],
       ),
@@ -726,5 +732,6 @@ class _Line extends StatelessWidget {
 }
 
 void _goToLogin(BuildContext context) {
+  AppAnalytics.logLandingCtaClicked();
   Navigator.push(context, AppRoutes.fadeSlide(const LoginScreen()));
 }

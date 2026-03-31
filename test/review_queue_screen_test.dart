@@ -50,7 +50,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('Your review queue is empty.'), findsOneWidget);
+    expect(find.text('Votre file de revision est vide.'), findsOneWidget);
   });
 
   testWidgets('shows queued items from both modules', (tester) async {
@@ -90,12 +90,12 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('2 question(s) need another pass.'), findsOneWidget);
+    expect(find.text('2 question(s) necessitent une nouvelle revision.'), findsOneWidget);
     expect(find.text('CE Test 1'), findsOneWidget);
     expect(find.text('CO Test 1'), findsOneWidget);
     expect(find.text('Comprehension'), findsOneWidget);
-    expect(find.text('Oral'), findsOneWidget);
-    expect(find.text('2 priority'), findsOneWidget);
+    expect(find.text('Orale'), findsOneWidget);
+    expect(find.text('2 prioritaire'), findsOneWidget);
   });
 
   testWidgets('can open a queued comprehension review item', (tester) async {
@@ -161,10 +161,10 @@ void main() {
     );
 
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Open review'));
+    await tester.tap(find.text('Ouvrir la revision'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Review Answers'), findsOneWidget);
+    expect(find.text('Revoir les reponses'), findsOneWidget);
     expect(find.text('Question 1'), findsOneWidget);
   });
 
@@ -198,14 +198,14 @@ void main() {
     );
 
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Open review'));
+    await tester.tap(find.text('Ouvrir la revision'));
     await tester.pumpAndSettle();
-    expect(find.text('Review source missing'), findsOneWidget);
+    expect(find.text('Source de revision introuvable'), findsOneWidget);
 
-    await tester.tap(find.text('Remove item'));
+    await tester.tap(find.text("Retirer l'element"));
     await tester.pumpAndSettle();
 
     expect(markedDone, isTrue);
-    expect(find.text('Review item removed from queue.'), findsOneWidget);
+    expect(find.text('Element retire de la file de revision.'), findsOneWidget);
   });
 }

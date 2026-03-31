@@ -61,6 +61,15 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.dark(),
       themeMode: themeController.themeMode,
       locale: localeController.locale,
+      localeResolutionCallback: (locale, supportedLocales) {
+        final appLocale = localeController.locale;
+        if (appLocale != null) return appLocale;
+        if (locale == null) return const Locale('fr');
+        for (final supported in supportedLocales) {
+          if (supported.languageCode == locale.languageCode) return supported;
+        }
+        return const Locale('fr');
+      },
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

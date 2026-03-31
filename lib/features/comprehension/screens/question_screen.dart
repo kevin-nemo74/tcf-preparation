@@ -8,6 +8,7 @@ import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/question_model.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 import 'result_screen.dart';
 import 'question_grid_screen.dart';
@@ -104,6 +105,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final isWide = kIsWeb
         ? Responsive.isTabletWeb(context)
@@ -133,12 +135,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
             ),
           ),
           IconButton(
-            tooltip: "Grille des questions",
+            tooltip: l10n.ceQuestionGridTooltip,
             icon: const Icon(Icons.grid_view_rounded),
             onPressed: _openGrid,
           ),
           IconButton(
-            tooltip: isFlagged ? "Retirer le drapeau" : "Signaler",
+            tooltip: isFlagged ? l10n.ceFlagTooltipRemove : l10n.ceFlagTooltipAdd,
             icon: Icon(
               isFlagged ? Icons.flag_rounded : Icons.outlined_flag_rounded,
               color: isFlagged ? Colors.orange : null,
@@ -235,7 +237,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                             children: [
                               Expanded(
                                 flex: Responsive.isDesktopWeb(context) ? 7 : 6,
-                                child: _ImagePanel(imageUrl: question.imageUrl),
+                                child: _ImagePanel(
+                                  imageUrl: question.imageUrl,
+                                  imageLoadErrorText: l10n.ceImageLoadError,
+                                ),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
@@ -248,6 +253,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                   ),
                                   footer: _BottomControls(
                                     isLastQuestion: isLast,
+                                    l10n: l10n,
                                     onPrev: currentIndex > 0
                                         ? () => setState(() => currentIndex--)
                                         : null,
@@ -262,7 +268,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                             children: [
                               Expanded(
                                 flex: 6,
-                                child: _ImagePanel(imageUrl: question.imageUrl),
+                                child: _ImagePanel(
+                                  imageUrl: question.imageUrl,
+                                  imageLoadErrorText: l10n.ceImageLoadError,
+                                ),
                               ),
                               const SizedBox(height: 14),
                               Expanded(
@@ -275,6 +284,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                   ),
                                   footer: _BottomControls(
                                     isLastQuestion: isLast,
+                                    l10n: l10n,
                                     onPrev: currentIndex > 0
                                         ? () => setState(() => currentIndex--)
                                         : null,
@@ -297,7 +307,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
 class _ImagePanel extends StatelessWidget {
   final String imageUrl;
-  const _ImagePanel({required this.imageUrl});
+  final String imageLoadErrorText;
+  const _ImagePanel({required this.imageUrl, required this.imageLoadErrorText});
 
   @override
   Widget build(BuildContext context) {
@@ -330,7 +341,7 @@ class _ImagePanel extends StatelessWidget {
                 );
               },
               errorBuilder: (_, __, ___) =>
-                  const Center(child: Text("Echec du chargement de l'image")),
+                  Center(child: Text(imageLoadErrorText)),
             ),
           ),
         ),
@@ -463,11 +474,13 @@ class _BottomControls extends StatelessWidget {
   final bool isLastQuestion;
   final VoidCallback? onPrev;
   final VoidCallback onNextOrSubmit;
+  final AppLocalizations l10n;
 
   const _BottomControls({
     required this.isLastQuestion,
     required this.onPrev,
     required this.onNextOrSubmit,
+    required this.l10n,
   });
 
   @override
@@ -478,7 +491,7 @@ class _BottomControls extends StatelessWidget {
           child: OutlinedButton.icon(
             onPressed: onPrev,
             icon: const Icon(Icons.arrow_back_rounded),
-            label: const Text("Precedent"),
+            label: Text(l10n.cePrevQuestion),
             style: OutlinedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
@@ -496,7 +509,9 @@ class _BottomControls extends StatelessWidget {
                   ? Icons.check_circle_rounded
                   : Icons.arrow_forward_rounded,
             ),
-            label: Text(isLastQuestion ? "Soumettre" : "Suivant"),
+            label: Text(
+              isLastQuestion ? l10n.ceSubmitTest : l10n.ceNextQuestion,
+            ),
             style: FilledButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),

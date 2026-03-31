@@ -96,4 +96,151 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get onboardingProgressBody =>
       'Consultez votre meilleur score, vos tentatives recentes, vos points faibles et la file de revision.';
+
+  @override
+  String get landingBrandName => 'MapleTcf';
+
+  @override
+  String get landingHeroTitle => 'MapleTcf';
+
+  @override
+  String get landingHeroSubtitle =>
+      'Plateforme specialisee dans la preparation au TCF Canada. Entrainez-vous avec des tests adaptes et des sujets mis a jour';
+
+  @override
+  String get landingServicesTitle => 'Services';
+
+  @override
+  String get landingPricingTitle => 'Tarifs';
+
+  @override
+  String get landingContactTitle => 'Contact';
+
+  @override
+  String get landingCtaLogin => 'Se connecter';
+
+  @override
+  String get landingCtaLoginShort => 'Connexion';
+
+  @override
+  String get landingServicesSummary => 'Ce que MapleTcf propose actuellement';
+
+  @override
+  String get landingPricingSummary => 'Formules de preparation';
+
+  @override
+  String get landingContactSummary => 'Parlez avec notre equipe';
+
+  @override
+  String get landingTagTcfCanada => 'TCF Canada';
+
+  @override
+  String get landingTagPreparation => 'Preparation';
+
+  @override
+  String get landingTagWebPlatform => 'Plateforme web';
+
+  @override
+  String get landingResumeTitle => 'Resume rapide';
+
+  @override
+  String get landingPlanEssential => 'Acces essentiel - 15 jours';
+
+  @override
+  String get landingPlanStandard => 'Acces standard - 30 jours';
+
+  @override
+  String landingPlanPriceLabel(Object price) {
+    return 'Prix: $price';
+  }
+
+  @override
+  String get landingCheckWrittenTests =>
+      '40 tests ecrits adaptes au format TCF Canada';
+
+  @override
+  String get landingCheckOralTests =>
+      '40 tests oraux pour renforcer votre expression';
+
+  @override
+  String get landingCheckPdfResources =>
+      'Livres PDF pour les expressions orale et ecrite';
+
+  @override
+  String get landingCheckUpdatedTopics => 'Sujets mis a jour';
+
+  @override
+  String get landingResumeLineEssential => 'Essentiel: 15 jours - 30\$';
+
+  @override
+  String get landingResumeLineStandard => 'Standard: 30 jours - 55\$';
+
+  @override
+  String get landingResumeLineSupport =>
+      'Contact direct par e-mail et telephone';
+
+  @override
+  String get landingEmailLabel => 'Email: hello@mapletcf.com';
+
+  @override
+  String get landingPhoneLabel => 'Telephone: +1 514 555 0147';
+
+  @override
+  String get landingSupportLabel => 'Support: Lundi a vendredi - 9:00 a 18:00';
+
+  @override
+  String get ceStartTestCta => 'Commencer le test';
+
+  @override
+  String get ceHeaderAdviceNeedsPractice =>
+      'Adaptatif: concentrez-vous sur les points faibles recents.';
+
+  @override
+  String get ceHeaderAdviceEstablishBaseline =>
+      'Adaptatif: poursuivez les exercices pour etablir une reference.';
+
+  @override
+  String get ceLoadError => 'Echec du chargement des tests CE:';
+
+  @override
+  String get ceEmptyState => 'Aucun test disponible';
+
+  @override
+  String get coLoadError => 'Echec du chargement des tests CO:';
+
+  @override
+  String get coEmptyState => 'Aucun test oral disponible';
+
+  @override
+  String get ceResultTitle => 'Resultat du test';
+
+  @override
+  String get ceResultYourScore => 'Votre score';
+
+  @override
+  String get ceResultBelowNclc4 => 'En dessous de NCLC 4';
+
+  @override
+  String get ceReviewCta => 'Revoir les reponses';
+
+  @override
+  String get ceQuestionGridTooltip => 'Grille des questions';
+
+  @override
+  String get ceFlagTooltipAdd => 'Signaler';
+
+  @override
+  String get ceFlagTooltipRemove => 'Retirer le drapeau';
+
+  @override
+  String get ceImageLoadError => 'Echec du chargement de l\'image';
+
+  @override
+  String get cePrevQuestion => 'Precedent';
+
+  @override
+  String get ceNextQuestion => 'Suivant';
+
+  @override
+  String get ceSubmitTest => 'Soumettre';
 }

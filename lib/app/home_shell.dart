@@ -5,6 +5,7 @@ import '../core/layout/responsive.dart';
 import '../core/widgets/premium_ui.dart';
 import '../core/widgets/responsive_frame.dart';
 import '../features/comprehension/screens/test_list_screen.dart';
+import '../features/dashboard/exam_portal_screen.dart';
 import '../features/oral/screens/oral_test_list_screen.dart';
 import '../features/resources/pdf_library_screen.dart';
 import '../features/settings/settings_screen.dart';
@@ -24,6 +25,7 @@ class _HomeShellState extends State<HomeShell> {
     TestListScreen(),
     OralTestListScreen(),
     PdfLibraryScreen(),
+    ExamPortalScreen(),
     SettingsScreen(),
   ];
 
@@ -45,8 +47,9 @@ class _HomeShellState extends State<HomeShell> {
               // Flutter assertion on web:
               // `!extended || (labelType == null || labelType == NavigationRailLabelType.none)`
               // So when `extended` is true, we must use `none` (or null) for `labelType`.
-              labelType:
-                  railExtended ? NavigationRailLabelType.none : NavigationRailLabelType.selected,
+              labelType: railExtended
+                  ? NavigationRailLabelType.none
+                  : NavigationRailLabelType.selected,
               destinations: const [
                 NavigationRailDestination(
                   icon: Icon(Icons.menu_book_outlined),
@@ -62,6 +65,11 @@ class _HomeShellState extends State<HomeShell> {
                   icon: Icon(Icons.picture_as_pdf_outlined),
                   selectedIcon: Icon(Icons.picture_as_pdf_rounded),
                   label: Text('PDF'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.dashboard_customize_outlined),
+                  selectedIcon: Icon(Icons.dashboard_customize_rounded),
+                  label: Text('Tableau'),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.settings_outlined),
@@ -97,7 +105,9 @@ class _HomeShellState extends State<HomeShell> {
           children: [
             const _BrandHeader(),
             const SizedBox(height: 12),
-            Expanded(child: IndexedStack(index: _index, children: _pages)),
+            Expanded(
+              child: IndexedStack(index: _index, children: _pages),
+            ),
           ],
         ),
       ),
@@ -119,6 +129,11 @@ class _HomeShellState extends State<HomeShell> {
             icon: Icon(Icons.picture_as_pdf_outlined),
             selectedIcon: Icon(Icons.picture_as_pdf_rounded),
             label: "PDF",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.dashboard_customize_outlined),
+            selectedIcon: Icon(Icons.dashboard_customize_rounded),
+            label: "Tableau",
           ),
           NavigationDestination(
             icon: Icon(Icons.settings_outlined),
@@ -149,18 +164,15 @@ class _BrandHeader extends StatelessWidget {
         ),
         child: Row(
           children: [
-            PremiumBrandMark(
-              heroTag: 'home_brand',
-              large: false,
-            ),
+            PremiumBrandMark(heroTag: 'home_brand', large: false),
             const SizedBox(width: 10),
             Expanded(
               child: Text(
                 l10n.appTitle,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: -0.4,
-                    ),
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: -0.4,
+                ),
               ),
             ),
           ],

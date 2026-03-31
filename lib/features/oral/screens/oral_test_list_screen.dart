@@ -5,6 +5,7 @@ import 'package:tcf_canada_preparation/core/telemetry/app_analytics.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
+import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 import '../data/local_oral_tests_data.dart';
 import '../data/models/oral_test_model.dart';
@@ -29,6 +30,7 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final isWide = Responsive.isSplitLayout(context);
     final uid = ProgressRepository.currentUid;
@@ -46,13 +48,13 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
         }
         if (snapshot.hasError) {
           return Center(
-            child: Text("Echec du chargement des tests CO:\n${snapshot.error}"),
+            child: Text("${l10n.coLoadError}\n${snapshot.error}"),
           );
         }
 
         final tests = snapshot.data ?? [];
         if (tests.isEmpty) {
-          return const Center(child: Text("Aucun test oral disponible"));
+          return Center(child: Text(l10n.coEmptyState));
         }
 
         selectedTest ??= tests.first;
@@ -174,6 +176,7 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
                             test: selectedTest!,
                             bestScore: bestScores[selectedTest!.id],
                             onStart: () => _start(context, selectedTest!),
+                            l10n: l10n,
                           ),
                         ),
                       ),
@@ -298,11 +301,13 @@ class _DetailsPanel extends StatelessWidget {
   final OralTestModel test;
   final int? bestScore;
   final VoidCallback onStart;
+  final AppLocalizations l10n;
 
   const _DetailsPanel({
     required this.test,
     required this.bestScore,
     required this.onStart,
+    required this.l10n,
   });
 
   @override
@@ -362,7 +367,7 @@ class _DetailsPanel extends StatelessWidget {
           FilledButton.icon(
             onPressed: onStart,
             icon: const Icon(Icons.play_arrow_rounded),
-            label: const Text("Commencer le test"),
+            label: Text(l10n.ceStartTestCta),
             style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
@@ -383,6 +388,7 @@ class _AdaptiveHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final needsPractice =
         summary.lastScore > 0 && summary.lastScore < summary.bestScore;
@@ -400,8 +406,8 @@ class _AdaptiveHeader extends StatelessWidget {
           Expanded(
             child: Text(
               needsPractice
-                  ? "Adaptatif: priorisez les faiblesses orales recentes."
-                  : "Adaptatif: faites quelques series orales pour calibrer.",
+                  ? l10n.ceHeaderAdviceNeedsPractice
+                  : l10n.ceHeaderAdviceEstablishBaseline,
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),
           ),

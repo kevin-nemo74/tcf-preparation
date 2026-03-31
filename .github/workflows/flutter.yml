@@ -28,3 +28,6 @@ jobs:
 
       - name: Android release compile check
         run: flutter build apk --release
+
+      - name: Web release compile check
+        run: flutter build web --release
