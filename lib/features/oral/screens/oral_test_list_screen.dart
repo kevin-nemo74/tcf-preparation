@@ -18,6 +18,59 @@ class OralTestListScreen extends StatefulWidget {
   State<OralTestListScreen> createState() => _OralTestListScreenState();
 }
 
+Widget _buildOralTestListHeader(BuildContext context) {
+  final cs = Theme.of(context).colorScheme;
+  return Container(
+    margin: const EdgeInsets.only(bottom: 16),
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          cs.secondaryContainer.withValues(alpha: 0.6),
+          cs.tertiaryContainer.withValues(alpha: 0.4),
+        ],
+      ),
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: cs.secondary.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(Icons.headphones_rounded, color: cs.secondary, size: 24),
+        ),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Tests Oraux',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: -0.3,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                'Comprehension orale (CO)',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: cs.onSurface.withValues(alpha: 0.7),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 class _OralTestListScreenState extends State<OralTestListScreen> {
   late Future<List<OralTestModel>> testsFuture;
   OralTestModel? selectedTest;
@@ -47,9 +100,7 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
           );
         }
         if (snapshot.hasError) {
-          return Center(
-            child: Text("${l10n.coLoadError}\n${snapshot.error}"),
-          );
+          return Center(child: Text("${l10n.coLoadError}\n${snapshot.error}"));
         }
 
         final tests = snapshot.data ?? [];
@@ -78,28 +129,36 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
                 builder: (context, summarySnap) {
                   final summary =
                       summarySnap.data ?? UserProgressSummary.empty();
-                  return ListView.separated(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: tests.length + 1,
-                    separatorBuilder: (_, __) => const SizedBox(height: 10),
-                    itemBuilder: (context, index) {
-                      if (index == 0) return _AdaptiveHeader(summary: summary);
-                      final test = tests[index - 1];
-                      final row = _TestRow(
-                        title: test.title,
-                        subtitle:
-                            "${test.questions.length} questions • ${test.durationMinutes} min • Meilleur ${_scoreText(bestScores[test.id])}",
-                        leading: _testNumberFromId(test.id),
-                        isSelected: false,
-                        onTap: () => _start(context, test),
-                      );
-                      return AnimatedFadeSlide(
-                        delay:
-                            AppMotion.fast +
-                            Duration(milliseconds: 40 * (index - 1)),
-                        child: row,
-                      );
-                    },
+                  return ListView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    children: [
+                      _buildOralTestListHeader(context),
+                      _AdaptiveHeader(summary: summary),
+                      const SizedBox(height: 12),
+                      ...tests.asMap().entries.map((entry) {
+                        final index = entry.key;
+                        final test = entry.value;
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: AnimatedFadeSlide(
+                            delay:
+                                AppMotion.fast +
+                                Duration(milliseconds: 40 * index),
+                            child: _TestRow(
+                              title: test.title,
+                              subtitle:
+                                  "${test.questions.length} questions • ${test.durationMinutes} min • Meilleur ${_scoreText(bestScores[test.id])}",
+                              leading: _testNumberFromId(test.id),
+                              isSelected: false,
+                              onTap: () => _start(context, test),
+                            ),
+                          ),
+                        );
+                      }),
+                    ],
                   );
                 },
               );
@@ -116,31 +175,35 @@ class _OralTestListScreenState extends State<OralTestListScreen> {
                     builder: (context, summarySnap) {
                       final summary =
                           summarySnap.data ?? UserProgressSummary.empty();
-                      return ListView.separated(
-                        padding: const EdgeInsets.all(16),
-                        itemCount: tests.length + 1,
-                        separatorBuilder: (_, __) => const SizedBox(height: 10),
-                        itemBuilder: (context, index) {
-                          if (index == 0) {
-                            return _AdaptiveHeader(summary: summary);
-                          }
-                          final test = tests[index - 1];
-                          final isSelected = selectedTest?.id == test.id;
-                          final row = _TestRow(
-                            title: test.title,
-                            subtitle:
-                                "${test.questions.length} questions • ${test.durationMinutes} min • Meilleur ${_scoreText(bestScores[test.id])} • Dernier ${_scoreText(latestScores[test.id])}",
-                            leading: _testNumberFromId(test.id),
-                            isSelected: isSelected,
-                            onTap: () => setState(() => selectedTest = test),
-                          );
-                          return AnimatedFadeSlide(
-                            delay:
-                                AppMotion.fast +
-                                Duration(milliseconds: 40 * (index - 1)),
-                            child: row,
-                          );
-                        },
+                      return ListView(
+                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                        children: [
+                          _buildOralTestListHeader(context),
+                          _AdaptiveHeader(summary: summary),
+                          const SizedBox(height: 12),
+                          ...tests.asMap().entries.map((entry) {
+                            final index = entry.key;
+                            final test = entry.value;
+                            final isSelected = selectedTest?.id == test.id;
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: AnimatedFadeSlide(
+                                delay:
+                                    AppMotion.fast +
+                                    Duration(milliseconds: 40 * index),
+                                child: _TestRow(
+                                  title: test.title,
+                                  subtitle:
+                                      "${test.questions.length} questions • ${test.durationMinutes} min • Meilleur ${_scoreText(bestScores[test.id])} • Dernier ${_scoreText(latestScores[test.id])}",
+                                  leading: _testNumberFromId(test.id),
+                                  isSelected: isSelected,
+                                  onTap: () =>
+                                      setState(() => selectedTest = test),
+                                ),
+                              ),
+                            );
+                          }),
+                        ],
                       );
                     },
                   ),

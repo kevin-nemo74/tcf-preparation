@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/design_tokens.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
-import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 import 'package:tcf_canada_preparation/app/locale_controller.dart';
 import 'package:tcf_canada_preparation/app/theme_controller.dart';
 
@@ -17,169 +15,205 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         final user = snapshot.data;
 
-        return Scaffold(
-          appBar: AppBar(title: Text(l10n.settingsTitle)),
-          body: Align(
-            alignment: Alignment.topCenter,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: Responsive.canvasMaxWidth(context),
-              ),
-              child: ListView(
-                padding: Responsive.pagePadding(context, vertical: 16),
-                children: [
-                  // Account card
-                  AnimatedFadeSlide(
-                    child: Container(
-                      padding: DesignTokens.cardPadding,
-                      decoration: BoxDecoration(
-                        borderRadius: DesignTokens.cardBorderRadius(),
-                        color: cs.surface,
-                        border: Border.all(
-                          color: cs.outlineVariant.withOpacity(0.35),
-                        ),
+        return ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          children: [
+            _buildSettingsHeader(context),
+            const SizedBox(height: 16),
+            // Account card
+            AnimatedFadeSlide(
+              child: Container(
+                padding: DesignTokens.cardPadding,
+                decoration: BoxDecoration(
+                  borderRadius: DesignTokens.cardBorderRadius(),
+                  color: cs.surface,
+                  border: Border.all(
+                    color: cs.outlineVariant.withValues(alpha: 0.35),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 22,
+                      backgroundColor: cs.primaryContainer.withValues(
+                        alpha: 0.7,
                       ),
-                      child: Row(
+                      child: Icon(
+                        Icons.person_rounded,
+                        color: cs.onPrimaryContainer,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CircleAvatar(
-                            radius: 22,
-                            backgroundColor: cs.primaryContainer.withOpacity(
-                              0.7,
-                            ),
-                            child: Icon(
-                              Icons.person_rounded,
-                              color: cs.onPrimaryContainer,
-                            ),
+                          Text(
+                            user?.displayName ?? "Utilisateur",
+                            style: const TextStyle(fontWeight: FontWeight.w900),
                           ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  user?.displayName ?? "Utilisateur",
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  user?.email ?? "",
-                                  style: TextStyle(
-                                    color: cs.onSurface.withOpacity(0.65),
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
+                          const SizedBox(height: 4),
+                          Text(
+                            user?.email ?? "",
+                            style: TextStyle(
+                              color: cs.onSurface.withValues(alpha: 0.65),
+                              fontWeight: FontWeight.w600,
                             ),
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: cs.onSurface.withOpacity(0.6),
                           ),
                         ],
                       ),
                     ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  AnimatedFadeSlide(
-                    delay: const Duration(milliseconds: 40),
-                    child: _ThemeModeCard(),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  AnimatedFadeSlide(
-                    delay: const Duration(milliseconds: 50),
-                    child: _LanguageModeCard(),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Profile navigation
-                  AnimatedFadeSlide(
-                    delay: const Duration(milliseconds: 60),
-                    child: Semantics(
-                      button: true,
-                      label: 'Ouvrir les details du profil',
-                      child: ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        tileColor: cs.surfaceContainerHighest.withOpacity(0.35),
-                        leading: const Icon(Icons.account_circle_rounded),
-                        title: const Text("Profil"),
-                        subtitle: const Text("Voir les details du compte"),
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 16,
-                        ),
-                        minVerticalPadding: 12,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            AppRoutes.fadeSlide(const ProfileScreen()),
-                          );
-                        },
-                      ),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      color: cs.onSurface.withValues(alpha: 0.6),
                     ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Logout
-                  AnimatedFadeSlide(
-                    delay: const Duration(milliseconds: 110),
-                    child: Semantics(
-                      button: true,
-                      label: 'Se deconnecter du compte',
-                      child: ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        tileColor: cs.surfaceContainerHighest.withOpacity(0.35),
-                        leading: Icon(Icons.logout_rounded, color: cs.error),
-                        title: Text(
-                          "Deconnexion",
-                          style: TextStyle(
-                            color: cs.error,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        subtitle: const Text("Quitter votre compte"),
-                        minVerticalPadding: 12,
-                        onTap: () async {
-                          final ok = await _confirmLogout(context);
-                          if (!ok) return;
-
-                          await AuthService.logout();
-
-                          if (!context.mounted) return;
-
-                          // ✅ Immediately return to root (AuthGate),
-                          // which will show LoginScreen since user is signed out
-                          Navigator.of(
-                            context,
-                          ).popUntil((route) => route.isFirst);
-                        },
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
+
+            const SizedBox(height: 12),
+
+            AnimatedFadeSlide(
+              delay: const Duration(milliseconds: 40),
+              child: _ThemeModeCard(),
+            ),
+
+            const SizedBox(height: 12),
+
+            AnimatedFadeSlide(
+              delay: const Duration(milliseconds: 50),
+              child: _LanguageModeCard(),
+            ),
+
+            const SizedBox(height: 12),
+
+            // Profile navigation
+            AnimatedFadeSlide(
+              delay: const Duration(milliseconds: 60),
+              child: Semantics(
+                button: true,
+                label: 'Ouvrir les details du profil',
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  tileColor: cs.surfaceContainerHighest.withValues(alpha: 0.35),
+                  leading: const Icon(Icons.account_circle_rounded),
+                  title: const Text("Profil"),
+                  subtitle: const Text("Voir les details du compte"),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                  ),
+                  minVerticalPadding: 12,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      AppRoutes.fadeSlide(const ProfileScreen()),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // Logout
+            AnimatedFadeSlide(
+              delay: const Duration(milliseconds: 110),
+              child: Semantics(
+                button: true,
+                label: 'Se deconnecter du compte',
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  tileColor: cs.surfaceContainerHighest.withValues(alpha: 0.35),
+                  leading: Icon(Icons.logout_rounded, color: cs.error),
+                  title: Text(
+                    "Deconnexion",
+                    style: TextStyle(
+                      color: cs.error,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  subtitle: const Text("Quitter votre compte"),
+                  minVerticalPadding: 12,
+                  onTap: () async {
+                    final ok = await _confirmLogout(context);
+                    if (!ok) return;
+
+                    await AuthService.logout();
+
+                    if (!context.mounted) return;
+
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  },
+                ),
+              ),
+            ),
+          ],
         );
       },
+    );
+  }
+
+  Widget _buildSettingsHeader(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            cs.surfaceContainerHighest.withValues(alpha: 0.6),
+            cs.surfaceContainerLow.withValues(alpha: 0.4),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: cs.onSurface.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(Icons.settings_rounded, color: cs.onSurface, size: 24),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Parametres',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.3,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'Theme, langue et compte',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: cs.onSurface.withValues(alpha: 0.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -215,8 +249,8 @@ class _ThemeModeCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: cs.surfaceContainerHighest.withOpacity(0.35),
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        color: cs.surfaceContainerHighest.withValues(alpha: 0.35),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,8 +305,8 @@ class _LanguageModeCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: cs.surfaceContainerHighest.withOpacity(0.35),
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        color: cs.surfaceContainerHighest.withValues(alpha: 0.35),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,7 +334,7 @@ class _LanguageModeCard extends StatelessWidget {
               ButtonSegment<String>(
                 value: "fr",
                 icon: Icon(Icons.translate_rounded),
-                label: Text("Français"),
+                label: Text("Francais"),
               ),
             ],
             selected: <String>{value},

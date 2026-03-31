@@ -19,7 +19,6 @@ class ExamPortalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
     final resolvedUid = uid ?? ProgressRepository.currentUid;
     final wide = kIsWeb
         ? Responsive.isTabletWeb(context)
@@ -31,48 +30,178 @@ class ExamPortalScreen extends StatelessWidget {
         child: resolvedUid != null
             ? wide
                   ? SingleChildScrollView(
-                      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          _buildHeader(context),
+                          const SizedBox(height: 20),
                           _PortalSummary(uid: resolvedUid),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 16),
                           _PortalActions(uid: resolvedUid, compact: true),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 16),
+                          _buildSectionTitle(
+                            context,
+                            'Plan d\'etude',
+                            Icons.event_note_rounded,
+                          ),
+                          const SizedBox(height: 8),
                           StudyPlanPortalCard(uid: resolvedUid),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 16),
+                          _buildSectionTitle(
+                            context,
+                            'Analyse de progression',
+                            Icons.insights_rounded,
+                          ),
+                          const SizedBox(height: 8),
                           _ProgressInsights(uid: resolvedUid, compact: true),
                         ],
                       ),
                     )
                   : ListView(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       children: [
+                        _buildHeader(context),
+                        const SizedBox(height: 20),
                         _PortalSummary(uid: resolvedUid),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 16),
                         _PortalActions(uid: resolvedUid),
+                        const SizedBox(height: 20),
+                        _buildSectionTitle(
+                          context,
+                          'Plan d\'etude',
+                          Icons.event_note_rounded,
+                        ),
                         const SizedBox(height: 10),
                         StudyPlanPortalCard(uid: resolvedUid),
+                        const SizedBox(height: 20),
+                        _buildSectionTitle(
+                          context,
+                          'Analyse de progression',
+                          Icons.insights_rounded,
+                        ),
                         const SizedBox(height: 10),
                         _ProgressInsights(uid: resolvedUid),
                       ],
                     )
-            : Center(
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
-                  ),
-                  child: Text(
-                    'Connectez-vous pour acceder au tableau de bord',
-                    style: TextStyle(
-                      color: cs.onSurface.withValues(alpha: 0.7),
-                      fontWeight: FontWeight.w600,
-                    ),
+            : _buildEmptyState(context),
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            cs.primaryContainer.withValues(alpha: 0.6),
+            cs.secondaryContainer.withValues(alpha: 0.4),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: cs.primary.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              Icons.dashboard_customize_rounded,
+              color: cs.primary,
+              size: 24,
+            ),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Tableau de bord',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.3,
                   ),
                 ),
+                const SizedBox(height: 2),
+                Text(
+                  'Suivez votre progression et planifiez votre etude',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: cs.onSurface.withValues(alpha: 0.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(BuildContext context, String title, IconData icon) {
+    final cs = Theme.of(context).colorScheme;
+    return Row(
+      children: [
+        Icon(icon, size: 18, color: cs.primary),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w800,
+            letterSpacing: -0.2,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEmptyState(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
+                shape: BoxShape.circle,
               ),
+              child: Icon(
+                Icons.person_outline_rounded,
+                size: 48,
+                color: cs.onSurface.withValues(alpha: 0.5),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Tableau de bord',
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Connectez-vous pour acceder a votre\ntableau de bord personnalise',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: cs.onSurface.withValues(alpha: 0.6),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
