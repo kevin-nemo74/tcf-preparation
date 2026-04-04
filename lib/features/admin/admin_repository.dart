@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 enum SubscriptionPlan {
   none('Aucun'),
-  essential('Essentiel - 15 jours', 15),
-  standard('Standard - 30 jours', 30);
+  essential('Essentiel - 15 jours / 15\$', 15),
+  standard('Standard - 30 jours / 25\$', 30);
 
   final String label;
   final int days;
