@@ -13,14 +13,12 @@ import 'app/locale_controller.dart';
 import 'app/theme_controller.dart';
 import 'core/theme/app_theme.dart';
 import 'core/widgets/app_scroll_behavior.dart';
+import 'features/admin/user_validation_service.dart';
 import 'features/auth/auth_gate.dart';
-
-// If you used FlutterFire CLI, you'll have this file:
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ✅ Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
@@ -29,11 +27,14 @@ void main() async {
     return true;
   };
 
-  // ✅ Load theme preference
   final themeController = ThemeController();
   await themeController.loadThemeMode();
   final localeController = LocaleController();
   await localeController.loadLocaleMode();
+
+  UserValidationService.instance.startPeriodicCheck(
+    interval: const Duration(seconds: 30),
+  );
 
   runApp(
     MultiProvider(

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,18 @@ import '../onboarding/onboarding_screen.dart';
 import '../../app/home_shell.dart';
 import '../progress/progress_repository.dart';
 
+Future<bool> _userExistsInFirestore(String uid) async {
+  try {
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get();
+    return doc.exists;
+  } catch (_) {
+    return true;
+  }
+}
+
 class AuthGate extends StatefulWidget {
   final Future<ConnectivityResult> Function()? checkConnectivity;
   final Stream<List<ConnectivityResult>>? connectivityChanges;
@@ -18,6 +31,7 @@ class AuthGate extends StatefulWidget {
   final Widget? unauthenticatedWidget;
   final Widget? authenticatedWidget;
   final Widget Function(VoidCallback onRetry)? offlineBuilder;
+
   /// When set, used instead of [ProgressRepository.isOnboardingDone] after sign-in.
   /// Use in tests to avoid Firestore. When null on the [authStatusChanges] path,
   /// onboarding is skipped (shows app immediately).
@@ -61,16 +75,19 @@ class _AuthGateState extends State<AuthGate> {
   void initState() {
     super.initState();
     _checkConnectivity();
-    final stream = widget.connectivityChanges ?? Connectivity().onConnectivityChanged;
+    final stream =
+        widget.connectivityChanges ?? Connectivity().onConnectivityChanged;
     _sub = stream.listen((results) {
-      final online = results.isNotEmpty && !results.contains(ConnectivityResult.none);
+      final online =
+          results.isNotEmpty && !results.contains(ConnectivityResult.none);
       if (mounted) setState(() => _hasInternet = online);
     });
 
     if (widget.authStatusChanges != null) {
       _userStream = const Stream<User?>.empty();
     } else {
-      _userStream = widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
+      _userStream =
+          widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
     }
   }
 
@@ -82,7 +99,8 @@ class _AuthGateState extends State<AuthGate> {
       if (widget.authStatusChanges != null) {
         _userStream = const Stream<User?>.empty();
       } else {
-        _userStream = widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
+        _userStream =
+            widget.authStateChanges ?? FirebaseAuth.instance.authStateChanges();
       }
     }
   }
@@ -132,7 +150,9 @@ class _AuthGateState extends State<AuthGate> {
             builder: (context, onboardSnap) {
               if (onboardSnap.connectionState == ConnectionState.waiting) {
                 return widget.loadingWidget ??
-                    const Scaffold(body: Center(child: CircularProgressIndicator()));
+                    const Scaffold(
+                      body: Center(child: CircularProgressIndicator()),
+                    );
               }
               final done = onboardSnap.data ?? false;
               if (done) return app;
@@ -151,9 +171,7 @@ class _AuthGateState extends State<AuthGate> {
         if (!snapshot.hasData &&
             snapshot.connectionState == ConnectionState.waiting) {
           return widget.loadingWidget ??
-              const Scaffold(
-                body: Center(child: CircularProgressIndicator()),
-              );
+              const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
 
         final user = snapshot.data;
@@ -163,22 +181,43 @@ class _AuthGateState extends State<AuthGate> {
           return widget.unauthenticatedWidget ?? const FrontScreen();
         }
 
-        // Logged in -> Onboarding (first run) -> App
-        final app = widget.authenticatedWidget ?? const HomeShell();
-        final onboardingFuture = widget.onboardingDoneCheck ??
-            () => ProgressRepository.isOnboardingDone(uid: user.uid);
+        // Check if user still exists in Firestore (wasn't deleted by admin)
         return FutureBuilder<bool>(
-          future: onboardingFuture(),
-          builder: (context, onboardSnap) {
-            if (onboardSnap.connectionState == ConnectionState.waiting) {
+          future: _userExistsInFirestore(user.uid),
+          builder: (context, userExistsSnap) {
+            // Still loading user check
+            if (userExistsSnap.connectionState == ConnectionState.waiting) {
               return widget.loadingWidget ??
                   const Scaffold(
                     body: Center(child: CircularProgressIndicator()),
                   );
             }
-            final done = onboardSnap.data ?? false;
-            if (done) return app;
-            return OnboardingScreen(child: app);
+
+            // User was deleted by admin - sign them out
+            if (userExistsSnap.data == false) {
+              FirebaseAuth.instance.signOut();
+              return widget.unauthenticatedWidget ?? const FrontScreen();
+            }
+
+            // Logged in -> Onboarding (first run) -> App
+            final app = widget.authenticatedWidget ?? const HomeShell();
+            final onboardingFuture =
+                widget.onboardingDoneCheck ??
+                () => ProgressRepository.isOnboardingDone(uid: user.uid);
+            return FutureBuilder<bool>(
+              future: onboardingFuture(),
+              builder: (context, onboardSnap) {
+                if (onboardSnap.connectionState == ConnectionState.waiting) {
+                  return widget.loadingWidget ??
+                      const Scaffold(
+                        body: Center(child: CircularProgressIndicator()),
+                      );
+                }
+                final done = onboardSnap.data ?? false;
+                if (done) return app;
+                return OnboardingScreen(child: app);
+              },
+            );
           },
         );
       },

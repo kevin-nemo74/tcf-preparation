@@ -7,6 +7,8 @@ import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/app/locale_controller.dart';
 import 'package:tcf_canada_preparation/app/theme_controller.dart';
 
+import '../admin/admin_repository.dart';
+import '../admin/admin_panel_screen.dart';
 import '../auth/auth_service.dart';
 import '../profile/profile_screen.dart';
 
@@ -93,6 +95,51 @@ class SettingsScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 12),
+
+            // Admin Panel (only for admins)
+            FutureBuilder<bool>(
+              future: AdminRepository.isCurrentUserAdmin(),
+              builder: (context, snapshot) {
+                if (snapshot.data != true) return const SizedBox.shrink();
+                return Column(
+                  children: [
+                    AnimatedFadeSlide(
+                      delay: const Duration(milliseconds: 65),
+                      child: Semantics(
+                        button: true,
+                        label: 'Ouvrir le panneau d\'administration',
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          tileColor: cs.primaryContainer.withValues(
+                            alpha: 0.25,
+                          ),
+                          leading: Icon(
+                            Icons.admin_panel_settings_rounded,
+                            color: cs.primary,
+                          ),
+                          title: const Text("Administration"),
+                          subtitle: const Text("Gerer les utilisateurs"),
+                          trailing: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 16,
+                          ),
+                          minVerticalPadding: 12,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              AppRoutes.fadeSlide(const AdminPanelScreen()),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
+                );
+              },
+            ),
 
             // Profile navigation
             AnimatedFadeSlide(
