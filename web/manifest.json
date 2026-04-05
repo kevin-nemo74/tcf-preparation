@@ -1,11 +1,11 @@
 {
-     "name": "MapleTcf",
-     "short_name": "MapleTcf",
+     "name": "Mapletcf",
+     "short_name": "Mapletcf",
      "start_url": ".",
      "display": "standalone",
-     "background_color": "#0175C2",
-     "theme_color": "#0175C2",
-     "description": "MapleTcf — TCF Canada preparation platform.",
+     "background_color": "#FFFFFF",
+     "theme_color": "#FFFFFF",
+     "description": "Mapletcf — TCF Canada preparation platform.",
      "orientation": "portrait-primary",
      "prefer_related_applications": false,
      "icons": [
