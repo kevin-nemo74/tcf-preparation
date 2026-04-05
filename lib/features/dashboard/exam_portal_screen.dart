@@ -95,33 +95,49 @@ class ExamPortalScreen extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
             cs.primaryContainer.withValues(alpha: 0.6),
-            cs.secondaryContainer.withValues(alpha: 0.4),
+            cs.tertiaryContainer.withValues(alpha: 0.35),
+            cs.secondaryContainer.withValues(alpha: 0.25),
           ],
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: cs.primary.withValues(alpha: 0.2)),
+        boxShadow: [
+          BoxShadow(
+            color: cs.primary.withValues(alpha: 0.08),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: cs.primary.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(12),
+              color: cs.primary.withValues(alpha: 0.18),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: cs.primary.withValues(alpha: 0.15),
+                  blurRadius: 12,
+                  offset: const Offset(0, 3),
+                ),
+              ],
             ),
             child: Icon(
               Icons.dashboard_customize_rounded,
               color: cs.primary,
-              size: 24,
+              size: 28,
             ),
           ),
-          const SizedBox(width: 14),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,11 +149,12 @@ class ExamPortalScreen extends StatelessWidget {
                     letterSpacing: -0.3,
                   ),
                 ),
-                const SizedBox(height: 2),
+                const SizedBox(height: 4),
                 Text(
                   'Suivez votre progression et planifiez votre etude',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: cs.onSurface.withValues(alpha: 0.7),
+                    color: cs.onSurface.withValues(alpha: 0.72),
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
@@ -230,20 +247,38 @@ class _PortalSummary extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.symmetric(
               horizontal: 14,
-              vertical: wide ? 10 : 14,
+              vertical: wide ? 12 : 16,
             ),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
+              borderRadius: BorderRadius.circular(18),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  cs.primaryContainer.withValues(alpha: 0.2),
+                  cs.surfaceContainerHighest.withValues(alpha: 0.35),
+                ],
+              ),
               border: Border.all(
                 color: cs.outlineVariant.withValues(alpha: 0.35),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: cs.primary.withValues(alpha: 0.05),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
             child: Wrap(
               alignment: WrapAlignment.spaceBetween,
-              runSpacing: 8,
+              runSpacing: 10,
               children: [
-                _Kpi(label: 'Meilleur', value: '${summary.bestScore} / 699'),
+                _Kpi(
+                  label: 'Meilleur',
+                  value: '${summary.bestScore} / 699',
+                  highlight: summary.bestScore >= 500,
+                ),
                 _Kpi(label: 'Dernier', value: '${summary.lastScore} / 699'),
                 _Kpi(
                   label: 'Moyenne',
@@ -252,7 +287,11 @@ class _PortalSummary extends StatelessWidget {
                       : summary.averageScore.toStringAsFixed(1),
                 ),
                 _Kpi(label: 'Tentatives', value: '${summary.attemptsCount}'),
-                _Kpi(label: 'Serie', value: '${summary.currentStreak} j'),
+                _Kpi(
+                  label: 'Serie',
+                  value: '${summary.currentStreak} j',
+                  highlight: summary.currentStreak >= 3,
+                ),
               ],
             ),
           ),
@@ -329,19 +368,33 @@ class _ActionButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: compact ? 10 : 14,
-          vertical: compact ? 10 : 12,
+          horizontal: compact ? 12 : 16,
+          vertical: compact ? 10 : 13,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(18),
           color: cs.surface,
           border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
+          boxShadow: [
+            BoxShadow(
+              color: cs.shadow.withValues(alpha: 0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 18, color: cs.primary),
-            SizedBox(width: compact ? 6 : 8),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: cs.primaryContainer.withValues(alpha: 0.5),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(icon, size: 16, color: cs.primary),
+            ),
+            SizedBox(width: compact ? 8 : 10),
             Text(
               label,
               style: TextStyle(
@@ -364,6 +417,7 @@ class _ProgressInsights extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return StreamBuilder<List<Map<String, dynamic>>>(
       stream: ProgressRepository.streamRecentAttempts(uid, limit: 8),
       builder: (context, attemptsSnap) {
@@ -381,79 +435,137 @@ class _ProgressInsights extends StatelessWidget {
             );
             return Container(
               width: double.infinity,
-              padding: EdgeInsets.all(compact ? 12 : 16),
+              padding: EdgeInsets.all(compact ? 14 : 18),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(20),
+                color: cs.surface,
                 border: Border.all(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.outlineVariant.withValues(alpha: 0.35),
+                  color: cs.outlineVariant.withValues(alpha: 0.35),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: cs.shadow.withValues(alpha: 0.04),
+                    blurRadius: 16,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Analyse de progression',
-                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: cs.primaryContainer.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(
+                          Icons.insights_rounded,
+                          size: 18,
+                          color: cs.primary,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        'Analyse de progression',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 16,
+                          color: cs.onSurface,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 12),
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 10,
+                      horizontal: 14,
+                      vertical: 12,
                     ),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primaryContainer.withValues(alpha: 0.35),
+                      borderRadius: BorderRadius.circular(14),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          cs.primaryContainer.withValues(alpha: 0.4),
+                          cs.secondaryContainer.withValues(alpha: 0.25),
+                        ],
+                      ),
+                      border: Border.all(
+                        color: cs.primary.withValues(alpha: 0.25),
+                      ),
                     ),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.bolt_rounded,
-                          size: 18,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        const SizedBox(width: 8),
+                        Icon(Icons.bolt_rounded, size: 20, color: cs.primary),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: Text(
                             nextAction,
-                            style: const TextStyle(fontWeight: FontWeight.w700),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: cs.onPrimaryContainer,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 12),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
                     children: [
-                      _InsightChip(label: 'File de revision: $queueCount'),
-                      _InsightChip(label: 'Tendance: $trendText'),
                       _InsightChip(
-                        label:
-                            "Moy CE: ${moduleAverages['CE']?.toStringAsFixed(1) ?? '0.0'}",
+                        label: 'File: $queueCount',
+                        highlighted: queueCount > 0,
+                      ),
+                      _InsightChip(
+                        label: 'Tendance: $trendText',
+                        highlighted: trendText == 'en hausse',
                       ),
                       _InsightChip(
                         label:
-                            "Moy CO: ${moduleAverages['CO']?.toStringAsFixed(1) ?? '0.0'}",
+                            "CE: ${moduleAverages['CE']?.toStringAsFixed(1) ?? '0.0'}",
+                      ),
+                      _InsightChip(
+                        label:
+                            "CO: ${moduleAverages['CO']?.toStringAsFixed(1) ?? '0.0'}",
                       ),
                     ],
                   ),
-                  SizedBox(height: compact ? 8 : 12),
+                  SizedBox(height: compact ? 10 : 14),
                   if (attempts.isEmpty)
-                    Text(
-                      'Passez votre premier test pour afficher l\'historique recent.',
-                      style: TextStyle(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.7),
-                        fontWeight: FontWeight.w600,
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: cs.surfaceContainerHighest.withValues(
+                          alpha: 0.4,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.info_outline_rounded,
+                            size: 18,
+                            color: cs.onSurface.withValues(alpha: 0.7),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              'Passez votre premier test pour afficher l\'historique recent.',
+                              style: TextStyle(
+                                color: cs.onSurface.withValues(alpha: 0.7),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     )
                   else
@@ -494,8 +606,9 @@ String _nextActionText({
 
 class _InsightChip extends StatelessWidget {
   final String label;
+  final bool highlighted;
 
-  const _InsightChip({required this.label});
+  const _InsightChip({required this.label, this.highlighted = false});
 
   @override
   Widget build(BuildContext context) {
@@ -504,9 +617,23 @@ class _InsightChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(999),
-        color: cs.surfaceContainerHighest.withValues(alpha: 0.45),
+        color: highlighted
+            ? cs.primaryContainer.withValues(alpha: 0.55)
+            : cs.surfaceContainerHighest.withValues(alpha: 0.45),
+        border: Border.all(
+          color: highlighted
+              ? cs.primary.withValues(alpha: 0.4)
+              : cs.outlineVariant.withValues(alpha: 0.25),
+        ),
       ),
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w700)),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontWeight: FontWeight.w700,
+          fontSize: 12.5,
+          color: highlighted ? cs.primary : null,
+        ),
+      ),
     );
   }
 }
@@ -553,24 +680,47 @@ class _AttemptRow extends StatelessWidget {
 class _Kpi extends StatelessWidget {
   final String label;
   final String value;
-  const _Kpi({required this.label, required this.value});
+  final bool highlight;
+  const _Kpi({
+    required this.label,
+    required this.value,
+    this.highlight = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return Container(
       constraints: const BoxConstraints(minWidth: 80),
+      padding: EdgeInsets.symmetric(
+        horizontal: highlight ? 10 : 0,
+        vertical: highlight ? 6 : 0,
+      ),
+      decoration: highlight
+          ? BoxDecoration(
+              color: cs.primary.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: cs.primary.withValues(alpha: 0.3)),
+            )
+          : null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             label,
             style: TextStyle(
-              color: cs.onSurface.withValues(alpha: 0.68),
+              color: cs.onSurface.withValues(alpha: highlight ? 0.85 : 0.68),
               fontSize: 12,
+              fontWeight: highlight ? FontWeight.w700 : FontWeight.w600,
             ),
           ),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w900)),
+          Text(
+            value,
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              color: highlight ? cs.primary : null,
+            ),
+          ),
         ],
       ),
     );

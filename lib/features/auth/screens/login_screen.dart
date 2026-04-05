@@ -40,10 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _loading = true);
 
     try {
-      await AuthService.login(
-        email: _email.text,
-        password: _password.text,
-      );
+      await AuthService.login(email: _email.text, password: _password.text);
       await AppAnalytics.logLoginSuccess();
       if (!mounted) return;
       // Return to AuthGate (root). It will rebuild to the authenticated flow.
@@ -70,7 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (t.contains('wrong-password') || t.contains('invalid-credential')) {
       return "E-mail ou mot de passe incorrect.";
     }
-    if (t.contains('user-not-found')) return "Aucun compte trouve avec cet e-mail.";
+    if (t.contains('user-not-found'))
+      return "Aucun compte trouve avec cet e-mail.";
     if (t.contains('network')) return "Erreur reseau. Veuillez reessayer.";
     if (t.contains('invalid-email')) return "Adresse e-mail invalide.";
     return "Connexion echouee. Veuillez reessayer.";
@@ -104,15 +102,14 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: isWide ? 480 : 520),
                 child: StaggeredColumn(
-                  spacing: 12,
+                  spacing: 14,
                   children: [
                     const PremiumBrandMark(large: true),
                     Text(
                       l10n.loginWelcomeBack,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w900,
-                          ),
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.w900),
                     ),
                     Text(
                       l10n.loginAccessTests,
@@ -125,28 +122,75 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 8),
                     AnimatedFadeSlide(
                       delay: const Duration(milliseconds: 120),
-                      child: PremiumInfoCard(
-                        padding: const EdgeInsets.all(20),
+                      child: Container(
+                        padding: const EdgeInsets.all(22),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          color: cs.surface,
+                          border: Border.all(
+                            color: cs.outlineVariant.withValues(alpha: 0.35),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: cs.primary.withValues(alpha: 0.06),
+                              blurRadius: 20,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
                         child: Form(
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: cs.primaryContainer.withValues(
+                                    alpha: 0.3,
+                                  ),
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.email_rounded,
+                                      color: cs.primary,
+                                      size: 20,
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      'Connexion',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        color: cs.primary,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 18),
                               TextFormField(
                                 controller: _email,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   labelText: l10n.emailLabel,
                                   prefixIcon: const Icon(Icons.email_rounded),
+                                  filled: true,
+                                  fillColor: cs.surfaceContainerHighest
+                                      .withValues(alpha: 0.5),
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
-                                  if (value.isEmpty) return "L'e-mail est obligatoire";
-                                  if (!value.contains('@')) return "Entrez un e-mail valide";
+                                  if (value.isEmpty)
+                                    return "L'e-mail est obligatoire";
+                                  if (!value.contains('@'))
+                                    return "Entrez un e-mail valide";
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 14),
                               TextFormField(
                                 controller: _password,
                                 obscureText: _obscure,
@@ -154,16 +198,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                   labelText: l10n.passwordLabel,
                                   prefixIcon: const Icon(Icons.lock_rounded),
                                   suffixIcon: IconButton(
-                                    onPressed: () => setState(() => _obscure = !_obscure),
-                                    icon: Icon(_obscure
-                                        ? Icons.visibility_rounded
-                                        : Icons.visibility_off_rounded),
+                                    onPressed: () =>
+                                        setState(() => _obscure = !_obscure),
+                                    icon: Icon(
+                                      _obscure
+                                          ? Icons.visibility_rounded
+                                          : Icons.visibility_off_rounded,
+                                    ),
                                   ),
+                                  filled: true,
+                                  fillColor: cs.surfaceContainerHighest
+                                      .withValues(alpha: 0.5),
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "");
-                                  if (value.isEmpty) return "Le mot de passe est obligatoire";
-                                  if (value.length < 6) return "Minimum 6 caracteres";
+                                  if (value.isEmpty)
+                                    return "Le mot de passe est obligatoire";
+                                  if (value.length < 6)
+                                    return "Minimum 6 caracteres";
                                   return null;
                                 },
                               ),
@@ -176,24 +228,47 @@ class _LoginScreenState extends State<LoginScreen> {
                                       : () {
                                           Navigator.push(
                                             context,
-                                            AppRoutes.fadeSlide(const ForgotPasswordScreen()),
+                                            AppRoutes.fadeSlide(
+                                              const ForgotPasswordScreen(),
+                                            ),
                                           );
                                         },
                                   child: Text(l10n.forgotPasswordCta),
                                 ),
                               ),
-                              const SizedBox(height: 6),
+                              const SizedBox(height: 8),
                               SizedBox(
                                 width: double.infinity,
                                 child: FilledButton(
                                   onPressed: _loading ? null : _submit,
+                                  style: FilledButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 16,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                  ),
                                   child: _loading
                                       ? const SizedBox(
                                           height: 20,
                                           width: 20,
-                                          child: CircularProgressIndicator(strokeWidth: 2),
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ),
                                         )
-                                      : Text(l10n.loginCta),
+                                      : Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.login_rounded,
+                                              size: 20,
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Text(l10n.loginCta),
+                                          ],
+                                        ),
                                 ),
                               ),
                             ],

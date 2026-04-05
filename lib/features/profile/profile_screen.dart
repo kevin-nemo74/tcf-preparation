@@ -18,7 +18,10 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Profil")),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream: FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(uid)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ListView(
@@ -41,8 +44,14 @@ class ProfileScreen extends StatelessWidget {
           }
 
           final data = snapshot.data?.data() ?? {};
-          final username = (data['username'] ?? FirebaseAuth.instance.currentUser?.displayName ?? "Utilisateur").toString();
-          final email = (data['email'] ?? FirebaseAuth.instance.currentUser?.email ?? "").toString();
+          final username =
+              (data['username'] ??
+                      FirebaseAuth.instance.currentUser?.displayName ??
+                      "Utilisateur")
+                  .toString();
+          final email =
+              (data['email'] ?? FirebaseAuth.instance.currentUser?.email ?? "")
+                  .toString();
 
           DateTime? createdAt;
           final created = data['createdAt'];
@@ -57,10 +66,7 @@ class ProfileScreen extends StatelessWidget {
             'attempts',
             'totalAttempts',
           ]);
-          final bestScore = _readInt(data, const [
-            'bestScore',
-            'highestScore',
-          ]);
+          final bestScore = _readInt(data, const ['bestScore', 'highestScore']);
           final latestAttemptAt = _readDate(data, const [
             'lastAttemptAt',
             'latestAttemptAt',
@@ -74,199 +80,274 @@ class ProfileScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.topCenter,
               child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: Responsive.canvasMaxWidth(context)),
+                constraints: BoxConstraints(
+                  maxWidth: Responsive.canvasMaxWidth(context),
+                ),
                 child: ListView(
                   padding: Responsive.pagePadding(context, vertical: 16),
                   children: [
-                Container(
-                  padding: const EdgeInsets.all(18),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(22),
-                    color: cs.surface,
-                    border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
-                  ),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 28,
-                        backgroundColor: cs.primaryContainer.withOpacity(0.7),
-                        child: Icon(Icons.person_rounded, color: cs.onPrimaryContainer, size: 30),
-                      ),
-                      const SizedBox(width: 14),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              username,
-                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              email,
-                              style: TextStyle(
-                                color: cs.onSurface.withOpacity(0.65),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            cs.primaryContainer.withValues(alpha: 0.4),
+                            cs.secondaryContainer.withValues(alpha: 0.25),
                           ],
                         ),
+                        border: Border.all(
+                          color: cs.primary.withValues(alpha: 0.25),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: cs.primary.withValues(alpha: 0.08),
+                            blurRadius: 20,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-
-              const SizedBox(height: 14),
-
-              _InfoTile(
-                icon: Icons.badge_rounded,
-                title: "Nom d'utilisateur",
-                value: username,
-              ),
-              _InfoTile(
-                icon: Icons.email_rounded,
-                title: "E-mail",
-                value: email,
-              ),
-              _InfoTile(
-                icon: Icons.calendar_month_rounded,
-                title: "Date de creation",
-                value: createdAt == null ? "—" : _fmt(createdAt),
-              ),
-              _InfoTile(
-                icon: Icons.login_rounded,
-                title: "Derniere connexion",
-                value: lastLoginAt == null ? "—" : _fmt(lastLoginAt),
-              ),
-
-              const SizedBox(height: 20),
-              Text(
-                "Progression",
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              const SizedBox(height: 10),
-              _StatsTile(
-                icon: Icons.checklist_rounded,
-                title: "Tentatives totales",
-                value: attemptsCount?.toString() ?? "0",
-              ),
-              _StatsTile(
-                icon: Icons.emoji_events_rounded,
-                title: "Meilleur score",
-                value: bestScore == null ? "— / 699" : "$bestScore / 699",
-              ),
-              _StatsTile(
-                icon: Icons.history_rounded,
-                title: "Derniere tentative",
-                value: latestAttemptAt == null ? "—" : _fmt(latestAttemptAt),
-              ),
-              _StatsTile(
-                icon: Icons.local_fire_department_rounded,
-                title: "Serie en cours",
-                value: "$currentStreak jour(s)",
-              ),
-              _StatsTile(
-                icon: Icons.workspace_premium_rounded,
-                title: "Meilleure serie",
-                value: "$bestStreak jour(s)",
-              ),
-              _StatsTile(
-                icon: Icons.date_range_rounded,
-                title: "Cette semaine",
-                value: "$weeklyAttempts tentatives • ${weeklyAverage.toStringAsFixed(1)} moy",
-              ),
-              const SizedBox(height: 18),
-              Text(
-                "Objectifs atteints",
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w900,
-                    ),
-              ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  _BadgeChip(label: "Premiere tentative", unlocked: (attemptsCount ?? 0) >= 1),
-                  _BadgeChip(label: "5 tentatives", unlocked: (attemptsCount ?? 0) >= 5),
-                  _BadgeChip(label: "Score 500+", unlocked: (bestScore ?? 0) >= 500),
-                  _BadgeChip(label: "Serie 7 jours", unlocked: currentStreak >= 7),
-                ],
-              ),
-              const SizedBox(height: 18),
-              StreamBuilder<List<ReviewQueueItem>>(
-                stream: ProgressRepository.streamReviewQueue(uid, limit: 20),
-                builder: (context, qSnap) {
-                  final items = qSnap.data ?? const <ReviewQueueItem>[];
-                  return Column(
-                    children: [
-                      _StatsTile(
-                        icon: Icons.assignment_late_rounded,
-                        title: "File de revision",
-                        value: "${items.length} question(s) a revoir",
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            AppRoutes.fadeSlide(ReviewQueueScreen(uid: uid)),
-                          );
-                        },
-                      ),
-                      if (items.isNotEmpty)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Derniere en file: ${items.first.testTitle} / ${items.first.questionId}",
-                              style: TextStyle(
-                                color: cs.onSurface.withOpacity(0.7),
-                                fontWeight: FontWeight.w600,
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [cs.primary, cs.secondary],
+                              ),
+                            ),
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: cs.primaryContainer,
+                              child: Icon(
+                                Icons.person_rounded,
+                                color: cs.onPrimaryContainer,
+                                size: 32,
                               ),
                             ),
                           ),
-                        ),
-                    ],
-                  );
-                },
-              ),
-              const SizedBox(height: 18),
-              Text(
-                "Tentatives recentes",
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              const SizedBox(height: 8),
-              StreamBuilder<List<Map<String, dynamic>>>(
-                stream: ProgressRepository.streamRecentAttempts(uid, limit: 6),
-                builder: (context, attemptSnap) {
-                  final attempts = attemptSnap.data ?? const <Map<String, dynamic>>[];
-                  if (attempts.isEmpty) {
-                    return _StatsTile(
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  username,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.email_rounded,
+                                      size: 14,
+                                      color: cs.primary,
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Expanded(
+                                      child: Text(
+                                        email,
+                                        style: TextStyle(
+                                          color: cs.onSurface.withOpacity(0.75),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 14),
+
+                    _InfoTile(
+                      icon: Icons.badge_rounded,
+                      title: "Nom d'utilisateur",
+                      value: username,
+                    ),
+                    _InfoTile(
+                      icon: Icons.email_rounded,
+                      title: "E-mail",
+                      value: email,
+                    ),
+                    _InfoTile(
+                      icon: Icons.calendar_month_rounded,
+                      title: "Date de creation",
+                      value: createdAt == null ? "—" : _fmt(createdAt),
+                    ),
+                    _InfoTile(
+                      icon: Icons.login_rounded,
+                      title: "Derniere connexion",
+                      value: lastLoginAt == null ? "—" : _fmt(lastLoginAt),
+                    ),
+
+                    const SizedBox(height: 20),
+                    Text(
+                      "Progression",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    _StatsTile(
+                      icon: Icons.checklist_rounded,
+                      title: "Tentatives totales",
+                      value: attemptsCount?.toString() ?? "0",
+                    ),
+                    _StatsTile(
+                      icon: Icons.emoji_events_rounded,
+                      title: "Meilleur score",
+                      value: bestScore == null ? "— / 699" : "$bestScore / 699",
+                    ),
+                    _StatsTile(
                       icon: Icons.history_rounded,
-                      title: "Tentatives recentes",
-                      value: "Aucune tentative pour le moment",
-                    );
-                  }
-                  final ceAverage = _moduleAverage(attempts, 'CE');
-                  final coAverage = _moduleAverage(attempts, 'CO');
-                  return Column(
-                    children: [
-                      _StatsTile(
-                        icon: Icons.analytics_rounded,
-                        title: "Moyennes par module",
-                        value:
-                            "CE ${ceAverage.toStringAsFixed(1)} / CO ${coAverage.toStringAsFixed(1)}",
+                      title: "Derniere tentative",
+                      value: latestAttemptAt == null
+                          ? "—"
+                          : _fmt(latestAttemptAt),
+                    ),
+                    _StatsTile(
+                      icon: Icons.local_fire_department_rounded,
+                      title: "Serie en cours",
+                      value: "$currentStreak jour(s)",
+                    ),
+                    _StatsTile(
+                      icon: Icons.workspace_premium_rounded,
+                      title: "Meilleure serie",
+                      value: "$bestStreak jour(s)",
+                    ),
+                    _StatsTile(
+                      icon: Icons.date_range_rounded,
+                      title: "Cette semaine",
+                      value:
+                          "$weeklyAttempts tentatives • ${weeklyAverage.toStringAsFixed(1)} moy",
+                    ),
+                    const SizedBox(height: 18),
+                    Text(
+                      "Objectifs atteints",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
                       ),
-                      ...attempts.take(4).map(
-                        (attempt) => _AttemptTile(attempt: attempt),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        _BadgeChip(
+                          label: "Premiere tentative",
+                          unlocked: (attemptsCount ?? 0) >= 1,
+                        ),
+                        _BadgeChip(
+                          label: "5 tentatives",
+                          unlocked: (attemptsCount ?? 0) >= 5,
+                        ),
+                        _BadgeChip(
+                          label: "Score 500+",
+                          unlocked: (bestScore ?? 0) >= 500,
+                        ),
+                        _BadgeChip(
+                          label: "Serie 7 jours",
+                          unlocked: currentStreak >= 7,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 18),
+                    StreamBuilder<List<ReviewQueueItem>>(
+                      stream: ProgressRepository.streamReviewQueue(
+                        uid,
+                        limit: 20,
                       ),
-                    ],
-                  );
-                },
-              ),
+                      builder: (context, qSnap) {
+                        final items = qSnap.data ?? const <ReviewQueueItem>[];
+                        return Column(
+                          children: [
+                            _StatsTile(
+                              icon: Icons.assignment_late_rounded,
+                              title: "File de revision",
+                              value: "${items.length} question(s) a revoir",
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  AppRoutes.fadeSlide(
+                                    ReviewQueueScreen(uid: uid),
+                                  ),
+                                );
+                              },
+                            ),
+                            if (items.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Derniere en file: ${items.first.testTitle} / ${items.first.questionId}",
+                                    style: TextStyle(
+                                      color: cs.onSurface.withOpacity(0.7),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 18),
+                    Text(
+                      "Tentatives recentes",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    StreamBuilder<List<Map<String, dynamic>>>(
+                      stream: ProgressRepository.streamRecentAttempts(
+                        uid,
+                        limit: 6,
+                      ),
+                      builder: (context, attemptSnap) {
+                        final attempts =
+                            attemptSnap.data ?? const <Map<String, dynamic>>[];
+                        if (attempts.isEmpty) {
+                          return _StatsTile(
+                            icon: Icons.history_rounded,
+                            title: "Tentatives recentes",
+                            value: "Aucune tentative pour le moment",
+                          );
+                        }
+                        final ceAverage = _moduleAverage(attempts, 'CE');
+                        final coAverage = _moduleAverage(attempts, 'CO');
+                        return Column(
+                          children: [
+                            _StatsTile(
+                              icon: Icons.analytics_rounded,
+                              title: "Moyennes par module",
+                              value:
+                                  "CE ${ceAverage.toStringAsFixed(1)} / CO ${coAverage.toStringAsFixed(1)}",
+                            ),
+                            ...attempts
+                                .take(4)
+                                .map(
+                                  (attempt) => _AttemptTile(attempt: attempt),
+                                ),
+                          ],
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -336,30 +417,50 @@ class _InfoTile extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
+        boxShadow: [
+          BoxShadow(
+            color: cs.shadow.withValues(alpha: 0.03),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Row(
         children: [
           Container(
-            width: 44,
-            height: 44,
+            width: 46,
+            height: 46,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
-              color: cs.primaryContainer.withOpacity(0.6),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  cs.primaryContainer.withValues(alpha: 0.6),
+                  cs.secondaryContainer.withValues(alpha: 0.4),
+                ],
+              ),
             ),
-            child: Icon(icon, color: cs.onPrimaryContainer),
+            child: Icon(icon, color: cs.primary),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.w800)),
-                const SizedBox(height: 3),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13,
+                  ),
+                ),
+                const SizedBox(height: 4),
                 Text(
                   value,
                   style: TextStyle(
-                    color: cs.onSurface.withOpacity(0.7),
+                    color: cs.onSurface.withValues(alpha: 0.75),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -396,31 +497,46 @@ class _StatsTile extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
-          color: cs.surfaceContainerHighest.withOpacity(0.35),
-          border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+          color: cs.surface,
+          border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.3)),
+          boxShadow: [
+            BoxShadow(
+              color: cs.shadow.withValues(alpha: 0.03),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Row(
           children: [
-            Icon(icon, color: cs.primary),
-            const SizedBox(width: 10),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: cs.primaryContainer.withValues(alpha: 0.5),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(icon, color: cs.primary, size: 20),
+            ),
+            const SizedBox(width: 12),
             Expanded(
               child: Text(
                 title,
                 style: TextStyle(
-                  color: cs.onSurface.withOpacity(0.8),
+                  color: cs.onSurface.withValues(alpha: 0.8),
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
             Text(
               value,
-              style: const TextStyle(
-                fontWeight: FontWeight.w900,
-              ),
+              style: TextStyle(fontWeight: FontWeight.w900, color: cs.primary),
             ),
             if (onTap != null) ...[
               const SizedBox(width: 8),
-              Icon(Icons.chevron_right_rounded, color: cs.onSurface.withOpacity(0.55)),
+              Icon(
+                Icons.chevron_right_rounded,
+                color: cs.onSurface.withValues(alpha: 0.5),
+              ),
             ],
           ],
         ),
@@ -438,7 +554,9 @@ class _AttemptTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final module = (attempt['moduleType'] ?? 'CE').toString();
-    final title = (attempt['testTitle'] ?? attempt['testId'] ?? 'Serie pratique').toString();
+    final title =
+        (attempt['testTitle'] ?? attempt['testId'] ?? 'Serie pratique')
+            .toString();
     final score = _readAttemptScore(attempt);
     return Container(
       margin: const EdgeInsets.only(top: 10),
@@ -446,17 +564,68 @@ class _AttemptTile extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.3)),
+        boxShadow: [
+          BoxShadow(
+            color: cs.shadow.withValues(alpha: 0.03),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Row(
         children: [
-          Text(
-            module,
-            style: TextStyle(fontWeight: FontWeight.w900, color: cs.primary),
+          Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  cs.primaryContainer.withValues(alpha: 0.6),
+                  cs.secondaryContainer.withValues(alpha: 0.4),
+                ],
+              ),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              module,
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                color: cs.primary,
+                fontSize: 12,
+              ),
+            ),
           ),
-          const SizedBox(width: 10),
-          Expanded(child: Text(title)),
-          Text('$score / 699', style: const TextStyle(fontWeight: FontWeight.w900)),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: cs.onSurface.withValues(alpha: 0.85),
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: cs.primaryContainer.withValues(alpha: 0.4),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              '$score / 699',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                color: cs.primary,
+                fontSize: 13,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -465,7 +634,9 @@ class _AttemptTile extends StatelessWidget {
 
 double _moduleAverage(List<Map<String, dynamic>> attempts, String moduleType) {
   final filtered = attempts
-      .where((attempt) => (attempt['moduleType'] ?? 'CE').toString() == moduleType)
+      .where(
+        (attempt) => (attempt['moduleType'] ?? 'CE').toString() == moduleType,
+      )
       .toList();
   if (filtered.isEmpty) return 0;
   final total = filtered.fold<double>(
@@ -493,15 +664,36 @@ class _BadgeChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
+        gradient: unlocked
+            ? LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  cs.primaryContainer.withValues(alpha: 0.6),
+                  cs.secondaryContainer.withValues(alpha: 0.4),
+                ],
+              )
+            : null,
         color: unlocked
-            ? cs.primaryContainer.withOpacity(0.6)
-            : cs.surfaceContainerHighest.withOpacity(0.35),
+            ? null
+            : cs.surfaceContainerHighest.withValues(alpha: 0.4),
         border: Border.all(
-          color: unlocked ? cs.primary.withOpacity(0.5) : cs.outlineVariant.withOpacity(0.35),
+          color: unlocked
+              ? cs.primary.withValues(alpha: 0.5)
+              : cs.outlineVariant.withValues(alpha: 0.3),
         ),
+        boxShadow: unlocked
+            ? [
+                BoxShadow(
+                  color: cs.primary.withValues(alpha: 0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ]
+            : null,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -509,14 +701,17 @@ class _BadgeChip extends StatelessWidget {
           Icon(
             unlocked ? Icons.verified_rounded : Icons.lock_outline_rounded,
             size: 16,
-            color: unlocked ? cs.primary : cs.onSurface.withOpacity(0.6),
+            color: unlocked ? cs.primary : cs.onSurface.withValues(alpha: 0.5),
           ),
           const SizedBox(width: 6),
           Text(
             label,
             style: TextStyle(
               fontWeight: FontWeight.w700,
-              color: unlocked ? cs.onPrimaryContainer : cs.onSurface.withOpacity(0.7),
+              fontSize: 12.5,
+              color: unlocked
+                  ? cs.onPrimaryContainer
+                  : cs.onSurface.withValues(alpha: 0.65),
             ),
           ),
         ],

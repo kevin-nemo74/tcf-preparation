@@ -111,80 +111,162 @@ class _ResultScreenState extends State<ResultScreen> {
     final reduced = contextReducedMotion(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.ceResultTitle),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: Responsive.formMaxWidth(context)),
-            child: AnimatedFadeSlide(
-              child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 32),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(28),
-                color: cs.surface,
-                border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
-                boxShadow: [
-                  BoxShadow(
-                    color: cs.shadow.withValues(alpha: 0.08),
-                    blurRadius: 24,
-                    offset: const Offset(0, 12),
-                  ),
-                ],
+      appBar: AppBar(title: Text(l10n.ceResultTitle)),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [cs.primaryContainer.withValues(alpha: 0.15), cs.surface],
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: Responsive.formMaxWidth(context),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.emoji_events_rounded, size: 48, color: cs.primary),
-                  const SizedBox(height: 12),
-                  Text(
-                    l10n.ceResultYourScore,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
+              child: AnimatedFadeSlide(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 36,
                   ),
-                  const SizedBox(height: 12),
-                  TweenAnimationBuilder<int>(
-                    tween: IntTween(begin: 0, end: score),
-                    duration: reduced ? Duration.zero : AppMotion.slow,
-                    curve: AppMotion.curve,
-                    builder: (context, value, _) => Text(
-                      "$value / 699",
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            fontWeight: FontWeight.w900,
-                          ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    color: cs.surface,
+                    border: Border.all(
+                      color: cs.primary.withValues(alpha: 0.2),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: cs.primary.withValues(alpha: 0.1),
+                        blurRadius: 32,
+                        offset: const Offset(0, 16),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  AnimatedDefaultTextStyle(
-                    duration: reduced ? Duration.zero : AppMotion.medium,
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                          fontWeight: FontWeight.w900,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              cs.primaryContainer.withValues(alpha: 0.5),
+                              cs.secondaryContainer.withValues(alpha: 0.3),
+                            ],
+                          ),
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: cs.primary.withValues(alpha: 0.2),
+                              blurRadius: 20,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
+                        child: Icon(
+                          Icons.emoji_events_rounded,
+                          size: 56,
                           color: cs.primary,
                         ),
-                    child: Text(level),
-                  ),
-                  const SizedBox(height: 28),
-                  FilledButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        AppRoutes.fadeSlide(
-                          ReviewScreen(
-                            test: widget.test,
-                            userAnswers: widget.userAnswers,
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        l10n.ceResultYourScore,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TweenAnimationBuilder<int>(
+                        tween: IntTween(begin: 0, end: score),
+                        duration: reduced ? Duration.zero : AppMotion.slow,
+                        curve: AppMotion.curve,
+                        builder: (context, value, _) => Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            color: cs.primaryContainer.withValues(alpha: 0.3),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: cs.primary.withValues(alpha: 0.3),
+                            ),
+                          ),
+                          child: Text(
+                            "$value / 699",
+                            style: Theme.of(context).textTheme.displaySmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w900,
+                                  color: cs.primary,
+                                ),
                           ),
                         ),
-                      );
-                    },
-                    icon: const Icon(Icons.rate_review_rounded),
-                    label: Text(l10n.ceReviewCta),
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 18,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              cs.secondaryContainer.withValues(alpha: 0.5),
+                              cs.primaryContainer.withValues(alpha: 0.3),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: cs.secondary.withValues(alpha: 0.4),
+                          ),
+                        ),
+                        child: AnimatedDefaultTextStyle(
+                          duration: reduced ? Duration.zero : AppMotion.medium,
+                          style: Theme.of(context).textTheme.titleMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.w900,
+                                color: cs.secondary,
+                              ),
+                          child: Text(level),
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      FilledButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            AppRoutes.fadeSlide(
+                              ReviewScreen(
+                                test: widget.test,
+                                userAnswers: widget.userAnswers,
+                              ),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.rate_review_rounded),
+                        label: Text(l10n.ceReviewCta),
+                        style: FilledButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 14,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
             ),
           ),
         ),

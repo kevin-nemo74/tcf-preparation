@@ -24,7 +24,7 @@ Widget _buildTestListHeader(BuildContext context) {
   final cs = Theme.of(context).colorScheme;
   return Container(
     margin: const EdgeInsets.only(bottom: 16),
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
     decoration: BoxDecoration(
       gradient: LinearGradient(
         begin: Alignment.topLeft,
@@ -32,21 +32,37 @@ Widget _buildTestListHeader(BuildContext context) {
         colors: [
           cs.primaryContainer.withValues(alpha: 0.6),
           cs.tertiaryContainer.withValues(alpha: 0.4),
+          cs.secondaryContainer.withValues(alpha: 0.2),
         ],
       ),
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(color: cs.primary.withValues(alpha: 0.2)),
+      boxShadow: [
+        BoxShadow(
+          color: cs.primary.withValues(alpha: 0.08),
+          blurRadius: 16,
+          offset: const Offset(0, 4),
+        ),
+      ],
     ),
     child: Row(
       children: [
         Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: cs.primary.withValues(alpha: 0.15),
-            borderRadius: BorderRadius.circular(12),
+            color: cs.primary.withValues(alpha: 0.18),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: cs.primary.withValues(alpha: 0.15),
+                blurRadius: 12,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
-          child: Icon(Icons.menu_book_rounded, color: cs.primary, size: 24),
+          child: Icon(Icons.menu_book_rounded, color: cs.primary, size: 28),
         ),
-        const SizedBox(width: 14),
+        const SizedBox(width: 16),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,11 +74,12 @@ Widget _buildTestListHeader(BuildContext context) {
                   letterSpacing: -0.3,
                 ),
               ),
-              const SizedBox(height: 2),
+              const SizedBox(height: 4),
               Text(
                 'Comprehension ecrite (CE)',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: cs.onSurface.withValues(alpha: 0.7),
+                  color: cs.onSurface.withValues(alpha: 0.72),
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
@@ -289,10 +306,11 @@ class _TestRow extends StatelessWidget {
 
     return PressableScale(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      child: AnimatedContainer(
+        duration: AppMotion.fast,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(16),
           color: isSelected
               ? cs.primaryContainer.withValues(alpha: 0.45)
               : cs.surface,
@@ -301,26 +319,49 @@ class _TestRow extends StatelessWidget {
                 ? cs.primary.withValues(alpha: 0.55)
                 : cs.outlineVariant.withValues(alpha: 0.35),
           ),
+          boxShadow: [
+            BoxShadow(
+              color: isSelected
+                  ? cs.primary.withValues(alpha: 0.08)
+                  : cs.shadow.withValues(alpha: 0.03),
+              blurRadius: isSelected ? 12 : 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Row(
           children: [
             Container(
-              width: 46,
-              height: 46,
+              width: 50,
+              height: 50,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: cs.surfaceContainerHighest.withValues(alpha: 0.55),
+                borderRadius: BorderRadius.circular(14),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    cs.primaryContainer.withValues(
+                      alpha: isSelected ? 0.7 : 0.5,
+                    ),
+                    cs.secondaryContainer.withValues(
+                      alpha: isSelected ? 0.5 : 0.3,
+                    ),
+                  ],
+                ),
                 border: Border.all(
-                  color: cs.outlineVariant.withValues(alpha: 0.25),
+                  color: cs.primary.withValues(alpha: isSelected ? 0.4 : 0.2),
                 ),
               ),
               child: Text(
                 leading,
-                style: const TextStyle(fontWeight: FontWeight.w900),
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  color: cs.primary,
+                ),
               ),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 14),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -346,11 +387,17 @@ class _TestRow extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            Icon(
-              Icons.chevron_right_rounded,
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.6),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: cs.primaryContainer.withValues(alpha: 0.4),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.chevron_right_rounded,
+                color: cs.primary,
+                size: 20,
+              ),
             ),
           ],
         ),
@@ -377,7 +424,7 @@ class _DetailsPanel extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+      padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -392,31 +439,92 @@ class _DetailsPanel extends StatelessWidget {
                       fontWeight: FontWeight.w900,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    "${test.questions.length} questions • ${test.durationMinutes} minutes",
-                    style: TextStyle(
-                      color: cs.onSurface.withOpacity(0.65),
-                      fontWeight: FontWeight.w600,
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: cs.surfaceContainerHighest.withValues(alpha: 0.5),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.quiz_rounded, size: 16, color: cs.primary),
+                        const SizedBox(width: 6),
+                        Text(
+                          "${test.questions.length} questions",
+                          style: TextStyle(
+                            color: cs.onSurface.withValues(alpha: 0.7),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Icon(Icons.timer_rounded, size: 16, color: cs.primary),
+                        const SizedBox(width: 6),
+                        Text(
+                          "${test.durationMinutes} min",
+                          style: TextStyle(
+                            color: cs.onSurface.withValues(alpha: 0.7),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 16),
                   Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      color: cs.surfaceContainerHighest.withOpacity(0.55),
+                      borderRadius: BorderRadius.circular(16),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          cs.primaryContainer.withValues(alpha: 0.3),
+                          cs.secondaryContainer.withValues(alpha: 0.2),
+                        ],
+                      ),
                       border: Border.all(
-                        color: cs.outlineVariant.withOpacity(0.25),
+                        color: cs.primary.withValues(alpha: 0.3),
                       ),
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.emoji_events_rounded, color: cs.primary),
-                        const SizedBox(width: 10),
-                        Text(
-                          "Meilleur: ${_scoreText(bestScore)}",
-                          style: const TextStyle(fontWeight: FontWeight.w900),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: cs.primary.withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.emoji_events_rounded,
+                            color: cs.primary,
+                            size: 24,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Meilleur Score',
+                              style: TextStyle(
+                                color: cs.onSurface.withValues(alpha: 0.7),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              _scoreText(bestScore),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 18,
+                                color: cs.primary,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -425,15 +533,15 @@ class _DetailsPanel extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 14),
           FilledButton.icon(
             onPressed: onStart,
             icon: const Icon(Icons.play_arrow_rounded),
             label: Text(l10n.ceStartTestCta),
             style: FilledButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(16),
               ),
             ),
           ),
@@ -455,16 +563,34 @@ class _AdaptiveHeader extends StatelessWidget {
     final needsPractice =
         summary.lastScore > 0 && summary.lastScore < summary.bestScore;
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
-        color: cs.surfaceContainerHighest.withOpacity(0.35),
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        borderRadius: BorderRadius.circular(16),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            cs.primaryContainer.withValues(alpha: 0.35),
+            cs.secondaryContainer.withValues(alpha: 0.2),
+          ],
+        ),
+        border: Border.all(color: cs.primary.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
-          Icon(Icons.auto_awesome_rounded, color: cs.primary),
-          const SizedBox(width: 10),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: cs.primary.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(
+              Icons.auto_awesome_rounded,
+              color: cs.primary,
+              size: 20,
+            ),
+          ),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(
               needsPractice

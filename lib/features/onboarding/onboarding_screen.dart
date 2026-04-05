@@ -50,9 +50,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              cs.primaryContainer.withValues(alpha: 0.18),
+              cs.primaryContainer.withValues(alpha: 0.2),
               cs.surface,
-              cs.secondaryContainer.withValues(alpha: 0.12),
+              cs.secondaryContainer.withValues(alpha: 0.15),
             ],
           ),
         ),
@@ -76,36 +76,58 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
+                        horizontal: 18,
+                        vertical: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: cs.surface,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: cs.outlineVariant.withValues(alpha: 0.3),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            cs.primaryContainer.withValues(alpha: 0.5),
+                            cs.secondaryContainer.withValues(alpha: 0.3),
+                          ],
                         ),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: cs.primary.withValues(alpha: 0.3),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: cs.primary.withValues(alpha: 0.1),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
-                            Icons.school_rounded,
-                            size: 20,
-                            color: cs.primary,
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: cs.primary.withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.school_rounded,
+                              size: 22,
+                              color: cs.primary,
+                            ),
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 10),
                           Text(
                             'TCF Canada',
                             style: TextStyle(
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w800,
                               color: cs.primary,
+                              fontSize: 15,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 20),
                     Expanded(
                       child: PageView.builder(
                         controller: _controller,
@@ -114,20 +136,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         itemBuilder: (_, i) {
                           final page = pages[i];
                           return Container(
-                            padding: const EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(28),
                             decoration: BoxDecoration(
                               color: cs.surface,
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(28),
                               border: Border.all(
-                                color: cs.outlineVariant.withValues(
-                                  alpha: 0.25,
-                                ),
+                                color: cs.primary.withValues(alpha: 0.2),
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: cs.shadow.withValues(alpha: 0.05),
-                                  blurRadius: 20,
-                                  offset: const Offset(0, 8),
+                                  color: cs.primary.withValues(alpha: 0.08),
+                                  blurRadius: 28,
+                                  offset: const Offset(0, 12),
                                 ),
                               ],
                             ),
@@ -135,12 +155,30 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(16),
+                                  padding: const EdgeInsets.all(20),
                                   decoration: BoxDecoration(
-                                    color: cs.primaryContainer.withValues(
-                                      alpha: 0.3,
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        cs.primaryContainer.withValues(
+                                          alpha: 0.5,
+                                        ),
+                                        cs.secondaryContainer.withValues(
+                                          alpha: 0.3,
+                                        ),
+                                      ],
                                     ),
                                     shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: cs.primary.withValues(
+                                          alpha: 0.15,
+                                        ),
+                                        blurRadius: 20,
+                                        offset: const Offset(0, 8),
+                                      ),
+                                    ],
                                   ),
                                   child: Icon(
                                     i == 0
@@ -148,11 +186,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                         : i == 1
                                         ? Icons.today_rounded
                                         : Icons.trending_up_rounded,
-                                    size: 48,
+                                    size: 52,
                                     color: cs.primary,
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                const SizedBox(height: 24),
                                 Text(
                                   page.title,
                                   style: Theme.of(context)
@@ -161,14 +199,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       ?.copyWith(fontWeight: FontWeight.w900),
                                   textAlign: TextAlign.center,
                                 ),
-                                const SizedBox(height: 12),
+                                const SizedBox(height: 14),
                                 Text(
                                   page.body,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: cs.onSurface.withValues(alpha: 0.72),
+                                    color: cs.onSurface.withValues(alpha: 0.75),
                                     fontWeight: FontWeight.w600,
                                     height: 1.5,
+                                    fontSize: 15,
                                   ),
                                 ),
                               ],
@@ -177,27 +216,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
                         pages.length,
                         (i) => AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          width: i == _index ? 28 : 10,
-                          height: 10,
+                          duration: const Duration(milliseconds: 250),
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          width: i == _index ? 32 : 12,
+                          height: 12,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: i == _index ? cs.primary : cs.outlineVariant,
+                            borderRadius: BorderRadius.circular(12),
+                            gradient: i == _index
+                                ? LinearGradient(
+                                    colors: [cs.primary, cs.secondary],
+                                  )
+                                : null,
+                            color: i == _index ? null : cs.outlineVariant,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 24),
                     SizedBox(
                       width: double.infinity,
-                      height: 52,
+                      height: 54,
                       child: FilledButton(
                         onPressed: () {
                           if (_index == pages.length - 1) {
@@ -205,18 +249,39 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             return;
                           }
                           _controller.nextPage(
-                            duration: const Duration(milliseconds: 220),
+                            duration: const Duration(milliseconds: 250),
                             curve: Curves.easeOut,
                           );
                         },
-                        child: Text(
-                          _index == pages.length - 1
-                              ? l10n.onboardingStart
-                              : l10n.onboardingNext,
+                        style: FilledButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _index == pages.length - 1
+                                  ? l10n.onboardingStart
+                                  : l10n.onboardingNext,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Icon(
+                              _index == pages.length - 1
+                                  ? Icons.rocket_launch_rounded
+                                  : Icons.arrow_forward_rounded,
+                              size: 20,
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 10),
                     TextButton(
                       onPressed: _finish,
                       child: Text(l10n.onboardingSkip),

@@ -73,8 +73,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   String _friendlyError(String raw) {
     final t = raw.toLowerCase();
-    if (t.contains('email-already-in-use')) return "Cet e-mail est deja utilise.";
-    if (t.contains('weak-password')) return "Mot de passe trop faible (min 6 caracteres).";
+    if (t.contains('email-already-in-use'))
+      return "Cet e-mail est deja utilise.";
+    if (t.contains('weak-password'))
+      return "Mot de passe trop faible (min 6 caracteres).";
     if (t.contains('invalid-email')) return "Adresse e-mail invalide.";
     if (t.contains('network')) return "Erreur reseau. Veuillez reessayer.";
     return "Inscription echouee. Veuillez reessayer.";
@@ -108,15 +110,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: isWide ? 520 : 560),
                 child: StaggeredColumn(
-                  spacing: 12,
+                  spacing: 14,
                   children: [
                     const PremiumBrandMark(large: true),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: cs.primaryContainer.withValues(alpha: 0.35),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: cs.primary.withValues(alpha: 0.3),
+                        ),
+                      ),
+                      child: Text(
+                        'TCF Canada',
+                        style: TextStyle(
+                          color: cs.primary,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
                     Text(
                       l10n.registerTitle,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w900,
-                          ),
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.w900),
                     ),
                     Text(
                       l10n.registerSubtitle,
@@ -129,29 +151,77 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 8),
                     AnimatedFadeSlide(
                       delay: const Duration(milliseconds: 100),
-                      child: PremiumInfoCard(
-                        padding: const EdgeInsets.all(20),
+                      child: Container(
+                        padding: const EdgeInsets.all(22),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          color: cs.surface,
+                          border: Border.all(
+                            color: cs.outlineVariant.withValues(alpha: 0.35),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: cs.primary.withValues(alpha: 0.06),
+                              blurRadius: 20,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
                         child: Form(
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: cs.primaryContainer.withValues(
+                                    alpha: 0.3,
+                                  ),
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.person_add_rounded,
+                                      color: cs.primary,
+                                      size: 20,
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      'Creer un compte',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        color: cs.primary,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 18),
                               TextFormField(
                                 controller: _username,
                                 textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(
                                   labelText: l10n.usernameLabel,
                                   prefixIcon: const Icon(Icons.badge_rounded),
+                                  filled: true,
+                                  fillColor: cs.surfaceContainerHighest
+                                      .withValues(alpha: 0.5),
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
-                                  if (value.isEmpty) return "Le nom d'utilisateur est obligatoire";
-                                  if (value.length < 3) return "Minimum 3 caracteres";
-                                  if (value.length > 20) return "Maximum 20 caracteres";
+                                  if (value.isEmpty)
+                                    return "Le nom d'utilisateur est obligatoire";
+                                  if (value.length < 3)
+                                    return "Minimum 3 caracteres";
+                                  if (value.length > 20)
+                                    return "Maximum 20 caracteres";
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 14),
                               TextFormField(
                                 controller: _email,
                                 keyboardType: TextInputType.emailAddress,
@@ -159,15 +229,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 decoration: InputDecoration(
                                   labelText: l10n.emailLabel,
                                   prefixIcon: const Icon(Icons.email_rounded),
+                                  filled: true,
+                                  fillColor: cs.surfaceContainerHighest
+                                      .withValues(alpha: 0.5),
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
-                                  if (value.isEmpty) return "L'e-mail est obligatoire";
-                                  if (!value.contains('@')) return "Entrez un e-mail valide";
+                                  if (value.isEmpty)
+                                    return "L'e-mail est obligatoire";
+                                  if (!value.contains('@'))
+                                    return "Entrez un e-mail valide";
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 14),
                               TextFormField(
                                 controller: _password,
                                 obscureText: _obscure,
@@ -176,32 +251,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   labelText: l10n.passwordLabel,
                                   prefixIcon: const Icon(Icons.lock_rounded),
                                   suffixIcon: IconButton(
-                                    onPressed: () => setState(() => _obscure = !_obscure),
-                                    icon: Icon(_obscure
-                                        ? Icons.visibility_rounded
-                                        : Icons.visibility_off_rounded),
+                                    onPressed: () =>
+                                        setState(() => _obscure = !_obscure),
+                                    icon: Icon(
+                                      _obscure
+                                          ? Icons.visibility_rounded
+                                          : Icons.visibility_off_rounded,
+                                    ),
                                   ),
+                                  filled: true,
+                                  fillColor: cs.surfaceContainerHighest
+                                      .withValues(alpha: 0.5),
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "");
-                                  if (value.isEmpty) return "Le mot de passe est obligatoire";
-                                  if (value.length < 6) return "Minimum 6 caracteres";
+                                  if (value.isEmpty)
+                                    return "Le mot de passe est obligatoire";
+                                  if (value.length < 6)
+                                    return "Minimum 6 caracteres";
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 14),
                               TextFormField(
                                 controller: _confirm,
                                 obscureText: _obscure,
                                 textInputAction: TextInputAction.done,
                                 decoration: InputDecoration(
                                   labelText: l10n.confirmPasswordLabel,
-                                  prefixIcon: const Icon(Icons.lock_outline_rounded),
+                                  prefixIcon: const Icon(
+                                    Icons.lock_outline_rounded,
+                                  ),
+                                  filled: true,
+                                  fillColor: cs.surfaceContainerHighest
+                                      .withValues(alpha: 0.5),
                                 ),
                                 validator: (v) {
                                   final value = v ?? "";
-                                  if (value.isEmpty) return "Confirmez votre mot de passe";
-                                  if (value != _password.text) return "Les mots de passe ne correspondent pas";
+                                  if (value.isEmpty)
+                                    return "Confirmez votre mot de passe";
+                                  if (value != _password.text)
+                                    return "Les mots de passe ne correspondent pas";
                                   return null;
                                 },
                               ),
@@ -210,23 +300,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 width: double.infinity,
                                 child: FilledButton(
                                   onPressed: _loading ? null : _submit,
+                                  style: FilledButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 16,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                  ),
                                   child: _loading
                                       ? const SizedBox(
                                           height: 20,
                                           width: 20,
-                                          child: CircularProgressIndicator(strokeWidth: 2),
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ),
                                         )
-                                      : Text(l10n.createAccountCta),
+                                      : Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.app_registration_rounded,
+                                              size: 20,
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Text(l10n.createAccountCta),
+                                          ],
+                                        ),
                                 ),
                               ),
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 14),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     l10n.alreadyHaveAccount,
                                     style: TextStyle(
-                                      color: cs.onSurface.withValues(alpha: 0.7),
+                                      color: cs.onSurface.withValues(
+                                        alpha: 0.7,
+                                      ),
                                     ),
                                   ),
                                   TextButton(
@@ -235,7 +348,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         : () {
                                             Navigator.pushReplacement(
                                               context,
-                                              AppRoutes.fadeSlide(const LoginScreen()),
+                                              AppRoutes.fadeSlide(
+                                                const LoginScreen(),
+                                              ),
                                             );
                                           },
                                     child: const Text("Connexion"),
