@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
@@ -25,10 +24,12 @@ class ProfileScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ListView(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
               children: const [
-                ShimmerSkeleton(height: 100),
-                SizedBox(height: 14),
+                ShimmerSkeleton(height: 120),
+                SizedBox(height: 20),
+                ShimmerSkeleton(height: 64),
+                SizedBox(height: 10),
                 ShimmerSkeleton(height: 64),
                 SizedBox(height: 10),
                 ShimmerSkeleton(height: 64),
@@ -77,39 +78,35 @@ class ProfileScreen extends StatelessWidget {
           final weeklyAverage = _readDouble(data, const ['weeklyAverage']) ?? 0;
 
           return AnimatedFadeSlide(
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: Responsive.canvasMaxWidth(context),
-                ),
-                child: ListView(
-                  padding: Responsive.pagePadding(context, vertical: 16),
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            cs.primaryContainer.withValues(alpha: 0.4),
-                            cs.secondaryContainer.withValues(alpha: 0.25),
-                          ],
-                        ),
-                        border: Border.all(
-                          color: cs.primary.withValues(alpha: 0.25),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: cs.primary.withValues(alpha: 0.08),
-                            blurRadius: 20,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        cs.primaryContainer.withValues(alpha: 0.4),
+                        cs.secondaryContainer.withValues(alpha: 0.25),
+                      ],
+                    ),
+                    border: Border.all(
+                      color: cs.primary.withValues(alpha: 0.25),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: cs.primary.withValues(alpha: 0.1),
+                        blurRadius: 24,
+                        offset: const Offset(0, 8),
                       ),
-                      child: Row(
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
                         children: [
                           Container(
                             padding: const EdgeInsets.all(4),
@@ -120,14 +117,21 @@ class ProfileScreen extends StatelessWidget {
                                 end: Alignment.bottomRight,
                                 colors: [cs.primary, cs.secondary],
                               ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: cs.primary.withValues(alpha: 0.3),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
                             ),
                             child: CircleAvatar(
-                              radius: 30,
+                              radius: 36,
                               backgroundColor: cs.primaryContainer,
                               child: Icon(
                                 Icons.person_rounded,
                                 color: cs.onPrimaryContainer,
-                                size: 32,
+                                size: 38,
                               ),
                             ),
                           ),
@@ -139,7 +143,7 @@ class ProfileScreen extends StatelessWidget {
                                 Text(
                                   username,
                                   style: const TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 22,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -156,7 +160,9 @@ class ProfileScreen extends StatelessWidget {
                                       child: Text(
                                         email,
                                         style: TextStyle(
-                                          color: cs.onSurface.withOpacity(0.75),
+                                          color: cs.onSurface.withValues(
+                                            alpha: 0.75,
+                                          ),
                                           fontWeight: FontWeight.w600,
                                           fontSize: 13,
                                         ),
@@ -169,188 +175,194 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ),
+                    ],
+                  ),
+                ),
 
-                    const SizedBox(height: 14),
+                const SizedBox(height: 20),
+                _SectionHeader(title: "Informations du compte"),
+                const SizedBox(height: 10),
+                _InfoTile(
+                  icon: Icons.badge_rounded,
+                  title: "Nom d'utilisateur",
+                  value: username,
+                ),
+                _InfoTile(
+                  icon: Icons.email_rounded,
+                  title: "E-mail",
+                  value: email,
+                ),
+                _InfoTile(
+                  icon: Icons.calendar_month_rounded,
+                  title: "Date de creation",
+                  value: createdAt == null ? "—" : _fmt(createdAt),
+                ),
+                _InfoTile(
+                  icon: Icons.login_rounded,
+                  title: "Derniere connexion",
+                  value: lastLoginAt == null ? "—" : _fmt(lastLoginAt),
+                ),
 
-                    _InfoTile(
-                      icon: Icons.badge_rounded,
-                      title: "Nom d'utilisateur",
-                      value: username,
-                    ),
-                    _InfoTile(
-                      icon: Icons.email_rounded,
-                      title: "E-mail",
-                      value: email,
-                    ),
-                    _InfoTile(
-                      icon: Icons.calendar_month_rounded,
-                      title: "Date de creation",
-                      value: createdAt == null ? "—" : _fmt(createdAt),
-                    ),
-                    _InfoTile(
-                      icon: Icons.login_rounded,
-                      title: "Derniere connexion",
-                      value: lastLoginAt == null ? "—" : _fmt(lastLoginAt),
-                    ),
+                const SizedBox(height: 24),
+                _SectionHeader(title: "Progression"),
+                const SizedBox(height: 10),
+                _StatsTile(
+                  icon: Icons.checklist_rounded,
+                  title: "Tentatives totales",
+                  value: attemptsCount?.toString() ?? "0",
+                ),
+                _StatsTile(
+                  icon: Icons.emoji_events_rounded,
+                  title: "Meilleur score",
+                  value: bestScore == null ? "— / 699" : "$bestScore / 699",
+                ),
+                _StatsTile(
+                  icon: Icons.history_rounded,
+                  title: "Derniere tentative",
+                  value: latestAttemptAt == null ? "—" : _fmt(latestAttemptAt),
+                ),
+                _StatsTile(
+                  icon: Icons.local_fire_department_rounded,
+                  title: "Serie en cours",
+                  value: "$currentStreak jour(s)",
+                ),
+                _StatsTile(
+                  icon: Icons.workspace_premium_rounded,
+                  title: "Meilleure serie",
+                  value: "$bestStreak jour(s)",
+                ),
+                _StatsTile(
+                  icon: Icons.date_range_rounded,
+                  title: "Cette semaine",
+                  value:
+                      "$weeklyAttempts tentatives • ${weeklyAverage.toStringAsFixed(1)} moy",
+                ),
 
-                    const SizedBox(height: 20),
-                    Text(
-                      "Progression",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w900,
-                      ),
+                const SizedBox(height: 24),
+                _SectionHeader(title: "Objectifs atteints"),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    _BadgeChip(
+                      label: "Premiere tentative",
+                      unlocked: (attemptsCount ?? 0) >= 1,
                     ),
-                    const SizedBox(height: 10),
-                    _StatsTile(
-                      icon: Icons.checklist_rounded,
-                      title: "Tentatives totales",
-                      value: attemptsCount?.toString() ?? "0",
+                    _BadgeChip(
+                      label: "5 tentatives",
+                      unlocked: (attemptsCount ?? 0) >= 5,
                     ),
-                    _StatsTile(
-                      icon: Icons.emoji_events_rounded,
-                      title: "Meilleur score",
-                      value: bestScore == null ? "— / 699" : "$bestScore / 699",
+                    _BadgeChip(
+                      label: "Score 500+",
+                      unlocked: (bestScore ?? 0) >= 500,
                     ),
-                    _StatsTile(
-                      icon: Icons.history_rounded,
-                      title: "Derniere tentative",
-                      value: latestAttemptAt == null
-                          ? "—"
-                          : _fmt(latestAttemptAt),
-                    ),
-                    _StatsTile(
-                      icon: Icons.local_fire_department_rounded,
-                      title: "Serie en cours",
-                      value: "$currentStreak jour(s)",
-                    ),
-                    _StatsTile(
-                      icon: Icons.workspace_premium_rounded,
-                      title: "Meilleure serie",
-                      value: "$bestStreak jour(s)",
-                    ),
-                    _StatsTile(
-                      icon: Icons.date_range_rounded,
-                      title: "Cette semaine",
-                      value:
-                          "$weeklyAttempts tentatives • ${weeklyAverage.toStringAsFixed(1)} moy",
-                    ),
-                    const SizedBox(height: 18),
-                    Text(
-                      "Objectifs atteints",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        _BadgeChip(
-                          label: "Premiere tentative",
-                          unlocked: (attemptsCount ?? 0) >= 1,
-                        ),
-                        _BadgeChip(
-                          label: "5 tentatives",
-                          unlocked: (attemptsCount ?? 0) >= 5,
-                        ),
-                        _BadgeChip(
-                          label: "Score 500+",
-                          unlocked: (bestScore ?? 0) >= 500,
-                        ),
-                        _BadgeChip(
-                          label: "Serie 7 jours",
-                          unlocked: currentStreak >= 7,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 18),
-                    StreamBuilder<List<ReviewQueueItem>>(
-                      stream: ProgressRepository.streamReviewQueue(
-                        uid,
-                        limit: 20,
-                      ),
-                      builder: (context, qSnap) {
-                        final items = qSnap.data ?? const <ReviewQueueItem>[];
-                        return Column(
-                          children: [
-                            _StatsTile(
-                              icon: Icons.assignment_late_rounded,
-                              title: "File de revision",
-                              value: "${items.length} question(s) a revoir",
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  AppRoutes.fadeSlide(
-                                    ReviewQueueScreen(uid: uid),
-                                  ),
-                                );
-                              },
-                            ),
-                            if (items.isNotEmpty)
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Derniere en file: ${items.first.testTitle} / ${items.first.questionId}",
-                                    style: TextStyle(
-                                      color: cs.onSurface.withOpacity(0.7),
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 18),
-                    Text(
-                      "Tentatives recentes",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    StreamBuilder<List<Map<String, dynamic>>>(
-                      stream: ProgressRepository.streamRecentAttempts(
-                        uid,
-                        limit: 6,
-                      ),
-                      builder: (context, attemptSnap) {
-                        final attempts =
-                            attemptSnap.data ?? const <Map<String, dynamic>>[];
-                        if (attempts.isEmpty) {
-                          return _StatsTile(
-                            icon: Icons.history_rounded,
-                            title: "Tentatives recentes",
-                            value: "Aucune tentative pour le moment",
-                          );
-                        }
-                        final ceAverage = _moduleAverage(attempts, 'CE');
-                        final coAverage = _moduleAverage(attempts, 'CO');
-                        return Column(
-                          children: [
-                            _StatsTile(
-                              icon: Icons.analytics_rounded,
-                              title: "Moyennes par module",
-                              value:
-                                  "CE ${ceAverage.toStringAsFixed(1)} / CO ${coAverage.toStringAsFixed(1)}",
-                            ),
-                            ...attempts
-                                .take(4)
-                                .map(
-                                  (attempt) => _AttemptTile(attempt: attempt),
-                                ),
-                          ],
-                        );
-                      },
+                    _BadgeChip(
+                      label: "Serie 7 jours",
+                      unlocked: currentStreak >= 7,
                     ),
                   ],
                 ),
-              ),
+
+                const SizedBox(height: 24),
+                StreamBuilder<List<ReviewQueueItem>>(
+                  stream: ProgressRepository.streamReviewQueue(uid, limit: 20),
+                  builder: (context, qSnap) {
+                    final items = qSnap.data ?? const <ReviewQueueItem>[];
+                    return Column(
+                      children: [
+                        _SectionHeader(title: "File de revision"),
+                        const SizedBox(height: 10),
+                        _StatsTile(
+                          icon: Icons.assignment_late_rounded,
+                          title: items.isEmpty
+                              ? "Aucune question a revoir"
+                              : "${items.length} question(s) a revoir",
+                          value: "",
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              AppRoutes.fadeSlide(ReviewQueueScreen(uid: uid)),
+                            );
+                          },
+                        ),
+                        if (items.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: cs.surfaceContainerHighest.withValues(
+                                  alpha: 0.4,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.info_outline_rounded,
+                                    size: 16,
+                                    color: cs.onSurface.withValues(alpha: 0.7),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      "Derniere: ${items.first.testTitle}",
+                                      style: TextStyle(
+                                        color: cs.onSurface.withValues(
+                                          alpha: 0.7,
+                                        ),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                      ],
+                    );
+                  },
+                ),
+
+                const SizedBox(height: 24),
+                _SectionHeader(title: "Tentatives recentes"),
+                const SizedBox(height: 10),
+                StreamBuilder<List<Map<String, dynamic>>>(
+                  stream: ProgressRepository.streamRecentAttempts(
+                    uid,
+                    limit: 6,
+                  ),
+                  builder: (context, attemptSnap) {
+                    final attempts =
+                        attemptSnap.data ?? const <Map<String, dynamic>>[];
+                    if (attempts.isEmpty) {
+                      return _StatsTile(
+                        icon: Icons.history_rounded,
+                        title: "Aucune tentative",
+                        value: "Commencez votre premier test",
+                      );
+                    }
+                    final ceAverage = _moduleAverage(attempts, 'CE');
+                    final coAverage = _moduleAverage(attempts, 'CO');
+                    return Column(
+                      children: [
+                        _StatsTile(
+                          icon: Icons.analytics_rounded,
+                          title: "Moyennes",
+                          value:
+                              "CE ${ceAverage.toStringAsFixed(1)} / CO ${coAverage.toStringAsFixed(1)}",
+                        ),
+                        ...attempts
+                            .take(4)
+                            .map((attempt) => _AttemptTile(attempt: attempt)),
+                      ],
+                    );
+                  },
+                ),
+                const SizedBox(height: 32),
+              ],
             ),
           );
         },
@@ -393,6 +405,53 @@ class ProfileScreen extends StatelessWidget {
       if (value is String) return double.tryParse(value);
     }
     return null;
+  }
+}
+
+class _SectionHeader extends StatelessWidget {
+  final String title;
+
+  const _SectionHeader({required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            cs.primaryContainer.withValues(alpha: 0.3),
+            cs.secondaryContainer.withValues(alpha: 0.15),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: cs.primary.withValues(alpha: 0.2)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: cs.primary.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(Icons.folder_rounded, size: 16, color: cs.primary),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 15,
+              color: cs.onSurface,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
