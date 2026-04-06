@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProgressSummary {
@@ -83,10 +82,7 @@ class ReviewQueueItem {
     required this.lastUpdatedAt,
   });
 
-  factory ReviewQueueItem.fromDoc(
-    String id,
-    Map<String, dynamic> map,
-  ) {
+  factory ReviewQueueItem.fromDoc(String id, Map<String, dynamic> map) {
     final updatedAt = map['lastUpdatedAt'];
     return ReviewQueueItem(
       id: id,
@@ -116,18 +112,18 @@ class StudyTask {
   });
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'title': title,
-        'type': type,
-        'done': done,
-      };
+    'id': id,
+    'title': title,
+    'type': type,
+    'done': done,
+  };
 
   factory StudyTask.fromMap(Map<String, dynamic> map) => StudyTask(
-        id: (map['id'] ?? '').toString(),
-        title: (map['title'] ?? '').toString(),
-        type: (map['type'] ?? '').toString(),
-        done: map['done'] == true,
-      );
+    id: (map['id'] ?? '').toString(),
+    title: (map['title'] ?? '').toString(),
+    type: (map['type'] ?? '').toString(),
+    done: map['done'] == true,
+  );
 }
 
 class StudyPlan {
@@ -149,7 +145,8 @@ class StudyPlan {
 
   factory StudyPlan.fromMap(Map<String, dynamic> map) {
     final targetDate = map['targetDate'];
-    final tasks = (map['todayTasks'] as List?)
+    final tasks =
+        (map['todayTasks'] as List?)
             ?.whereType<Map>()
             .map((e) => StudyTask.fromMap(Map<String, dynamic>.from(e)))
             .toList() ??
@@ -157,7 +154,9 @@ class StudyPlan {
     return StudyPlan(
       targetScore: _asInt(map['targetScore']),
       targetLevel: (map['targetLevel'] ?? 'NCLC 7').toString(),
-      targetDate: targetDate is Timestamp ? targetDate.toDate() : DateTime.now(),
+      targetDate: targetDate is Timestamp
+          ? targetDate.toDate()
+          : DateTime.now(),
       weeklyCadence: _asInt(map['weeklyCadence']),
       planDateKey: (map['planDateKey'] ?? _dateKey(DateTime.now())).toString(),
       todayTasks: tasks,
@@ -165,14 +164,14 @@ class StudyPlan {
   }
 
   Map<String, dynamic> toMap() => {
-        'targetScore': targetScore,
-        'targetLevel': targetLevel,
-        'targetDate': Timestamp.fromDate(targetDate),
-        'weeklyCadence': weeklyCadence,
-        'planDateKey': planDateKey,
-        'todayTasks': todayTasks.map((e) => e.toMap()).toList(),
-        'updatedAt': FieldValue.serverTimestamp(),
-      };
+    'targetScore': targetScore,
+    'targetLevel': targetLevel,
+    'targetDate': Timestamp.fromDate(targetDate),
+    'weeklyCadence': weeklyCadence,
+    'planDateKey': planDateKey,
+    'todayTasks': todayTasks.map((e) => e.toMap()).toList(),
+    'updatedAt': FieldValue.serverTimestamp(),
+  };
 }
 
 class ProgressRepository {
@@ -197,8 +196,9 @@ class ProgressRepository {
   static CollectionReference<Map<String, dynamic>> _attemptsCol(String uid) =>
       _userDoc(uid).collection('attempts');
 
-  static CollectionReference<Map<String, dynamic>> _reviewQueueCol(String uid) =>
-      _userDoc(uid).collection('reviewQueue');
+  static CollectionReference<Map<String, dynamic>> _reviewQueueCol(
+    String uid,
+  ) => _userDoc(uid).collection('reviewQueue');
 
   static Stream<UserProgressSummary> streamSummary(String uid) {
     return _userDoc(uid).snapshots().map((snap) {
@@ -209,7 +209,9 @@ class ProgressRepository {
   }
 
   static Stream<StudyPlan?> streamStudyPlan(String uid) {
-    return _userDoc(uid).collection('meta').doc('studyPlan').snapshots().map((snap) {
+    return _userDoc(uid).collection('meta').doc('studyPlan').snapshots().map((
+      snap,
+    ) {
       final data = snap.data();
       if (data == null) return null;
       return StudyPlan.fromMap(data);
@@ -217,10 +219,10 @@ class ProgressRepository {
   }
 
   static Future<void> saveStudyPlan(String uid, StudyPlan plan) async {
-    await _userDoc(uid).collection('meta').doc('studyPlan').set(
-          plan.toMap(),
-          SetOptions(merge: true),
-        );
+    await _userDoc(uid)
+        .collection('meta')
+        .doc('studyPlan')
+        .set(plan.toMap(), SetOptions(merge: true));
   }
 
   static Future<StudyPlan?> refreshStudyPlanIfNeeded(
@@ -247,17 +249,16 @@ class ProgressRepository {
     if (data == null) return;
     final plan = StudyPlan.fromMap(data);
     final updatedTasks = plan.todayTasks
-        .map((t) => t.id == taskId
-            ? StudyTask(id: t.id, title: t.title, type: t.type, done: !t.done)
-            : t)
+        .map(
+          (t) => t.id == taskId
+              ? StudyTask(id: t.id, title: t.title, type: t.type, done: !t.done)
+              : t,
+        )
         .toList();
-    await ref.set(
-      {
-        'todayTasks': updatedTasks.map((e) => e.toMap()).toList(),
-        'updatedAt': FieldValue.serverTimestamp(),
-      },
-      SetOptions(merge: true),
-    );
+    await ref.set({
+      'todayTasks': updatedTasks.map((e) => e.toMap()).toList(),
+      'updatedAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
   }
 
   static Future<void> recordAttempt({
@@ -308,30 +309,30 @@ class ProgressRepository {
       final nextStreak = _computeStreak(lastAttemptAt, oldStreak, now);
       final nextBestStreak = nextStreak > bestStreak ? nextStreak : bestStreak;
 
-      tx.set(
-        userRef,
-        {
-          'attemptsCount': nextCount,
-          'bestScore': nextBest,
-          'lastScore': score,
-          'lastAttemptAt': FieldValue.serverTimestamp(),
-          'averageScore': nextAvg,
-          'currentStreak': nextStreak,
-          'bestStreak': nextBestStreak,
-          'weeklyAttempts': FieldValue.increment(1),
-          'weeklyScoreTotal': FieldValue.increment(score),
-          'updatedAt': FieldValue.serverTimestamp(),
-        },
-        SetOptions(merge: true),
-      );
+      tx.set(userRef, {
+        'attemptsCount': nextCount,
+        'bestScore': nextBest,
+        'lastScore': score,
+        'lastAttemptAt': FieldValue.serverTimestamp(),
+        'averageScore': nextAvg,
+        'currentStreak': nextStreak,
+        'bestStreak': nextBestStreak,
+        'weeklyAttempts': FieldValue.increment(1),
+        'weeklyScoreTotal': FieldValue.increment(score),
+        'updatedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
     });
 
     final userSnap = await userRef.get();
     final updated = userSnap.data() ?? <String, dynamic>{};
     final weeklyAttempts = _asInt(updated['weeklyAttempts']);
     final weeklyScoreTotal = _asInt(updated['weeklyScoreTotal']);
-    final weeklyAverage = weeklyAttempts == 0 ? 0 : weeklyScoreTotal / weeklyAttempts;
-    await userRef.set({'weeklyAverage': weeklyAverage}, SetOptions(merge: true));
+    final weeklyAverage = weeklyAttempts == 0
+        ? 0
+        : weeklyScoreTotal / weeklyAttempts;
+    await userRef.set({
+      'weeklyAverage': weeklyAverage,
+    }, SetOptions(merge: true));
 
     await _storeReviewQueue(
       uid: uid,
@@ -361,23 +362,23 @@ class ProgressRepository {
     ids.addAll(flaggedQuestionIds);
 
     for (final id in ids) {
-      await _reviewQueueCol(uid).doc('$moduleType:$testId:$id').set(
-        {
-          'questionId': id,
-          'moduleType': moduleType,
-          'testId': testId,
-          'testTitle': testTitle,
-          'lastUserAnswer': userAnswers[id],
-          'correctAnswer': correctAnswersByQuestion[id],
-          'needsReview': true,
-          'lastUpdatedAt': FieldValue.serverTimestamp(),
-        },
-        SetOptions(merge: true),
-      );
+      await _reviewQueueCol(uid).doc('$moduleType:$testId:$id').set({
+        'questionId': id,
+        'moduleType': moduleType,
+        'testId': testId,
+        'testTitle': testTitle,
+        'lastUserAnswer': userAnswers[id],
+        'correctAnswer': correctAnswersByQuestion[id],
+        'needsReview': true,
+        'lastUpdatedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
     }
   }
 
-  static Stream<List<Map<String, dynamic>>> streamRecentAttempts(String uid, {int limit = 12}) {
+  static Stream<List<Map<String, dynamic>>> streamRecentAttempts(
+    String uid, {
+    int limit = 12,
+  }) {
     return _attemptsCol(uid)
         .orderBy('createdAt', descending: true)
         .limit(limit)
@@ -385,42 +386,42 @@ class ProgressRepository {
         .map((snap) => snap.docs.map((e) => e.data()).toList());
   }
 
-  static Stream<List<ReviewQueueItem>> streamReviewQueue(String uid, {int limit = 20}) {
+  static Stream<List<ReviewQueueItem>> streamReviewQueue(
+    String uid, {
+    int limit = 20,
+  }) {
     return _reviewQueueCol(uid)
         .where('needsReview', isEqualTo: true)
         .limit(limit)
         .snapshots()
         .map(
-          (snap) => snap.docs
-              .map((e) => ReviewQueueItem.fromDoc(e.id, e.data()))
-              .toList()
-            ..sort((a, b) {
-              final left = a.lastUpdatedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
-              final right = b.lastUpdatedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
-              return right.compareTo(left);
-            }),
+          (snap) =>
+              snap.docs
+                  .map((e) => ReviewQueueItem.fromDoc(e.id, e.data()))
+                  .toList()
+                ..sort((a, b) {
+                  final left =
+                      a.lastUpdatedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+                  final right =
+                      b.lastUpdatedAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+                  return right.compareTo(left);
+                }),
         );
   }
 
   static Future<void> markReviewQueueItemDone(String uid, String itemId) async {
-    await _reviewQueueCol(uid).doc(itemId).set(
-      {
-        'needsReview': false,
-        'completedAt': FieldValue.serverTimestamp(),
-        'lastUpdatedAt': FieldValue.serverTimestamp(),
-      },
-      SetOptions(merge: true),
-    );
+    await _reviewQueueCol(uid).doc(itemId).set({
+      'needsReview': false,
+      'completedAt': FieldValue.serverTimestamp(),
+      'lastUpdatedAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
   }
 
   static Future<void> restoreReviewQueueItem(String uid, String itemId) async {
-    await _reviewQueueCol(uid).doc(itemId).set(
-      {
-        'needsReview': true,
-        'lastUpdatedAt': FieldValue.serverTimestamp(),
-      },
-      SetOptions(merge: true),
-    );
+    await _reviewQueueCol(uid).doc(itemId).set({
+      'needsReview': true,
+      'lastUpdatedAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
   }
 
   static Future<bool> isOnboardingDone({String? uid}) async {
@@ -442,10 +443,16 @@ class ProgressRepository {
     if (resolvedUid == null) return;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('onboarding_done_$resolvedUid', true);
-    await _userDoc(resolvedUid).set({'onboardingDone': true}, SetOptions(merge: true));
+    await _userDoc(
+      resolvedUid,
+    ).set({'onboardingDone': true}, SetOptions(merge: true));
   }
 
-  static int _computeStreak(DateTime? lastAttempt, int oldStreak, DateTime now) {
+  static int _computeStreak(
+    DateTime? lastAttempt,
+    int oldStreak,
+    DateTime now,
+  ) {
     if (lastAttempt == null) return 1;
     final d1 = DateTime(lastAttempt.year, lastAttempt.month, lastAttempt.day);
     final d2 = DateTime(now.year, now.month, now.day);

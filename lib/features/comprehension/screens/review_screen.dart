@@ -299,7 +299,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
         Color tileColor;
         if (!answered) {
-          tileColor = cs.outlineVariant.withOpacity(0.55);
+          tileColor = cs.outlineVariant.withValues(alpha: 0.55);
         } else if (correct) {
           tileColor = Colors.green;
         } else {
@@ -322,7 +322,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: tileColor.withOpacity(0.25),
+                  color: tileColor.withValues(alpha: 0.25),
                   blurRadius: 10,
                   offset: const Offset(0, 6),
                 ),
@@ -369,11 +369,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(28),
         color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(
-              Theme.of(context).brightness == Brightness.dark ? 0.25 : 0.06,
+            color: Colors.black.withValues(
+              alpha: Theme.of(context).brightness == Brightness.dark
+                  ? 0.25
+                  : 0.06,
             ),
             blurRadius: 18,
             offset: const Offset(0, 10),
@@ -396,7 +398,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
-                    color: cs.surfaceContainerHighest.withOpacity(0.25),
+                    color: cs.surfaceContainerHighest.withValues(alpha: 0.25),
                     padding: const EdgeInsets.all(10),
                     child: InteractiveViewer(
                       minScale: 0.8,
@@ -417,8 +419,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
                             ),
                           );
                         },
-                        errorBuilder: (_, __, ___) =>
-                            const Center(child: Text("Echec du chargement de l'image")),
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Center(
+                              child: Text("Echec du chargement de l'image"),
+                            ),
                       ),
                     ),
                   ),
@@ -432,16 +436,16 @@ class _ReviewScreenState extends State<ReviewScreen> {
               final isUser = userAnswer == option.id;
               final isCorrect = correctAnswer == option.id;
 
-              Color border = cs.outlineVariant.withOpacity(0.35);
-              Color bg = cs.surfaceContainerHighest.withOpacity(0.25);
+              Color border = cs.outlineVariant.withValues(alpha: 0.35);
+              Color bg = cs.surfaceContainerHighest.withValues(alpha: 0.25);
 
               if (isCorrect) {
                 border = Colors.green;
-                bg = Colors.green.withOpacity(0.10);
+                bg = Colors.green.withValues(alpha: 0.10);
               }
               if (isUser && !isCorrect) {
                 border = Colors.red;
-                bg = Colors.red.withOpacity(0.10);
+                bg = Colors.red.withValues(alpha: 0.10);
               }
 
               return Container(
@@ -463,22 +467,24 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ],
                 ),
               );
-            }).toList(),
+            }),
             const SizedBox(height: 10),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: cs.surfaceContainerHighest.withOpacity(0.22),
-                border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+                color: cs.surfaceContainerHighest.withValues(alpha: 0.22),
+                border: Border.all(
+                  color: cs.outlineVariant.withValues(alpha: 0.35),
+                ),
               ),
               child: Text(
                 question.explanation.isEmpty
                     ? "Explication: cet element est ajoute a la file de revision si la reponse est fausse ou signalee."
                     : "Explication: ${question.explanation}",
                 style: TextStyle(
-                  color: cs.onSurface.withOpacity(0.8),
+                  color: cs.onSurface.withValues(alpha: 0.8),
                   fontWeight: FontWeight.w600,
                 ),
               ),

@@ -140,7 +140,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
             onPressed: _openGrid,
           ),
           IconButton(
-            tooltip: isFlagged ? l10n.ceFlagTooltipRemove : l10n.ceFlagTooltipAdd,
+            tooltip: isFlagged
+                ? l10n.ceFlagTooltipRemove
+                : l10n.ceFlagTooltipAdd,
             icon: Icon(
               isFlagged ? Icons.flag_rounded : Icons.outlined_flag_rounded,
               color: isFlagged ? Colors.orange : null,
@@ -154,8 +156,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
               borderRadius: BorderRadius.circular(14),
               color: remainingSeconds < 120
                   ? cs.errorContainer.withValues(alpha: 0.55)
-                  : cs.surfaceContainerHighest.withOpacity(0.55),
-              border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+                  : cs.surfaceContainerHighest.withValues(alpha: 0.55),
+              border: Border.all(
+                color: cs.outlineVariant.withValues(alpha: 0.25),
+              ),
             ),
             child: Row(
               children: [
@@ -320,7 +324,7 @@ class _ImagePanel extends StatelessWidget {
       child: ClipRRect(
         borderRadius: DesignTokens.cardBorderRadius(),
         child: Container(
-          color: cs.surfaceContainerHighest.withOpacity(0.25),
+          color: cs.surfaceContainerHighest.withValues(alpha: 0.25),
           child: InteractiveViewer(
             minScale: 0.8,
             maxScale: 4.0,
@@ -340,7 +344,7 @@ class _ImagePanel extends StatelessWidget {
                   ),
                 );
               },
-              errorBuilder: (_, __, ___) =>
+              errorBuilder: (context, error, stackTrace) =>
                   Center(child: Text(imageLoadErrorText)),
             ),
           ),
@@ -380,8 +384,10 @@ class _OptionsPanel extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                color: cs.primaryContainer.withOpacity(isDark ? 0.45 : 0.65),
-                border: Border.all(color: cs.primary.withOpacity(0.55)),
+                color: cs.primaryContainer.withValues(
+                  alpha: isDark ? 0.45 : 0.65,
+                ),
+                border: Border.all(color: cs.primary.withValues(alpha: 0.55)),
               ),
               child: Row(
                 children: [
@@ -403,14 +409,16 @@ class _OptionsPanel extends StatelessWidget {
                 final isSelected = selectedAnswer == option.id;
 
                 final bg = isSelected
-                    ? cs.primaryContainer.withOpacity(isDark ? 0.60 : 0.85)
-                    : cs.surfaceContainerHighest.withOpacity(
-                        isDark ? 0.20 : 0.40,
+                    ? cs.primaryContainer.withValues(
+                        alpha: isDark ? 0.60 : 0.85,
+                      )
+                    : cs.surfaceContainerHighest.withValues(
+                        alpha: isDark ? 0.20 : 0.40,
                       );
 
                 final border = isSelected
                     ? cs.primary
-                    : cs.outlineVariant.withOpacity(0.35);
+                    : cs.outlineVariant.withValues(alpha: 0.35);
                 final textColor = isSelected
                     ? cs.onPrimaryContainer
                     : cs.onSurface;

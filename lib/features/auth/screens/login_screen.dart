@@ -67,10 +67,15 @@ class _LoginScreenState extends State<LoginScreen> {
     if (t.contains('wrong-password') || t.contains('invalid-credential')) {
       return "E-mail ou mot de passe incorrect.";
     }
-    if (t.contains('user-not-found'))
+    if (t.contains('user-not-found')) {
       return "Aucun compte trouve avec cet e-mail.";
-    if (t.contains('network')) return "Erreur reseau. Veuillez reessayer.";
-    if (t.contains('invalid-email')) return "Adresse e-mail invalide.";
+    }
+    if (t.contains('network')) {
+      return "Erreur reseau. Veuillez reessayer.";
+    }
+    if (t.contains('invalid-email')) {
+      return "Adresse e-mail invalide.";
+    }
     return "Connexion echouee. Veuillez reessayer.";
   }
 
@@ -183,10 +188,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "").trim();
-                                  if (value.isEmpty)
+                                  if (value.isEmpty) {
                                     return "L'e-mail est obligatoire";
-                                  if (!value.contains('@'))
+                                  }
+                                  if (!value.contains('@')) {
                                     return "Entrez un e-mail valide";
+                                  }
                                   return null;
                                 },
                               ),
@@ -212,10 +219,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 validator: (v) {
                                   final value = (v ?? "");
-                                  if (value.isEmpty)
+                                  if (value.isEmpty) {
                                     return "Le mot de passe est obligatoire";
-                                  if (value.length < 6)
+                                  }
+                                  if (value.length < 6) {
                                     return "Minimum 6 caracteres";
+                                  }
                                   return null;
                                 },
                               ),

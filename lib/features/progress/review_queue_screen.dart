@@ -53,8 +53,8 @@ class ReviewQueueScreen extends StatelessWidget {
             return ListView.separated(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
               itemCount: 5,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemBuilder: (_, __) => const ShimmerSkeleton(height: 120),
+              separatorBuilder: (_, index) => const SizedBox(height: 10),
+              itemBuilder: (_, index) => const ShimmerSkeleton(height: 120),
             );
           }
 
@@ -630,6 +630,7 @@ class _QueueCardState extends State<_QueueCard> {
       );
       return;
     }
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Cet element de revision ne peut pas etre rouvert.'),

@@ -116,8 +116,8 @@ class PdfLibraryScreen extends StatelessWidget {
             return ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               itemCount: 8,
-              separatorBuilder: (_, __) => const SizedBox(height: 12),
-              itemBuilder: (_, __) => const ShimmerSkeleton(height: 72),
+              separatorBuilder: (_, index) => const SizedBox(height: 12),
+              itemBuilder: (_, index) => const ShimmerSkeleton(height: 72),
             );
           }
 

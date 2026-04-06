@@ -18,7 +18,7 @@ class StudyPlanGenerator {
     final weakModule = _weakestModule(recentAttempts);
     final accelerating = _daysUntilTarget(today, targetDate) <= 21;
     final scoreTrend = recentTrend(recentAttempts);
-    final needsRecovery = scoreTrend == _Trend.down;
+    final needsRecovery = scoreTrend == Trend.down;
     final hasRecentData = recentAttempts.isNotEmpty;
     final taskSeed = _dateKey(today);
     final tasks = <StudyTask>[
@@ -131,18 +131,22 @@ class StudyPlanGenerator {
   static int daysUntilTarget(DateTime now, DateTime targetDate) =>
       _daysUntilTarget(now, targetDate);
 
-  static _Trend recentTrend(List<Map<String, dynamic>> attempts) {
-    if (attempts.length < 2) return _Trend.flat;
+  static Trend recentTrend(List<Map<String, dynamic>> attempts) {
+    if (attempts.length < 2) return Trend.flat;
     final sorted = [...attempts]
       ..sort((a, b) => _attemptTime(b).compareTo(_attemptTime(a)));
     final latest = sorted.take(3).map((a) => _asDouble(a['score'])).toList();
-    final earlier = sorted.skip(3).take(3).map((a) => _asDouble(a['score'])).toList();
-    if (latest.isEmpty || earlier.isEmpty) return _Trend.flat;
+    final earlier = sorted
+        .skip(3)
+        .take(3)
+        .map((a) => _asDouble(a['score']))
+        .toList();
+    if (latest.isEmpty || earlier.isEmpty) return Trend.flat;
     final latestAvg = latest.reduce((a, b) => a + b) / latest.length;
     final earlierAvg = earlier.reduce((a, b) => a + b) / earlier.length;
-    if (latestAvg >= earlierAvg + 15) return _Trend.up;
-    if (latestAvg <= earlierAvg - 15) return _Trend.down;
-    return _Trend.flat;
+    if (latestAvg >= earlierAvg + 15) return Trend.up;
+    if (latestAvg <= earlierAvg - 15) return Trend.down;
+    return Trend.flat;
   }
 
   static String _spacedReviewTitle({
@@ -177,13 +181,16 @@ class StudyPlanGenerator {
   }
 }
 
-enum _Trend { up, flat, down }
+enum Trend { up, flat, down }
 
 DateTime _attemptTime(Map<String, dynamic> attempt) {
   final createdAt = attempt['createdAt'];
   if (createdAt is Timestamp) return createdAt.toDate();
   if (createdAt is DateTime) return createdAt;
-  if (createdAt is String) return DateTime.tryParse(createdAt) ?? DateTime.fromMillisecondsSinceEpoch(0);
+  if (createdAt is String) {
+    return DateTime.tryParse(createdAt) ??
+        DateTime.fromMillisecondsSinceEpoch(0);
+  }
   return DateTime.fromMillisecondsSinceEpoch(0);
 }
 
@@ -193,8 +200,11 @@ int _daysUntilTarget(DateTime now, DateTime targetDate) {
   return end.difference(start).inDays;
 }
 
-String _dateKey(DateTime value) =>
-    DateTime(value.year, value.month, value.day).toIso8601String().split('T').first;
+String _dateKey(DateTime value) => DateTime(
+  value.year,
+  value.month,
+  value.day,
+).toIso8601String().split('T').first;
 
 double _asDouble(dynamic value) {
   if (value is num) return value.toDouble();

@@ -4,10 +4,7 @@ import 'package:just_audio/just_audio.dart';
 class AudioPlayerWidget extends StatefulWidget {
   final String audioUrl;
 
-  const AudioPlayerWidget({
-    super.key,
-    required this.audioUrl,
-  });
+  const AudioPlayerWidget({super.key, required this.audioUrl});
 
   @override
   State<AudioPlayerWidget> createState() => _AudioPlayerWidgetState();
@@ -79,15 +76,18 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(22),
-        color: cs.surfaceContainerHighest.withOpacity(0.55),
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        color: cs.surfaceContainerHighest.withValues(alpha: 0.55),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
       ),
       child: Column(
         children: [
           if (_error != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
-              child: Text(_error!, style: TextStyle(color: cs.error, fontWeight: FontWeight.w700)),
+              child: Text(
+                _error!,
+                style: TextStyle(color: cs.error, fontWeight: FontWeight.w700),
+              ),
             ),
           StreamBuilder<PlayerState>(
             stream: _player.playerStateStream,
@@ -123,14 +123,27 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                           value: _position.inMilliseconds
                               .clamp(0, _duration.inMilliseconds)
                               .toDouble(),
-                          max: (_duration.inMilliseconds == 0) ? 1 : _duration.inMilliseconds.toDouble(),
-                          onChanged: (v) => _player.seek(Duration(milliseconds: v.toInt())),
+                          max: (_duration.inMilliseconds == 0)
+                              ? 1
+                              : _duration.inMilliseconds.toDouble(),
+                          onChanged: (v) =>
+                              _player.seek(Duration(milliseconds: v.toInt())),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(_fmt(_position), style: const TextStyle(fontWeight: FontWeight.w700)),
-                            Text(_fmt(_duration), style: const TextStyle(fontWeight: FontWeight.w700)),
+                            Text(
+                              _fmt(_position),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text(
+                              _fmt(_duration),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                           ],
                         ),
                       ],

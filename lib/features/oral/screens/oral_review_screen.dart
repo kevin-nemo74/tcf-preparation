@@ -144,10 +144,10 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(26),
         color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
+            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
             blurRadius: 18,
             offset: const Offset(0, 10),
           ),
@@ -241,7 +241,7 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
 
         Color tileColor;
         if (!answered) {
-          tileColor = cs.outlineVariant.withOpacity(0.55);
+          tileColor = cs.outlineVariant.withValues(alpha: 0.55);
         } else if (correct) {
           tileColor = Colors.green;
         } else {
@@ -264,7 +264,7 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: tileColor.withOpacity(0.25),
+                  color: tileColor.withValues(alpha: 0.25),
                   blurRadius: 10,
                   offset: const Offset(0, 6),
                 ),
@@ -299,10 +299,10 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(28),
         color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
+            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
             blurRadius: 18,
             offset: const Offset(0, 10),
           ),
@@ -326,7 +326,7 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18),
                     child: Container(
-                      color: cs.surfaceContainerHighest.withOpacity(0.25),
+                      color: cs.surfaceContainerHighest.withValues(alpha: 0.25),
                       padding: const EdgeInsets.all(10),
                       child: InteractiveViewer(
                         minScale: 0.8,
@@ -347,8 +347,10 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
                               ),
                             );
                           },
-                          errorBuilder: (_, __, ___) =>
-                              const Center(child: Text("Echec du chargement de l'image")),
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Center(
+                                child: Text("Echec du chargement de l'image"),
+                              ),
                         ),
                       ),
                     ),
@@ -362,16 +364,16 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
               final isUser = userAnswer == option.id;
               final isCorrect = correctAnswer == option.id;
 
-              Color border = cs.outlineVariant.withOpacity(0.35);
-              Color bg = cs.surfaceContainerHighest.withOpacity(0.25);
+              Color border = cs.outlineVariant.withValues(alpha: 0.35);
+              Color bg = cs.surfaceContainerHighest.withValues(alpha: 0.25);
 
               if (isCorrect) {
                 border = Colors.green;
-                bg = Colors.green.withOpacity(0.10);
+                bg = Colors.green.withValues(alpha: 0.10);
               }
               if (isUser && !isCorrect) {
                 border = Colors.red;
-                bg = Colors.red.withOpacity(0.10);
+                bg = Colors.red.withValues(alpha: 0.10);
               }
 
               return Container(
@@ -392,22 +394,24 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
                   ],
                 ),
               );
-            }).toList(),
+            }),
             const SizedBox(height: 10),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: cs.surfaceContainerHighest.withOpacity(0.22),
-                border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+                color: cs.surfaceContainerHighest.withValues(alpha: 0.22),
+                border: Border.all(
+                  color: cs.outlineVariant.withValues(alpha: 0.35),
+                ),
               ),
               child: Text(
                 question.explanation.isEmpty
                     ? "Explication: les elements incorrects ou signales sont ajoutes a la file de revision."
                     : "Explication: ${question.explanation}",
                 style: TextStyle(
-                  color: cs.onSurface.withOpacity(0.8),
+                  color: cs.onSurface.withValues(alpha: 0.8),
                   fontWeight: FontWeight.w600,
                 ),
               ),

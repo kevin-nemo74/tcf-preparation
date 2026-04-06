@@ -700,7 +700,7 @@ double _moduleAverage(List<Map<String, dynamic>> attempts, String moduleType) {
   if (filtered.isEmpty) return 0;
   final total = filtered.fold<double>(
     0,
-    (sum, attempt) => sum + _readAttemptScore(attempt),
+    (acc, attempt) => acc + _readAttemptScore(attempt),
   );
   return total / filtered.length;
 }

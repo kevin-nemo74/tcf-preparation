@@ -5,13 +5,19 @@ import 'package:tcf_canada_preparation/core/theme/motion.dart';
 class AppRoutes {
   AppRoutes._();
 
-  static PageRoute<T> fadeSlide<T extends Object?>(Widget page, {Duration? duration}) {
+  static PageRoute<T> fadeSlide<T extends Object?>(
+    Widget page, {
+    Duration? duration,
+  }) {
     return PageRouteBuilder<T>(
-      pageBuilder: (_, __, ___) => page,
+      pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionDuration: duration ?? AppMotion.medium,
       reverseTransitionDuration: duration ?? AppMotion.fast,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        final curved = CurvedAnimation(parent: animation, curve: AppMotion.curve);
+        final curved = CurvedAnimation(
+          parent: animation,
+          curve: AppMotion.curve,
+        );
         return FadeTransition(
           opacity: curved,
           child: SlideTransition(

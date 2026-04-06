@@ -41,7 +41,7 @@ class ComprehensionHubScreen extends StatelessWidget {
                             "Mock tests • Score / 699 • Review answers",
                             style: Theme.of(context).textTheme.bodyMedium
                                 ?.copyWith(
-                                  color: cs.onSurface.withOpacity(0.6),
+                                  color: cs.onSurface.withValues(alpha: 0.6),
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
@@ -70,9 +70,9 @@ class ComprehensionHubScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(22),
-                    color: cs.surfaceContainerHighest.withOpacity(0.55),
+                    color: cs.surfaceContainerHighest.withValues(alpha: 0.55),
                     border: Border.all(
-                      color: cs.outlineVariant.withOpacity(0.35),
+                      color: cs.outlineVariant.withValues(alpha: 0.35),
                     ),
                   ),
                   child: TabBar(
@@ -80,10 +80,10 @@ class ComprehensionHubScreen extends StatelessWidget {
                     dividerColor: Colors.transparent,
                     indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(18),
-                      color: cs.primaryContainer.withOpacity(0.75),
+                      color: cs.primaryContainer.withValues(alpha: 0.75),
                     ),
                     labelColor: cs.onPrimaryContainer,
-                    unselectedLabelColor: cs.onSurface.withOpacity(0.7),
+                    unselectedLabelColor: cs.onSurface.withValues(alpha: 0.7),
                     labelStyle: const TextStyle(fontWeight: FontWeight.w900),
                     tabs: const [
                       Tab(icon: Icon(Icons.menu_book_rounded), text: "Écrite"),
@@ -102,7 +102,7 @@ class ComprehensionHubScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: cs.surface,
                         border: Border.all(
-                          color: cs.outlineVariant.withOpacity(0.25),
+                          color: cs.outlineVariant.withValues(alpha: 0.25),
                         ),
                         borderRadius: BorderRadius.circular(22),
                       ),

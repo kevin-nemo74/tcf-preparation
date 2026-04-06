@@ -144,8 +144,10 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
-              color: cs.surfaceContainerHighest.withOpacity(0.55),
-              border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+              color: cs.surfaceContainerHighest.withValues(alpha: 0.55),
+              border: Border.all(
+                color: cs.outlineVariant.withValues(alpha: 0.25),
+              ),
             ),
             child: Row(
               children: [
@@ -295,10 +297,10 @@ class _OralMediaPanel extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(26),
         color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
+            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
             blurRadius: 18,
             offset: const Offset(0, 10),
           ),
@@ -317,7 +319,7 @@ class _OralMediaPanel extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(18),
                 child: Container(
-                  color: cs.surfaceContainerHighest.withOpacity(0.25),
+                  color: cs.surfaceContainerHighest.withValues(alpha: 0.25),
                   padding: const EdgeInsets.all(10),
                   child: InteractiveViewer(
                     minScale: 0.8,
@@ -338,8 +340,10 @@ class _OralMediaPanel extends StatelessWidget {
                           ),
                         );
                       },
-                      errorBuilder: (_, __, ___) =>
-                          const Center(child: Text("Echec du chargement de l'image")),
+                      errorBuilder: (context, error, stackTrace) =>
+                          const Center(
+                            child: Text("Echec du chargement de l'image"),
+                          ),
                     ),
                   ),
                 ),
@@ -351,15 +355,15 @@ class _OralMediaPanel extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  color: cs.surfaceContainerHighest.withOpacity(0.20),
+                  color: cs.surfaceContainerHighest.withValues(alpha: 0.20),
                   border: Border.all(
-                    color: cs.outlineVariant.withOpacity(0.25),
+                    color: cs.outlineVariant.withValues(alpha: 0.25),
                   ),
                 ),
                 child: Text(
                   "Question audio",
                   style: TextStyle(
-                    color: cs.onSurface.withOpacity(0.7),
+                    color: cs.onSurface.withValues(alpha: 0.7),
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -394,10 +398,10 @@ class _OptionsPanel extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(26),
         color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.25 : 0.06),
+            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
             blurRadius: 18,
             offset: const Offset(0, 10),
           ),
@@ -412,8 +416,10 @@ class _OptionsPanel extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                color: cs.primaryContainer.withOpacity(isDark ? 0.45 : 0.65),
-                border: Border.all(color: cs.primary.withOpacity(0.55)),
+                color: cs.primaryContainer.withValues(
+                  alpha: isDark ? 0.45 : 0.65,
+                ),
+                border: Border.all(color: cs.primary.withValues(alpha: 0.55)),
               ),
               child: Row(
                 children: [
@@ -435,14 +441,16 @@ class _OptionsPanel extends StatelessWidget {
                 final isSelected = selectedAnswer == option.id;
 
                 final bg = isSelected
-                    ? cs.primaryContainer.withOpacity(isDark ? 0.60 : 0.85)
-                    : cs.surfaceContainerHighest.withOpacity(
-                        isDark ? 0.20 : 0.40,
+                    ? cs.primaryContainer.withValues(
+                        alpha: isDark ? 0.60 : 0.85,
+                      )
+                    : cs.surfaceContainerHighest.withValues(
+                        alpha: isDark ? 0.20 : 0.40,
                       );
 
                 final border = isSelected
                     ? cs.primary
-                    : cs.outlineVariant.withOpacity(0.35);
+                    : cs.outlineVariant.withValues(alpha: 0.35);
 
                 final textColor = isSelected
                     ? cs.onPrimaryContainer

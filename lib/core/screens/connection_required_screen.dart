@@ -19,7 +19,9 @@ class ConnectionRequiredScreen extends StatelessWidget {
             padding: const EdgeInsets.all(22),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
-              border: Border.all(color: cs.outlineVariant.withOpacity(0.35)),
+              border: Border.all(
+                color: cs.outlineVariant.withValues(alpha: 0.35),
+              ),
               color: cs.surface,
             ),
             child: Column(
@@ -29,16 +31,16 @@ class ConnectionRequiredScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 Text(
                   "Internet connection required",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w900,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   "This app works online only. Please connect to the internet and try again.",
                   style: TextStyle(
-                    color: cs.onSurface.withOpacity(0.7),
+                    color: cs.onSurface.withValues(alpha: 0.7),
                     fontWeight: FontWeight.w600,
                   ),
                   textAlign: TextAlign.center,

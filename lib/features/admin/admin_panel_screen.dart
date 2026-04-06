@@ -322,7 +322,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
         } else {
           await AdminRepository.reactivateUser(user.uid);
         }
-        if (mounted) {
+        if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -335,7 +335,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
           );
         }
       } catch (e) {
-        if (mounted) {
+        if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('Erreur: ${e.toString()}'),

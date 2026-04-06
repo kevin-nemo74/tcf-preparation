@@ -114,8 +114,8 @@ class _TestListScreenState extends State<TestListScreen> {
           return ListView.separated(
             padding: const EdgeInsets.all(16),
             itemCount: 8,
-            separatorBuilder: (_, __) => const SizedBox(height: 10),
-            itemBuilder: (_, __) => const ShimmerSkeleton(height: 72),
+            separatorBuilder: (_, index) => const SizedBox(height: 10),
+            itemBuilder: (_, index) => const ShimmerSkeleton(height: 72),
           );
         }
         if (snapshot.hasError) {

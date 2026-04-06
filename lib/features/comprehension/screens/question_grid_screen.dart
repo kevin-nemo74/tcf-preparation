@@ -52,7 +52,9 @@ class QuestionGridScreen extends StatelessWidget {
                 } else if (isAnswered) {
                   tileColor = cs.primary;
                 } else {
-                  tileColor = cs.surfaceContainerHighest.withOpacity(0.55);
+                  tileColor = cs.surfaceContainerHighest.withValues(
+                    alpha: 0.55,
+                  );
                 }
 
                 // ✅ Ensure number contrast always readable
@@ -72,7 +74,7 @@ class QuestionGridScreen extends StatelessWidget {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: tileColor.withOpacity(0.25),
+                          color: tileColor.withValues(alpha: 0.25),
                           blurRadius: 6,
                           offset: const Offset(0, 3),
                         ),
@@ -115,7 +117,7 @@ class QuestionGridScreen extends StatelessWidget {
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: Colors.black.withOpacity(0.25),
+                                color: Colors.black.withValues(alpha: 0.25),
                               ),
                               child: Text(
                                 userAnswers[questionId] ?? "",
