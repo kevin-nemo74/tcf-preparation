@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -15,17 +15,14 @@ import 'core/theme/app_theme.dart';
 import 'core/widgets/app_scroll_behavior.dart';
 import 'features/admin/user_validation_service.dart';
 import 'features/auth/auth_gate.dart';
+import 'core/services/crashlytics_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
+  CrashlyticsService.setup();
 
   final themeController = ThemeController();
   await themeController.loadThemeMode();
@@ -78,9 +75,9 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
-      ],
+      navigatorObservers: kIsWeb
+          ? []
+          : [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
       home: const AuthGate(),
     );
   }

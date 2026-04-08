@@ -8,7 +8,6 @@ class EETache {
   final int maxWords;
   final String? documentA;
   final String? documentB;
-  final String? destinataire;
 
   const EETache({
     required this.title,
@@ -17,7 +16,6 @@ class EETache {
     required this.maxWords,
     this.documentA,
     this.documentB,
-    this.destinataire,
   });
 
   factory EETache.fromJson(Map<String, dynamic> json) {
@@ -28,7 +26,6 @@ class EETache {
       maxWords: json['maxWords'] ?? 0,
       documentA: json['documentA'],
       documentB: json['documentB'],
-      destinataire: json['destinataire'],
     );
   }
 
@@ -58,29 +55,44 @@ class EECombinaison {
   }
 }
 
-class EEExamen {
+class EEMonth {
+  final String id;
   final String examTitle;
-  final String description;
   final List<EECombinaison> combinaisons;
 
-  const EEExamen({
+  const EEMonth({
+    required this.id,
     required this.examTitle,
-    required this.description,
     required this.combinaisons,
   });
 
-  factory EEExamen.fromJson(Map<String, dynamic> json) {
+  factory EEMonth.fromJson(Map<String, dynamic> json) {
     final combList =
         (json['combinaisons'] as List?)
             ?.map((c) => EECombinaison.fromJson(c))
             .toList() ??
         [];
 
-    return EEExamen(
+    return EEMonth(
+      id: json['id'] ?? '',
       examTitle: json['examTitle'] ?? '',
-      description: json['description'] ?? '',
       combinaisons: combList,
     );
+  }
+}
+
+class EEExamen {
+  final String description;
+  final List<EEMonth> months;
+
+  const EEExamen({required this.description, required this.months});
+
+  factory EEExamen.fromJson(Map<String, dynamic> json) {
+    final monthsList =
+        (json['months'] as List?)?.map((m) => EEMonth.fromJson(m)).toList() ??
+        [];
+
+    return EEExamen(description: json['description'] ?? '', months: monthsList);
   }
 
   static Future<EEExamen> loadFromAssets() async {
