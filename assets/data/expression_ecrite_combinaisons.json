@@ -1,0 +1,294 @@
+{
+  "examTitle": "Janvier 2025",
+  "description": "Examen officiel TCF Canada - Expression Écrite",
+  "combinaisons": [
+    {
+      "id": "comb-1",
+      "tache1": {
+        "title": "Transport en ville",
+        "instruction": "Je suis votre amie Anna et je compte passer un weekend dans ta ville. Donnez-moi des informations sur les moyens de transport pour explorer la ville. Répondez à Anna dans un message.",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "une amie"
+      },
+      "tache2": {
+        "title": "Fête de voisins",
+        "instruction": "Vous avez assisté à une fête de voisins du quartier, écrivez un blog pour montrer pourquoi vous avez aimé cette fête.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Distributeurs automatiques",
+        "instruction": "L'utilisation Des Distributeurs Automatiques Au Sein Des Établissements Scolaires, Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : Je suis en faveur des distributeurs de boissons dans les lycées. Premièrement, ils offrent une commodité supplémentaire pour les élèves, notamment pour ceux qui n'ont pas le temps de passer à la cafétéria pendant les pauses. Deuxièmement, s'ils sont bien gérés, ces distributeurs peuvent offrir une gamme de boissons saines, comme de l'eau, du jus de fruits pur et des boissons aux fruits sans sucre ajouté. Ces distributeurs peuvent être une source de revenus supplémentaire pour l'école, qui peut être réinvestie dans l'amélioration des infrastructures ou des programmes scolaires.",
+        "documentB": "Opinion 2 : Je suis contre l'installation de distributeurs de boissons dans les lycées. Ma principale préoccupation est liée à la santé des élèves. Malheureusement, beaucoup de ces distributeurs sont remplis de boissons sucrées et de sodas qui contribuent à l'obésité infantile et à d'autres problèmes de santé comme le diabète. Même les jus de fruits, qui peuvent sembler sains, contiennent souvent beaucoup de sucre. Les écoles devraient être des lieux qui encouragent des habitudes alimentaires saines et je crains que la présence de ces distributeurs n'encourage une consommation excessive de boissons sucrées."
+      }
+    },
+    {
+      "id": "comb-2",
+      "tache1": {
+        "title": "Château de Chombony",
+        "instruction": "Vous avez invité votre ami Cédric à votre mariage au Château de Chombony et il vous a répondu qu'il ne connaît pas ce château. Décrivez à votre ami (lieu, localisation, transports, etc.).",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "un ami"
+      },
+      "tache2": {
+        "title": "Apprentissage d'une langue",
+        "instruction": "Dans votre blog, racontez votre expérience de l'apprentissage d'une langue étrangère (vous écrivez sur un forum internet en racontant votre expérience en apprenant une langue étrangère).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Cuisinier Amateur ou Professionnel",
+        "instruction": "Cuisinier Amateur Ou Cuisinier Professionnel ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : Les amateurs ont fait des recettes réussies, mais ils manquent toujours des compétences et des techniques, c'est pourquoi la formation et l'expérience sont nécessaires pour être un vrai cuisinier.",
+        "documentB": "Opinion 2 : Il parle des cuisiniers qui ont appris le métier de cuisiniers sur internet et qui ont le buzz sur les réseaux sociaux. Il raconte aussi l'histoire d'une amatrice qui est devenue professionnelle et qui a rédigé plusieurs livres sur la cuisine pour les amateurs de cuisine à la maison."
+      }
+    },
+    {
+      "id": "comb-3",
+      "tache1": {
+        "title": "Moyens de transport",
+        "instruction": "Votre ami Mehdi vient de déménager dans votre ville et cherche des renseignements sur les moyens de transports. Écrivez un message en lui donnant les informations nécessaires (types de transport, abonnement, tarif, etc.).",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "un ami"
+      },
+      "tache2": {
+        "title": "Admiration pour une personnalité",
+        "instruction": "Exprimez votre admiration pour une personnalité, célèbre ou non, en vous appuyant sur ses actions spécifiques. Rédigez un article de blog en détaillant les actions remarquables de cette personne et expliquez pourquoi vous l'aimez.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Vivre en Colocation",
+        "instruction": "Vivre En Colocation : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : La vie en colocation offre de nombreux avantages. Partager un logement avec d'autres personnes permet de réduire les dépenses, que ce soit le loyer, les factures ou les frais généraux. De plus, cela favorise les interactions sociales et les échanges culturels. Vivre avec des colocataires permet de rencontrer des individus de différents horizons, de nouer des amitiés et de partager des expériences enrichissantes.",
+        "documentB": "Opinion 2 : La colocation peut cependant présenter des défis. Les différences de personnalité et de mode de vie entre les colocataires peuvent entraîner des tensions. La gestion des responsabilités et des tâches ménagères peut également être source de conflits. De plus, la colocation peut limiter l'intimité et l'espace personnel. Il est important d'établir une communication ouverte et respectueuse, ainsi que des règles de vie commune, pour favoriser une cohabitation harmonieuse."
+      }
+    },
+    {
+      "id": "comb-4",
+      "tache1": {
+        "title": "Nouveau travail",
+        "instruction": "Vous avez trouvé un nouveau travail. Vous écrivez à votre ami(e) francophone pour lui annoncer la nouvelle, vous décrivez votre poste, vos collègues et votre lieu de travail.",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "un ami ou une amie"
+      },
+      "tache2": {
+        "title": "Études à l'étranger",
+        "instruction": "INFOS FAMILLES : J'ai 19 ans, je vais bientôt partir à l'étranger pour continuer mes études. J'aimerais bien lire les témoignages et avis des étudiants qui ont déjà fait des études loin de chez eux. Merci de me répondre. - Julie. Vous avez fait des études à l'étranger pendant un an. Vous écrivez une réponse sur le forum. Vous racontez votre séjour à l'étranger, vous dites si vous avez aimé ou non cette expérience et vous dites pourquoi.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'aide aux personnes pauvres",
+        "instruction": "L'aide Aux Personnes Pauvres",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : Christine, 56 ans : Tous les ans, en hiver, je donne un peu de mon temps et de mon argent pour aider les personnes qui vivent dans la rue et ont froid. Pour moi, c'est important de se soucier de ceux qui sont dans le besoin. Je trouve très important de donner quelques dollars à ces personnes ou aux associations qui peuvent les aider. Et puis, cette action me donne l'impression d'être utile, au moins une fois dans l'année ! C'est un geste de solidarité qui est à la portée de tout le monde.",
+        "documentB": "Opinion 2 : Pierre, 65 ans : Plutôt que de donner de l'argent à des personnes pauvres, il vaudrait mieux revoir notre mode de vie. C'est pourquoi je préfère m'engager au quotidien dans une association de mon quartier, où je suis bénévole. Les sans domicile fixe ont besoin d'un logement et d'un travail et pas seulement d'argent. Il faut les aider à devenir autonomes. C'est le but d'organismes qui aident ceux qui sont dans la rue à trouver un emploi. Donner de l'argent est un acte inutile qui sert seulement à apaiser notre conscience."
+      }
+    },
+    {
+      "id": "comb-5",
+      "tache1": {
+        "title": "Marché du quartier",
+        "instruction": "Je vais bientôt vivre dans ton quartier. Je cherche un endroit sympathique pour faire mes courses. Est-ce que tu connais un marché intéressant ? Merci d'avance et à bientôt ! - Bernard. Vous répondez à votre ami Bernard. Dans votre message, vous décrivez un marché de votre quartier que vous aimez bien (lieu, horaires, produits, etc.).",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "un ami"
+      },
+      "tache2": {
+        "title": "Association de quartier",
+        "instruction": "Vous faites partie d'une association de quartier qui propose des activités aux enfants (aide aux devoirs, sorties, jeux, etc.). Sur votre site internet, vous racontez votre expérience et vous expliquez pourquoi ce type d'association est utile.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Livre Papier ou Numérique",
+        "instruction": "Le Livre Papier ou Le Livre Numérique?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : Depuis plusieurs années maintenant, de nombreux lecteurs ont décidé de remplacer la bibliothèque traditionnelle par des livres numériques. Selon eux, l'avantage est avant tout économique. D'une part, le livre numérique permet d'économiser du papier, d'autre part la version numérique d'un livre est généralement moins chère que la version papier. Les livres numériques ont un autre avantage : ils permettent une ouverture sur le monde pour les personnes en situation de handicap. Certaines options, comme la possibilité d'augmenter la taille des lettres, facilitent la lecture pour les personnes malvoyantes.",
+        "documentB": "Opinion 2 : Le livre numérique remplacera-t-il le livre papier ? Non, répondront la plupart des lecteurs. Le livre papier est un beau support. Quel plaisir de le prêter aux gens qu'on aime ou de l'offrir en glissant un petit mot dedans ! Le livre papier a une histoire, l'odeur du neuf ou de l'ancien… Il transmet beaucoup d'émotions alors que le livre numérique a un côté un peu impersonnel. De plus, les livres numériques demandent de posséder un minimum de connaissances en informatique, ce qui peut être une difficulté pour certaines personnes."
+      }
+    },
+    {
+      "id": "comb-6",
+      "tache1": {
+        "title": "Endroit pour déjeuner",
+        "instruction": "Je cherche un endroit pour déjeuner en plein air ce week-end. Qu'est-ce que tu me proposes ? À bientôt, Barbara. Vous répondez à votre amie Barbara en décrivant le lieu (parc, jardin, terrasse, etc.).",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "une amie"
+      },
+      "tache2": {
+        "title": "Association de quartier",
+        "instruction": "Vous faites partie d'une association de quartier qui propose des activités aux enfants (aide aux devoirs, sorties, jeux, etc.). Sur votre site internet, vous racontez votre expérience et vous expliquez pourquoi ce type d'association est utile.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'utilisation du plastique",
+        "instruction": "L'utilisation du Plastique, Pour ou Contre",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : Franck soutient l'utilisation limitée du plastique, soulignant son importance dans de nombreux secteurs, notamment les secteurs médical et alimentaire. Pour lui, le plastique est vital pour la conservation des aliments et la stérilisation des équipements médicaux. Il prône une utilisation responsable et le recyclage, mais reconnaît que certains usages du plastique sont indispensables pour la société moderne.",
+        "documentB": "Opinion 2 : Amicha s'oppose fermement à l'utilisation du plastique, mettant en avant son impact environnemental dévastateur. Elle soutient que les déchets plastiques polluent les océans et les écosystèmes, causant des dommages irréparables. Amicha milite pour des alternatives écologiques et durables, insistant sur l'urgence de renoncer au plastique pour protéger l'environnement et la santé publique."
+      }
+    },
+    {
+      "id": "comb-7",
+      "tache1": {
+        "title": "Partenaire de sport",
+        "instruction": "Écrivez un message dans le journal de votre université pour rechercher un partenaire avec qui faire du sport.",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "étudiants de l'université"
+      },
+      "tache2": {
+        "title": "Arrivée dans un pays étranger",
+        "instruction": "Écrivez dans un article de blog pour raconter votre arrivée dans un pays étranger en donnant vos impressions.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Rôle de la télévision",
+        "instruction": "Rôle De La Télévision Dans L'éducation Des Enfants.",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : La télévision est un outil de communication et de divertissement largement répandu dans notre société moderne. Son influence est incontestable, tant sur les individus que sur la culture en général. Elle permet de diffuser des informations, d'offrir des divertissements variés et de favoriser la diffusion de la culture. La télévision est présente dans de nombreux foyers et constitue une source d'information et de divertissement accessibles à tous. Grâce à sa portée et à sa capacité à toucher un large public, la télévision joue un rôle important dans la transmission des connaissances et la sensibilisation aux enjeux sociaux.",
+        "documentB": "Opinion 2 : La télévision peut également présenter certains inconvénients. Les émissions télévisées peuvent parfois véhicule des stéréotypes, des préjugés et des valeurs discutables. De plus, le temps passé devant la télévision peut réduire le temps consacré à d'autres activités plus enrichissantes, telles que la lecture, les interactions sociales ou la pratique d'un sport. Il est important de faire preuve de discernement et de réguler l'exposition à la télévision, en particulier pour les enfants, afin de préserver un équilibre sain entre les différentes formes d'apprentissage et de divertissement."
+      }
+    },
+    {
+      "id": "comb-8",
+      "tache1": {
+        "title": "Sites à visiter",
+        "instruction": "Votre ami(e) veut découvrir la région dans laquelle vous habitez. Écrivez lui un message pour lui proposer des sites à visiter.",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "un ami ou une amie"
+      },
+      "tache2": {
+        "title": "Cours de sport",
+        "instruction": "Vous avez participé à un cours de sport dans une salle. Écrivez un article de blog parlant de cette expérience et en exprimant également votre avis par rapport à cette salle.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Livraison des repas au bureau",
+        "instruction": "Livraison Des Repas Au Bureau : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : Grâce à la livraison en entreprise, les employés bénéficieront d'un gain de temps notable. Il n'est plus question d'aller sortir loin du lieu de travail pour trouver de quoi manger. En complément, l'argent et l'énergie économisés permettent d'être encore plus efficace au travail. Sans pour autant mettre fin à une session importante liée au travail, le repas sera déjà prêt et pourra attendre la fin d'une conférence, d'une réunion ou d'un rendez-vous. Il s'agit d'une véritable solution dédiée aux entreprises ayant une activité intense et qui requiert la présence continue de leurs employés.",
+        "documentB": "Opinion 2 : Cette pratique révèle souvent des inconvénients à cause de sa notoriété montante. Certains jours, il arrive que les responsables de livraisons peuvent être envahis par un grand nombre de livraisons à faire et cela risque de générer des perturbations liées au stress de l'attente. De même pour les employés, une trop longue heure de travail peut causer un état de fatigue si ce dernier ne quittera pas son bureau pour le repas. Dans tous les cas, il est recommandé de toujours marquer des temps de pause lors des durs labeurs."
+      }
+    },
+    {
+      "id": "comb-9",
+      "tache1": {
+        "title": "Nouveau travail",
+        "instruction": "Salut, Tu as commencé ton nouveau travail ! C'est comment ? Tu es content(e) ? - Ali. Vous répondez à votre ami Ali. Dans votre message, vous décrivez votre nouveau travail (lieu, collègues, etc.) et vous donnez vos impressions.",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "un ami"
+      },
+      "tache2": {
+        "title": "Vivre avec une personne âgée",
+        "instruction": "INFOS FAMILLES : Vivre avec une personne âgée : comment faire ? Notre site cherche des témoignages. Vous avez vécu avec une personne âgée. Vous racontez votre expérience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Cours de langues en ligne",
+        "instruction": "Les Cours de Langues en Ligne",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : Apprendre une langue en ligne grâce à Internet, c'est possible et cela donne de bons résultats ! Contrairement aux cours classiques, on peut apprendre quand on veut : les cours sont disponibles tout le temps. Cela permet de mieux organiser sa journée. On n'a pas non plus besoin de faire des kilomètres pour aller dans une école de langues. On peut apprendre de son salon, de son bureau ou même d'un café près de chez soi ! Cela permet aussi de faire des économies.",
+        "documentB": "Opinion 2 : Cela semble facile d'apprendre une langue en ligne mais ce n'est pas possible pour tout le monde. En effet, il faut avoir une bonne connexion à Internet et un outil numérique adapté (ordinateur, smartphone, tablette) pour apprendre en ligne. De plus, il faut être très autonome pour être capable d'apprendre seul : il est difficile de se mettre au travail chez soi et de rester motivé quand on n'a pas l'aide d'un professeur et de collègues. Dans ces conditions, on peut se décourager et abandonner très vite."
+      }
+    },
+    {
+      "id": "comb-10",
+      "tache1": {
+        "title": "Pique-nique",
+        "instruction": "L'été est arrivé ! Je vous propose de faire un pique-nique samedi prochain. Connaissez-vous un endroit sympa pour les enfants et les adultes où nous pouvons tous nous retrouver ? Bisous, à bientôt. - Léa. Vous acceptez l'invitation de Léa et vous lui proposez un endroit pour organiser le pique-nique. Vous décrivez le lieu et expliquez quelles sont les activités possibles.",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "une amie"
+      },
+      "tache2": {
+        "title": "Vacances en janvier",
+        "instruction": "Salut, tu vas bien ? Nous avons deux semaines de vacances en janvier. Nous allons venir visiter ton pays. Nous cherchons à visiter des sites historiques et à découvrir des plats nouveaux. Qu'est-ce que tu nous conseilles ? - Aaron & Perla. Vous répondez à Aaron et Perla pour leur faire des propositions et justifiez votre choix en racontant vos dernières vacances.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Manger à l'extérieur ou chez soi",
+        "instruction": "Manger à l'Extérieur ou Chez Soi ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : Aïcha, jeune célibataire française de 28 ans, refuse de prendre ses repas seule chez elle. Me retrouver avec un plateau repas devant la télé, non merci ! Vivre à Lyon me donne la possibilité de dîner à l'extérieur, où je veux et à n'importe quelle heure. Pourquoi m'en priver ? Je trouve aussi génial de pouvoir partager des moments de convivialité avec tous mes amis, ce qui est impossible dans mon petit appartement. Et puis, c'est vrai, peu de gens de ma génération ont la patience et le talent de préparer des petits plats maison.",
+        "documentB": "Opinion 2 : Laura, mère de famille de 45 ans, déclare : Dîner au restaurant est un luxe que je peux rarement m'offrir avec mon salaire de vendeuse. Bien sûr, j'aimerais parfois éviter de faire la cuisine et pouvoir sortir au restaurant, mais pour une famille de cinq personnes, la dépense est énorme ! Et puis je trouve que la qualité des plats servis dans les restaurants est très moyenne. Le rapport qualité-prix n'est pas toujours au rendez-vous. Au moins, en mangeant à la maison, je sais ce qu'il y a dans mon assiette."
+      }
+    },
+    {
+      "id": "comb-11",
+      "tache1": {
+        "title": "Recherche d'appartement",
+        "instruction": "Vous allez déménager à Nice, en France. Vous écrivez un message sur le site d'une agence immobilière. Vous donnez les informations nécessaires pour votre recherche d'appartement (date, personnes, loyer…).",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "une agence immobilière"
+      },
+      "tache2": {
+        "title": "Vacances et sites historiques",
+        "instruction": "Nouveau message : Salut, tu vas bien ? J'ai 2 semaines de vacances en janvier. Je vais venir visiter ton pays. Je cherche à visiter des sites historiques et à découvrir des plats nouveaux. Qu'est-ce que tu me conseilles ? - Marina. Répondez à ce message de votre amie.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Circuler à vélo en ville",
+        "instruction": "Circuler à Vélo en Ville, Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : En ville, la bicyclette est devenue un moyen de transport de plus en plus populaire. Prendre son vélo à la place de sa voiture, c'est facile et c'est gratuit. De plus, c'est généralement plus rapide que la voiture ou le bus sur une distance inférieure à huit kilomètres ! Enfin, rouler à vélo pour se rendre au travail permet de profiter des périodes de déplacement pour faire du sport. Vous serez surpris de l'effet sur votre forme, sur votre concentration au travail et même sur votre moral. Essayez, vous verrez !",
+        "documentB": "Opinion 2 : Depuis plusieurs années, les mairies font la promotion du vélo pour circulaire en ville. Il serait plus écologique et moins bruyant que la voiture. Mais n'est-ce pas dangereux de circuler à vélo en ville ? Parmi les Français qui utilisent le vélo comme moyen de transport, 88% avouent qu'ils ne respectent pas toujours les règles du code de la route. Conséquence : les cyclistes sont de plus en plus victimes d'accidents de la route. Il vaut donc mieux prendre la voiture !"
+      }
+    },
+    {
+      "id": "comb-12",
+      "tache1": {
+        "title": "Vacances dans votre pays",
+        "instruction": "Salut, je vais venir en vacances dans ton pays tu peux me conseiller un endroit à visiter ? Merci ! Vous répondez à votre ami dans votre message, vous décrivez un lieu intéressant à visiter (ville, monuments, site naturel, etc.).",
+        "minWords": 60,
+        "maxWords": 120,
+        "destinataire": "un ami"
+      },
+      "tache2": {
+        "title": "Émission de télévision",
+        "instruction": "Vous avez participé à une émission de télévision. Vous souhaitez partager votre expérience. Vous rédigez un article sur votre site internet. Vous racontez votre participation (types d'émissions, personnes rencontrées, etc.) et vous donnez vos impressions.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Quotas Hommes/Femmes",
+        "instruction": "Les Quotas Hommes/Femmes : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Opinion 1 : Dans de nombreux pays, les femmes ont plus difficilement accès que les hommes au travail et à la politique. Pour réduire ces inégalités et favoriser la parité, certains états ont mis en place des quotas hommes/femmes à respecter dans l'administration et à la fonction publique. Ainsi, les organismes publics doivent employer autant de femmes que d'hommes. Grâce à ces mesures il y a de plus en plus de femmes à des postes à responsabilités, peu à peu les mentalités évoluent et l'on s'habitue à être dirigé par des femmes.",
+        "documentB": "Opinion 2 : Choisir une personne pour son sexe peut dévaloriser les femmes nommées à des postes importants. En effet, avec les quotas hommes/femmes, les femmes ne peuvent pas mettre en avant leurs qualités et défendre leurs compétences. Finalement, ces quotas qui ont pour objectif de faire disparaître une discrimination, renforcent les stéréotypes de genre. De plus, ce type de mesure peut empêcher les hommes compétents d'accéder à des postes. Lors d'un recrutement ce sont avant tout les compétences d'une personne qui doivent être prises en compte et non le genre."
+      }
+    }
+  ]
+}

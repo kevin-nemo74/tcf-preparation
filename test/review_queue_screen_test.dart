@@ -34,10 +34,15 @@ void main() {
       lastUpdatedAt: null,
     );
 
-    expect(reviewQueuePriority(flagged), greaterThan(reviewQueuePriority(missed)));
+    expect(
+      reviewQueuePriority(flagged),
+      greaterThan(reviewQueuePriority(missed)),
+    );
   });
 
-  testWidgets('shows empty state when review queue has no items', (tester) async {
+  testWidgets('shows empty state when review queue has no items', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         home: ReviewQueueScreen(
@@ -50,7 +55,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('Votre file de revision est vide.'), findsOneWidget);
+    expect(find.text('File de revision vide'), findsOneWidget);
   });
 
   testWidgets('shows queued items from both modules', (tester) async {
@@ -58,44 +63,42 @@ void main() {
       MaterialApp(
         home: ReviewQueueScreen(
           uid: 'uid-1',
-          queueStream: (_, {int limit = 20}) => Stream.value(
-            const [
-              ReviewQueueItem(
-                id: 'CE:Q1',
-                questionId: 'Q1',
-                moduleType: 'CE',
-                testId: 'ce_01',
-                testTitle: 'CE Test 1',
-                lastUserAnswer: 'B',
-                correctAnswer: 'A',
-                needsReview: true,
-                lastUpdatedAt: null,
-              ),
-              ReviewQueueItem(
-                id: 'CO:Q2',
-                questionId: 'Q2',
-                moduleType: 'CO',
-                testId: 'co_01',
-                testTitle: 'CO Test 1',
-                lastUserAnswer: 'C',
-                correctAnswer: 'D',
-                needsReview: true,
-                lastUpdatedAt: null,
-              ),
-            ],
-          ),
+          queueStream: (_, {int limit = 20}) => Stream.value(const [
+            ReviewQueueItem(
+              id: 'CE:Q1',
+              questionId: 'Q1',
+              moduleType: 'CE',
+              testId: 'ce_01',
+              testTitle: 'CE Test 1',
+              lastUserAnswer: 'B',
+              correctAnswer: 'A',
+              needsReview: true,
+              lastUpdatedAt: null,
+            ),
+            ReviewQueueItem(
+              id: 'CO:Q2',
+              questionId: 'Q2',
+              moduleType: 'CO',
+              testId: 'co_01',
+              testTitle: 'CO Test 1',
+              lastUserAnswer: 'C',
+              correctAnswer: 'D',
+              needsReview: true,
+              lastUpdatedAt: null,
+            ),
+          ]),
         ),
       ),
     );
 
     await tester.pumpAndSettle();
 
-    expect(find.text('2 question(s) necessitent une nouvelle revision.'), findsOneWidget);
+    expect(find.text('2 question(s) necessitent une revision'), findsOneWidget);
     expect(find.text('CE Test 1'), findsOneWidget);
     expect(find.text('CO Test 1'), findsOneWidget);
     expect(find.text('Comprehension'), findsOneWidget);
     expect(find.text('Orale'), findsOneWidget);
-    expect(find.text('2 prioritaire'), findsOneWidget);
+    expect(find.text('2 question(s) prioritaire(s)'), findsOneWidget);
   });
 
   testWidgets('can open a queued comprehension review item', (tester) async {
@@ -103,21 +106,19 @@ void main() {
       MaterialApp(
         home: ReviewQueueScreen(
           uid: 'uid-1',
-          queueStream: (_, {int limit = 20}) => Stream.value(
-            const [
-              ReviewQueueItem(
-                id: 'CE:Q1',
-                questionId: 'Q1',
-                moduleType: 'CE',
-                testId: 'ce_01',
-                testTitle: 'CE Test 1',
-                lastUserAnswer: 'B',
-                correctAnswer: 'A',
-                needsReview: true,
-                lastUpdatedAt: null,
-              ),
-            ],
-          ),
+          queueStream: (_, {int limit = 20}) => Stream.value(const [
+            ReviewQueueItem(
+              id: 'CE:Q1',
+              questionId: 'Q1',
+              moduleType: 'CE',
+              testId: 'ce_01',
+              testTitle: 'CE Test 1',
+              lastUserAnswer: 'B',
+              correctAnswer: 'A',
+              needsReview: true,
+              lastUpdatedAt: null,
+            ),
+          ]),
           loadComprehensionTests: () async => [
             TestModel(
               id: 'ce_01',
@@ -161,34 +162,34 @@ void main() {
     );
 
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Ouvrir la revision'));
+    await tester.tap(find.text('Revoir'));
     await tester.pumpAndSettle();
 
     expect(find.text('Revoir les reponses'), findsOneWidget);
     expect(find.text('Question 1'), findsOneWidget);
   });
 
-  testWidgets('missing review source can be removed from queue', (tester) async {
+  testWidgets('missing review source can be removed from queue', (
+    tester,
+  ) async {
     var markedDone = false;
     await tester.pumpWidget(
       MaterialApp(
         home: ReviewQueueScreen(
           uid: 'uid-1',
-          queueStream: (_, {int limit = 20}) => Stream.value(
-            const [
-              ReviewQueueItem(
-                id: 'CE:Q9',
-                questionId: 'Q9',
-                moduleType: 'CE',
-                testId: 'ce_01',
-                testTitle: 'CE Test 1',
-                lastUserAnswer: 'B',
-                correctAnswer: 'A',
-                needsReview: true,
-                lastUpdatedAt: null,
-              ),
-            ],
-          ),
+          queueStream: (_, {int limit = 20}) => Stream.value(const [
+            ReviewQueueItem(
+              id: 'CE:Q9',
+              questionId: 'Q9',
+              moduleType: 'CE',
+              testId: 'ce_01',
+              testTitle: 'CE Test 1',
+              lastUserAnswer: 'B',
+              correctAnswer: 'A',
+              needsReview: true,
+              lastUpdatedAt: null,
+            ),
+          ]),
           loadComprehensionTests: () async => [],
           markItemDone: (uid, itemId) async {
             markedDone = uid == 'uid-1' && itemId == 'CE:Q9';
@@ -198,7 +199,7 @@ void main() {
     );
 
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Ouvrir la revision'));
+    await tester.tap(find.text('Revoir'));
     await tester.pumpAndSettle();
     expect(find.text('Source de revision introuvable'), findsOneWidget);
 
