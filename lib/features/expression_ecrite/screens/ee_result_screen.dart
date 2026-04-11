@@ -111,11 +111,9 @@ Score: ${widget.evaluation.finalScoreOutOf20.toStringAsFixed(1)}/20
   Widget _buildScoreOverview(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final score = widget.evaluation.finalScoreOutOf20;
-    final color = score >= 14
-        ? Colors.green
-        : score >= 10
-        ? Colors.orange
-        : Colors.red;
+    final color = _getLevelColor(score);
+    final nclcLevel = _getNCLCLevel(score);
+    final cefrLevel = _getCEFRLevel(score);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -141,37 +139,116 @@ Score: ${widget.evaluation.finalScoreOutOf20.toStringAsFixed(1)}/20
       ),
       child: Column(
         children: [
-          Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: color.withValues(alpha: 0.15),
-              border: Border.all(color: color, width: 4),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    score.toStringAsFixed(1),
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.w900,
-                      color: color,
-                    ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: color.withValues(alpha: 0.15),
+                  border: Border.all(color: color, width: 4),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        score.toStringAsFixed(1),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w900,
+                          color: color,
+                        ),
+                      ),
+                      Text(
+                        '/20',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: cs.onSurface.withValues(alpha: 0.6),
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    '/20',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: cs.onSurface.withValues(alpha: 0.6),
+                ),
+              ),
+              const SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: color, width: 2),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          cefrLevel,
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w900,
+                            color: color,
+                          ),
+                        ),
+                        Text(
+                          'CEFR',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: color.withValues(alpha: 0.8),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-            ),
+              const SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: color, width: 2),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'NCLC $nclcLevel',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: color,
+                          ),
+                        ),
+                        Text(
+                          'Canada',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: color.withValues(alpha: 0.8),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           Text(
@@ -203,6 +280,34 @@ Score: ${widget.evaluation.finalScoreOutOf20.toStringAsFixed(1)}/20
     if (score >= 10) return 'Passable';
     if (score >= 8) return 'À améliorer';
     return 'Besoin de travail';
+  }
+
+  int _getNCLCLevel(double score) {
+    if (score >= 16) return 10;
+    if (score >= 14) return 9;
+    if (score >= 12) return 8;
+    if (score >= 10) return 7;
+    if (score >= 7) return 6;
+    if (score >= 6) return 5;
+    if (score >= 4) return 4;
+    return 4;
+  }
+
+  String _getCEFRLevel(double score) {
+    if (score >= 16) return 'C2';
+    if (score >= 14) return 'C1';
+    if (score >= 12) return 'B2';
+    if (score >= 10) return 'B2';
+    if (score >= 7) return 'B1';
+    if (score >= 6) return 'B1';
+    if (score >= 4) return 'A2';
+    return 'A1';
+  }
+
+  Color _getLevelColor(double score) {
+    if (score >= 14) return Colors.green;
+    if (score >= 10) return Colors.orange;
+    return Colors.red;
   }
 
   Widget _buildTacheResults(BuildContext context) {

@@ -240,6 +240,7 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
                                         : null,
                                     onNextOrSubmit: _goNextOrSubmit,
                                   ),
+                                  questionNumber: currentIndex + 1,
                                 ),
                               ),
                             ],
@@ -267,6 +268,7 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
                                         : null,
                                     onNextOrSubmit: _goNextOrSubmit,
                                   ),
+                                  questionNumber: currentIndex + 1,
                                 ),
                               ),
                             ],
@@ -380,12 +382,14 @@ class _OptionsPanel extends StatelessWidget {
   final String? selectedAnswer;
   final ValueChanged<String> onSelect;
   final Widget footer;
+  final int questionNumber;
 
   const _OptionsPanel({
     required this.question,
     required this.selectedAnswer,
     required this.onSelect,
     required this.footer,
+    required this.questionNumber,
   });
 
   @override
@@ -409,6 +413,47 @@ class _OptionsPanel extends StatelessWidget {
       ),
       child: Column(
         children: [
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: cs.primaryContainer.withValues(alpha: 0.5),
+              border: Border.all(color: cs.primary.withValues(alpha: 0.3)),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: cs.primary,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    'Q$questionNumber',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 14,
+                      color: cs.onPrimary,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  'Question $questionNumber',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    color: cs.primary,
+                  ),
+                ),
+              ],
+            ),
+          ),
           if (selectedAnswer != null)
             Container(
               width: double.infinity,
