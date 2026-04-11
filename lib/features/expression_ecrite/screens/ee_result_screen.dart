@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import '../models/ee_combinaison.dart';
 import '../models/ee_evaluation.dart';
 
-class EEResultScreen extends StatelessWidget {
+class EEResultScreen extends StatefulWidget {
   final EECombinaison combinaison;
   final EECombinaisonEvaluation evaluation;
 
@@ -12,6 +13,59 @@ class EEResultScreen extends StatelessWidget {
     required this.combinaison,
     required this.evaluation,
   });
+
+  @override
+  State<EEResultScreen> createState() => _EEResultScreenState();
+}
+
+class _EEResultScreenState extends State<EEResultScreen> {
+  final Set<int> _expandedSections = {0, 1, 2};
+  bool _allSectionsExpanded = true;
+
+  void _toggleSection(int index) {
+    setState(() {
+      if (_expandedSections.contains(index)) {
+        _expandedSections.remove(index);
+      } else {
+        _expandedSections.add(index);
+      }
+    });
+  }
+
+  void _toggleAllSections() {
+    setState(() {
+      _allSectionsExpanded = !_allSectionsExpanded;
+      if (_allSectionsExpanded) {
+        _expandedSections.addAll({0, 1, 2});
+      } else {
+        _expandedSections.clear();
+      }
+    });
+  }
+
+  void _copyAnswers() {
+    final text =
+        '''
+Tâche 1: ${widget.combinaison.tache1.title}
+Réponse: ${widget.evaluation.wordCounts['tache1Answer'] ?? 'N/A'}
+
+Tâche 2: ${widget.combinaison.tache2.title}
+Réponse: ${widget.evaluation.wordCounts['tache2Answer'] ?? 'N/A'}
+
+Tâche 3: ${widget.combinaison.tache3.title}
+Réponse: ${widget.evaluation.wordCounts['tache3Answer'] ?? 'N/A'}
+
+Score: ${widget.evaluation.finalScoreOutOf20.toStringAsFixed(1)}/20
+''';
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Réponses copiées!'),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +87,18 @@ class EEResultScreen extends StatelessWidget {
               const SizedBox(height: 20),
               _buildTacheResults(context),
               const SizedBox(height: 20),
-              if (evaluation.generalFeedback.isNotEmpty)
+              if (widget.evaluation.generalFeedback.isNotEmpty)
                 _buildGeneralFeedback(context),
-              if (evaluation.generalFeedback.isNotEmpty)
+              if (widget.evaluation.generalFeedback.isNotEmpty)
                 const SizedBox(height: 20),
-              if (evaluation.suggestions.isNotEmpty) _buildSuggestions(context),
-              if (evaluation.suggestions.isNotEmpty) const SizedBox(height: 20),
-              if (evaluation.corrections.isNotEmpty) _buildCorrections(context),
-              if (evaluation.corrections.isNotEmpty) const SizedBox(height: 20),
+              if (widget.evaluation.suggestions.isNotEmpty)
+                _buildSuggestions(context),
+              if (widget.evaluation.suggestions.isNotEmpty)
+                const SizedBox(height: 20),
+              if (widget.evaluation.corrections.isNotEmpty)
+                _buildCorrections(context),
+              if (widget.evaluation.corrections.isNotEmpty)
+                const SizedBox(height: 20),
               _buildActions(context),
               const SizedBox(height: 24),
             ],
@@ -52,7 +110,7 @@ class EEResultScreen extends StatelessWidget {
 
   Widget _buildScoreOverview(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final score = evaluation.finalScoreOutOf20;
+    final score = widget.evaluation.finalScoreOutOf20;
     final color = score >= 14
         ? Colors.green
         : score >= 10
@@ -126,7 +184,7 @@ class EEResultScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Score total : ${evaluation.calculatedOverallScore.toInt()}/100 (${evaluation.taches.length} tâches évaluées)',
+            'Score total : ${widget.evaluation.calculatedOverallScore.toInt()}/100 (${widget.evaluation.taches.length} tâches évaluées)',
             style: TextStyle(
               fontSize: 13,
               color: cs.onSurface.withValues(alpha: 0.6),
@@ -165,46 +223,69 @@ class EEResultScreen extends StatelessWidget {
                 color: cs.onSurface,
               ),
             ),
+            const Spacer(),
+            TextButton.icon(
+              onPressed: _toggleAllSections,
+              icon: Icon(
+                _allSectionsExpanded ? Icons.unfold_less : Icons.unfold_more,
+                size: 18,
+              ),
+              label: Text(
+                _allSectionsExpanded ? 'Tout réduire' : 'Tout déplier',
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 12),
-        _TacheResultCard(
+        _CollapsibleTacheCard(
           label: 'Tâche 1',
-          title: combinaison.tache1.title,
-          score: evaluation.taches.isNotEmpty ? evaluation.taches[0].score : 0,
+          title: widget.combinaison.tache1.title,
+          score: widget.evaluation.taches.isNotEmpty
+              ? widget.evaluation.taches[0].score
+              : 0,
           maxScore: 25,
-          wordCount: evaluation.wordCounts['tache1'] ?? 0,
+          wordCount: widget.evaluation.wordCounts['tache1'] ?? 0,
           expectedWords:
-              '${combinaison.tache1.minWords}-${combinaison.tache1.maxWords}',
-          feedback: evaluation.taches.isNotEmpty
-              ? evaluation.taches[0].feedback
+              '${widget.combinaison.tache1.minWords}-${widget.combinaison.tache1.maxWords}',
+          feedback: widget.evaluation.taches.isNotEmpty
+              ? widget.evaluation.taches[0].feedback
               : '',
+          isExpanded: _expandedSections.contains(0),
+          onToggle: () => _toggleSection(0),
         ),
-        const SizedBox(height: 10),
-        _TacheResultCard(
+        const SizedBox(height: 8),
+        _CollapsibleTacheCard(
           label: 'Tâche 2',
-          title: combinaison.tache2.title,
-          score: evaluation.taches.length > 1 ? evaluation.taches[1].score : 0,
+          title: widget.combinaison.tache2.title,
+          score: widget.evaluation.taches.length > 1
+              ? widget.evaluation.taches[1].score
+              : 0,
           maxScore: 25,
-          wordCount: evaluation.wordCounts['tache2'] ?? 0,
+          wordCount: widget.evaluation.wordCounts['tache2'] ?? 0,
           expectedWords:
-              '${combinaison.tache2.minWords}-${combinaison.tache2.maxWords}',
-          feedback: evaluation.taches.length > 1
-              ? evaluation.taches[1].feedback
+              '${widget.combinaison.tache2.minWords}-${widget.combinaison.tache2.maxWords}',
+          feedback: widget.evaluation.taches.length > 1
+              ? widget.evaluation.taches[1].feedback
               : '',
+          isExpanded: _expandedSections.contains(1),
+          onToggle: () => _toggleSection(1),
         ),
-        const SizedBox(height: 10),
-        _TacheResultCard(
+        const SizedBox(height: 8),
+        _CollapsibleTacheCard(
           label: 'Tâche 3',
-          title: combinaison.tache3.title,
-          score: evaluation.taches.length > 2 ? evaluation.taches[2].score : 0,
+          title: widget.combinaison.tache3.title,
+          score: widget.evaluation.taches.length > 2
+              ? widget.evaluation.taches[2].score
+              : 0,
           maxScore: 25,
-          wordCount: evaluation.wordCounts['tache3'] ?? 0,
+          wordCount: widget.evaluation.wordCounts['tache3'] ?? 0,
           expectedWords:
-              '${combinaison.tache3.minWords}-${combinaison.tache3.maxWords}',
-          feedback: evaluation.taches.length > 2
-              ? evaluation.taches[2].feedback
+              '${widget.combinaison.tache3.minWords}-${widget.combinaison.tache3.maxWords}',
+          feedback: widget.evaluation.taches.length > 2
+              ? widget.evaluation.taches[2].feedback
               : '',
+          isExpanded: _expandedSections.contains(2),
+          onToggle: () => _toggleSection(2),
         ),
       ],
     );
@@ -242,7 +323,7 @@ class EEResultScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            evaluation.generalFeedback,
+            widget.evaluation.generalFeedback,
             style: TextStyle(
               fontWeight: FontWeight.w500,
               height: 1.6,
@@ -293,7 +374,7 @@ class EEResultScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            evaluation.suggestions,
+            widget.evaluation.suggestions,
             style: TextStyle(
               fontWeight: FontWeight.w500,
               height: 1.6,
@@ -337,7 +418,7 @@ class EEResultScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            evaluation.corrections,
+            widget.evaluation.corrections,
             style: TextStyle(
               fontWeight: FontWeight.w500,
               height: 1.6,
@@ -526,6 +607,171 @@ class _TacheResultCard extends StatelessWidget {
             ),
           ],
         ],
+      ),
+    );
+  }
+}
+
+class _CollapsibleTacheCard extends StatelessWidget {
+  final String label;
+  final String title;
+  final double score;
+  final double maxScore;
+  final int wordCount;
+  final String expectedWords;
+  final String feedback;
+  final bool isExpanded;
+  final VoidCallback onToggle;
+
+  const _CollapsibleTacheCard({
+    required this.label,
+    required this.title,
+    required this.score,
+    required this.maxScore,
+    required this.wordCount,
+    required this.expectedWords,
+    required this.feedback,
+    required this.isExpanded,
+    required this.onToggle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final percentage = (score / maxScore) * 100;
+    final color = percentage >= 70
+        ? Colors.green
+        : percentage >= 50
+        ? Colors.orange
+        : Colors.red;
+
+    return Material(
+      color: cs.surface,
+      borderRadius: BorderRadius.circular(12),
+      elevation: 0,
+      child: InkWell(
+        onTap: onToggle,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.3)),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(14),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: cs.primaryContainer.withValues(alpha: 0.5),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        label,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 12,
+                          color: cs.primary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: color.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        '${score.toInt()}/${maxScore.toInt()}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 14,
+                          color: color,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Icon(
+                      isExpanded ? Icons.expand_less : Icons.expand_more,
+                      color: cs.primary,
+                    ),
+                  ],
+                ),
+              ),
+              if (isExpanded)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: LinearProgressIndicator(
+                          value: percentage / 100,
+                          minHeight: 8,
+                          backgroundColor: color.withValues(alpha: 0.15),
+                          valueColor: AlwaysStoppedAnimation<Color>(color),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.text_fields_rounded,
+                            size: 14,
+                            color: cs.onSurface.withValues(alpha: 0.5),
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            '$wordCount mots (attendu: $expectedWords)',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: cs.onSurface.withValues(alpha: 0.6),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (feedback.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          feedback,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: cs.onSurface.withValues(alpha: 0.7),
+                            fontWeight: FontWeight.w500,
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

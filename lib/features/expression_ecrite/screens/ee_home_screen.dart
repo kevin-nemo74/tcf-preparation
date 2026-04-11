@@ -157,59 +157,101 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
       0,
       (sum, m) => sum + m.combinaisons.length,
     );
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final isUltraWide = screenWidth >= 1600;
+    final isWide = screenWidth >= 1280;
 
     return Column(
       children: [
-        Expanded(
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          decoration: BoxDecoration(
+            color: cs.surfaceContainerLow.withValues(alpha: 0.5),
+            border: Border(
+              bottom: BorderSide(
+                color: cs.outlineVariant.withValues(alpha: 0.2),
+              ),
+            ),
+          ),
           child: Row(
             children: [
-              Expanded(
-                flex: 3,
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _HeroCard(
-                        totalExercises: totalComb,
-                        onStart: () => _startExercise(),
-                        large: true,
-                      ),
-                      const SizedBox(height: 32),
-                      Text(
-                        'Tous les exercices',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Wrap(
-                        spacing: 12,
-                        runSpacing: 12,
-                        children: _examen!.months
-                            .expand(
-                              (m) => m.combinaisons
-                                  .take(4)
-                                  .map(
-                                    (c) => SizedBox(
-                                      width: 280,
-                                      child: _ExerciseCard(
-                                        monthName: m.examTitle,
-                                        index: m.combinaisons.indexOf(c),
-                                        combinaison: c,
-                                        onTap: () => _startExercise(c),
-                                      ),
-                                    ),
-                                  ),
-                            )
-                            .toList(),
-                      ),
-                    ],
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: cs.primaryContainer.withValues(alpha: 0.5),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.edit_note_rounded,
+                  color: cs.primary,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'TCF Canada',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 18,
+                      color: cs.primary,
+                    ),
+                  ),
+                  Text(
+                    'Expression Écrite',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: cs.onSurface.withValues(alpha: 0.6),
+                    ),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: cs.primaryContainer.withValues(alpha: 0.3),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  '$totalComb exercices',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: cs.primary,
+                    fontSize: 13,
                   ),
                 ),
               ),
+              const SizedBox(width: 16),
+              FilledButton.icon(
+                onPressed: () => _startExercise(),
+                icon: const Icon(Icons.play_arrow_rounded, size: 20),
+                label: const Text('Commencer'),
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 12,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: isUltraWide ? 3 : (isWide ? 2 : 1),
+                child: _buildExerciseGrid(context, isUltraWide, isWide),
+              ),
               Container(
-                width: 320,
+                width: isUltraWide ? 360 : 300,
                 decoration: BoxDecoration(
                   color: cs.surfaceContainerHighest.withValues(alpha: 0.3),
                   border: Border(
@@ -223,15 +265,25 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Par mois',
-                        style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.w800),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.calendar_month_rounded,
+                            size: 20,
+                            color: cs.primary,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'Par mois',
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w800),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 16),
                       ..._examen!.months.map(
                         (m) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.only(bottom: 8),
                           child: _MonthCard(
                             month: m,
                             onTap: () => _selectMonth(m),
@@ -249,6 +301,52 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildExerciseGrid(
+    BuildContext context,
+    bool isUltraWide,
+    bool isWide,
+  ) {
+    final crossAxisCount = isUltraWide ? 4 : (isWide ? 3 : 2);
+
+    return GridView.builder(
+      padding: const EdgeInsets.all(20),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        childAspectRatio: 1.6,
+      ),
+      itemCount: _examen!.months.fold<int>(
+        0,
+        (sum, m) => sum + m.combinaisons.length,
+      ),
+      itemBuilder: (context, index) {
+        int monthIndex = 0;
+        int comboIndex = 0;
+        int remaining = index;
+
+        for (final month in _examen!.months) {
+          if (remaining < month.combinaisons.length) {
+            monthIndex = _examen!.months.indexOf(month);
+            comboIndex = remaining;
+            break;
+          }
+          remaining -= month.combinaisons.length;
+        }
+
+        final month = _examen!.months[monthIndex];
+        final comb = month.combinaisons[comboIndex];
+
+        return _CompactExerciseCard(
+          monthName: month.examTitle,
+          index: comboIndex,
+          combinaison: comb,
+          onTap: () => _startExercise(comb),
+        );
+      },
     );
   }
 }
@@ -537,6 +635,125 @@ class _ExerciseCard extends StatelessWidget {
                     size: 18,
                     color: cs.primary,
                   ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CompactExerciseCard extends StatelessWidget {
+  final String monthName;
+  final int index;
+  final EECombinaison combinaison;
+  final VoidCallback onTap;
+
+  const _CompactExerciseCard({
+    required this.monthName,
+    required this.index,
+    required this.combinaison,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
+    return Material(
+      color: cs.surface,
+      borderRadius: BorderRadius.circular(12),
+      elevation: 0,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: cs.outlineVariant.withValues(alpha: 0.25),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 28,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      color: cs.primaryContainer,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${index + 1}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          color: cs.primary,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      monthName,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: cs.onSurface.withValues(alpha: 0.6),
+                        fontWeight: FontWeight.w500,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Icon(
+                    Icons.play_circle_outline_rounded,
+                    size: 20,
+                    color: cs.primary,
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Text(
+                combinaison.tache1.title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Row(
+                children: [
+                  Icon(
+                    Icons.text_fields_rounded,
+                    size: 12,
+                    color: cs.primary.withValues(alpha: 0.7),
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '${combinaison.tache1.minWords}-${combinaison.tache1.maxWords}',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: cs.primary.withValues(alpha: 0.7),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  if (combinaison.tache3.hasDocuments) ...[
+                    const SizedBox(width: 8),
+                    Icon(
+                      Icons.article_outlined,
+                      size: 12,
+                      color: cs.secondary.withValues(alpha: 0.7),
+                    ),
+                  ],
                 ],
               ),
             ],
