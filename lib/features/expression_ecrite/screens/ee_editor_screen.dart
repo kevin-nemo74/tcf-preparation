@@ -501,25 +501,6 @@ class _EEEditorScreenState extends State<EEEditorScreen>
 
   Widget _buildEvaluateButton(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final t1Words = _wordCount(_tache1Controller.text);
-    final t2Words = _wordCount(_tache2Controller.text);
-    final t3Words = _wordCount(_tache3Controller.text);
-
-    final t1Ok = _withinRange(
-      t1Words,
-      widget.combinaison.tache1.minWords,
-      widget.combinaison.tache1.maxWords,
-    );
-    final t2Ok = _withinRange(
-      t2Words,
-      widget.combinaison.tache2.minWords,
-      widget.combinaison.tache2.maxWords,
-    );
-    final t3Ok = _withinRange(
-      t3Words,
-      widget.combinaison.tache3.minWords,
-      widget.combinaison.tache3.maxWords,
-    );
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -533,124 +514,29 @@ class _EEEditorScreenState extends State<EEEditorScreen>
           ),
         ],
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _WordStatus(
-                label: 'T1',
-                count: t1Words,
-                min: widget.combinaison.tache1.minWords,
-                max: widget.combinaison.tache1.maxWords,
-                ok: t1Ok,
-              ),
-              _WordStatus(
-                label: 'T2',
-                count: t2Words,
-                min: widget.combinaison.tache2.minWords,
-                max: widget.combinaison.tache2.maxWords,
-                ok: t2Ok,
-              ),
-              _WordStatus(
-                label: 'T3',
-                count: t3Words,
-                min: widget.combinaison.tache3.minWords,
-                max: widget.combinaison.tache3.maxWords,
-                ok: t3Ok,
-              ),
-            ],
+      child: SizedBox(
+        width: double.infinity,
+        child: FilledButton.icon(
+          onPressed: _evaluating ? null : _evaluate,
+          icon: _evaluating
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Icon(Icons.auto_awesome_rounded),
+          label: Text(
+            _evaluating ? 'Évaluation...' : 'Évaluer (/20)',
+            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
           ),
-          const SizedBox(height: 12),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.icon(
-              onPressed: _evaluating ? null : _evaluate,
-              icon: _evaluating
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Icon(Icons.auto_awesome_rounded),
-              label: Text(
-                _evaluating ? 'Évaluation...' : 'Évaluer (/20)',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16,
-                ),
-              ),
-              style: FilledButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
+          style: FilledButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
           ),
-        ],
+        ),
       ),
-    );
-  }
-}
-
-class _WordStatus extends StatelessWidget {
-  final String label;
-  final int count;
-  final int min;
-  final int max;
-  final bool ok;
-
-  const _WordStatus({
-    required this.label,
-    required this.count,
-    required this.min,
-    required this.max,
-    required this.ok,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    final color = count == 0 ? null : (ok ? Colors.green : Colors.orange);
-
-    return Column(
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
-            fontSize: 14,
-            color: cs.primary,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          decoration: BoxDecoration(
-            color: (count == 0
-                ? cs.surfaceContainerHighest
-                : color!.withValues(alpha: 0.15)),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            '$count',
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontSize: 13,
-              color: count == 0 ? cs.onSurface : color,
-            ),
-          ),
-        ),
-        Text(
-          '$min-$max',
-          style: TextStyle(
-            fontSize: 10,
-            color: cs.onSurface.withValues(alpha: 0.5),
-          ),
-        ),
-      ],
     );
   }
 }

@@ -5,7 +5,6 @@ import 'package:tcf_canada_preparation/core/navigation/app_routes.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
-import 'package:tcf_canada_preparation/features/expression_ecrite/screens/ee_home_screen.dart';
 import 'package:tcf_canada_preparation/features/profile/profile_screen.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 import 'package:tcf_canada_preparation/features/progress/review_queue_screen.dart';
@@ -342,14 +341,6 @@ class _PortalActions extends StatelessWidget {
           compact: compact,
           onTap: () {
             Navigator.push(context, AppRoutes.fadeSlide(const ProfileScreen()));
-          },
-        ),
-        _ActionButton(
-          label: 'Expression écrite',
-          icon: Icons.edit_note_rounded,
-          compact: compact,
-          onTap: () {
-            Navigator.push(context, AppRoutes.fadeSlide(const EEHomeScreen()));
           },
         ),
       ],
