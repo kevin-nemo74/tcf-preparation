@@ -33,7 +33,6 @@ class _HomeShellState extends State<HomeShell> {
     EEHomeScreen(),
     PdfLibraryScreen(),
     ExamPortalScreen(),
-    SettingsScreen(),
   ];
 
   @override
@@ -84,6 +83,12 @@ class _HomeShellState extends State<HomeShell> {
     } else {
       setState(() => _index = index);
     }
+  }
+
+  void _openSettings() {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const SettingsScreen()));
   }
 
   Future<void> _checkUserStatusAndNavigate(int targetIndex) async {
@@ -146,7 +151,7 @@ class _HomeShellState extends State<HomeShell> {
         body: Row(
           children: [
             NavigationRail(
-              selectedIndex: 4,
+              selectedIndex: null,
               onDestinationSelected: (_) {},
               destinations: [
                 NavigationRailDestination(
@@ -172,23 +177,18 @@ class _HomeShellState extends State<HomeShell> {
                   ),
                   label: Text('Tableau', style: TextStyle(color: cs.outline)),
                 ),
-                const NavigationRailDestination(
-                  icon: Icon(Icons.settings_outlined),
-                  selectedIcon: Icon(Icons.settings_rounded),
-                  label: Text('Parametres'),
-                ),
               ],
             ),
             const VerticalDivider(width: 1, thickness: 1),
             Expanded(
               child: Column(
                 children: [
-                  const _BrandHeader(isSuspended: true),
+                  _BrandHeader(isSuspended: true),
                   const SizedBox(height: 12),
-                  Expanded(
+                  const Expanded(
                     child: ResponsiveFrame(
                       expandToViewport: true,
-                      child: IndexedStack(index: 4, children: _fullPages),
+                      child: SettingsScreen(),
                     ),
                   ),
                 ],
@@ -204,14 +204,14 @@ class _HomeShellState extends State<HomeShell> {
         bottom: false,
         child: Column(
           children: [
-            const _BrandHeader(isSuspended: true),
+            _BrandHeader(isSuspended: true),
             const SizedBox(height: 12),
-            Expanded(child: IndexedStack(index: 4, children: _fullPages)),
+            const Expanded(child: SettingsScreen()),
           ],
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: 4,
+        selectedIndex: 0,
         onDestinationSelected: (_) {},
         destinations: [
           NavigationDestination(
@@ -233,11 +233,6 @@ class _HomeShellState extends State<HomeShell> {
           NavigationDestination(
             icon: Icon(Icons.dashboard_customize_outlined, color: cs.outline),
             label: "Tableau",
-          ),
-          const NavigationDestination(
-            icon: Icon(Icons.settings_outlined),
-            selectedIcon: Icon(Icons.settings_rounded),
-            label: "Parametres",
           ),
         ],
       ),
@@ -314,7 +309,7 @@ class _HomeShellState extends State<HomeShell> {
         bottom: false,
         child: Column(
           children: [
-            const _BrandHeader(),
+            _BrandHeader(onSettingsPressed: _openSettings),
             const SizedBox(height: 12),
             Expanded(
               child: IndexedStack(index: _index, children: _fullPages),
@@ -351,11 +346,6 @@ class _HomeShellState extends State<HomeShell> {
             selectedIcon: Icon(Icons.dashboard_customize_rounded),
             label: "Tableau",
           ),
-          NavigationDestination(
-            icon: Icon(Icons.settings_outlined),
-            selectedIcon: Icon(Icons.settings_rounded),
-            label: "Parametres",
-          ),
         ],
       ),
     );
@@ -364,8 +354,9 @@ class _HomeShellState extends State<HomeShell> {
 
 class _BrandHeader extends StatelessWidget {
   final bool isSuspended;
+  final VoidCallback? onSettingsPressed;
 
-  const _BrandHeader({this.isSuspended = false});
+  const _BrandHeader({this.isSuspended = false, this.onSettingsPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -424,6 +415,12 @@ class _BrandHeader extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+            ] else if (onSettingsPressed != null) ...[
+              IconButton(
+                icon: Icon(Icons.settings_outlined, color: cs.onSurfaceVariant),
+                onPressed: onSettingsPressed,
+                tooltip: 'Parametres',
               ),
             ],
           ],
