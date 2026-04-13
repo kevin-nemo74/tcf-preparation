@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
+import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
+import '../models/ee_attempt.dart';
 import '../models/ee_combinaison.dart';
+import '../services/ee_progress_service.dart';
 import 'ee_editor_screen.dart';
 
 class EEHomeScreen extends StatefulWidget {
@@ -14,11 +17,15 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
   EEExamen? _examen;
   bool _loading = true;
   String? _error;
+  EEProgressSummary? _progressSummary;
+  List<EEAttempt> _attempts = [];
+  bool _loadingProgress = true;
 
   @override
   void initState() {
     super.initState();
     _loadExam();
+    _loadProgress();
   }
 
   Future<void> _loadExam() async {
@@ -36,6 +43,26 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
     }
   }
 
+  Future<void> _loadProgress() async {
+    final uid = ProgressRepository.currentUid;
+    if (uid == null) {
+      setState(() => _loadingProgress = false);
+      return;
+    }
+
+    try {
+      final attempts = await EEProgressService.getAttempts(uid);
+      final summary = EEProgressSummary.fromAttempts(attempts);
+      setState(() {
+        _attempts = attempts;
+        _progressSummary = summary;
+        _loadingProgress = false;
+      });
+    } catch (e) {
+      setState(() => _loadingProgress = false);
+    }
+  }
+
   void _startExercise([EECombinaison? comb]) {
     if (_examen == null) return;
 
@@ -43,7 +70,7 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => EEEditorScreen(combinaison: exercise)),
-    );
+    ).then((_) => _loadProgress());
   }
 
   void _selectMonth(EEMonth month) {
@@ -153,13 +180,6 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
 
   Widget _buildWebLayout() {
     final cs = Theme.of(context).colorScheme;
-    final totalComb = _examen!.months.fold<int>(
-      0,
-      (sum, m) => sum + m.combinaisons.length,
-    );
-    final screenWidth = MediaQuery.sizeOf(context).width;
-    final isUltraWide = screenWidth >= 1600;
-    final isWide = screenWidth >= 1280;
 
     return Column(
       children: [
@@ -209,29 +229,10 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
                 ],
               ),
               const Spacer(),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: cs.primaryContainer.withValues(alpha: 0.3),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  '$totalComb exercices',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: cs.primary,
-                    fontSize: 13,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
               FilledButton.icon(
                 onPressed: () => _startExercise(),
                 icon: const Icon(Icons.play_arrow_rounded, size: 20),
-                label: const Text('Commencer'),
+                label: const Text('Nouvel exercice'),
                 style: FilledButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
@@ -246,12 +247,9 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                flex: isUltraWide ? 3 : (isWide ? 2 : 1),
-                child: _buildExerciseGrid(context, isUltraWide, isWide),
-              ),
+              Expanded(flex: 2, child: _buildProgressSection()),
               Container(
-                width: isUltraWide ? 360 : 300,
+                width: 320,
                 decoration: BoxDecoration(
                   color: cs.surfaceContainerHighest.withValues(alpha: 0.3),
                   border: Border(
@@ -274,7 +272,7 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            'Par mois',
+                            'Exercices',
                             style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(fontWeight: FontWeight.w800),
                           ),
@@ -304,62 +302,302 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
     );
   }
 
-  Widget _buildExerciseGrid(
-    BuildContext context,
-    bool isUltraWide,
-    bool isWide,
-  ) {
-    final crossAxisCount = isUltraWide ? 4 : (isWide ? 3 : 2);
+  Widget _buildProgressSection() {
+    final uid = ProgressRepository.currentUid;
 
-    return GridView.builder(
+    if (uid == null || _loadingProgress) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (_progressSummary == null || _progressSummary!.attemptsCount == 0) {
+      return _buildEmptyProgress();
+    }
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Votre progression',
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+          ),
+          const SizedBox(height: 20),
+          _buildStatsCards(),
+          const SizedBox(height: 24),
+          _buildLevelCard(),
+          const SizedBox(height: 24),
+          Text(
+            'Derniers résultats',
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+          ),
+          const SizedBox(height: 12),
+          _buildAttemptsList(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyProgress() {
+    final cs = Theme.of(context).colorScheme;
+
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: cs.primaryContainer.withValues(alpha: 0.3),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.history_rounded, size: 48, color: cs.primary),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'Pas encore d\'exercices',
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 18,
+              color: cs.onSurface,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Commencez votre premier exercice pour voir\nvotre progression ici.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: cs.onSurface.withValues(alpha: 0.6)),
+          ),
+          const SizedBox(height: 24),
+          FilledButton.icon(
+            onPressed: () => _startExercise(),
+            icon: const Icon(Icons.play_arrow_rounded),
+            label: const Text('Commencer'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsCards() {
+    final cs = Theme.of(context).colorScheme;
+    final summary = _progressSummary!;
+
+    return Row(
+      children: [
+        Expanded(
+          child: _StatCard(
+            label: 'Tentatives',
+            value: '${summary.attemptsCount}',
+            icon: Icons.repeat_rounded,
+            color: cs.primary,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: _StatCard(
+            label: 'Meilleur',
+            value: summary.bestScore.toStringAsFixed(1),
+            icon: Icons.emoji_events_rounded,
+            color: Colors.amber,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: _StatCard(
+            label: 'Dernière',
+            value: summary.lastScore.toStringAsFixed(1),
+            icon: Icons.access_time_rounded,
+            color: cs.tertiary,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: _StatCard(
+            label: 'Moyenne',
+            value: summary.averageScore.toStringAsFixed(1),
+            icon: Icons.analytics_rounded,
+            color: Colors.blue,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLevelCard() {
+    final cs = Theme.of(context).colorScheme;
+    final summary = _progressSummary!;
+    final levelColor = getLevelColor(summary.currentNclcLevel);
+
+    return Container(
       padding: const EdgeInsets.all(20),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-        childAspectRatio: 1.6,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            cs.primaryContainer.withValues(alpha: 0.4),
+            cs.tertiaryContainer.withValues(alpha: 0.3),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: cs.primary.withValues(alpha: 0.2)),
       ),
-      itemCount: _examen!.months.fold<int>(
-        0,
-        (sum, m) => sum + m.combinaisons.length,
+      child: Row(
+        children: [
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: levelColor.withValues(alpha: 0.2),
+              border: Border.all(color: levelColor, width: 3),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'NCLC',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: levelColor.withValues(alpha: 0.8),
+                    ),
+                  ),
+                  Text(
+                    '${summary.currentNclcLevel}',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w900,
+                      color: levelColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(width: 20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: levelColor.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: levelColor),
+                      ),
+                      child: Text(
+                        summary.currentCefrLevel,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 18,
+                          color: levelColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      _getLevelLabel(summary.currentNclcLevel),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: cs.onSurface.withValues(alpha: 0.7),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Niveau actuel basé sur votre dernière tentative',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: cs.onSurface.withValues(alpha: 0.6),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              Text(
+                'Objectif',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: cs.onSurface.withValues(alpha: 0.5),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.green.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.flag_rounded, size: 16, color: Colors.green),
+                    const SizedBox(width: 4),
+                    Text(
+                      'NCLC 7',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
-      itemBuilder: (context, index) {
-        int monthIndex = 0;
-        int comboIndex = 0;
-        int remaining = index;
+    );
+  }
 
-        for (final month in _examen!.months) {
-          if (remaining < month.combinaisons.length) {
-            monthIndex = _examen!.months.indexOf(month);
-            comboIndex = remaining;
-            break;
-          }
-          remaining -= month.combinaisons.length;
-        }
+  String _getLevelLabel(int nclc) {
+    if (nclc >= 10) return 'Maîtrise avancée';
+    if (nclc >= 8) return 'Compétence avancée';
+    if (nclc >= 7) return 'Compétence intermédiaire haute';
+    if (nclc >= 5) return 'Compétence intermédiaire';
+    if (nclc >= 4) return 'Compétence de base';
+    return 'Débutant';
+  }
 
-        final month = _examen!.months[monthIndex];
-        final comb = month.combinaisons[comboIndex];
-
-        return _CompactExerciseCard(
-          monthName: month.examTitle,
-          index: comboIndex,
-          combinaison: comb,
-          onTap: () => _startExercise(comb),
-        );
-      },
+  Widget _buildAttemptsList() {
+    return Column(
+      children: _attempts
+          .take(10)
+          .map((attempt) => _AttemptCard(attempt: attempt, onTap: () {}))
+          .toList(),
     );
   }
 }
 
-class _HeroCard extends StatelessWidget {
-  final int totalExercises;
-  final VoidCallback onStart;
-  final bool large;
+class _StatCard extends StatelessWidget {
+  final String label;
+  final String value;
+  final IconData icon;
+  final Color color;
 
-  const _HeroCard({
-    required this.totalExercises,
-    required this.onStart,
-    this.large = false,
+  const _StatCard({
+    required this.label,
+    required this.value,
+    required this.icon,
+    required this.color,
   });
 
   @override
@@ -367,7 +605,180 @@ class _HeroCard extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
 
     return Container(
-      padding: EdgeInsets.all(large ? 32 : 24),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: cs.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 20, color: color),
+          const SizedBox(height: 8),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w900,
+              color: color,
+            ),
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: cs.onSurface.withValues(alpha: 0.6),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AttemptCard extends StatelessWidget {
+  final EEAttempt attempt;
+  final VoidCallback onTap;
+
+  const _AttemptCard({required this.attempt, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final levelColor = getLevelColor(attempt.nclcLevel);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Material(
+        color: cs.surface,
+        borderRadius: BorderRadius.circular(12),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: cs.outlineVariant.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: levelColor.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        attempt.scoreOutOf20.toStringAsFixed(1),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 16,
+                          color: levelColor,
+                        ),
+                      ),
+                      Text(
+                        '/20',
+                        style: TextStyle(fontSize: 10, color: levelColor),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: levelColor.withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              'NCLC ${attempt.nclcLevel}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 11,
+                                color: levelColor,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: cs.primaryContainer.withValues(alpha: 0.5),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              attempt.cefrLevel,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 11,
+                                color: cs.primary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _formatDate(attempt.createdAt),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: cs.onSurface.withValues(alpha: 0.5),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(Icons.chevron_right_rounded, color: cs.primary),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  String _formatDate(DateTime date) {
+    final now = DateTime.now();
+    final diff = now.difference(date);
+    if (diff.inDays == 0) return 'Aujourd\'hui';
+    if (diff.inDays == 1) return 'Hier';
+    if (diff.inDays < 7) return 'Il y a ${diff.inDays} jours';
+    return '${date.day}/${date.month}/${date.year}';
+  }
+}
+
+class _HeroCard extends StatelessWidget {
+  final int totalExercises;
+  final VoidCallback onStart;
+
+  const _HeroCard({required this.totalExercises, required this.onStart});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
+    return Container(
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -383,34 +794,30 @@ class _HeroCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(large ? 24 : 16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: cs.primary.withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              Icons.edit_note_rounded,
-              color: cs.primary,
-              size: large ? 56 : 40,
-            ),
+            child: Icon(Icons.edit_note_rounded, color: cs.primary, size: 40),
           ),
-          SizedBox(height: large ? 20 : 16),
+          const SizedBox(height: 16),
           Text(
             'TCF Canada',
             style: TextStyle(
               fontWeight: FontWeight.w900,
-              fontSize: large ? 28 : 22,
+              fontSize: 22,
               color: cs.primary,
             ),
           ),
           Text(
             'Expression Écrite',
             style: TextStyle(
-              fontSize: large ? 18 : 14,
+              fontSize: 14,
               color: cs.onSurface.withValues(alpha: 0.7),
             ),
           ),
-          SizedBox(height: large ? 16 : 12),
+          const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
             decoration: BoxDecoration(
@@ -422,22 +829,19 @@ class _HeroCard extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 color: cs.primary,
-                fontSize: large ? 16 : 13,
+                fontSize: 13,
               ),
             ),
           ),
-          SizedBox(height: large ? 24 : 16),
+          const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
             child: FilledButton.icon(
               onPressed: onStart,
               icon: const Icon(Icons.play_arrow_rounded),
-              label: Text(large ? 'Commencer maintenant' : 'Commencer'),
+              label: const Text('Commencer'),
               style: FilledButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: large ? 18 : 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
-                ),
+                padding: const EdgeInsets.symmetric(vertical: 14),
               ),
             ),
           ),
@@ -534,227 +938,6 @@ class _MonthCard extends StatelessWidget {
                 Icons.chevron_right_rounded,
                 color: cs.primary,
                 size: compact ? 18 : 22,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ExerciseCard extends StatelessWidget {
-  final String monthName;
-  final int index;
-  final EECombinaison combinaison;
-  final VoidCallback onTap;
-
-  const _ExerciseCard({
-    required this.monthName,
-    required this.index,
-    required this.combinaison,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-
-    return Material(
-      color: cs.surface,
-      borderRadius: BorderRadius.circular(14),
-      elevation: 0,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(14),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.3)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: cs.primaryContainer,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      '#${index + 1}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        color: cs.primary,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      monthName,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: cs.onSurface.withValues(alpha: 0.6),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Text(
-                combinaison.tache1.title,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  Icon(Icons.text_fields_rounded, size: 14, color: cs.primary),
-                  const SizedBox(width: 4),
-                  Text(
-                    '${combinaison.tache1.minWords}-${combinaison.tache1.maxWords} mots',
-                    style: TextStyle(fontSize: 11, color: cs.primary),
-                  ),
-                  const Spacer(),
-                  Icon(
-                    Icons.arrow_forward_rounded,
-                    size: 18,
-                    color: cs.primary,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _CompactExerciseCard extends StatelessWidget {
-  final String monthName;
-  final int index;
-  final EECombinaison combinaison;
-  final VoidCallback onTap;
-
-  const _CompactExerciseCard({
-    required this.monthName,
-    required this.index,
-    required this.combinaison,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-
-    return Material(
-      color: cs.surface,
-      borderRadius: BorderRadius.circular(12),
-      elevation: 0,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Container(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: cs.outlineVariant.withValues(alpha: 0.25),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 28,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      color: cs.primaryContainer,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${index + 1}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          color: cs.primary,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      monthName,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: cs.onSurface.withValues(alpha: 0.6),
-                        fontWeight: FontWeight.w500,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Icon(
-                    Icons.play_circle_outline_rounded,
-                    size: 20,
-                    color: cs.primary,
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Text(
-                combinaison.tache1.title,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 13,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Row(
-                children: [
-                  Icon(
-                    Icons.text_fields_rounded,
-                    size: 12,
-                    color: cs.primary.withValues(alpha: 0.7),
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    '${combinaison.tache1.minWords}-${combinaison.tache1.maxWords}',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: cs.primary.withValues(alpha: 0.7),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  if (combinaison.tache3.hasDocuments) ...[
-                    const SizedBox(width: 8),
-                    Icon(
-                      Icons.article_outlined,
-                      size: 12,
-                      color: cs.secondary.withValues(alpha: 0.7),
-                    ),
-                  ],
-                ],
               ),
             ],
           ),
@@ -1136,7 +1319,6 @@ class _FormatRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-
     return Row(
       children: [
         Icon(icon, size: 18, color: cs.primary),

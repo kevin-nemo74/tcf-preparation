@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/widgets/french_keyboard.dart';
+import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 import '../models/ee_combinaison.dart';
+import '../services/ee_progress_service.dart';
 import '../services/openrouter_service.dart';
 import 'ee_result_screen.dart';
 
@@ -169,6 +171,35 @@ class _EEEditorScreenState extends State<EEEditorScreen>
         tache3DocumentA: widget.combinaison.tache3.documentA,
         tache3DocumentB: widget.combinaison.tache3.documentB,
       );
+
+      if (!mounted) return;
+
+      final uid = ProgressRepository.currentUid;
+      if (uid != null) {
+        try {
+          await EEProgressService.saveAttempt(
+            uid: uid,
+            combinaisonId: widget.combinaison.id,
+            monthId: widget.combinaison.id.split('-').first,
+            scoreOutOf20: evaluation.finalScoreOutOf20,
+            tache1WordCount: t1Words,
+            tache2WordCount: t2Words,
+            tache3WordCount: t3Words,
+            tache1Score: evaluation.taches.isNotEmpty
+                ? evaluation.taches[0].score
+                : null,
+            tache2Score: evaluation.taches.length > 1
+                ? evaluation.taches[1].score
+                : null,
+            tache3Score: evaluation.taches.length > 2
+                ? evaluation.taches[2].score
+                : null,
+            feedback: evaluation.generalFeedback,
+          );
+        } catch (err) {
+          debugPrint('Failed to save EE attempt: $err');
+        }
+      }
 
       if (!mounted) return;
 

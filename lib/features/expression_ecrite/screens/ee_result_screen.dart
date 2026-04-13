@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import '../models/ee_combinaison.dart';
 import '../models/ee_evaluation.dart';
@@ -41,30 +40,6 @@ class _EEResultScreenState extends State<EEResultScreen> {
         _expandedSections.clear();
       }
     });
-  }
-
-  void _copyAnswers() {
-    final text =
-        '''
-Tâche 1: ${widget.combinaison.tache1.title}
-Réponse: ${widget.evaluation.wordCounts['tache1Answer'] ?? 'N/A'}
-
-Tâche 2: ${widget.combinaison.tache2.title}
-Réponse: ${widget.evaluation.wordCounts['tache2Answer'] ?? 'N/A'}
-
-Tâche 3: ${widget.combinaison.tache3.title}
-Réponse: ${widget.evaluation.wordCounts['tache3Answer'] ?? 'N/A'}
-
-Score: ${widget.evaluation.finalScoreOutOf20.toStringAsFixed(1)}/20
-''';
-    Clipboard.setData(ClipboardData(text: text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Réponses copiées!'),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
   }
 
   @override
@@ -568,151 +543,6 @@ Score: ${widget.evaluation.finalScoreOutOf20.toStringAsFixed(1)}/20
           ),
         ),
       ],
-    );
-  }
-}
-
-class _TacheResultCard extends StatelessWidget {
-  final String label;
-  final String title;
-  final double score;
-  final double maxScore;
-  final int wordCount;
-  final String expectedWords;
-  final String feedback;
-
-  const _TacheResultCard({
-    required this.label,
-    required this.title,
-    required this.score,
-    required this.maxScore,
-    required this.wordCount,
-    required this.expectedWords,
-    required this.feedback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    final percentage = (score / maxScore) * 100;
-    final color = percentage >= 70
-        ? Colors.green
-        : percentage >= 50
-        ? Colors.orange
-        : Colors.red;
-
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: cs.surface,
-        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.35)),
-        boxShadow: [
-          BoxShadow(
-            color: cs.shadow.withValues(alpha: 0.03),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
-                ),
-                decoration: BoxDecoration(
-                  color: cs.primaryContainer.withValues(alpha: 0.5),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  label,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 12,
-                    color: cs.primary,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 13,
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
-                ),
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  '${score.toInt()}/${maxScore.toInt()}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 14,
-                    color: color,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: LinearProgressIndicator(
-              value: percentage / 100,
-              minHeight: 8,
-              backgroundColor: color.withValues(alpha: 0.15),
-              valueColor: AlwaysStoppedAnimation<Color>(color),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              Icon(
-                Icons.text_fields_rounded,
-                size: 14,
-                color: cs.onSurface.withValues(alpha: 0.5),
-              ),
-              const SizedBox(width: 4),
-              Text(
-                '$wordCount mots (attendu: $expectedWords)',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: cs.onSurface.withValues(alpha: 0.6),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-          if (feedback.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Text(
-              feedback,
-              style: TextStyle(
-                fontSize: 12,
-                color: cs.onSurface.withValues(alpha: 0.7),
-                fontWeight: FontWeight.w500,
-                height: 1.4,
-              ),
-            ),
-          ],
-        ],
-      ),
     );
   }
 }
