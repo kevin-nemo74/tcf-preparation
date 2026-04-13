@@ -18,197 +18,210 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        final user = snapshot.data;
+    return Scaffold(
+      backgroundColor: cs.surface,
+      body: SafeArea(
+        child: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            final user = snapshot.data;
 
-        return ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          children: [
-            _buildSettingsHeader(context),
-            const SizedBox(height: 16),
-            // Account card
-            AnimatedFadeSlide(
-              child: Container(
-                padding: DesignTokens.cardPadding,
-                decoration: BoxDecoration(
-                  borderRadius: DesignTokens.cardBorderRadius(),
-                  color: cs.surface,
-                  border: Border.all(
-                    color: cs.outlineVariant.withValues(alpha: 0.35),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 22,
-                      backgroundColor: cs.primaryContainer.withValues(
-                        alpha: 0.7,
-                      ),
-                      child: Icon(
-                        Icons.person_rounded,
-                        color: cs.onPrimaryContainer,
+            return ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              children: [
+                _buildSettingsHeader(context),
+                const SizedBox(height: 16),
+                // Account card
+                AnimatedFadeSlide(
+                  child: Container(
+                    padding: DesignTokens.cardPadding,
+                    decoration: BoxDecoration(
+                      borderRadius: DesignTokens.cardBorderRadius(),
+                      color: cs.surface,
+                      border: Border.all(
+                        color: cs.outlineVariant.withValues(alpha: 0.35),
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            user?.displayName ?? "Utilisateur",
-                            style: const TextStyle(fontWeight: FontWeight.w900),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 22,
+                          backgroundColor: cs.primaryContainer.withValues(
+                            alpha: 0.7,
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            user?.email ?? "",
-                            style: TextStyle(
-                              color: cs.onSurface.withValues(alpha: 0.65),
-                              fontWeight: FontWeight.w600,
+                          child: Icon(
+                            Icons.person_rounded,
+                            color: cs.onPrimaryContainer,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                user?.displayName ?? "Utilisateur",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                user?.email ?? "",
+                                style: TextStyle(
+                                  color: cs.onSurface.withValues(alpha: 0.65),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(
+                          Icons.chevron_right_rounded,
+                          color: cs.onSurface.withValues(alpha: 0.6),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                AnimatedFadeSlide(
+                  delay: const Duration(milliseconds: 40),
+                  child: _ThemeModeCard(),
+                ),
+
+                const SizedBox(height: 12),
+
+                AnimatedFadeSlide(
+                  delay: const Duration(milliseconds: 50),
+                  child: _LanguageModeCard(),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Admin Panel (only for admins)
+                FutureBuilder<bool>(
+                  future: AdminRepository.isCurrentUserAdmin(),
+                  builder: (context, snapshot) {
+                    if (snapshot.data != true) return const SizedBox.shrink();
+                    return Column(
+                      children: [
+                        AnimatedFadeSlide(
+                          delay: const Duration(milliseconds: 65),
+                          child: Semantics(
+                            button: true,
+                            label: 'Ouvrir le panneau d\'administration',
+                            child: ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              tileColor: cs.primaryContainer.withValues(
+                                alpha: 0.25,
+                              ),
+                              leading: Icon(
+                                Icons.admin_panel_settings_rounded,
+                                color: cs.primary,
+                              ),
+                              title: const Text("Administration"),
+                              subtitle: const Text("Gerer les utilisateurs"),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 16,
+                              ),
+                              minVerticalPadding: 12,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  AppRoutes.fadeSlide(const AdminPanelScreen()),
+                                );
+                              },
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Icon(
-                      Icons.chevron_right_rounded,
-                      color: cs.onSurface.withValues(alpha: 0.6),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            AnimatedFadeSlide(
-              delay: const Duration(milliseconds: 40),
-              child: _ThemeModeCard(),
-            ),
-
-            const SizedBox(height: 12),
-
-            AnimatedFadeSlide(
-              delay: const Duration(milliseconds: 50),
-              child: _LanguageModeCard(),
-            ),
-
-            const SizedBox(height: 12),
-
-            // Admin Panel (only for admins)
-            FutureBuilder<bool>(
-              future: AdminRepository.isCurrentUserAdmin(),
-              builder: (context, snapshot) {
-                if (snapshot.data != true) return const SizedBox.shrink();
-                return Column(
-                  children: [
-                    AnimatedFadeSlide(
-                      delay: const Duration(milliseconds: 65),
-                      child: Semantics(
-                        button: true,
-                        label: 'Ouvrir le panneau d\'administration',
-                        child: ListTile(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          tileColor: cs.primaryContainer.withValues(
-                            alpha: 0.25,
-                          ),
-                          leading: Icon(
-                            Icons.admin_panel_settings_rounded,
-                            color: cs.primary,
-                          ),
-                          title: const Text("Administration"),
-                          subtitle: const Text("Gerer les utilisateurs"),
-                          trailing: const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16,
-                          ),
-                          minVerticalPadding: 12,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              AppRoutes.fadeSlide(const AdminPanelScreen()),
-                            );
-                          },
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                  ],
-                );
-              },
-            ),
-
-            // Profile navigation
-            AnimatedFadeSlide(
-              delay: const Duration(milliseconds: 60),
-              child: Semantics(
-                button: true,
-                label: 'Ouvrir les details du profil',
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  tileColor: cs.surfaceContainerHighest.withValues(alpha: 0.35),
-                  leading: const Icon(Icons.account_circle_rounded),
-                  title: const Text("Profil"),
-                  subtitle: const Text("Voir les details du compte"),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 16,
-                  ),
-                  minVerticalPadding: 12,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      AppRoutes.fadeSlide(const ProfileScreen()),
+                        const SizedBox(height: 12),
+                      ],
                     );
                   },
                 ),
-              ),
-            ),
 
-            const SizedBox(height: 12),
-
-            // Logout
-            AnimatedFadeSlide(
-              delay: const Duration(milliseconds: 110),
-              child: Semantics(
-                button: true,
-                label: 'Se deconnecter du compte',
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  tileColor: cs.surfaceContainerHighest.withValues(alpha: 0.35),
-                  leading: Icon(Icons.logout_rounded, color: cs.error),
-                  title: Text(
-                    "Deconnexion",
-                    style: TextStyle(
-                      color: cs.error,
-                      fontWeight: FontWeight.w800,
+                // Profile navigation
+                AnimatedFadeSlide(
+                  delay: const Duration(milliseconds: 60),
+                  child: Semantics(
+                    button: true,
+                    label: 'Ouvrir les details du profil',
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      tileColor: cs.surfaceContainerHighest.withValues(
+                        alpha: 0.35,
+                      ),
+                      leading: const Icon(Icons.account_circle_rounded),
+                      title: const Text("Profil"),
+                      subtitle: const Text("Voir les details du compte"),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 16,
+                      ),
+                      minVerticalPadding: 12,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          AppRoutes.fadeSlide(const ProfileScreen()),
+                        );
+                      },
                     ),
                   ),
-                  subtitle: const Text("Quitter votre compte"),
-                  minVerticalPadding: 12,
-                  onTap: () async {
-                    final ok = await _confirmLogout(context);
-                    if (!ok) return;
-
-                    await AuthService.logout();
-
-                    if (!context.mounted) return;
-
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                  },
                 ),
-              ),
-            ),
-          ],
-        );
-      },
+
+                const SizedBox(height: 12),
+
+                // Logout
+                AnimatedFadeSlide(
+                  delay: const Duration(milliseconds: 110),
+                  child: Semantics(
+                    button: true,
+                    label: 'Se deconnecter du compte',
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      tileColor: cs.surfaceContainerHighest.withValues(
+                        alpha: 0.35,
+                      ),
+                      leading: Icon(Icons.logout_rounded, color: cs.error),
+                      title: Text(
+                        "Deconnexion",
+                        style: TextStyle(
+                          color: cs.error,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      subtitle: const Text("Quitter votre compte"),
+                      minVerticalPadding: 12,
+                      onTap: () async {
+                        final ok = await _confirmLogout(context);
+                        if (!ok) return;
+
+                        await AuthService.logout();
+
+                        if (!context.mounted) return;
+
+                        Navigator.of(
+                          context,
+                        ).popUntil((route) => route.isFirst);
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 
