@@ -292,7 +292,9 @@ class _HomeShellState extends State<HomeShell> {
                 Expanded(
                   child: ResponsiveFrame(
                     expandToViewport: true,
-                    child: IndexedStack(index: _index, children: _fullPages),
+                    child: _index == 5
+                        ? const SettingsScreen()
+                        : IndexedStack(index: _index, children: _fullPages),
                   ),
                 ),
               ],

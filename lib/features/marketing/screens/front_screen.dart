@@ -574,14 +574,6 @@ class _WebContactRow extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Expanded(
-          child: _ContactCard(
-            title: 'WhatsApp',
-            value: '+213 557 911 298',
-            icon: Icons.chat_rounded,
-          ),
-        ),
-        const SizedBox(width: 10),
-        Expanded(
           child: Container(
             height: 90,
             decoration: BoxDecoration(
@@ -1021,12 +1013,6 @@ class _MobileContact extends StatelessWidget {
             icon: Icons.email_rounded,
             title: 'Email',
             value: 'tcfmaple@gmail.com',
-          ),
-          const SizedBox(height: 12),
-          _MobileContactRow(
-            icon: Icons.chat_rounded,
-            title: 'WhatsApp',
-            value: '+213 557 911 298',
           ),
           const SizedBox(height: 16),
           SizedBox(
