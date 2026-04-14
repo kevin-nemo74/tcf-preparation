@@ -206,6 +206,9 @@ class _EEEditorScreenState extends State<EEEditorScreen>
                 : null,
             corrections: evaluation.corrections,
             suggestions: evaluation.suggestions,
+            tache1Answer: _tache1Controller.text,
+            tache2Answer: _tache2Controller.text,
+            tache3Answer: _tache3Controller.text,
           );
         } catch (err) {
           debugPrint('Failed to save EE attempt: $err');

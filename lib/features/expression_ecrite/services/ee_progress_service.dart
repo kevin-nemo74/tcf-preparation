@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/ee_attempt.dart';
-import '../models/ee_evaluation.dart';
 
 class EEProgressService {
   EEProgressService._();
+
+  static const int maxStoredAttempts = 10;
 
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -41,6 +42,9 @@ class EEProgressService {
     String? tache3Feedback,
     String? corrections,
     String? suggestions,
+    String? tache1Answer,
+    String? tache2Answer,
+    String? tache3Answer,
   }) async {
     final attemptRef = _eeAttemptsCol(uid).doc();
     final attempt = EEAttempt(
@@ -62,15 +66,34 @@ class EEProgressService {
       tache3Feedback: tache3Feedback,
       corrections: corrections,
       suggestions: suggestions,
+      tache1Answer: tache1Answer,
+      tache2Answer: tache2Answer,
+      tache3Answer: tache3Answer,
       createdAt: DateTime.now(),
     );
 
     await attemptRef.set(attempt.toMap());
+
+    await _cleanupOldAttempts(uid);
+  }
+
+  static Future<void> _cleanupOldAttempts(String uid) async {
+    final snapshot = await _eeAttemptsCol(
+      uid,
+    ).orderBy('createdAt', descending: true).get();
+
+    if (snapshot.docs.length > maxStoredAttempts) {
+      final docsToDelete = snapshot.docs.skip(maxStoredAttempts).toList();
+      for (final doc in docsToDelete) {
+        await doc.reference.delete();
+      }
+    }
   }
 
   static Stream<List<EEAttempt>> streamAttempts(String uid) {
     return _eeAttemptsCol(uid)
         .orderBy('createdAt', descending: true)
+        .limit(maxStoredAttempts)
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
@@ -82,7 +105,7 @@ class EEProgressService {
   static Future<List<EEAttempt>> getAttempts(String uid) async {
     final snapshot = await _eeAttemptsCol(
       uid,
-    ).orderBy('createdAt', descending: true).get();
+    ).orderBy('createdAt', descending: true).limit(maxStoredAttempts).get();
     return snapshot.docs
         .map((doc) => EEAttempt.fromFirestore(doc.id, doc.data()))
         .toList();
@@ -129,4 +152,3 @@ class EEProgressService {
     return snapshot.size;
   }
 }
-

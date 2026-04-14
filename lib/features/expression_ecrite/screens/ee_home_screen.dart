@@ -112,8 +112,11 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) =>
-            EEResultScreen(combinaison: combinaison, evaluation: evaluation),
+        builder: (_) => EEResultScreen(
+          combinaison: combinaison,
+          evaluation: evaluation,
+          attempt: attempt,
+        ),
       ),
     );
   }
@@ -626,7 +629,12 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
     return Column(
       children: _attempts
           .take(10)
-          .map((attempt) => _AttemptCard(attempt: attempt, onTap: () => _viewAttemptResult(attempt)))
+          .map(
+            (attempt) => _AttemptCard(
+              attempt: attempt,
+              onTap: () => _viewAttemptResult(attempt),
+            ),
+          )
           .toList(),
     );
   }
@@ -1385,4 +1393,3 @@ class _FormatRow extends StatelessWidget {
     );
   }
 }
-

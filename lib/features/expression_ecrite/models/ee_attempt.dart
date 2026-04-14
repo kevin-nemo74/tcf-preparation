@@ -21,6 +21,9 @@ class EEAttempt {
   final String? tache3Feedback;
   final String? corrections;
   final String? suggestions;
+  final String? tache1Answer;
+  final String? tache2Answer;
+  final String? tache3Answer;
   final DateTime createdAt;
 
   const EEAttempt({
@@ -42,6 +45,9 @@ class EEAttempt {
     this.tache3Feedback,
     this.corrections,
     this.suggestions,
+    this.tache1Answer,
+    this.tache2Answer,
+    this.tache3Answer,
     required this.createdAt,
   });
 
@@ -66,6 +72,9 @@ class EEAttempt {
       tache3Feedback: map['tache3Feedback']?.toString(),
       corrections: map['corrections']?.toString(),
       suggestions: map['suggestions']?.toString(),
+      tache1Answer: map['tache1Answer']?.toString(),
+      tache2Answer: map['tache2Answer']?.toString(),
+      tache3Answer: map['tache3Answer']?.toString(),
       createdAt: createdAtData is Timestamp
           ? createdAtData.toDate()
           : DateTime.now(),
@@ -91,8 +100,50 @@ class EEAttempt {
       'tache3Feedback': tache3Feedback,
       'corrections': corrections,
       'suggestions': suggestions,
+      'tache1Answer': tache1Answer,
+      'tache2Answer': tache2Answer,
+      'tache3Answer': tache3Answer,
       'createdAt': Timestamp.fromDate(createdAt),
     };
+  }
+
+  String? getAnswerForTache(int index) {
+    switch (index) {
+      case 0:
+        return tache1Answer;
+      case 1:
+        return tache2Answer;
+      case 2:
+        return tache3Answer;
+      default:
+        return null;
+    }
+  }
+
+  String? getFeedbackForTache(int index) {
+    switch (index) {
+      case 0:
+        return tache1Feedback;
+      case 1:
+        return tache2Feedback;
+      case 2:
+        return tache3Feedback;
+      default:
+        return null;
+    }
+  }
+
+  double? getScoreForTache(int index) {
+    switch (index) {
+      case 0:
+        return tache1Score;
+      case 1:
+        return tache2Score;
+      case 2:
+        return tache3Score;
+      default:
+        return null;
+    }
   }
 
   EECombinaisonEvaluation toEvaluation() {
