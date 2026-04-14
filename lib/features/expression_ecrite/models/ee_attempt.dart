@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'ee_evaluation.dart';
 
 class EEAttempt {
   final String id;
@@ -15,6 +16,11 @@ class EEAttempt {
   final double? tache2Score;
   final double? tache3Score;
   final String? feedback;
+  final String? tache1Feedback;
+  final String? tache2Feedback;
+  final String? tache3Feedback;
+  final String? corrections;
+  final String? suggestions;
   final DateTime createdAt;
 
   const EEAttempt({
@@ -31,6 +37,11 @@ class EEAttempt {
     this.tache2Score,
     this.tache3Score,
     this.feedback,
+    this.tache1Feedback,
+    this.tache2Feedback,
+    this.tache3Feedback,
+    this.corrections,
+    this.suggestions,
     required this.createdAt,
   });
 
@@ -50,6 +61,11 @@ class EEAttempt {
       tache2Score: map['tache2Score']?.toDouble(),
       tache3Score: map['tache3Score']?.toDouble(),
       feedback: map['feedback']?.toString(),
+      tache1Feedback: map['tache1Feedback']?.toString(),
+      tache2Feedback: map['tache2Feedback']?.toString(),
+      tache3Feedback: map['tache3Feedback']?.toString(),
+      corrections: map['corrections']?.toString(),
+      suggestions: map['suggestions']?.toString(),
       createdAt: createdAtData is Timestamp
           ? createdAtData.toDate()
           : DateTime.now(),
@@ -70,8 +86,62 @@ class EEAttempt {
       'tache2Score': tache2Score,
       'tache3Score': tache3Score,
       'feedback': feedback,
+      'tache1Feedback': tache1Feedback,
+      'tache2Feedback': tache2Feedback,
+      'tache3Feedback': tache3Feedback,
+      'corrections': corrections,
+      'suggestions': suggestions,
       'createdAt': Timestamp.fromDate(createdAt),
     };
+  }
+
+  EECombinaisonEvaluation toEvaluation() {
+    final taches = <EETacheEvaluation>[];
+
+    if (tache1Score != null) {
+      taches.add(
+        EETacheEvaluation(
+          title: 'Tache 1',
+          score: tache1Score!,
+          maxScore: 25,
+          feedback: tache1Feedback ?? '',
+        ),
+      );
+    }
+    if (tache2Score != null) {
+      taches.add(
+        EETacheEvaluation(
+          title: 'Tache 2',
+          score: tache2Score!,
+          maxScore: 25,
+          feedback: tache2Feedback ?? '',
+        ),
+      );
+    }
+    if (tache3Score != null) {
+      taches.add(
+        EETacheEvaluation(
+          title: 'Tache 3',
+          score: tache3Score!,
+          maxScore: 25,
+          feedback: tache3Feedback ?? '',
+        ),
+      );
+    }
+
+    return EECombinaisonEvaluation(
+      overallScore: (scoreOutOf20 / 20) * 100,
+      maxScore: 100,
+      taches: taches,
+      generalFeedback: feedback ?? '',
+      corrections: corrections ?? '',
+      suggestions: suggestions ?? '',
+      wordCounts: {
+        'tache1': tache1WordCount,
+        'tache2': tache2WordCount,
+        'tache3': tache3WordCount,
+      },
+    );
   }
 }
 

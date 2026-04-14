@@ -3,8 +3,10 @@ import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/features/progress/progress_repository.dart';
 import '../models/ee_attempt.dart';
 import '../models/ee_combinaison.dart';
+import '../models/ee_evaluation.dart';
 import '../services/ee_progress_service.dart';
 import 'ee_editor_screen.dart';
+import 'ee_result_screen.dart';
 
 class EEHomeScreen extends StatefulWidget {
   const EEHomeScreen({super.key});
@@ -71,6 +73,49 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
       context,
       MaterialPageRoute(builder: (_) => EEEditorScreen(combinaison: exercise)),
     ).then((_) => _loadProgress());
+  }
+
+  EECombinaison? _findCombinaisonById(String id) {
+    if (_examen == null) return null;
+    for (final month in _examen!.months) {
+      for (final comb in month.combinaisons) {
+        if (comb.id == id) return comb;
+      }
+    }
+    return null;
+  }
+
+  void _viewAttemptResult(EEAttempt attempt) {
+    final combinaison = _findCombinaisonById(attempt.combinaisonId);
+    if (combinaison == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Exercice non trouve')));
+      return;
+    }
+
+    final evaluation = EECombinaisonEvaluation.fromAttempt(
+      tache1Feedback: attempt.tache1Feedback,
+      tache2Feedback: attempt.tache2Feedback,
+      tache3Feedback: attempt.tache3Feedback,
+      tache1Score: attempt.tache1Score,
+      tache2Score: attempt.tache2Score,
+      tache3Score: attempt.tache3Score,
+      scoreOutOf20: attempt.scoreOutOf20,
+      feedback: attempt.feedback,
+      corrections: attempt.corrections,
+      suggestions: attempt.suggestions,
+      tache1WordCount: attempt.tache1WordCount,
+      tache2WordCount: attempt.tache2WordCount,
+      tache3WordCount: attempt.tache3WordCount,
+    );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) =>
+            EEResultScreen(combinaison: combinaison, evaluation: evaluation),
+      ),
+    );
   }
 
   void _selectMonth(EEMonth month) {
@@ -581,7 +626,7 @@ class _EEHomeScreenState extends State<EEHomeScreen> {
     return Column(
       children: _attempts
           .take(10)
-          .map((attempt) => _AttemptCard(attempt: attempt, onTap: () {}))
+          .map((attempt) => _AttemptCard(attempt: attempt, onTap: () => _viewAttemptResult(attempt)))
           .toList(),
     );
   }
@@ -1340,3 +1385,4 @@ class _FormatRow extends StatelessWidget {
     );
   }
 }
+

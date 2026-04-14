@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/ee_attempt.dart';
+import '../models/ee_evaluation.dart';
 
 class EEProgressService {
   EEProgressService._();
@@ -35,6 +36,11 @@ class EEProgressService {
     double? tache2Score,
     double? tache3Score,
     String? feedback,
+    String? tache1Feedback,
+    String? tache2Feedback,
+    String? tache3Feedback,
+    String? corrections,
+    String? suggestions,
   }) async {
     final attemptRef = _eeAttemptsCol(uid).doc();
     final attempt = EEAttempt(
@@ -51,6 +57,11 @@ class EEProgressService {
       tache2Score: tache2Score,
       tache3Score: tache3Score,
       feedback: feedback,
+      tache1Feedback: tache1Feedback,
+      tache2Feedback: tache2Feedback,
+      tache3Feedback: tache3Feedback,
+      corrections: corrections,
+      suggestions: suggestions,
       createdAt: DateTime.now(),
     );
 
@@ -118,3 +129,4 @@ class EEProgressService {
     return snapshot.size;
   }
 }
+

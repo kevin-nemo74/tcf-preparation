@@ -195,6 +195,17 @@ class _EEEditorScreenState extends State<EEEditorScreen>
                 ? evaluation.taches[2].score
                 : null,
             feedback: evaluation.generalFeedback,
+            tache1Feedback: evaluation.taches.isNotEmpty
+                ? evaluation.taches[0].feedback
+                : null,
+            tache2Feedback: evaluation.taches.length > 1
+                ? evaluation.taches[1].feedback
+                : null,
+            tache3Feedback: evaluation.taches.length > 2
+                ? evaluation.taches[2].feedback
+                : null,
+            corrections: evaluation.corrections,
+            suggestions: evaluation.suggestions,
           );
         } catch (err) {
           debugPrint('Failed to save EE attempt: $err');

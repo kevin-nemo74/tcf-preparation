@@ -56,6 +56,69 @@ class EECombinaisonEvaluation {
     return scoreOutOf20;
   }
 
+  factory EECombinaisonEvaluation.fromAttempt({
+    required String? tache1Feedback,
+    required String? tache2Feedback,
+    required String? tache3Feedback,
+    required double? tache1Score,
+    required double? tache2Score,
+    required double? tache3Score,
+    required double scoreOutOf20,
+    required String? feedback,
+    required String? corrections,
+    required String? suggestions,
+    required int tache1WordCount,
+    required int tache2WordCount,
+    required int tache3WordCount,
+  }) {
+    final taches = <EETacheEvaluation>[];
+
+    if (tache1Score != null) {
+      taches.add(
+        EETacheEvaluation(
+          title: 'Tache 1',
+          score: tache1Score,
+          maxScore: 25,
+          feedback: tache1Feedback ?? '',
+        ),
+      );
+    }
+    if (tache2Score != null) {
+      taches.add(
+        EETacheEvaluation(
+          title: 'Tache 2',
+          score: tache2Score,
+          maxScore: 25,
+          feedback: tache2Feedback ?? '',
+        ),
+      );
+    }
+    if (tache3Score != null) {
+      taches.add(
+        EETacheEvaluation(
+          title: 'Tache 3',
+          score: tache3Score,
+          maxScore: 25,
+          feedback: tache3Feedback ?? '',
+        ),
+      );
+    }
+
+    return EECombinaisonEvaluation(
+      overallScore: (scoreOutOf20 / 20) * 100,
+      maxScore: 100,
+      taches: taches,
+      generalFeedback: feedback ?? '',
+      corrections: corrections ?? '',
+      suggestions: suggestions ?? '',
+      wordCounts: {
+        'tache1': tache1WordCount,
+        'tache2': tache2WordCount,
+        'tache3': tache3WordCount,
+      },
+    );
+  }
+
   factory EECombinaisonEvaluation.fromJson(Map<String, dynamic> json) {
     final tachesList = <EETacheEvaluation>[];
     final tachesData = json['taches'] as Map<String, dynamic>?;
