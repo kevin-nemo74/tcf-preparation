@@ -316,6 +316,16 @@ class _WebServicesRow extends StatelessWidget {
           SizedBox(width: 10),
           Expanded(
             child: _ServiceCard(
+              icon: Icons.edit_note_rounded,
+              title: 'Expression Ecrite',
+              text: 'Simulateur avec\ncorrections IA',
+              highlight: 'NOUVEAU',
+              isNew: true,
+            ),
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: _ServiceCard(
               icon: Icons.record_voice_over_rounded,
               title: 'Expression Orale Tache 2',
               text: 'Corrections des\nactualites recentes',
@@ -342,12 +352,14 @@ class _ServiceCard extends StatelessWidget {
   final String title;
   final String text;
   final String highlight;
+  final bool isNew;
 
   const _ServiceCard({
     required this.icon,
     required this.title,
     required this.text,
     required this.highlight,
+    this.isNew = false,
   });
 
   @override
@@ -358,8 +370,15 @@ class _ServiceCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: cs.surfaceContainerHighest.withValues(alpha: 0.3),
-        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.2)),
+        color: isNew
+            ? Colors.green.withValues(alpha: 0.08)
+            : cs.surfaceContainerHighest.withValues(alpha: 0.3),
+        border: Border.all(
+          color: isNew
+              ? Colors.green.withValues(alpha: 0.4)
+              : cs.outlineVariant.withValues(alpha: 0.2),
+          width: isNew ? 2 : 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -367,24 +386,30 @@ class _ServiceCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: cs.primaryContainer.withValues(alpha: 0.5),
+              color: isNew
+                  ? Colors.green.withValues(alpha: 0.15)
+                  : cs.primaryContainer.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(icon, color: cs.primary, size: 28),
+            child: Icon(
+              icon,
+              color: isNew ? Colors.green : cs.primary,
+              size: 28,
+            ),
           ),
           const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: cs.primary.withValues(alpha: 0.15),
+              color: isNew ? Colors.green : cs.primary.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Text(
               highlight,
               style: TextStyle(
                 fontSize: 11,
-                fontWeight: FontWeight.w800,
-                color: cs.primary,
+                fontWeight: FontWeight.w900,
+                color: isNew ? Colors.green.shade700 : cs.primary,
               ),
             ),
           ),
@@ -769,6 +794,13 @@ class _MobileServices extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           _MobileServiceItem(
+            icon: Icons.edit_note_rounded,
+            title: 'Expression Ecrite',
+            subtitle: 'NOUVEAU - Simulateur avec corrections IA',
+            isNew: true,
+          ),
+          const SizedBox(height: 12),
+          _MobileServiceItem(
             icon: Icons.record_voice_over_rounded,
             title: 'Expression Orale Tache 2',
             subtitle: 'Corrections des actualites',
@@ -789,11 +821,13 @@ class _MobileServiceItem extends StatelessWidget {
   final IconData icon;
   final String title;
   final String subtitle;
+  final bool isNew;
 
   const _MobileServiceItem({
     required this.icon,
     required this.title,
     required this.subtitle,
+    this.isNew = false,
   });
 
   @override
@@ -804,22 +838,55 @@ class _MobileServiceItem extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: cs.primaryContainer.withValues(alpha: 0.5),
+            color: isNew
+                ? Colors.green.withValues(alpha: 0.15)
+                : cs.primaryContainer.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(icon, color: cs.primary, size: 24),
+          child: Icon(icon, color: isNew ? Colors.green : cs.primary, size: 24),
         ),
         const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.w800)),
+              Row(
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(fontWeight: FontWeight.w800),
+                  ),
+                  if (isNew) ...[
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Text(
+                        'NOUVEAU',
+                        style: TextStyle(
+                          fontSize: 9,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
               Text(
                 subtitle,
                 style: TextStyle(
-                  color: cs.onSurface.withValues(alpha: 0.7),
+                  color: isNew
+                      ? Colors.green.shade700
+                      : cs.onSurface.withValues(alpha: 0.7),
                   fontSize: 13,
+                  fontWeight: isNew ? FontWeight.w600 : FontWeight.normal,
                 ),
               ),
             ],
