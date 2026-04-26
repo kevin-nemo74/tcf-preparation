@@ -4,6 +4,7 @@ import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import 'package:tcf_canada_preparation/core/theme/motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
+import '../widgets/audio_player_widget.dart';
 import '../data/models/oral_question_model.dart';
 import '../data/models/oral_test_model.dart';
 
@@ -317,6 +318,15 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 14),
+
+            // Audio player (for listening questions)
+            Center(
+              child: SizedBox(
+                width: double.infinity,
+                child: AudioPlayerWidget(audioUrl: question.audioUrl),
+              ),
+            ),
+            const SizedBox(height: 16),
 
             // Optional image (Q1/Q2 only)
             if (question.imageUrl != null) ...[

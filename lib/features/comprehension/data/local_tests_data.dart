@@ -23,6 +23,7 @@ class LocalTestsData {
           return QuestionModel(
             id: q['id'],
             imageUrl: q['imageUrl'],
+            audioUrl: q['audioUrl'],
             correctAnswer: q['correctAnswer'],
             options: (q['options'] as List).map((o) {
               return OptionModel(id: o['id'], text: o['text']);

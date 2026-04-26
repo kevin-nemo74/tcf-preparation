@@ -7,6 +7,8 @@ import 'package:tcf_canada_preparation/core/widgets/app_motion.dart';
 import 'package:tcf_canada_preparation/core/widgets/responsive_frame.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/question_model.dart';
 import 'package:tcf_canada_preparation/features/comprehension/data/models/test_model.dart';
+import 'package:just_audio/just_audio.dart';
+import 'dart:async';
 
 class ReviewScreen extends StatefulWidget {
   final TestModel test;
@@ -26,6 +28,17 @@ class _ReviewScreenState extends State<ReviewScreen> {
   int selectedIndex = 0;
   bool showPointsValue = false;
   bool showMissedOnly = false;
+  bool _isPlaying = false;
+  
+  void _toggleAudio() {
+    if (!mounted) return;
+    setState(() => _isPlaying = !_isPlaying);
+  }
+  
+  void _stopAudio() {
+    if (!mounted) return;
+    setState(() => _isPlaying = false);
+  }
 
   int getQuestionPoints(int questionNumber) {
     if (questionNumber >= 1 && questionNumber <= 4) return 3;
@@ -386,9 +399,22 @@ class _ReviewScreenState extends State<ReviewScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Question ${index + 1}",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+            Row(
+              children: [
+                Text(
+                  "Question ${index + 1}",
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+                ),
+                if (question.hasAudio) ...[
+                  const Spacer(),
+                  _AudioPlayerButton(
+                    audioUrl: question.audioUrl!,
+                    isPlaying: _isPlaying,
+                    onPlay: _toggleAudio,
+                    onStop: _stopAudio,
+                  ),
+                ],
+              ],
             ),
             const SizedBox(height: 16),
 
@@ -487,6 +513,162 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   color: cs.onSurface.withValues(alpha: 0.8),
                   fontWeight: FontWeight.w600,
                 ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AudioPlayerButton extends StatefulWidget {
+  final String audioUrl;
+  final bool isPlaying;
+  final VoidCallback onPlay;
+  final VoidCallback onStop;
+
+  const _AudioPlayerButton({
+    required this.audioUrl,
+    required this.isPlaying,
+    required this.onPlay,
+    required this.onStop,
+  });
+
+  @override
+  State<_AudioPlayerButton> createState() => _AudioPlayerButtonState();
+}
+
+class _AudioPlayerButtonState extends State<_AudioPlayerButton> {
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  StreamSubscription<PlayerState>? _playerStateSubscription;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _playerStateSubscription = _audioPlayer.playerStateStream.listen((state) {
+      if (mounted) {
+        if (state.processingState == ProcessingState.completed) {
+          widget.onStop();
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _playerStateSubscription?.cancel();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  Future<void> _playAudio() async {
+    if (_isLoading) return;
+    setState(() => _isLoading = true);
+    try {
+      await _audioPlayer.setUrl(widget.audioUrl);
+      await _audioPlayer.play();
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erreur audio: $e')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
+if (_isLoading) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: cs.primaryContainer,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: cs.primary,
+              ),
+            ),
+            const SizedBox(width: 6),
+            Text(
+              'Chargement...',
+              style: TextStyle(
+                color: cs.primary,
+                fontWeight: FontWeight.w700,
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    if (widget.isPlaying) {
+      return InkWell(
+        onTap: () async {
+          await _audioPlayer.stop();
+          widget.onStop();
+        },
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: cs.primary,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.stop_rounded, color: Colors.white, size: 20),
+              const SizedBox(width: 6),
+              const Text(
+                'Arreter',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return InkWell(
+      onTap: _playAudio,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: cs.primaryContainer,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: cs.primary, width: 2),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.volume_up_rounded, color: cs.primary, size: 20),
+            const SizedBox(width: 6),
+            Text(
+              'Audio',
+              style: TextStyle(
+                color: cs.primary,
+                fontWeight: FontWeight.w700,
+                fontSize: 12,
               ),
             ),
           ],
