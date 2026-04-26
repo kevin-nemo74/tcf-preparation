@@ -326,7 +326,7 @@ class _OralReviewScreenState extends State<OralReviewScreen> {
                 child: AudioPlayerWidget(audioUrl: question.audioUrl),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 6),
 
             // Optional image (Q1/Q2 only)
             if (question.imageUrl != null) ...[

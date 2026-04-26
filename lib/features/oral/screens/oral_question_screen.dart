@@ -220,10 +220,19 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
                             key: ValueKey<String>(question.id),
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                flex: Responsive.isDesktopWeb(context) ? 7 : 6,
-                                child: _OralMediaPanel(question: question),
-                              ),
+                              // On tablet+ web: expand media panel; on mobile without image: don't reserve space
+                              if (question.imageUrl != null)
+                                Expanded(
+                                  flex: Responsive.isDesktopWeb(context) ? 7 : 6,
+                                  child: _OralMediaPanel(question: question),
+                                )
+                              else if (MediaQuery.sizeOf(context).width >= 600)
+                                Expanded(
+                                  flex: Responsive.isDesktopWeb(context) ? 7 : 6,
+                                  child: _OralMediaPanel(question: question),
+                                )
+                              else
+                                _OralMediaPanel(question: question),
                               const SizedBox(width: 16),
                               Expanded(
                                 flex: Responsive.isDesktopWeb(context) ? 6 : 5,
@@ -248,10 +257,19 @@ class _OralQuestionScreenState extends State<OralQuestionScreen> {
                         : Column(
                             key: ValueKey<String>(question.id),
                             children: [
-                              Expanded(
-                                flex: 6,
-                                child: _OralMediaPanel(question: question),
-                              ),
+                              // On mobile without image: don't expand, just wrap content
+                              if (question.imageUrl != null)
+                                Expanded(
+                                  flex: 6,
+                                  child: _OralMediaPanel(question: question),
+                                )
+                              else if (MediaQuery.sizeOf(context).width >= 600)
+                                Expanded(
+                                  flex: 6,
+                                  child: _OralMediaPanel(question: question),
+                                )
+                              else
+                                _OralMediaPanel(question: question),
                               const SizedBox(height: 14),
                               Expanded(
                                 flex: 7,
@@ -351,6 +369,8 @@ class _OralMediaPanel extends StatelessWidget {
                 ),
               ),
             )
+          else if (MediaQuery.sizeOf(context).width < 600)
+            const SizedBox.shrink()
           else
             Expanded(
               child: Container(
