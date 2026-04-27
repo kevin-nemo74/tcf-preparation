@@ -586,39 +586,25 @@ class _PricePlanCard extends StatelessWidget {
 class _WebContactRow extends StatelessWidget {
   const _WebContactRow();
 
+  static const _whatsappNumber = '+213 552146044';
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: _ContactCard(
-            title: 'Email',
-            value: 'tcfmaple@gmail.com',
-            icon: Icons.email_rounded,
+            title: 'WhatsApp',
+            value: _whatsappNumber,
+            icon: Icons.chat_rounded,
           ),
         ),
         const SizedBox(width: 10),
         Expanded(
-          child: Container(
-            height: 90,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              color: Theme.of(
-                context,
-              ).colorScheme.primaryContainer.withValues(alpha: 0.3),
-              border: Border.all(
-                color: Theme.of(
-                  context,
-                ).colorScheme.primary.withValues(alpha: 0.3),
-              ),
-            ),
-            child: Center(
-              child: FilledButton.icon(
-                onPressed: () => _goToLogin(context),
-                icon: const Icon(Icons.login_rounded),
-                label: const Text('Connexion'),
-              ),
-            ),
+          child: _ContactCard(
+            title: 'Email',
+            value: 'tcfmaple@gmail.com',
+            icon: Icons.email_rounded,
           ),
         ),
       ],
@@ -1058,6 +1044,8 @@ class _MobilePriceCard extends StatelessWidget {
 class _MobileContact extends StatelessWidget {
   const _MobileContact();
 
+  static const _whatsappNumber = '+213 552146044';
+
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
@@ -1076,6 +1064,12 @@ class _MobileContact extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
           ),
           const SizedBox(height: 14),
+          _MobileContactRow(
+            icon: Icons.chat_rounded,
+            title: 'WhatsApp',
+            value: _whatsappNumber,
+          ),
+          const SizedBox(height: 12),
           _MobileContactRow(
             icon: Icons.email_rounded,
             title: 'Email',

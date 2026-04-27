@@ -8,6 +8,7 @@ import 'package:tcf_canada_preparation/l10n/app_localizations.dart';
 
 import '../auth_service.dart';
 import 'forgot_password_screen.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -245,40 +246,32 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: Text(l10n.forgotPasswordCta),
                                 ),
                               ),
-                              const SizedBox(height: 8),
-                              SizedBox(
-                                width: double.infinity,
-                                child: FilledButton(
-                                  onPressed: _loading ? null : _submit,
-                                  style: FilledButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 16,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16),
+                              const SizedBox(height: 18),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    l10n.noAccount,
+                                    style: TextStyle(
+                                      color: cs.onSurface.withValues(
+                                        alpha: 0.7,
+                                      ),
                                     ),
                                   ),
-                                  child: _loading
-                                      ? const SizedBox(
-                                          height: 20,
-                                          width: 20,
-                                          child: CircularProgressIndicator(
-                                            strokeWidth: 2,
-                                          ),
-                                        )
-                                      : Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              Icons.login_rounded,
-                                              size: 20,
-                                            ),
-                                            const SizedBox(width: 8),
-                                            Text(l10n.loginCta),
-                                          ],
-                                        ),
-                                ),
+                                  TextButton(
+                                    onPressed: _loading
+                                        ? null
+                                        : () {
+                                            Navigator.push(
+                                              context,
+                                              AppRoutes.fadeSlide(
+                                                const RegisterScreen(),
+                                              ),
+                                            );
+                                          },
+                                    child: Text(l10n.createOne),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
