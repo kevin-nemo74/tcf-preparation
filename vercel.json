@@ -1,0 +1,5 @@
+{
+  "buildCommand": "export DART_VM_OPTIONS=\"--old_gen_heap_size=384\" && git clone https://github.com/flutter/flutter.git -b stable && export PATH=\"$PATH:`pwd`/flutter/bin\" && flutter build web --release --dart-define=GROQ_API_KEY=$GROQ_API_KEY --web-renderer html",
+  "outputDirectory": "build/web",
+  "framework": null
+}
