@@ -1,3 +1,5 @@
+// ignore: unnecessary_import - needed on Flutter >=3.44 (CupertinoPageTransitionsBuilder moved from material)
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
