@@ -1,0 +1,259 @@
+{
+  "id": "avril-2025",
+  "examTitle": "Avril 2025",
+  "combinaisons": [
+    {
+      "id": "avr-1",
+      "tache1": {
+        "title": "Vacances et recommandations",
+        "instruction": "Salut, je vais bientot passer mes vacances dans ta region et j'aimerais avoir tes conseils. Est-ce que tu pourrais me recommander un endroit sympas a visiter pendant mon sejour ? Merci d'avance pour ton aide ! Mathieu.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Salle de sport avis",
+        "instruction": "Bonjour, vous avez recemment suivi des cours dans notre salle de sport. Que pensez-vous de notre site Internet ? Partez votre experience et donnez-nous votre avis ici : www.masalledesport.org.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Livraison de Repas : Pour ou Contre ?",
+        "instruction": "La Livraison de Repas : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Commander a manger permet de gagner du temps, surtout quand on est au travail. On peut recevoir son repas directement au bureau et finir sa pause plus tot. En plus, il y a du choix pour tout le monde : un collegue veut une pizza, vous preferez des sushis ? Pas de probleme. Autre avantage : certains restos livrent 24h/24. — Celine, 25 ans",
+        "documentB": "La livraison de repas est pratique, mais elle n'est pas toujours bonne pour l'environnement. Les livraisons en scooter ou en voiture polluent. Cette habitude peut aussi nuire a notre vie sociale : on reste enferme, on voit moins de monde. Pourtant, c'est important de sortir, de respirer et de faire des rencontres. — Ahmed, 40 ans"
+      }
+    },
+    {
+      "id": "avr-2",
+      "tache1": {
+        "title": "Appartement a louer",
+        "instruction": "Vous avez vu une annonce en ligne concernant un appartement a louer. Redigez un courriel pour demander des precisions sur le logement et le quartier.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Programme apprentissage langues",
+        "instruction": "Vous avez pris part a un programme dans une ecole specialisee dans l'apprentissage des langues. Ecrivez un article sur votre site personnel pour partager votre experience et vos impressions.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Cameras de Surveillance : Protection ou Intrusion ?",
+        "instruction": "Cameras de Surveillance : Protection ou Intrusion ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "L'installation de cameras dans les espaces urbains est de plus en plus repandue. Une majorite de Francais soutiennent cette mesure, car elle contribue a renforcer la securite. Un sondage revele que 75 % sont favorables a leur usage. Cependant, cette approbation concerne uniquement les lieux publics comme les rues, les commerces ou les transports. Les Francais restent opposes a leur usage dans le cadre professionnel. En France, la surveillance au travail est encore tres encadree.",
+        "documentB": "Plusieurs etudes soulignent le cout eleve de la videosurveillance et remettent en question son efficacite reelle. Etant visibles, les cameras ne suffisent pas a deterrer certains actes comme les agressions, les vols ou la consommation de drogue. De plus, leur gestion reste compliquee : une etude allemande montre qu'il faut jusqu'a sept personnes pour analyser les images d'une seule camera."
+      }
+    },
+    {
+      "id": "avr-3",
+      "tache1": {
+        "title": "Region a decouvrir",
+        "instruction": "Votre ami(e) souhaite decouvrir la region ou vous habitez. Ecrivez-lui un message pour lui proposer quelques endroits interessants a visiter.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Cours salle de sport",
+        "instruction": "Redigez un article pour votre blog dans lequel vous racontez votre participation a un cours dans une salle de sport. Partagez votre experience, donnez votre opinion sur l'ambiance, le materiel, les encadrants, et votre ressenti general.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Recevoir ses Repas au Bureau : Bonne idee ou pas ?",
+        "instruction": "Recevoir ses Repas au Bureau : Bonne idee ou pas ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Se faire livrer a manger sur son lieu de travail permet aux employes de gagner un temps precieux. Ils n'ont plus besoin de sortir pour aller chercher un repas, ce qui limite les deplacements et aide a rester concentre. Cela ameliore aussi la productivite, surtout apres une reunion ou pendant une journee chargee. Ce service est particulierement utile dans les entreprises au rythme de travail intense.",
+        "documentB": "Mais cette solution a aussi ses limites. Les livreurs, parfois debordes, peuvent prendre du retard, ce qui cree du stress. De plus, si les employes restent a leur poste pour manger, ils risquent de ne pas suffisamment se reposer. Il est donc important de faire de vraies pauses, meme dans un emploi du temps charge."
+      }
+    },
+    {
+      "id": "avr-4",
+      "tache1": {
+        "title": "Invitation vacances",
+        "instruction": "Invitez votre ami(e) a venir passer ses vacances chez vous. Dans votre message, presentez les lieux touristiques et les endroits a ne pas manquer dans votre ville.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Article artiste prefere",
+        "instruction": "Vous avez ete choisi(e) pour participer a un concours dont la recompense est un sejour de deux semaines dans votre ville preferee. Le theme du concours etait : « Mon artiste prefere ». Redigez un article sur votre blog pour parler de l'artiste que vous admirez le plus.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Chasse aux Animaux : Tradition ou Cruaute ?",
+        "instruction": "La Chasse aux Animaux : Tradition ou Cruaute ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "David : Les raisons pour lesquelles on chasse sont nombreuses : alimentation, commerce, regulation des especes, protection des terres, activite physique, loisir ou encore prestige social.",
+        "documentB": "Melissa : Je ne comprends pas qu'on puisse ressentir du plaisir en tuant des animaux. Et je ne comprends pas non plus qu'on dise aimer la nature tout en participant activement a sa destruction."
+      }
+    },
+    {
+      "id": "avr-5",
+      "tache1": {
+        "title": "Recommandation salle de sport",
+        "instruction": "Vous repondez a un ami qui souhaite avoir des renseignements sur une salle de sport bien connue pour la qualite de ses services. Dans votre message, donnez-lui des informations sur cette salle (equipements, ambiance, horaires, tarifs, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Formation en ligne",
+        "instruction": "Redigez un message pour raconter votre experience avec une formation en ligne. Mettez en avant les aspects positifs du programme suivi, mais evoquez aussi les eventuelles difficultes que vous avez rencontrees pendant l'apprentissage.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Produits faits Maison : Solution responsable ou pas ?",
+        "instruction": "Les Produits faits Maison : Solution responsable ou pas ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Preparer soi-meme ses produits bio a la maison permet de choisir les ingredients avec precision, pour un resultat plus sain et adapte a ses besoins. Cela reduit aussi les dechets plastiques grace a l'usage de contenants reutilisables. Cette demarche ecologique, en plus d'etre economique sur le long terme, valorise la creativite et encourage un mode de vie respectueux de l'environnement.",
+        "documentB": "Cependant, fabriquer ses produits chez soi n'est pas sans risques. Une mauvaise composition peut reduire leur efficacite ou causer des reactions cutanees. Cela demande aussi du temps et de la rigueur pour trouver des ingredients fiables. Sans controle strict, le produit peut se deteriorer ou se contaminer. Enfin, l'achat d'ingredients de qualite peut representer un cout important."
+      }
+    },
+    {
+      "id": "avr-6",
+      "tache1": {
+        "title": "Victoire competition",
+        "instruction": "Vous etes inscrit(e) dans un club sportif et venez de remporter une competition. Redigez un courriel a vos amis pour leur raconter cet evenement et exprimer votre joie.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Experience colocation",
+        "instruction": "Vous avez deja eu l'experience de vivre en colocation avec des amis. Le site « colocation.com » recherche des temoignages. Partagez votre experience en expliquant comment cela s'est passe et donnez votre avis sur la vie en colocation.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'Agrandissement des Villes",
+        "instruction": "L'Agrandissement des Villes",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "L'expansion rapide des villes a un impact negatif sur l'environnement. Plus l'urbanisation progresse, plus les milieux naturels sont detruits, ce qui affecte aussi notre sante. La deforestation est l'un des effets les plus inquiettants : les plantes absorbent le carbone, mais elles sont remplacees par des batiments, ce qui reduit leur capacite a limiter le changement climatique.",
+        "documentB": "La plupart des gens vivent desormai en ville, notamment dans les pays developpes. Cela pose de grands defis ecologiques. On critique souvent les villes pour leur conception peu respectueuse de l'environnement. Pourtant, il ne faut pas generaliser : un habitant d'une grande ville consomme parfois moins d'energie qu'une personne vivant a la campagne."
+      }
+    },
+    {
+      "id": "avr-7",
+      "tache1": {
+        "title": "Invitation anniversaire",
+        "instruction": "Vous allez bientot feter votre anniversaire. Redigez un message a vos amis pour les inviter et leur decrire ce que vous avez prevu (lieu, programme, ambiance, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Etudes a l'etranger",
+        "instruction": "Quelqu'un a publie un message sur Facebook a propos des etudes a l'etranger. Ecrivez un commentaire pour exprimer votre point de vue en evoquant les avantages et les difficultes de cette experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Enfants et les Technologies Modernes",
+        "instruction": "Les Enfants et les Technologies Modernes",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les eleves du primaire peuvent utiliser la technologie pour enrichir leurs apprentissages. Par exemple, ils peuvent regarder des videos educatives ou jouer a des jeux interactifs qui developpent leurs competences en lecture, en calcul ou en dactylographie.",
+        "documentB": "Cependant, de nombreux parents s'inquietent du role passif que ces outils peuvent provoquer chez les enfants. Les ecrans reduisent les echanges humains, les jeux creatifs et l'activite physique. Il serait utile de proposer des activites originales et stimulantes pour les encourager a decrocher un peu des ecrans."
+      }
+    },
+    {
+      "id": "avr-8",
+      "tache1": {
+        "title": "Fete d'anniversaire",
+        "instruction": "Vous avez recemment organise une fete d'anniversaire. Ecrivez un message a vos amis pour leur raconter comment s'est passee la fete. Parlez de ce que vous avez le plus apprecie pendant la soiree et mentionnez les cadeaux qui vous ont le plus plues.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Voyage a l'etranger",
+        "instruction": "Vous revenez d'un voyage a l'etranger. Redigez un texte pour raconter comment s'est deroule votre sejour et partagez vos impressions. Donnez a votre ami(e) de bonnes raisons de decouvrir ce pays.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'Energie Nucleaire : une Solution d'Avenir ou un Danger a Eviter ?",
+        "instruction": "L'Energie Nucleaire : une Solution d'Avenir ou un Danger a Eviter ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "De nombreux experts considerent que l'energie nucleaire est indispensable pour repondre aux besoins croissants en electricite tout en limitant les emissions de gaz a effet de serre. Contrairement aux energies fossiles, elle ne rejette presque pas de CO2. C'est aussi une source d'energie stable, capable de produire une grande quantite d'electricite en continu, ce qui la rend essentielle pour assurer la securite energetique des pays developpes.",
+        "documentB": "D'autres specialistes s'opposent fermement a l'usage de l'energie nucleaire. Ils rappellent que les dechets radioactifs restent dangereux pendant des milliers d'annees et qu'en cas d'accident, les consequences peuvent etre catastrophiques. Pour eux, il faut investir davantage dans les energies renouvelables comme le solaire ou l'eolien, qui sont plus sures, propres et respectueuses de l'environnement."
+      }
+    },
+    {
+      "id": "avr-9",
+      "tache1": {
+        "title": "Centre de langues",
+        "instruction": "Tu as pris des cours au centre de langues cultures pour tous ? Comment trouves tu cette ecole ? Paul. Vous repondez a votre ami Paul en lui en decrivant l'ecole : les salles de classe, le materiel, les professeurs, et d'autres elements importants.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Pique-nique collegues",
+        "instruction": "Vous avez participe a un pique-nique organise avec vos collegues de travail. Redigez un article pour le journal interne de votre entreprise. Racontez comment s'est deroule cet evenement (lieu, ambiance, repas, meteo, activites, etc.).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Faut-il Reduire sa Consommation de Viande ?",
+        "instruction": "Faut-il Reduire sa Consommation de Viande ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Quentin, 45 ans : Est-il vraiment necessaire de manger de la viande tous les jours ? C'est une question que je me suis souvent posee et, finalement, j'ai choisi de reduire ma consommation de viande et de poisson. J'en mange seulement de temps en temps, quand je suis invite chez des amis ou au restaurant. Chez moi, je n'en prepare jamais. Je trouve que c'est une bonne decision : mon alimentation est plus equilibree qu'avant, ce qui est meilleur pour ma sante car je mange moins gras. J'imagine aussi que c'est plus respectueux de l'environnement.",
+        "documentB": "Vanessa, 24 ans : Reduire sa consommation de viande, c'est un vrai sujet d'actualite ! Pour ma part, je ne pourrais pas vivre sans manger de viande. J'ai des amis vegetariens, et quand je dine chez eux, j'apprecie leurs plats. Mais chez moi, je trouve que c'est difficile de preparer des repas sans viande… Et puis, peut-on vraiment se passer de viande sans mettre sa sante en danger ? J'ai deja essaye d'en manger moins et je me sentais tres fatiguee. Selon moi, il est important de manger de tout pour rester en bonne sante."
+      }
+    },
+    {
+      "id": "avr-10",
+      "tache1": {
+        "title": "Journee avec ami(e)",
+        "instruction": "Vous avez envie de passer une journee avec votre ami(e). Vous ecrivez a votre ami(e), vous l'invitez et vous decrivez le programme de la journee (heure, lieu du rendez-vous, activites, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Journee formation professionnelle",
+        "instruction": "Dans le cadre de votre emploi, vous avez assiste a une journee de formation professionnelle. Votre entreprise vous demande de rediger un article pour raconter cette experience a vos collegues, decrivez le deroulement de la journee et donnez votre avis sur cette formation.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Colocation : une Bonne Experience ou une Source de Conflits ?",
+        "instruction": "La Colocation : une Bonne Experience ou une Source de Conflits ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Pour ceux qui n'aiment pas manger seuls ou qui apprecient les echanges quotidiens, la colocation est ideale. Vivre avec d'autres permet de partager les repas, de jouer ensemble, et de diviser les taches menageres. La colocation offre aussi l'occasion d'ouvrir son esprit, de decouvrir d'autres modes de vie, de tisser des liens forts et de s'entraider au quotidien. D'apres etudiant.aujourdhui.fr",
+        "documentB": "Vivre en colocation peut aussi etre source de tensions. Il est parfois difficile de trouver du calme ou de supporter les amis des autres colocataires. Il faut aussi etre pret a bien reparter les corvees menageres pour eviter les disputes. La colocation demande donc beaucoup de diplomatie, sauf si l'on a la chance de tomber sur un colocataire parfait. D'apres nrj.fr"
+      }
+    },
+    {
+      "id": "avr-11",
+      "tache1": {
+        "title": "Nouveau restaurant",
+        "instruction": "Vous avez teste un nouveau restaurant situe pres de chez vous. Ecrivez un courriel a un(e) ami(e) pour lui donner vos impressions sur cet etablissement (ambiance, accueil, prix, qualite des plats, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Cours de langue",
+        "instruction": "Vous avez suivi un cours de langue recemment. Sur un forum Internet, redigez un article pour raconter votre experience (lieu, organisation, duree, etc.) et donner votre avis sur la qualite du cours.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Le Vegetarianisme : Pour ou Contre ?",
+        "instruction": "Le Vegetarianisme : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "La France compte plus de 1,5 million de vegetariens. Pour Brigitte G., membre d'une association, devenir vegetarien, c'est avant tout refuser l'exploitation animale et defender leur cause. Le vegetarianisme est aussi souvent lie a une preoccupation ecologique : selon une etude scientifique, l'elevage serait responsable de 18 % des emissions mondiales de CO2. Memesi la majorite des Francais restent omnivores, la sensibilisation a la cause animale progresse fortement. Respect des animaux, ecologie ou engagement personnel, ces raisons poussent de plus en plus de personnes a reduire leur consommation de produits issus des animaux.",
+        "documentB": "Selon une etude scientifique recente, une alimentation vegetarienne pourrait etre plus polluante qu'une alimentation incluant de la viande. Des chercheurs de l'universite de Carnegie-Mellon ont compare les emissions de carbone liees a la production de fruits et legumes avec celles de l'elevage. Ils ont decouvert, par exemple, que produire et transporter une laitue genere trois fois plus de pollution qu'eleve un poulet. Cette etude remet donc en question plusieurs idees recues sur l'impact environnemental du vegetarianisme."
+      }
+    }
+  ]
+}

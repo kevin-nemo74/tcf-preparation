@@ -1,0 +1,282 @@
+{
+  "id": "mars-2025",
+  "examTitle": "Mars 2025",
+  "combinaisons": [
+    {
+      "id": "mar-1",
+      "tache1": {
+        "title": "Nouveaux locaux entreprise",
+        "instruction": "Votre ami Lucas vous a envoye un courriel pour obtenir des informations sur les nouveaux locaux de votre entreprise. Repondez-lui en detailant l'emplacement, la disposition des pieces et les equipements disponibles.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Semaine sans voiture",
+        "instruction": "Vous avez participe a l'evenement Une semaine sans voiture. Ecrivez un texte pour raconter votre experience, donner votre ressenti et decrire le deroulement de cette initiative (dates, lieu, activites proposees).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Vetements de Grandes Marques",
+        "instruction": "Les Vetements de Grandes Marques",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Pour les enfants et les adolescents, les vetements de marque sont bien plus qu'un simple choix vestimentaire : ils permettent d'affirmer leur identite et de se sentir integres dans un groupe social. Chez les plus jeunes, l'attachement aux logos et aux personnages de dessins animes influence fortement leurs preferences vestimentaires.",
+        "documentB": "Les enfants grandissent vite, et leurs vetements deviennent rapidement trop petits. De plus, en jouant dehors, ils usent et salissent frequemment leurs habits. Investir dans des vetements de marque peut donc sembler peu rentable, surtout lorsqu'ils ne sont portes que quelques mois avant d'etre remplaces."
+      }
+    },
+    {
+      "id": "mar-2",
+      "tache1": {
+        "title": "Cours de langue",
+        "instruction": "Un(e) ami(e) souhaite suivre des cours de langue dans votre ecole. Redigez un message pour lui donner des informations sur les lieux, les tarifs et les formations proposees.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Association aide personnes agees",
+        "instruction": "Vous travaillez dans une association qui vient en aide aux personnes agees. Redigez un article pour raconter votre experience et encourager d'autres personnes a s'engager dans cette cause.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Animaux de Compagnie",
+        "instruction": "Les Animaux de Compagnie pour les Enfants : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "D'apres de nombreux psychologues, offrir un animal de compagnie a un enfant a plusieurs avantages. Pour ceux qui n'ont ni frere ni sœur, un animal devient un verritable compagnon qui combat la solitude. Il aide aussi l'enfant a gagner en confiance et lui apprend a respecter et prendre soin d'un etre vivant.",
+        "documentB": "Beaucoup d'enfants revent d'avoir un animal de compagnie, souvent un chien ou un chat. Pourtant, avant d'en adopter un, il faut bien reflechir. Un animal est un engagement a long terme et necessite des soins constants. De plus, son entretien peut couter cher."
+      }
+    },
+    {
+      "id": "mar-3",
+      "tache1": {
+        "title": "Recommandation salle de sport",
+        "instruction": "Votre ami(e) veut commencer a faire du sport. Redigez un message pour lui recommander une salle dans votre quartier en precisant son emplacement, les tarifs et les activites proposees.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Evenement marquant",
+        "instruction": "Vous avez assiste a un evenement marquant (anniversaire, mariage, etc.). Ecrivez un recit pour partager votre souvenir et mettre en avant ce qui vous a le plus marque.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Lecture pour les Enfants",
+        "instruction": "La Lecture pour les Enfants",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Avec le developpement des nouvelles technologies et l'omnipresence des appareils high-tech, les enfants delaissent la lecture au profit des jeux video, du sport ou de la musique. Lire regulierement aide les enfants a mieux maitriser la langue et a ameliorer leur concentration.",
+        "documentB": "La passion pour la lecture se transmet de generation en generation. Lire regularly helps children master language and improve concentration. Pour encourager cette habitude, les parents peuvent consacrer 10 minutes par jour a la lecture avec leur enfant, un moment de partage qui renforce leur complicite."
+      }
+    },
+    {
+      "id": "mar-4",
+      "tache1": {
+        "title": "Salle de sport quartier",
+        "instruction": "Un(e) ami(e) vous a demande des informations sur la salle de sport que vous frequentes. Ecrivez lui un message pour lui en parler (equipements, ambiance, avantages, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Formations en ligne",
+        "instruction": "Vous avez lu un debat sur un forum a propos des formations en ligne. Redigez un message pour partager votre experience et donner votre avis sur ce que vous avez aime ou non.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Produits Faits Maison",
+        "instruction": "Les Produits Faits Maison : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Fabriquer soi-meme ses produits bio permet de mieux controler les ingredients et d'opter pour des solutions plus saines et personnalisees. Cela reduit également les dechets plastiques grace aux emballages reutilisables. De plus, cette demarche peut etre economique sur le long terme et encourage la creativite.",
+        "documentB": "Toutefois, la fabrication maison comporte des risques. Des erreurs dans la composition peuvent rendre les produits inefficaces ou irritants. De plus, trouver et preparer les ingredients demande du temps et un certain savoir-faire. Enfin, le cout initial pour acheter des matieres premieres de qualite peut etre un frein."
+      }
+    },
+    {
+      "id": "mar-5",
+      "tache1": {
+        "title": "Temoignage sport amateur",
+        "instruction": "France Television prepare un reportage sur le sport amateur. Partagez votre temoignage sur votre pratique sportive en envoyant un message sur leur site.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Vacances region magnifique",
+        "instruction": "Vous avez passe vos vacances dans une magnifique region de votre pays. Redigez un message a vos amis pour leur decrire votre sejour et expliquer pourquoi vous l'avez tant apprecie.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Ecoles Privees ou Publiques",
+        "instruction": "Ecoles Privees ou Publiques ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Le nombre d'eleves inscrits dans les ecoles privees ne cesse d'augmenter en France. Ce succes n'est pas uniquement lie aux resultats scolaires, mais aussi a l'image que ces etablissements vehiculent. De nombreux parents pensent que les eleves y beneficient d'un meilleur encadrement.",
+        "documentB": "Les etablissements prives comptent peu d'eleves issus de milieux modestes. Le fait que ces ecoles soient payantes cree une barriere financiere, limitant la mixite sociale. Ce systeme renforce les inegalites en cloisonnant les eleves selon leur origine sociale."
+      }
+    },
+    {
+      "id": "mar-6",
+      "tache1": {
+        "title": "Produit endommage commande",
+        "instruction": "Vous avez commande un article en ligne, mais a la reception, il est endommage. Envoyez un courriel au service client pour signaler le probleme, decrire l'etat du produit et indiquer la solution que vous attendez.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Exposition artiste prefere",
+        "instruction": "Vous avez visite une exposition consacree a votre artiste prefere. Ecrivez un article pour raconter votre experience, decrire les œuvres exposees et partager vos impressions.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Devoirs a la Maison",
+        "instruction": "Les Devoirs a la Maison",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Selon des associations de parents, les devoirs a la maison sont benefiques, car ils permettent aux eleves d'apprendre a mieux gerer leur temps. De plus, cela renforce le lien entre l'ecole et les parents. Bien que certains trouvent difficile de superviser les devoirs apres une longue journee de travail, ils apprecient ces moments de partage avec leurs enfants.",
+        "documentB": "Nous nous opposons aux devoirs a la maison pour plusieurs raisons. Aucune etude n'a prouve qu'ils ameliorent les resultats scolaires. Par ailleurs, tous les parents n'ont pas la possibilite ou les competences necessaires pour aider leurs enfants. Ceux qui reussissent en classe perdent du temps a refaire les exercices, tandis que ceux qui ne sont pas accompagnes a la maison restent en difficulte."
+      }
+    },
+    {
+      "id": "mar-7",
+      "tache1": {
+        "title": "Week-end a la campagne",
+        "instruction": "Vous avez passe un week-end a la campagne et souhaitez partager votre experience avec un(e) ami(e). Redigez un message pour lui raconter ce que vous avez vecu.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Salle pour fete fin annee",
+        "instruction": "Votre entreprise recherche une salle pouvant accueillir 100 invites pour la fete de fin d'annee. Vous avez trouve un espace ideal et vous ecrives a votre direction pour leur en donner les details (emplacement, tarifs, services proposes, etc.).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Nouvelles Technologies dans les Ecoles",
+        "instruction": "L'Usage des Nouvelles Technologies dans les Ecoles : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Pierre : Je suis persuade que l'integration des nouvelles technologies a l'ecole est essentielle pour preparer les eleves au monde numerique. L'utilisation de tablettes et d'ordinateurs capte leur attention et enrichit leur apprentissage en leur donnant acces a une multitude de ressources. Cela stimule aussi leur creativite et leur autonomie.",
+        "documentB": "Sophia : J'ai des reserves quant a l'omnipresence des technologies dans l'education. Je pense que cela peut reduire les interactions humaines essentielles et engendrer une dependance excessive aux ecrans. Selon moi, les methodes d'enseignement traditionnelles et la relation directe avec les enseignants restent indispensables pour un apprentissage equilibre."
+      }
+    },
+    {
+      "id": "mar-8",
+      "tache1": {
+        "title": "Anniversaire surprise",
+        "instruction": "Envoyez un courriel pour inviter vos amis a un anniversaire surprise organise pour votre meilleur(e) ami(e). Precisez le lieu, la date et l'heure de l'evenement.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Brocante dans ma ville",
+        "instruction": "Vous avez assiste a une brocante dans votre ville et vous avez beaucoup aime cette experience d'achat et de vente d'objets d'occasion. Ecrivez un article sur votre blog personnel pour expliquer pourquoi cette activite vous a plu.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Vols a Bas Prix",
+        "instruction": "Les Vols a Bas Prix",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Je voyage souvent avec des compagnies aeriennes a bas cout. Ces entreprises proposent des tarifs bien inferieurs a ceux des compagnies regulieres, ce qui me revient parfois moins cher qu'un voyage en voiture ou en train. Toutefois, ces prix attractifs ont un revers : aucun service a bord n'est inclus.",
+        "documentB": "J'ai recemment decide d'arreter d'utiliser les compagnies low-cost. Apres reflexion, ce choix s'est impose comme une evidence : sieges inconfortables, conditions de travail difficiles pour le personnel, avions vieilhissants qui posent des questions de securite..."
+      }
+    },
+    {
+      "id": "mar-9",
+      "tache1": {
+        "title": "Decoration appartement",
+        "instruction": "Vous souhaitez refaire la decoration de votre appartement (mobilier, peinture, objets decoratifs, etc.). Ecrivez un message a un(e) ami(e) pour lui exposer votre projet et lui demander son aide.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Ecole de musique",
+        "instruction": "Ecole de musique ! Cours gratuits, concerts, animations. Rendez-vous vendredi des 9h ! Vous avez participe a cet evenement et vous souhaitez partager votre experience avec vos amis. Redigez un message pour raconter votre journee et donner votre avis sur l'evenement.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Petits Magasins ou Supermarches",
+        "instruction": "Faut-il faire ses Courses dans de Petits Magasins ou dans des Supermarches ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les supermarches offrent une grande diversite de produits en un seul lieu, ce qui est tres pratique. Vous pouvez stationner votre voiture facilement et parcourir les rayons pour acheter tout ce dont vous avez besoin. De plus, ces grandes surfaces proposent plusieurs marques pour un meme article et offrent souvent des promotions interessantes.",
+        "documentB": "L'Association pour la preservation des petits commerces a lance le defi Fevrier sans supermarche afin de contrer la domination des grandes surfaces et soutenir les commerces de proximite. Pendant un mois, les consommateurs sont invites a privilegier les epiceries de quartier, ou ils trouveront des produits frais de meilleure qualite."
+      }
+    },
+    {
+      "id": "mar-10",
+      "tache1": {
+        "title": "Vente velo",
+        "instruction": "Je souhaite acheter un velo en bon etat a un prix abordable. Vous pouvez me contacter par e-mail : mathieu@gmail.com Vous possedez un velo que vous souhaitez vendre. Redigez un courriel a l'acheteur potentiel pour lui decrire votre velo, proposer un prix et lui fixer un rendez-vous pour l'essayer.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Journee a la campagne",
+        "instruction": "Vous avez passe une journee agreable a la campagne avec vos amis. A votre retour, vous ecrives un message sur un forum pour partager votre experience. Vous expliquez ce que vous avez apprecie (les activites, le paysage, les animaux, etc.).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Severite des Parents",
+        "instruction": "La Severite des Parents envers leurs Enfants",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "J'ai bientot 22 ans et je vis encore chez mes parents. Malgre ma majorite, ils restent stricts avec moi. Lorsque j'etais plus jeune, ils m'interdisaient de dormir ailleurs et de rentrer apres 21h lorsque je sortais avec des amies. Aujourd'hui, meme si j'ai le droit de rester dehors plus tard, ma mere m'appelle constamment jusqu'a ce que je sois de retour a la maison.",
+        "documentB": "Certains parents ont peur d'etre trop autoritaires avec leurs enfants. Ils redoutent qu'une education trop stricte freine leur epanouissement et les empeche de developper leur personnalite. Pourtant, leur ceder tout par amour peut aussi etre nefaste une fois devenus adultes."
+      }
+    },
+    {
+      "id": "mar-11",
+      "tache1": {
+        "title": "Invitation restaurant anniversaire",
+        "instruction": "Vous organisez une fete d'anniversaire dans un restaurant et souhaitez inviter vos amis. Vous leur ecrives un courriel pour leur fournir tous les details (lieu, date, heure, menu, prix) et leur demander un retour avec une reponse.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Ville vers campagne",
+        "instruction": "Vous avez quitte la ville pour vivre a la campagne. Sur un forum en ligne, vous expliquez les raisons de ce choix et decrivez les avantages de cette nouvelle vie.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Cameras de Surveillance dans les Ecoles",
+        "instruction": "Les Cameras de Surveillance dans les Ecoles : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Dans l'ecole ou j'enseigne a Montreal, des cameras sont installees un peu partout. Cette surveillance permet de faire comprendre aux eleves que tout acte de violence sera sanctionne. Ce dispositif est largement accepte par les parents, les enseignants et la majorite des eleves. Les parents se sentent rassures quant a la securite de leurs enfants.",
+        "documentB": "Je suis oppose a l'installation de cameras de surveillance dans les ecoles de Montreal. Dans les pays ou ce systeme est utilise, les resultats ne sont pas tres concluants. Les cameras etant facilement reperables, une personne exterieure pourrait entrer dans l'etablissement en contournant les zones surveillées."
+      }
+    },
+    {
+      "id": "mar-12",
+      "tache1": {
+        "title": "Proposition journee ensemble",
+        "instruction": "Redigez un courriel a votre ami pour lui proposer de passer une journee ensemble. Precisez le lieu, la date et les activites prevues.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Journee formation entreprise",
+        "instruction": "Vous avez assiste a une journee de formation dans votre entreprise. Redigez un article sur un forum destine a vos collegues pour partager votre experience et expliquer ce que vous avez apprecie.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Location entre Particuliers",
+        "instruction": "Location entre Particuliers : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "De plus en plus de personnes mettent en location leur logement ou une chambre a des voyageurs pour arrondir leurs fins de mois ou rencontrer de nouvelles personnes. Ce systeme repose sur la confiance et permet aux visiteurs de se loger a moindre cout par rapport a un hotel. L'hote peut egalement servir de guide et donner des conseils sur les endroit a visiter.",
+        "documentB": "L'annee derniere, j'ai loue mon appartement a un couple de touristes pour une semaine de vacances a Marseille. Cette experience a ete tres decevante et m'a fait changer d'avis sur ce type de location ! Ils sont arrives en retard, et j'ai du patienter pour leur remettre les cles. Ils ont fait beaucoup de bruit, derangeant mes voisins."
+      }
+    }
+  ]
+}

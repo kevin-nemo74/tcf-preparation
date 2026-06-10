@@ -1,0 +1,673 @@
+{
+  "id": "septembre-2025",
+  "examTitle": "Septembre 2025",
+  "combinaisons": [
+    {
+      "id": "sep-1",
+      "tache1": {
+        "title": "Chateau de Chombony",
+        "instruction": "Vous avez invite votre ami Cedric a votre mariage au Chateau de Chombony et il vous a repondu qu'il ne connais pas ce chateau. Decrivez a votre ami le lieu, la localisation, les transports, etc.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Apprentissage langue etrangere",
+        "instruction": "Dans votre blog, racontez votre experience de l'apprentissage d'une langue etrangere. Vous ecrivez sur un forum internet en racontant votre experience en apprenant une langue etrangere.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Cuisinier Amateur Ou Cuisinier Professionnel ?",
+        "instruction": "Cuisinier Amateur Ou Cuisinier Professionnel ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les amateurs ont fait des recettes reussies, mais ils manquent toujours des competences et des techniques, c'est pourquoi la formation et l'experience sont necessaires pour etre un vrai cuisinier.",
+        "documentB": "Il parle des cuisiniers qui ont appris le metier sur internet et qui ont le buzz sur les reseaux sociaux. Il raconte aussi l'histoire d'une amatrice qui est devenue professionnelle et qui a redige plusieurs livres sur la cuisine pour les amateurs a la maison."
+      }
+    },
+    {
+      "id": "sep-2",
+      "tache1": {
+        "title": "Moyens de transport",
+        "instruction": "Votre ami Mehdi vient d'emmenager dans votre ville et cherche des renseignements sur les moyens de transports. Ecrivez un message en lui donnant les informations necessaires (types de transport, abonnement, tarif, etc.)",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Admiration personnalite",
+        "instruction": "Exprimez votre admiration pour une personnalite, celebre ou non, en vous appuyant sur ses actions specifiques. Redigez un article de blog en detailant les actions remarquables de cette personne et expliquez pourquoi vous l'aimez.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Vivre En Colocation",
+        "instruction": "Vivre En Colocation",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "La vie en colocation offre de nombreux avantages. Partager un logement avec d'autres personnes permet de reduire les depenses. De plus, cela favorise les interactions sociales et les echanges culturels. Vivre avec des colocataires permet de rencontrer des individus de differents horizons, de nouer des amitiees et de partager des experiences enrichissantes.",
+        "documentB": "La colocation peut cependant presenter des defis. Les differences de personnalite et de mode de vie entre les colocataires peuvent entrainer des tensions. La gestion des responsabilites et des taches menageres peut egalement etre source de conflits. De plus, la colocation peut limiter l'intimite et l'espace personnel."
+      }
+    },
+    {
+      "id": "sep-3",
+      "tache1": {
+        "title": "Week-end amis",
+        "instruction": "Vous voulez partir en week-end avec vos amis le mois prochain. Vous leur ecrivez un message pour decrire votre projet (lieu, transport, activites, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Tout quitter pour voyager",
+        "instruction": "COURRIER DES LECTEURS : Tout quitter pour partir en voyage pendant un an : bonne ou mauvaise idee ? Repondez sur notre site Internet : « voyage.internaute.fr ». Vous ecrivez un message sur ce site internet, vous repondez a la question posee en prenant des exemples de votre vie personnelle.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Le Travail : Favorable ou Defavorable ?",
+        "instruction": "Le Travail : Favorable ou Defavorable ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Le travail est au centre de notre vie. Des l'enfance, on entend souvent la question : « Qu'est-ce que tu veux faire quand tu seras grand ? ». Le travail devrait etre synonyme de reussite et de satisfaction. Aujourd'hui, beaucoup pensent que l'on ne passe pas assez de temps avec sa famille, ses amis. Il est urgent de revoir la place occupee par le travail dans notre societe.",
+        "documentB": "Certaines personnes ont decide d'arreter de travailler pour changer de mode de vie. Pourtant, aujourd'hui, travailler, c'est exister. La question : « Qu'est-ce que tu fais dans la vie ? » revient souvent lors d'une premiere rencontre. Elle prouve que l'emploi fait partie de notre identite. Les contacts quotidiens, les reseaux, les amitiees, tout cela contribue a construire notre personnalite."
+      }
+    },
+    {
+      "id": "sep-4",
+      "tache1": {
+        "title": "Hotel pour visa Canada",
+        "instruction": "Bonjour, ca y est, j'ai obtenu mon visa pour le Canada. Je vais arriver le 3 mars. Est-ce que tu pourras m'aider a trouver un hotel pour la premiere semaine ? Merci d'avance pour ton aide. Matthias. Vous avez trouve un hotel pour Matthias. Vous lui ecrivez un courriel en decrivant l'hotel et en lui donnant toutes les informations utiles (situation, tarif…).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Spectacle avec amis",
+        "instruction": "Vous etes alles voir un spectacle (film, piece de theatre, concert, etc.) avec des amis. Vous l'avez aime. Sur votre blog, vous racontez votre soiree et vous expliquez pourquoi vous avez aime le spectacle.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Relations Amicales Au Travail",
+        "instruction": "Les Relations Amicales Au Travail",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les amitiees entre collegues au travail peuvent etre extremement benefiques. Elles favorisent un climat de travail agreable et une ambiance positive au sein de l'equipe. Avoir des amis parmi ses collegues permet de renforcer les liens professionnels et de creer un sentiment de camaraderie. Cela peut contribuer a une meilleure communication et une collaboration plus etroite.",
+        "documentB": "Il est important de trouver un equilibre entre amitie et professionnalisme au travail. Les amitiees excessivement proches peuvent parfois creer des tensions ou des conflits lorsque des decisions professionnelles doivent etre prises. De plus, les amitiees exclusives entre certains collegues peuvent exclure les autres membres de l'equipe."
+      }
+    },
+    {
+      "id": "sep-5",
+      "tache1": {
+        "title": "Week-end campagne",
+        "instruction": "Vous avez passe un week-end a la campagne et souhaitez partager votre experience avec un(e) ami(e). Redigez un message pour lui raconter ce que vous avez vecu.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Fete fin d'annee salle",
+        "instruction": "Votre entreprise recherche une salle pouvant accueillir 100 invites pour la fete de fin d'annee. Vous avez trouve un espace ideal et vous ecrivez a votre direction pour leur en donner les details (emplacement, tarifs, services proposes, etc.).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'Usage des Nouvelles Technologies dans les Ecoles : Pour ou Contre ?",
+        "instruction": "L'Usage des Nouvelles Technologies dans les Ecoles : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Pierre : Je suis persuade que l'integration des nouvelles technologies a l'ecole est essentielle pour preparer les eleves au monde numerique. L'utilisation de tablettes et d'ordinateurs capte leur attention et enrichit leur apprentissage en leur donnant acces a une multitude de ressources. Cela stimule aussi leur creativite et leur autonomie.",
+        "documentB": "Sophia : J'ai des reserves quant a l'omnipresence des technologies dans l'education. Je pense que cela peut reduire les interactions humaines essentielles et engendrer une dependance excessive aux ecrans. Selon moi, les methodes d'enseignement traditionnelles et la relation directe avec les enseignants restent indispensables pour un apprentissage equilibre."
+      }
+    },
+    {
+      "id": "sep-6",
+      "tache1": {
+        "title": "Appartement demenagement",
+        "instruction": "Vous envisagez de demenager et avez trouve un appartement. Vous souhaitez en informer un ami en lui fournissant les details concernant le bien en question : nombre de pieces, emplacement et prix.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Festival de musique",
+        "instruction": "Une annonce de festival de musique gratuit a ete publiee dans votre ville, et vous avez profite de cette occasion pour y assister avec votre ami. Ecrivez un article de blog pour raconter l'experience que vous avez vecue lors de cet evenement musical.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'emploi des jeunes : diplome ou experience",
+        "instruction": "L'emploi des jeunes : diplome ou experience",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "De nombreux jeunes diplomes de l'universite se retrouvent au chomage. La reconnaissance des formations universitaires sur le marche du travail souleve des questions. En effet, les jeunes rencontrent souvent des difficultes pour trouver un emploi : les recruteurs leur reprochent d'avoir trop de diplomes et pas assez d'experience, ou bien leur jeunesse constitue un obstacle.",
+        "documentB": "On entend souvent parler de celebres chefs d'entreprise qui ont reussi sans aller a l'universite. L'exemple de ces personnalites riches et admirees pourrait laisser croire qu'il suffit d'etre brillant pour diriger une entreprise. Certains dirigeants estiment que les etudes universitaires peuvent etre un frein. Pour les futurs createurs d'entreprise, rien ne vaudrait l'autoformation et l'experience."
+      }
+    },
+    {
+      "id": "sep-7",
+      "tache1": {
+        "title": "Recherche logement",
+        "instruction": "Envoyez un courriel a votre ami francophone afin de lui demander de l'aide pour la recherche d'un logement, en lui fournissant toutes les informations necessaires (type de logement, budget, date).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Journee nouveaux etudiants",
+        "instruction": "Votre ecole vous a charge d'organiser une journee speciale pour accueillir les nouveaux etudiants francophones. Vous redigez un courriel destine a ces etudiants dans lequel vous donnez tous les details pour le bon deroulement de cette journee.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La vie a la campagne ou en ville",
+        "instruction": "La vie a la campagne ou en ville",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "A mon avis, le fait de vivre en ville vous donne la possibilite de vous divertir de plusieurs manières : aller au cinema, dejeuner dans un restaurant, faire du shopping… Tout est a cote, vous n'avez pas besoin de parcourir plusieurs kilometres. Meme les amoureux des evenements culturels sont servis : musee, theatre, opera… tout y est !",
+        "documentB": "Dernierement, j'ai decide de quitter la ville pour vivre a la campagne, car j'avais vraiment besoin de me rapprocher de la nature et de profiter du calme. J'invite des amis a boire un verre sur la terrasse de ma maison ou j'organise de temps en temps un barbecue dans mon jardin. Avec mon budget actuel, j'ai une grande maison avec terrasse et jardin privatif."
+      }
+    },
+    {
+      "id": "sep-8",
+      "tache1": {
+        "title": "Recherche colocataire",
+        "instruction": "Vous habitez dans un grand appartement et vous recherchez un colocataire. Decrivez le type de colocation que vous proposez ainsi que les caracteristiques de votre appartement.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Spectacle theatre",
+        "instruction": "Une troupe de theatre s'est installee dans votre ville, et vous avez assiste a l'un de ses spectacles. Redigez un article de blog pour decrire cette experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Influence de la publicite sur les enfants : pour ou contre ?",
+        "instruction": "Influence de la publicite sur les enfants : pour ou contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Une etude a revele que les enfants sont constamment exposes a de nombreuses publicites. Les enfants sont particulierement cibls par des publicites pour des produits alimentaires peu sains, des jouets, des jeux video. Cela peut influencer leurs choix de consommation et leurs demandes envers leurs parents.",
+        "documentB": "Un article de recherche souligne que les enfants ont des capacites cognitives limitees pour comprendre et interpreter les messages publicitaires. D'autres facteurs tels que l'education parentale et les influences sociales et culturelles ont un role plus important dans les choix de consommation des enfants que la publicite elle-meme."
+      }
+    },
+    {
+      "id": "sep-9",
+      "tache1": {
+        "title": "Nouvelle ville",
+        "instruction": "Vous venez de vous installer dans une nouvelle ville. Vous ecrivez un message a un(e) ami(e) pour decrire votre nouvel environnement (quartier, voisins, magasins, etc.)",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Journee mondiale nettoyage planete",
+        "instruction": "Vous avez participe a une action pour la « Journee mondiale du nettoyage de notre planete ». Vous avez ramasse des dechets dans un lieu public avec d'autres personnes. Vous racontez cette experience a vos amis. Vous expliquez pourquoi il est important de participer a ce type d'action.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les publicites alimentaires pour les enfants",
+        "instruction": "Les publicites alimentaires pour les enfants",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Certaines personnes trouvent la publicite ennuyeuse, mais a mon avis, elle est indispensable pour le commerce et les entreprises. Grace a la publicite, on fait connaître un produit ou un service. J'aime bien ecouter les publicites quand je suis en voiture. Cela me permet aussi d'etre informe des novedades et des promotions.",
+        "documentB": "La publicite est presente partout dans notre vie de tous les jours : journaux, radios, television, telephone, Internet… Par exemple, sur certaines chaines de television, les emissions sont coupees par la publicite et c'est agacant. Je pense qu'il est necessaire de faire voter une loi pour reduire les publicites."
+      }
+    },
+    {
+      "id": "sep-10",
+      "tache1": {
+        "title": "Nouveau travail",
+        "instruction": "Salut, Tu as commence ton nouveau travail ! C'est comment ? Tu es content(e) ? Ali. Vous repondez a votre ami Ali. Dans votre message, vous decrivez votre nouveau travail (lieu, collegues, etc.) et vous donnez vos impressions.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Vivre avec personne agee",
+        "instruction": "INFOS FAMILLES : Vivre avec une personne agee : comment faire ? Notre site cherche des temoignages. Vous avez vecu avec une personne agee. Vous racontez votre experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les cours de langue en ligne",
+        "instruction": "Les cours de langue en ligne",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Apprendre une langue en ligne grace a Internet, c'est possible et cela donne de bons resultats ! Contrairement aux cours classiques, on peut apprendre quand on veut. On n'a pas non plus besoin de faire des kilometres pour aller dans une ecole de langues. On peut apprendre de son salon ou de son bureau. Cela permet aussi de faire des economies.",
+        "documentB": "Cela semble facile d'apprendre une langue en ligne mais ce n'est pas possible pour tout le monde. En effet, il faut avoir une bonne connexion a Internet et un outil numerique adapte. De plus, il faut etre tres autonome pour apprendre seul : il est difficile de se mettre au travail chez soi et de rester motive. Dans ces conditions, on peut se decourager et abandonner tres vite."
+      }
+    },
+    {
+      "id": "sep-11",
+      "tache1": {
+        "title": "Fete traditionnelle",
+        "instruction": "Vous avez recu ce message de votre ami Thomas : « Salut ! Je ne connais pas bien la culture et les traditions de ton pays. Peux-tu me parler d'une grande fete celebree chez toi ? A bientot ! » Repondez-lui en decrivant une fete importante de votre pays.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Festival de cinema",
+        "instruction": "Vous avez assiste a un festival de cinema. Vous avez vu plusieurs films. Sur votre site personnel, vous racontez le film que vous avez prefere. Vous expliquez votre choix.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Que pensez-vous des maisons de retraite ?",
+        "instruction": "Que pensez-vous des maisons de retraite ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "J'habite dans un pays ou il y a tres peu de maisons de retraite. Ici, quand une personne agee ne peut plus etre autonome, elle habite avec les generations plus jeunes. Il nous parait etrange de confier nos parents ou grands-parents a des personnes qu'ils ne connaissent pas.",
+        "documentB": "Beaucoup de gens critiquent les maisons de retraite, pourtant c'est une bonne solution d'accueil pour les personnes agees ! D'abord, pour lutter contre l'isolement puisqu'elles sont entourees de personnes de leur age. Ensuite, pour les soins et les services medicaux offres. Enfin, parce que c'est pratique et rassurant pour leurs enfants."
+      }
+    },
+    {
+      "id": "sep-12",
+      "tache1": {
+        "title": "Invitation anniversaire",
+        "instruction": "Invitez vos amis a celebrex votre anniversaire tout en sollicitant leur soutien pour organiser la fete.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Concours de cuisine",
+        "instruction": "Vous avez participe a un concours de cuisine, vous allez decrire vos souvenirs dans votre blog en indiquant les details.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Le travail des etudiants pendant les vacances : Pour ou contre ?",
+        "instruction": "Le travail des etudiants pendant les vacances : Pour ou contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Alexandre, conseiller d'orientation : « Je suis fermement pour le travail des jeunes pendant les vacances. C'est une excellente occasion d'acquerir des competences pratiques, d'apprendre a travailler en equipe et de decouvrir differentes industries. Les jeunes peuvent gagner de l'argent qu'ils peuvent economiser pour l'avenir. Le fait d'avoir une experience de travail sur leur CV peut leur donner un avantage.",
+        "documentB": "Elise, psychologue pour adolescents : « Je suis contre l'idee que les jeunes doivent travailler pendant leurs vacances. Les adolescents sont deja sous une enorme pression pendant l'annee scolaire. Les vacances doivent etre une periode pour eux de se detendre et de se decompresser. Forcer les jeunes a travailler pourrait contribuer au stress et a l'epuisement."
+      }
+    },
+    {
+      "id": "sep-13",
+      "tache1": {
+        "title": "Pays et culture",
+        "instruction": "Salut, Je suis vraiment interesse a l'idee de voyager et de decouvrir un autre pays. Peux-tu me parler un peu de ton pays et de sa culture ? Marc. Ecrivez un message a votre ami Marc pour lui parler de votre pays et de sa culture (lieux, sites touristiques, monuments, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Nouveau travail",
+        "instruction": "Vous venez d'avoir un nouveau travail. Envoyez un courriel a vos amis pour leur raconter comment vous avez passe votre premiere semaine de travail (entreprise, poste, taches, etc.).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Egalite Homme/Femme en Milieu de Travail",
+        "instruction": "Egalite Homme/Femme en Milieu de Travail",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Certains postes sont majoritairement occupes par des hommes. Au Quebec, l'egalite entre les femmes et les hommes est respectee, les femmes peuvent acceder aux metiers reserves aux hommes tels que les postes de direction.",
+        "documentB": "Malgre les efforts pour imposer la parite a tous les postes dans les entreprises et les collectivites, il y a des metiers ou les femmes sont largement majoritaires. De plus, les femmes ne doivent pas faire les metiers d'homme selon certains, car elles doivent prendre soin de leurs enfants."
+      }
+    },
+    {
+      "id": "sep-14",
+      "tache1": {
+        "title": "Journee nouveaux etudiants",
+        "instruction": "Votre ecole vous a charge d'organiser une journee speciale pour accueillir les nouveaux etudiants francophones. Vous redigez un email destine a ces etudiants, dans lequel vous donnez tous les details pour le bon deroulement de cette journee.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Reseaux sociaux",
+        "instruction": "Vous avez pris la decision de ne plus utiliser les plateformes de reseau social preferees (Facebook, Twitter, Instagram). Racontez votre experience a vos amis et expliquez pourquoi vous avez pris cette decision.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'utilisation d'une photo sur un CV",
+        "instruction": "L'utilisation d'une photo sur un CV",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "On parle souvent de l'inutilite d'une photo sur un CV, car ce qui compte vraiment, ce sont les diplomes et l'experience professionnelle. En general, les recruteurs n'aiment pas voir des photos sur les CV. Une etude a montre que la plupart des employeurs ne regardent meme pas ces photos. Mettre une photo ne devrait pas etre obligatoire, car cela peut influencer le recruteur.",
+        "documentB": "Christophe pense que mettre une photo sur un CV est tres important pour certains metiers ou l'apparence compte beaucoup. La photo ne servira pas a choisir un candidat, mais elle aidera le recruteur a faire un meilleur choix. Par exemple, pour un poste de steward ou d'hotesse de l'air, un candidat devra surement ajouter une belle photo sur son CV."
+      }
+    },
+    {
+      "id": "sep-15",
+      "tache1": {
+        "title": "Fete surprise anniversaire",
+        "instruction": "Vous voulez organiser une fete surprise pour l'anniversaire de votre meilleur(e) ami(e). Vous envoyez un message aux invites pour leur donner toutes les informations necessaires (activites, cadeau, lieu, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Brocante",
+        "instruction": "Vous avez participe a une brocante (vente et achat d'objets d'occasion entre habitants) dans votre ville. Vous racontez votre journee sur un forum Internet. Vous expliquez pourquoi vous avez aime cette journee.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les compagnies LOW COST",
+        "instruction": "Les compagnies LOW COST",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Je prends regulierement l'avion avec des compagnies low cost. Elles proposent des billets tres bon marche, donc cela me coute moins cher que le train ou meme la voiture. J'en profite parce que je ne pourrais pas voyager autant si je devais payer mes billets au prix fort. En revanche, les services a bord sont limites. — Juliette, 34 ans",
+        "documentB": "Je ne voyage plus avec des compagnies aeriennes Low Cost ! Leurs avions sont tres inconfortables, et je trouve que les conditions de travail du personnel de bord sont difficiles. De plus, est-ce que la securite est aussi bien assuree sur ce type de vol que sur une compagnie classique ? — Romeo, 28 ans"
+      }
+    },
+    {
+      "id": "sep-16",
+      "tache1": {
+        "title": "Fete fin d'annee",
+        "instruction": "Ecrivez un message pour inviter vos amis a une fete de fin d'annee.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Voyage Canada agence",
+        "instruction": "Vous avez passe des vacances au Canada par le biais d'une agence de voyage. Ecrivez un commentaire pour raconter votre experience que vous avez vecue durant ce voyage.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Limitation Des Voitures Dans Les Centres-Villes",
+        "instruction": "Limitation Des Voitures Dans Les Centres-Villes",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Avec des taux de pollution alarmants, plusieurs villes ont reussi leur pari d'interdire la circulation des voitures en zones urbaines. La capitale de la Norvege, Oslo, a opté pour cette solution et s'en felicite. Apres un certain temps, les accidents diminueront, la dependence au petrole baissera et la qualite d'air sera meilleure !",
+        "documentB": "Beaucoup de villes se lancent dans des projets d'interdiction de voitures en zone urbaine sans mettre en place les outils et les infrastructures necessaires. certes, en diminuant les voitures, on aura moins de pollution, mais il faut prevoir des gigantesques parkings, opter davantage pour les transports en commun et prevoir des autorisations de circulation."
+      }
+    },
+    {
+      "id": "sep-17",
+      "tache1": {
+        "title": "Bienvenue nouvelle ville",
+        "instruction": "Le journal « Bienvenue » compte publier un article qui parle des habitants de notre ville. Ecrivez-nous un message qui sera diffuse dans ce numero. Vous etes recemment installe dans cette ville, et il vous est demande de vous presenter et decrire ensuite tous vos lieux preferes au sein de cette ville.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Concert artiste favori",
+        "instruction": "Vous venez d'assister au concert de votre artiste favori. Vous ecrivez un article sur votre blog personnel, pour partager cette experience et inciter vos amis et les autres a assister a son prochain concert.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Jeux Video : Pour ou contre ?",
+        "instruction": "Les Jeux Video : Pour ou contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les enfants, jusqu'a l'age de l'adolescence, jouent d'une manière reguliere aux jeux video et a force, ils peuvent developper des pensees negatives et des comportements negatifs. Une etude menee sur des enfants ages de 9 a 18 ans jouant frequemment aux jeux video a revele que le fait de jouer a des jeux de violence augmente considerablement un comportement negatif.",
+        "documentB": "On parle tout le temps des effets negatifs des jeux video, mais ces derniers peuvent egalement avoir des avantages pour le fonctionnement du cerveau et pour la sante. Les jeux video permettent d'ameliorer plusieurs fonctions cognitives telles que l'amelioration de la concentration, de la creation et de la capacite d'analyse."
+      }
+    },
+    {
+      "id": "sep-18",
+      "tache1": {
+        "title": "Invitation anniversaire surprise",
+        "instruction": "Ecrivez un courriel a vos amis pour les inviter a un anniversaire surprise pour votre meilleur(e) ami(e), et proposez de lui offrir un cadeau commun (lieu, cadeau, activites, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Fete fin d'annee salle",
+        "instruction": "Votre direction est a la recherche d'une salle pour la fete de fin d'annee, capable d'acueillir 100 invites. Redigez un message a la direction pour leur dire que vous avez trouve un local ideal (lieu, tarifs et services).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La severite des parents envers leurs enfants",
+        "instruction": "La severite des parents envers leurs enfants",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Je vais bientot avoir 22 ans et j'habite toujours chez mes parents. Mon pere et ma mere restent autoritaires avec moi, meme si je suis majeure. Quand j'etais mineure, je n'avais pas le droit de dormir dehors, ni meme de depasser 21h. Maintenant, peu de choses ont change ; ma mere ne cesse de m'appeler sur mon telephone jusqu'a ce que je sois de retour.",
+        "documentB": "Les parents ont parfois peur d'etre trop severes avec leurs enfants. Ils craignent qu'a cause d'un exces d'autorite, leurs enfants ne s'epanouissent pas et manquent plus tard de personnalite. Les parents acceptent par amour tout ce dont leurs enfants demandent, cela pourrait avoir des effets negatifs lorsqu'ils passent a l'age adulte."
+      }
+    },
+    {
+      "id": "sep-19",
+      "tache1": {
+        "title": "Moyens de transport pour Anna",
+        "instruction": "Je suis votre amie Anna et je compte passer un weekend dans ta ville. Donnez-moi des informations sur les moyens de transport pour explorer la ville. Repondez a Anna dans un message.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Fete de voisins",
+        "instruction": "Vous avez assiste a une fete de voisins du quartier, ecrivez un blog pour montrer pourquoi vous avez aime cette fete.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'utilisation Des Distributeurs Automatiques Au Sein Des Etablissements Scolaires, Pour ou Contre ?",
+        "instruction": "L'utilisation Des Distributeurs Automatiques Au Sein Des Etablissements Scolaires, Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Je suis en faveur des distributeurs de boissons dans les lycees. Premierenement, ils offrent une commodite supplementaire pour les eleves. Deuxiemement, s'ils sont bien geres, ces distributeurs peuvent offrir une gamme de boissons saines. Ces distributeurs peuvent etre une source de revenus supplementaire pour l'ecole.",
+        "documentB": "Je suis contre l'installation de distributeurs de boissons dans les lycees. Ma principale preoccupation est liee a la sante des eleves. Beaucoup de ces distributeurs sont remplis de boissons sucrees et de sodas qui contribuent a l'obesite infantile et a d'autres problemes de sante comme le diabete. Les ecoles devraient encourager des habitudes alimentaires saines."
+      }
+    },
+    {
+      "id": "sep-20",
+      "tache1": {
+        "title": "Invitation lieu touristique",
+        "instruction": "Vous souhaitez inviter vos amis a decouvrir un lieu touristique que vous appreciez particulierement. Dans un message amical, presentez ce lieu, expliquez pourquoi vous l'aimez et proposez une date, une heure et un hebergement pour cette visite.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Festival decu",
+        "instruction": "Vous avez assiste a un festival (de musique, de cinema, de gastronoémie…) mais vous avez ete decu. Redigez un article sur votre blog dans lequel vous expliquez ce qui ne vous a pas plu.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La vie a la campagne : pour ou contre ?",
+        "instruction": "La vie a la campagne : pour ou contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "A mon avis, vivre en ville offre de nombreuses possibilites de divertissement. Il est facile d'aller au cinema, de dejeuner dans un restaurant ou encore de faire du shopping. Tout est a proximite. De plus, la ville propose une grande diversite d'evenements culturels : musees, theatres, operas… Il y en a pour tous les gouts !",
+        "documentB": "Dernierement, j'ai decide de quitter la ville pour vivre a la campagne, car j'avais besoin de me rapprocher de la nature et de profiter du calme. J'invite des amis a boire un verre sur la terrasse de ma maison. Un autre element important a motive ma decision : le cout du logement. Avec mon budget actuel, j'ai pu acquerir une grande maison avec terrasse et jardin privatif."
+      }
+    },
+    {
+      "id": "sep-21",
+      "tache1": {
+        "title": "Invitation anniversaire surprise",
+        "instruction": "Ecrivez un courriel a vos amis pour les inviter a un anniversaire surprise de votre meilleur(e) ami(e) (lieu, date, horaire, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Brocante",
+        "instruction": "Vous avez participe a une brocante (achat / vente de produits d'occasion) dans votre ville. Sur votre blog personnel, racontez pourquoi vous avez aime cette activite.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Vols A Bas Prix",
+        "instruction": "Les Vols A Bas Prix",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Je fais souvent mes voyages avec des compagnies aeriennes a bas prix. Les compagnies Low-cost mettent a disposition des prix inferieurs a ceux proposes par les compagnies aeriennes regulieres. Cela me coute des fois moins cher que de voyager en voiture ou en train. Vous n'aurez le droit a aucun service a bord (ni aliments, ni boissons).",
+        "documentB": "Dernierement, j'ai pris la decision de ne plus voyager avec les compagnies aeriennes a bas prix. En effet, ce choix etait evident : des sieges inconfortables, des conditions de travail penibles et des avions vetustes qui remettent en cause la securite. Pour certains voyages, je vais opter pour la voiture ou meme le train."
+      }
+    },
+    {
+      "id": "sep-22",
+      "tache1": {
+        "title": "Velo a vendre",
+        "instruction": "Je cherche un velo en bon etat et bon marche. Contactez-moi par courriel : mathieu@gmail.com. Vous avez un velo a vendre. Vous ecrivez un courriel pour decrire votre velo et proposer un prix. Vous lui donnez un RDV pour essayer le velo.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Journee a la campagne",
+        "instruction": "Vous avez passe une journee a la campagne avec vos amis. A votre retour, vous ecrivez un message sur votre forum pour raconter a vos amis comment cette journee s'est passee. Vous expliquez ce que vous avez aime (activites, lieu, animaux, etc.).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les severite des parents envers les enfants",
+        "instruction": "Les severite des parents envers les enfants",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Je vais bientot avoir 22 ans et j'habite toujours chez mes parents. Mon pere et ma mere restent autoritaires avec moi, meme si je suis majeure. Quand j'etais mineure, je n'avais pas le droit de dormir dehors, ni meme de depasser 21h. Maintenant, peu de choses ont change ; ma mere ne cesse de m'appeler sur mon telephone portable jusqu'a ce que je sois de retour.",
+        "documentB": "Les parents ont parfois peur d'etre trop severes avec leurs enfants. Ils craignent qu'a cause d'un exces d'autorite, leurs enfants ne s'epanouissent pas et manquent plus tard de personnalite. Les parents acceptent, par amour, tout ce dont leurs enfants demandent, cela pourrait avoir des effets negatifs lorsqu'ils passent a l'age adulte."
+      }
+    },
+    {
+      "id": "sep-23",
+      "tache1": {
+        "title": "Week-end sport",
+        "instruction": "Ecrivez un message a vos amis pour leur proposer de passer un week-end avec vous pour faire du sport.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Changement habitudes alimentaires",
+        "instruction": "Ecrivez un article de blog sur un forum pour raconter pourquoi vous avez decide de changer vos habitudes alimentaires.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La sieste au travail",
+        "instruction": "La sieste au travail",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "La sieste au travail peut avoir de nombreux avantages pour les employes et les entreprises. En permettant aux travailleurs de faire une petite sieste, cela peut aider a augmenter leur productivite et a ameliorer leur sante et leur bien-etre. Les siestes courtes peuvent aider a ameliorer la vigilance et la concentration, reduire les niveaux de stress et ameliorer l'humeur.",
+        "documentB": "Malgre les nombreux avantages de la sieste au travail, il peut etre difficile pour toutes les entreprises de mettre en place des lits et des salles dediees a cette pratique. Cela peut etre du a des contraintes financieres ou logistiques. Certains travailleurs peuvent ne pas se sentir a l'aise de faire une sieste au travail."
+      }
+    },
+    {
+      "id": "sep-24",
+      "tache1": {
+        "title": "Salle de sport",
+        "instruction": "Tu vas a une salle de sport et ton amie te demande des informations sur la salle (prix, activites, lieu). Tu lui reponds dans un message en lui donnant tous les details.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Formation en ligne",
+        "instruction": "Tu as suivi une formation (langue etrangere, informatique). Ecris sur un site internet pour partager ton experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Fabrication de produits menagers : pour ou contre ?",
+        "instruction": "Fabrication de produits menagers : pour ou contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Preparer soi-meme ses produits bio a la maison permet de maitriser totalement les ingredients utilises, ce qui assure des solutions plus adaptees et meilleures pour la sante. Cela aide aussi a limiter les dechets plastiques en utilisant des contenants reutilisables. Par ailleurs, cela permet d'economiser sur le long terme.",
+        "documentB": "Faire des produits bio chez soi presente certains inconvenients. Des erreurs dans les recettes peuvent rendre les produits inefficaces ou causer des reactions. Ces produits n'ont pas toujours de garanties de securite ou de conservation. Enfin, les ingredients de qualite coutent cher au depart."
+      }
+    },
+    {
+      "id": "sep-25",
+      "tache1": {
+        "title": "Hotel pour Carole",
+        "instruction": "Votre amie Carole et sa famille prevoyent de visiter votre ville prochainement. Dans un message, proposez-leur un hotel ou sejourner (tarifs, activites, transports, etc.)",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Apprentissage nouvelle langue",
+        "instruction": "Ecrivez un article de blog pour partager votre experience d'apprentissage d'une nouvelle langue (francais ou autre). Decrivez les defis rencontres, les progres realises et les methodes d'apprentissage que vous avez trouvees efficaces.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les jeux video",
+        "instruction": "Les jeux video",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les jeux video ont la reputation d'etre nefastes ; cependant, plusieurs etudes montrent qu'en y jouant, un adulte peut developper des capacites cognitives. Ils permettent par exemple d'ameliorer l'aptitude a reagîr. Cela peut etre considered comme un point positif. Cependant, il faut rester vigilant car de nombreux jeux favorisent la violence et l'addiction.",
+        "documentB": "Les jeux video font regulierement l'objet de plusieurs etudes. Une etude qui a dure trois ans et qui s'est interessee a des enfants ages de 8 a 17 ans a montre que les enfants les plus addicts aux jeux developpent des comportements negatifs. Dans certains cas, cela peut se repercuter sur les resultats scolaires."
+      }
+    },
+    {
+      "id": "sep-26",
+      "tache1": {
+        "title": "Sport avec Camille",
+        "instruction": "Salut ! Je sais que tu fais du sport depuis le mois dernier. Ca m'interesse beaucoup et j'aimeriais bien venir avec toi. Tu peux m'en dire plus ? A bientot ! Camille. Vous repondez a votre ami Camille. Dans votre message, vous decrivez votre activite sportive et vous donnez des informations utiles (lieu, duree, prix, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Changer de vie",
+        "instruction": "Tout quitter pour changer de vie ? Il y a deux ans, nous avons decide de changer de vie. Paul a quitte son poste de banquier a Paris et nous avons ouvert une boulangerie a Calgary ! Que pensez-vous de cette decision ? Vous avez lu ce message sur un forum internet. Vous repondez a Paul et Naïma en donnant votre opinion et en racontant comment vous feriez.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Le Bien-etre au Travail",
+        "instruction": "Le Bien-etre au Travail",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Nous avons installe dans votre entreprise des bureaux reglables qui montent et descendent. Les employes sont satisfaits et disent qu'ils sont plus productifs et plus efficaces lors des negociations. Meme le climat social est plus convivial et la communication verbale entre collegues s'est renforcee. — Lorie, responsable",
+        "documentB": "De nos jours, les entreprises veulent toujours plus de productivite et d'efficacite. Les employes passent plus de temps sur les lieux de travail. Ce qui m'importe c'est de faire mon job sur mon temps de travail reel sans etre oblige de faire des rallonges en heures supplementaires. — Florian, ingenieur"
+      }
+    },
+    {
+      "id": "sep-27",
+      "tache1": {
+        "title": "Nouveau travail",
+        "instruction": "Vous avez trouve un nouveau travail. Vous ecrivez a votre ami(e) francophone pour lui annoncer la nouvelle. Vous decrivez votre poste, vos collegues et votre lieu de travail.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Etudes a l'etranger",
+        "instruction": "Chersinternet nautes, J'ai 19 ans, je vais bientot partir a l'etranger pour continuer mes etudes. J'aimeriais bien lire les temoignages et avis des etudiants qui ont deja fait des etudes loin de chez eux. Merci de me repondre. Julie. Vous avez fait des etudes a l'etranger pendant un an. Vous ecrivez une reponse sur le forum en racontant votre sejour.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'aide aux personnes pauvres",
+        "instruction": "L'aide aux personnes pauvres",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Tous les ans, en hiver, je donne un peu de mon temps et de mon argent pour aider les personnes qui vivent dans la rue. Pour moi, c'est important de se soucier de ceux qui sont dans le besoin. Cette action me donne l'impression d'etre utile, au moins une fois dans l'annee ! C'est un geste de solidarite qui est a la portee de tout le monde.",
+        "documentB": "Plutot que de donner de l'argent a des personnes pauvres, il vaudrait mieux revoir notre mode de vie. C'est pourquoi je prefere m'engager au quotidien dans une association de mon quartier. Les sans domicile fixe ont besoin d'un logement et d'un travail et pas seulement d'argent. Il faut les aider a devenir autonomes."
+      }
+    },
+    {
+      "id": "sep-28",
+      "tache1": {
+        "title": "Region a decouvrir",
+        "instruction": "Votre ami(e) souhaite decouvrir la region ou vous habitez. Redigez-lui un message dans lequel vous lui recommandez quelques endroits interessants a visiter.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Cours de sport",
+        "instruction": "Vous avez recemment suivi un cours de sport dans une salle de votre ville. Redigez un article pour votre blog personnel afin de raconter cette experience et donner votre avis sur cette salle.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Livraison Des Repas Au Bureau : Pour Ou Contre ?",
+        "instruction": "Livraison Des Repas Au Bureau : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Commander un repas livre au bureau fait gagner du temps. En effet, on peut rester sur place pendant la pause dejeuner, ce qui permet de finir plus tot sa journee. Ce service permet aussi a chacun de choisir le repas qui lui plait. Un autre avantage est la disponibilite : certains restaurants fonctionnent 24 heures sur 24.",
+        "documentB": "Mais ce mode de consommation presente aussi des limites. Quand il y a trop de commandes, les livreurs peuvent etre debordes, ce qui entraine des retards et du stress. Pour les employes, rester assis a son bureau sans faire de vraie pause peut provoquer de la fatigue. Il est doncconseille de faire une vraie coupure."
+      }
+    },
+    {
+      "id": "sep-29",
+      "tache1": {
+        "title": "Cours de langue",
+        "instruction": "Ecrivez un message a votre ami(e) qui souhaite suivre des cours de langue dans votre ecole. Donnez les details specifiques pour l'aider a faire son choix (lieu, tarifs, types de cours disponibles, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Association personnes agees",
+        "instruction": "Vous travaillez dans une association qui aide les personnes agees. Redigez un article de blog pour raconter vos experiences et convaincre d'autres personnes de rejoindre l'association.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les animaux de compagnie pour les enfants : pour ou contre ?",
+        "instruction": "Les animaux de compagnie pour les enfants : pour ou contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Offrir un animal de compagnie a un enfant presente de nombreux avantages. Pour des enfants qui n'ont pas de freres et/ou de sœurs, l'animal est un compagnon qui leur evitera la solitude. Grace a lui, un enfant prendra confiance en lui et apprendra qu'un animal est un etre vivant qui a besoin d'attention et de respect.",
+        "documentB": "Beaucoup d'enfants demandent un jour ou l'autre un animal a leurs parents, le plus souvent un chien ou un chat. Mais meme si vous avez envie de faire plaisir a votre enfant, il vaut mieux reflechir serieuxement avant d'acheter un animal domestique. L'animal devient un nouveau membre de la famille et represente un engagement sur de nombreuses annees."
+      }
+    }
+  ]
+}

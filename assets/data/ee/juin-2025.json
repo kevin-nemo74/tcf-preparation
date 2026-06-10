@@ -1,0 +1,121 @@
+{
+  "id": "juin-2025",
+  "examTitle": "Juin 2025",
+  "combinaisons": [
+    {
+      "id": "jui-1",
+      "tache1": {
+        "title": "Bienvenue nouvelle ville",
+        "instruction": "Le journal « Bienvenue » souhaite publier un article sur les habitants de notre ville. Ecrivez un message qui sera publique dans ce numero. Vous venez d'arriver dans cette ville : presentez-vous et decrivez les endroits que vous appreciez particulierement dans cette ville.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Concert artiste prefere",
+        "instruction": "Vous avez assiste au concert de votre artiste prefere. Redigez un article sur votre blog personnel pour raconter cette experience et donner envie a vos amis et aux autres de venir a son prochain concert.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Jeux Video : Bonne ou Mauvaise Chose ?",
+        "instruction": "Les Jeux Video : Bonne ou Mauvaise Chose ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les enfants, jusqu'a l'adolescence, jouent regulierement aux jeux video. Avec le temps, cela peut developper des pensees negatives et des comportements violents. Une etude recente menee sur des enfants de 9 a 18 ans qui jouent souvent a des jeux violents a montre que ces jeux augmenteraient fortement l'agressivite. Selon Diego Gentil, ce phenomene est inevitable, meme si les parents surveillent leurs enfants.",
+        "documentB": "On entend souvent parler des effets negatifs des jeux video, mais ils ont aussi des benefices pour le cerveau et la sante en general. Par exemple, les jeux video ameliorent plusieurs fonctions cognitives comme la concentration, la creativite et la capacite d'analyse. C'est logique : quand on joue, on doit souvent trouver des solutions."
+      }
+    },
+    {
+      "id": "jui-2",
+      "tache1": {
+        "title": "Nouvel emmangement",
+        "instruction": "Vous avez emmenage dans une nouvelle ville il y a un mois. Ecrivez un courriel a votre ami Leo pour lui donner de vos nouvelles. Racontez-lui comment est votre appartement, decrivez votre quartier, donnez votre avis sur la ville en general et parlez-lui des activites que vous pratiquez.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Fete traditionnelle",
+        "instruction": "Vous avez participe a une fete traditionnelle, soit dans votre pays, soit a l'etranger. Redigez un article pour votre blog afin de raconter cette fete et d'expliquer pourquoi vous l'avez appreciee.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Parcs Zoologiques : Pour ou Contre ?",
+        "instruction": "Les Parcs Zoologiques : Pour ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Je pense qu'il ne faut pas mettre les animaux dans les zoos. Les zoos ne sont pas leur vrai habitat. Les animaux ont besoin de la nature et de la liberte pour vivre bien. Par exemple, un ours polaire ne peut pas vivre heureux dans un zoo ou il fait 15 degres. Mesmo si les zoos aident certaines especes, je trouve que ce n'est pas suffisant. Les animaux doivent rester dans leur environnement naturel et non enfermes.",
+        "documentB": "Dans les zoos, les animaux sont bien soignes et les zoos aident a sauver les especes en danger. C'est vrai que ce n'est pas leur habitat naturel, mais sans les zoos, certains animaux pourraient disparaitre. Par exemple, les zoos aident les animaux a se reproduire et les protegent des dangers. Je crois aussi que les zoos permettent aux gens de mieux connatre les animaux et de les respecter."
+      }
+    },
+    {
+      "id": "jui-3",
+      "tache1": {
+        "title": "Cadeaux vetements",
+        "instruction": "Vous allez bientot celebrex votre anniversaire. Vos amis vous demandent ce que vous aimeriez recevoir comme cadeaux. Vous souhaitez des vetements. Ecrivez-leur un message pour decrire les vetements que vous aimeriez qu'ils vous offrent.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Habitudes alimentaires",
+        "instruction": "www.manger-international.com Ce mois-ci, notre site s'interesse aux habitudes alimentaires dans differents pays. Racontez comment mangent les habitants de votre pays ! Les 10 premiers temoignages seront publies sur notre site. Vous avez lu cette annonce. Redigez un article destine aux lecteurs de « www.manger-international.com ». Expliquez comment mangent les habitants de votre pays et precisez quelles habitudes vous appreciez ou non, et pourquoi.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Jeux Video : Bonne ou Mauvaise Idee ?",
+        "instruction": "Les Jeux Video : Bonne ou Mauvaise Idee ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Beaucoup de personnes pensent encore que les jeux video rendent moins intelligents. Pourtant, plusieurs etudes prouvent le contraire. Par exemple, une etude montre que les amateurs de jeux de course ameliorent leur orientation, leur memoire et leur precision. D'autres recherches demontrent aussi que les joueurs developpent leur rapidite et leur concentration. Certains jeux sont meme concus pour aider les personnes agees a entretenir leur memoire et leur vivacite d'esprit. Bref, la science le prouve : les jeux video rendent plus intelligent !",
+        "documentB": "Les jeux video – qu'ils soient sur console ou ordinateur, joues seuls ou en ligne – peuvent creer une veritable dependance. On parle d'addiction quand le jeu devient l'activite principale, au detriment des relations, du travail, de l'ecole ou d'autres loisirs. Cette dependance est particulierement inquiettante chez les adolescents, car elle peut nuire a leurs resultats scolaires."
+      }
+    },
+    {
+      "id": "jui-4",
+      "tache1": {
+        "title": "Week-end amis",
+        "instruction": "Vous prevoyez de partir en week-end avec vos amis le mois prochain. Ecrivez-leur un message pour leur presenter votre projet : parlez du lieu choisi, du moyen de transport et des activites prevues.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Tout quitter pour voyager",
+        "instruction": "COURRIER DES LECTEURS Tout quitter pour partir voyager pendant un an : est-ce une bonne ou une mauvaise idee ? Ecrivez votre reponse sur notre site Internet : « voyage.internaute.fr ». Dans votre message, donnez votre avis en illustrant votre reponse avec des exemples tires de votre experience personnelle.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Le Travail : un Atout ou un Obstacle ?",
+        "instruction": "Le Travail : un Atout ou un Obstacle ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Le travail occupe une place centrale dans nos vies. Depuis l'enfance, on nous demande souvent : « Que veux-tu faire plus tard ? ». Travailler devrait rimer avec reussite et epanouissement, mais pour beaucoup, cela signifie plutot fatigue et contraintes. Aujourd'hui, certains estiment qu'on ne consacre pas assez de temps a sa famille ou a ses amis. Selon eux, il est urgent de repenser la place du travail dans notre societe. Travailler moins offrirait plus de temps libre et ameliore la qualite de vie.",
+        "documentB": "D'autres ont choisi de quitter leur emploi pour changer de mode de vie. Pourtant, travailler reste essentiel aujourd'hui. La question : « Tu fais quoi dans la vie ? » est souvent posee lors d'une rencontre. Cela montre que l'emploi fait partie de notre identite. Selon le specialiste Jean-Daniel Remond, l'entreprise est un lieu fondamental : les relations quotidiennes, les reseaux, les amitiees, le sentiment d'etre utile mais aussi les difficultes participent a la construction de soi."
+      }
+    },
+    {
+      "id": "jui-5",
+      "tache1": {
+        "title": "Chateau Saint-Simon",
+        "instruction": "Salut ! Merci pour ton invitation au mariage, je suis vraiment heureux pour toi ! La fete aura lieu au chateau Saint-Simon, mais je ne connais pas cet endroit. Tu pourrais me dire comment y aller ? A bientot. Vous repondez a votre ami par courriel et vous lui donnez toutes les informations necessaires pour se rendre au chateau (adresse, localisation, transport, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Apprentissage langues",
+        "instruction": "Sur un forum en ligne, les utilisateurs sont invites a partager leur experience dans l'apprentissage des langues. Redigez un message pour raconter comment vous avez appris le francais ou une autre langue, et expliquez pourquoi, selon vous, il est essentiel de parler une langue etrangere aujourd'hui.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Cuisine : Metier de Passion ou Passion devenue Metier ?",
+        "instruction": "La Cuisine : Metier de Passion ou Passion devenue Metier ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Depuis quelques annees, on remarque que de plus en plus de gens s'interessent a la cuisine. Les blogs culinaires se multiplient sur le web. Chacun y raconte ses experiences, parfois reussies, parfois non… Pourtant, il existe une vraie difference entre ces passionnes et les professionnels comme moi : c'est la formation ! Aujourd'hui, on croit que ce metier est ouvert a tous, alors qu'il exige de nombreuses competences et connaissances. C'est un metier exigeant, mais quelle satisfaction et quelle fiierte d'etre un veritable cuisinier !",
+        "documentB": "Le Salon du blog culinaire lance sa toute premiere edition en Belgique : 450 bloggers sont reunis jusqu'a dimanche pour faire des demontrations de cuisine en public et partager leurs experiences. Une passion qui devient parfois un metier, comme pour Pascale Wocks, premiere blogueuse culinaire francaise. Depuis, elle a publie cinq livres de cuisine et teste des produits pour differentes marques. D'amatrice, elle est devenue une veritable professionnelle !"
+      }
+    }
+  ]
+}

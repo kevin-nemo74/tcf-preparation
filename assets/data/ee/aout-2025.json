@@ -1,0 +1,466 @@
+{
+  "id": "aout-2025",
+  "examTitle": "Août 2025",
+  "combinaisons": [
+    {
+      "id": "aou-1",
+      "tache1": {
+        "title": "Festival de cinema",
+        "instruction": "Vous souhaitez assister a un festival de cinema dans votre ville. Vous ecrivez un message a votre ami(e) pour lui proposer de venir avec vous. Vous lui donnez toutes les informations necessaires sur l'evenement (films, dates, horaires, tarifs…).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Film prefere festival",
+        "instruction": "Vous avez recemment assiste a un festival de cinema et vous avez vu un film qui vous a particulierement marque. Ecrivez un message a vos amis pour leur raconter votre experience et leur parler de votre film prefere.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les maisons de retraite, pour ou contre ?",
+        "instruction": "Les maisons de retraite, pour ou contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les maisons de retraite sont une bonne solution pour les personnes agees. Elles y recoivent des soins adaptes et participent a des activites qui evitent l'isolement… — Sophie, infirmiere",
+        "documentB": "Les maisons de retraite peuvent eloigner les personnes agees de leur famille et creer un sentiment d'abandon… — Jean, retraite"
+      }
+    },
+    {
+      "id": "aou-2",
+      "tache1": {
+        "title": "Invitation festival cinema",
+        "instruction": "Festival de cinema : vous invitez votre ami(e) a venir avec vous (films, dates, horaires, tarifs…).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Etudiant etranger",
+        "instruction": "Vous avez accueili un(e) etudiant(e) etranger(e) pendant une semaine chez vous. Sur votre blog, racontez cette experience et expliquez pourquoi vous l'avez aimee.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La restauration rapide",
+        "instruction": "La restauration rapide",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les restaurants rapides proposent des plats equilibres, respectent les normes d'hygiene et responsabilisent les clients dans leurs choix.",
+        "documentB": "Les fast-foods sont dangereux pour la sante (hamburgers, frites, boissons sucrees). Trop de calories, dechets plastiques, nuisance pour l'environnement."
+      }
+    },
+    {
+      "id": "aou-3",
+      "tache1": {
+        "title": "Parc de loisirs",
+        "instruction": "Parc de loisirs : repondez a votre ami(e) pour decrire la sortie (horaires, transport, activites…).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Salon du livre",
+        "instruction": "Ecrivez un message a vos amis pour raconter votre experience lors d'un salon du livre (conferences, expositions, auteurs…).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Courses alimentaires – producteurs locaux ou supermarche ?",
+        "instruction": "Courses alimentaires – producteurs locaux ou supermarche ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Jean (campagne) : prefere acheter directement a la ferme, meilleure qualite, meme si plus cher.",
+        "documentB": "Camille (ville) : prefere le supermarche pour la variete et les prix abordables."
+      }
+    },
+    {
+      "id": "aou-4",
+      "tache1": {
+        "title": "Invitation vacances",
+        "instruction": "Redigez un message pour inviter votre ami(e) a passer ses vacances dans votre ville (lieux, endroits a visiter…).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Concours artiste prefere",
+        "instruction": "Vous avez participe a un concours sur le theme Mon artiste prefere. Ecrivez un article de blog pour parler de votre artiste prefere.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La chasse aux animaux – pour ou contre ?",
+        "instruction": "La chasse aux animaux – pour ou contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Je ne comprends pas comment on peut aimer la nature et en meme temps prendre plaisir a tuer des animaux. — Gala, 29 ans",
+        "documentB": "Les gens chassent pour differentes raisons : subsistance, commerce, gestion de la faune, protection, loisir, prestige… — David, journaliste"
+      }
+    },
+    {
+      "id": "aou-5",
+      "tache1": {
+        "title": "Rencontre ecrivain",
+        "instruction": "La bibliotheque de votre ville organise une rencontre avec un ecrivain. Ecrivez un message a votre ami(e) pour l'inviter a cet evenement.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Semaine du gout",
+        "instruction": "Vous avez participe a un evenement nomme « La semaine du gout ». Ecrivez un article de blog pour raconter cette experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'art Urbain : Pour Ou Contre ?",
+        "instruction": "L'art Urbain : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Grace a l'art, la curiosite des citadins est attisee dans l'espace urbain. Les villes se reinventent et s'enrichissent de la diversite de leur population. Les murs se parent de couleurs graces au street art, ce qui debouche sur des lieux ou la qualite de vie est privilegiee.",
+        "documentB": "Mais a une plus large echelle, les graffitis peuvent etre percus comme une degradation de la communaute, une pollution visuelle ou une preuve de la rupture sociale. On les considere comme du vandalisme qui defigure les biens publics."
+      }
+    },
+    {
+      "id": "aou-6",
+      "tache1": {
+        "title": "Demenagement",
+        "instruction": "Vous allez demenager. Des amis ont accepte de vous aider. Vous leur ecrivez un message collectif pour leur expliquer comment le demenagement va se passer (lieux, horaires, duree, trajet, taches a faire, etc.)",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Concours artiste",
+        "instruction": "Participez a notre concours pour gagner un sejour pour deux personnes dans la ville de votre choix. Redigez un article sur le theme : « La vie de mon artiste prefere(e) ». Vous expliquez pourquoi vous avez choisi cet(te) artiste et vous racontez sa vie.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les objets connectes",
+        "instruction": "Les objets connectes",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les objets connectes facilitent notre vie quotidienne. Ce sont des objets ou des equipements piltes a distance a l'aide d'un telephone portable ou par Internet. De plus, avec une montre ou un bracelet connecte, toutes nos activites peuvent etre analysees. Certains objets agissent comme un carnet de sante.",
+        "documentB": "Il y aurait 50 milliards d'objets connectes dans le monde. Face a cette evolution, la question de la securite se pose. En effet, un pirate informatique peut prendre le controle d'un objet connecte en quelques minutes. Un cambrioleur pourrait verifier grace aux cameras si les occupants sont absents."
+      }
+    },
+    {
+      "id": "aou-7",
+      "tache1": {
+        "title": "Recherche colocataire",
+        "instruction": "Vous etes locataire d'un appartement trop grand pour vous. Ecrivez une annonce dans un journal pour chercher un colocataire. Il faut mentionner : la superficie, le caractere du colocataire, le prix, etc.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Nouvelle activite de loisir",
+        "instruction": "Vous venez de commencer une nouvelle activite de loisir (sport, danse, etc.). Ecrivez un article sur votre blog pour parler de cette experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Gratuite Des Musees : Pour Ou Contre ?",
+        "instruction": "La Gratuite Des Musees : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "La gratuitie des musees peut entrainer une surfrequentation, ce qui nuit a la qualite de l'experience des visiteurs. De plus, cela peut reduire les ressources financieres des musees, affectant ainsi leur entretien et la preservation des œuvres.",
+        "documentB": "La gratuitie des musees est une excellente initiative. Cela rend la culture accessible a tous, independamment de leur situation financiere. Pour moi, la gratuitie des musees contribue a l'education du public et au partage du patrimoine culturel."
+      }
+    },
+    {
+      "id": "aou-8",
+      "tache1": {
+        "title": "Garde maison",
+        "instruction": "Votre ami Cedric a accepte de garder votre maison et jardin pendant vos vacances. Ecrivez un message pour lui dire ce qu'il doit faire.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Reclamation agence voyages",
+        "instruction": "Vous faites une reclamation par rapport aux mauvaises prestations d'une agence de voyages suite a un voyage mal organise. Exprimez votre mecontentement.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Restauration Rapide",
+        "instruction": "La Restauration Rapide",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les restaurants rapides se distinguent par leur engagement a proposer une variete de plats equilibres, respectant strictement les normes d'hygiene. En laissant aux clients la liberte de composer leur propre menu, ces etablissements les responsabilisent dans leurs choix alimentaires.",
+        "documentB": "Les specialistes affirment que manger regulierement dans des restaurants de fast-food est dangereux pour la sante. La nourriture servie contient souvent une grande quantite de calories. De plus, la plupart des produits sont emballes dans du plastique, ce qui est nuisible pour l'environnement."
+      }
+    },
+    {
+      "id": "aou-9",
+      "tache1": {
+        "title": "Nouveaux locaux entreprise",
+        "instruction": "Repondez au courriel de votre ami Lucas pour lui donner des informations sur les nouveaux locaux de votre entreprise (lieu, disposition des pieces, equipements, etc.)",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Semaine sans voiture",
+        "instruction": "Vous avez assiste a un evenement intitule « Une semaine sans voiture ». Racontez votre experience et donnez votre impression sur cette initiative. Decrivez le deroulement de l'evenement (dates, lieu, activites proposees).",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les vetements de grande marque",
+        "instruction": "Les vetements de grande marque",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les vetements de marques sont tres importants pour les enfants et les adolescents. C'est un moyen de s'exprimer et de se rattacher a un groupe social. Cette attirance pour les marques est tres presente chez les adolescents qui se cherchent et montrent leurs personnalites.",
+        "documentB": "Les enfants grandissent tres vite et les vetements sont portes pendant une courte periode. Ainsi, les vetements deviennent rapidement trop petits. Les habits sont tres vite sales ou troues en jouant a l'exterieur avec les copains."
+      }
+    },
+    {
+      "id": "aou-10",
+      "tache1": {
+        "title": "Cadeau anniversaire voyage",
+        "instruction": "L'anniversaire de votre ami approche a grands pas et vous avez decide de lui offrir un voyage comme cadeau. Redigez un message pour l'informer des preparations que vous avez faites (destination, dates, preparatifs, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Etudes a l'etranger",
+        "instruction": "Un internaute a publie le message suivant : « Je vais partir etudier un an a l'etranger et j'ai peur ». Redigez une reponse pour partager votre experience personnelle. Parlez des defis que vous avez rencontres et des benefices que vous avez tires de cette experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La reduction du temps de travail",
+        "instruction": "La reduction du temps de travail",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "La reduction du temps de travail permet aux employes de mieux equilibrer leur vie professionnelle et personnelle. En travaillant moins, ils peuvent consacrer plus de temps a leur famille, a leurs loisirs et a leur sante. Cela peut egalement augmenter leur satisfaction au travail et reduire le stress.",
+        "documentB": "La reduction du temps de travail peut beneficier aux entreprises en diminuant l'absenteisme et en ameliorant la retention des employes. Cependant, cela necessite une bonne organisation et une adaptation des processus pour maintenir l'efficacite."
+      }
+    },
+    {
+      "id": "aou-11",
+      "tache1": {
+        "title": "Invitation restaurant",
+        "instruction": "Vous souhaitez feter votre anniversaire dans un restaurant. Vous invitez vos amis. Vous leur ecrivez un courriel pour leur donner toutes les informations necessaires (lieu, date, menu, prix, etc.) et vous leur demandez une reponse.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Ville campagne",
+        "instruction": "Vous avez quitte la ville afin de vous installer a la campagne. Sur votre blog, vous expliquez pourquoi vous avez fait ce choix et vous presentez les avantages de votre nouvelle vie.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Cameras De Surveillance A L'ecole : Pour Ou Contre ?",
+        "instruction": "Les Cameras De Surveillance A L'ecole : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Dans l'ecole ou j'enseigne a Montreal, les cameras de surveillance sont omnipresentes. Leur presence permet de dissuader les eleves de commettre des actes de violence. Les enseignants, les parents et la majorite des eleves les acceptent volontiers.",
+        "documentB": "Je suis oppose a l'installation des cameras de surveillance dans nos ecoles a Montreal. Les resultats obtenus dans les pays ou ce systeme est utilise ne sont pas convaincants. Les personnes mal intentionnees peuvent facilement contourner les cameras."
+      }
+    },
+    {
+      "id": "aou-12",
+      "tache1": {
+        "title": "Rencontre ecrivain",
+        "instruction": "La bibliotheque de votre ville organise une rencontre avec un ecrivain. Ecrivez un message a votre ami(e) pour l'inviter a cet evenement.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Semaine du gout",
+        "instruction": "Vous avez participe a un evenement nomme « La semaine du gout ». Ecrivez un article de blog pour raconter cette experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "L'art Urbain : Pour Ou Contre ?",
+        "instruction": "L'art Urbain : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Grace a l'art, la curiosite des citadins est attisee dans l'espace urbain. Les villes se reinventent et s'enrichissent de la diversite de leur population. Les murs se parent de couleurs graces au street art.",
+        "documentB": "Mais a une plus large echelle, les graffitis peuvent etre percus comme une degradation de la communaute, une pollution visuelle ou une preuve de la rupture sociale. On les considere comme du vandalisme."
+      }
+    },
+    {
+      "id": "aou-13",
+      "tache1": {
+        "title": "Demenagement",
+        "instruction": "Vous allez demenager. Des amis ont accepte de vous aider. Vous leur ecrivez un message collectif pour leur expliquer comment le demenagement va se passer.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Concours artiste",
+        "instruction": "Participez a notre concours pour gagner un sejour pour deux personnes dans la ville de votre choix. Redigez un article sur le theme : « La vie de mon artiste prefere(e) ».",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les objets connectes",
+        "instruction": "Les objets connectes",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les objets connectes facilitent notre vie quotidienne. Ce sont des objets ou des equipements piltes a distance a l'aide d'un telephone portable ou par Internet. Avec une montre ou un bracelet connecte, toutes nos activites peuvent etre analysees.",
+        "documentB": "Il y aurait 50 milliards d'objets connectes dans le monde. Face a cette evolution, la question de la securite se pose. Un pirate informatique peut prendre le controle d'un objet connecte en quelques minutes."
+      }
+    },
+    {
+      "id": "aou-14",
+      "tache1": {
+        "title": "Recherche colocataire",
+        "instruction": "Vous etes locataire d'un appartement trop grand pour vous. Ecrivez une annonce dans un journal pour chercher un colocataire. Il faut mentionner la superficie, le caractere du colocataire, le prix, etc.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Nouvelle activite de loisir",
+        "instruction": "Vous venez de commencer une nouvelle activite de loisir (sport, danse, etc.). Ecrivez un article sur votre blog pour parler de cette experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Gratuite Des Musees : Pour Ou Contre ?",
+        "instruction": "La Gratuite Des Musees : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "La gratuitie des musees peut entrainer une surfrequentation, ce qui nuit a la qualite de l'experience des visiteurs. De plus, cela peut reduire les ressources financieres des musees.",
+        "documentB": "La gratuitie des musees est une excellente initiative. Cela rend la culture accessible a tous, independamment de leur situation financiere. Pour moi, la gratuitie contribue a l'education du public."
+      }
+    },
+    {
+      "id": "aou-15",
+      "tache1": {
+        "title": "Garde maison",
+        "instruction": "Votre ami Cedric a accepte de garder votre maison et jardin pendant vos vacances. Ecrivez un message pour lui dire ce qu'il doit faire.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Reclamation agence voyages",
+        "instruction": "Vous faites une reclamation par rapport aux mauvaises prestations d'une agence de voyages suite a un voyage mal organise. Exprimez votre mecontentement.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Restauration Rapide",
+        "instruction": "La Restauration Rapide",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Les restaurants rapides proposent des plats equilibres, respectant les normes d'hygiene. En laissant aux clients la liberte de composer leur propre menu, ces etablissements les responsabilisent dans leurs choix.",
+        "documentB": "Les specialistes affirment que manger regulierement dans des fast-foods est dangereux pour la sante. La nourriture servie contient souvent trop de calories. De plus, les produits sont emballes dans du plastique, ce qui nuit a l'environnement."
+      }
+    },
+    {
+      "id": "aou-16",
+      "tache1": {
+        "title": "Nouveaux locaux",
+        "instruction": "Salut ! Le demenagement de ton entreprise est-il termine ? Comment sont les nouveaux locaux ? Lucas. Vous repondez a votre ami Lucas en decrivant les nouveaux locaux de votre entreprise.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Semaine sans voiture",
+        "instruction": "Vous avez participe a l'evenement « Une semaine sans ma voiture » organise par votre ville. Sur un site Internet, vous racontez votre experience et vous donnez votre opinion sur ce type d'action.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les vetements de marque chez les enfants",
+        "instruction": "Les vetements de marque chez les enfants",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Pour moi, porter des vetements de marques populaires, ce n'est pas vraiment important. Malheureusement, pour se faire des amis au lycee, il vaut mieux en porter. Ce n'est pas le vetement qui definit la personne. — Marine, 17 ans",
+        "documentB": "Mes fils ne veulent porter que des vetements de marque. Comme cela coute tres cher, nous avons un accord : pas plus d'un habit de marque par mois. Cela leur donne un sentiment de confiance. — Melanie, mere de deux adolescents"
+      }
+    },
+    {
+      "id": "aou-17",
+      "tache1": {
+        "title": "Colocation",
+        "instruction": "Vous habitez dans un grand appartement et vous recherchez un colocataire. Decrivez le type de colocation que vous proposez ainsi que les caracteristiques de votre appartement.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Spectacle theatre",
+        "instruction": "Une troupe de theatre s'est installee dans votre ville, et vous avez assiste a l'un de ses spectacles. Redigez un article de blog pour decrire cette experience.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Influence de la publicite sur les enfants : pour ou contre ?",
+        "instruction": "Influence de la publicite sur les enfants : pour ou contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Une etude a revele que les enfants sont constamment exposes a de nombreuses publicites. Les enfants sont particulierement cibls par des publicites pour des produits alimentaires peu sains, ce qui peut influencer leurs choix de consommation.",
+        "documentB": "Un article de recherche souligne que les enfants ont des capacites cognitives limitees pour comprendre les messages publicitaires. D'autres facteurs comme l'education parentale et les influences sociales ont un role plus important dans leurs choix."
+      }
+    },
+    {
+      "id": "aou-18",
+      "tache1": {
+        "title": "Recherche logement",
+        "instruction": "Envoyez un courriel a votre ami francophone afin de lui demander de l'aide pour la recherche d'un logement, en lui fournissant toutes les informations necessaires (type de logement, budget, date).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Journee nouveaux etudiants",
+        "instruction": "Votre ecole vous a charge d'organiser une journee speciale pour accueillir les nouveaux etudiants francophones. Vous redigez un courriel destine a ces etudiants dans lequel vous donnez tous les details pour le bon deroulement de cette journee.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La vie a la campagne ou en ville",
+        "instruction": "La vie a la campagne ou en ville",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "A mon avis, le fait de vivre en ville vous donne la possibilite de vous divertir de plusieurs manières : aller au cinema, dejeuner dans un restaurant, faire du shopping… Tout est a cote, vous n'avez pas besoin de parcourir plusieurs kilometres.",
+        "documentB": "Dernièrement, j'ai décidé de quitter la ville pour vivre à la campagne. J'avais vraiment besoin de me rapprocher de la nature et de profiter du calme. Avec mon budget actuel, j'ai une grande maison avec terrasse et jardin privatif."
+      }
+    },
+    {
+      "id": "aou-19",
+      "tache1": {
+        "title": "Appartement demenagement",
+        "instruction": "Vous envisagez de demenager et avez trouve un appartement. Vous souhaitez en informer un ami en lui fournissant les details concernant le bien en question : nombre de pieces, emplacement et prix.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Festival de musique",
+        "instruction": "Une annonce de festival de musique gratuit a ete publiee dans votre ville, et vous avez profite de cette occasion pour y assister avec votre ami. Ecrivez un article de blog pour raconter l'experience que vous avez vecue lors de cet evenement musical.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Diplome ou experience pour l'emploi des jeunes ?",
+        "instruction": "Diplome ou experience pour l'emploi des jeunes ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "De nombreux jeunes diplomes de l'universite se retrouvent au chomage. Les recruteurs leur reprochent d'avoir trop de diplomes et pas assez d'experience, ou bien leur jeunesse constitue un obstacle. Plus de 60 % des jeunes diplomes n'ont toujours pas trouve de travail un an apres la fin de leurs etudes.",
+        "documentB": "On entend souvent parler de celebres chefs d'entreprise qui ont reussi sans aller a l'universite. Certains dirigeants estiment que les etudes universitaires peuvent etre un frein. Selon eux, l'universite enseigne le conformisme et limite la creativite."
+      }
+    },
+    {
+      "id": "aou-20",
+      "tache1": {
+        "title": "Week-end sport",
+        "instruction": "Ecrivez un message a vos amis pour leur proposer de passer un week-end avec vous pour faire du sport.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Habitudes alimentaires",
+        "instruction": "Ecrivez un article de blog sur un forum pour raconter pourquoi vous avez decide de changer vos habitudes alimentaires.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La sieste au travail",
+        "instruction": "La sieste au travail",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "La sieste au travail peut avoir de nombreux avantages pour les employes et les entreprises. En permettant aux travailleurs de faire une petite sieste, cela peut aider a augmenter leur productivite et a ameliorer leur sante et leur bien-etre.",
+        "documentB": "Malgre les nombreux avantages de la sieste au travail, il peut etre difficile pour toutes les entreprises de mettre en place des lits et des salles dediees a cette pratique. Cela peut etre du a des contraintes financieres ou logistiques."
+      }
+    }
+  ]
+}

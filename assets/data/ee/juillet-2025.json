@@ -1,0 +1,75 @@
+{
+  "id": "juillet-2025",
+  "examTitle": "Juillet 2025",
+  "combinaisons": [
+    {
+      "id": "jul-1",
+      "tache1": {
+        "title": "Invitation vacances",
+        "instruction": "Ecrivez un message pour inviter votre ami(e) a venir passer ses vacances dans votre ville. Presentez-lui les lieux interessants et les endroits a visiter.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Concours artiste prefere",
+        "instruction": "Vous avez participe a un concours pour gagner un sejour de deux semaines dans la ville que vous preferez. Le theme du concours est « Mon artiste prefere ». Redigez un article de blog pour presenter cet artiste.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "La Chasse Aux Animaux : Pour Ou Contre ?",
+        "instruction": "La Chasse Aux Animaux : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Je fais partie de ces personnes qui ne parviennent pas a comprendre qu'on puisse ressentir du plaisir en tuant des animaux. Cela me depasse totalement. J'ai egalement du mal a concevoir que certaines personnes puissent pretendre aimer la nature tout en participant activement a sa destruction. – Sabrina, 29 ans",
+        "documentB": "Il existe de nombreuses raisons pour lesquelles certaines personnes pratiquent la chasse. Cela peut etre pour se nourrir, dans un but commercial, ou encore pour gerer et reguler certaines especes animales. D'autres le font pour defendre leurs terres ou simplement comme activite physique, de loisir ou meme pour gagner en reconnaissance sociale. – David, journaliste a la FRM"
+      }
+    },
+    {
+      "id": "jul-2",
+      "tache1": {
+        "title": "Salle de sport recommandation",
+        "instruction": "Salut, j'ai entendu dire que tu vas dans une super salle de sport. Tu peux m'en parler ? Vous lui repondez dans un message et vous donnez des details sur cette salle (ambiance, equipements, prix, etc.).",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Formations en ligne",
+        "instruction": "Vous avez lu un debat sur un forum au sujet des formations en ligne. Ecrivez un message pour raconter votre propre experience (cours de langue, formation professionnelle, etc.). Dites ce que vous avez apprecie et ce que vous avez moins aime.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Les Produits Faits Maison : Pour Ou Contre ?",
+        "instruction": "Les Produits Faits Maison : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Preparer soi-meme des produits bio a la maison permet de maitriser totalement les ingredients utilises, ce qui assure des solutions plus adaptees et meilleures pour la sante. Cela aide aussi a limiter les dechets plastiques en utilisant des contenants reutilisables. Par ailleurs, cela permet d'economiser sur le long terme et d'apprendre des savoir-faire creatifs, tout en adoptant un mode de vie plus responsable.",
+        "documentB": "Faire des produits bio chez soi presente certains inconvenients. Des erreurs dans les recettes peuvent rendre les produits inefficaces ou causer des reactions. De plus, chercher et preparer les ingredients demande du temps et de l'energie. Ces produits n'ont pas toujours de garanties de securite ou de conservation, ce qui peut favoriser les bacteries. Enfin, les ingredients de qualite coutent cher au depart, ce qui peut decourager certaines personnes."
+      }
+    },
+    {
+      "id": "jul-3",
+      "tache1": {
+        "title": "Region a decouvrir",
+        "instruction": "Votre ami(e) souhaite decouvrir la region ou vous habitez. Redigez-lui un message dans lequel vous lui recommandez quelques endroits interessants a visiter.",
+        "minWords": 60,
+        "maxWords": 120
+      },
+      "tache2": {
+        "title": "Cours de sport",
+        "instruction": "Vous avez recemment suivi un cours de sport dans une salle de votre ville. Redigez un article pour votre blog personnel afin de raconter cette experience et donner votre avis sur cette salle.",
+        "minWords": 120,
+        "maxWords": 150
+      },
+      "tache3": {
+        "title": "Livraison Des Repas Au Bureau : Pour Ou Contre ?",
+        "instruction": "Livraison Des Repas Au Bureau : Pour Ou Contre ?",
+        "minWords": 120,
+        "maxWords": 180,
+        "documentA": "Commander un repas livre au bureau fait gagner du temps. En effet, on peut rester sur place pendant la pause dejeuner, ce qui permet de finir plus tot sa journee. Ce service permet aussi a chacun de choisir le repas qui lui plait : si l'un veut un plat italien et l'autre des sushis, chacun peut commander separement sans probleme. Un autre avantage est la disponibilite : certains restaurants fonctionnent 24 heures sur 24, ce qui rend ce service accessible a tout moment.",
+        "documentB": "Mais ce mode de consommation presente aussi des limites. Quand il y a trop de commandes, les livreurs peuvent etre debordes, ce qui entraine des retards et du stress. Pour les employes, rester assis a son bureau sans faire de vraie pause peut provoquer de la fatigue. Il est donc conseille de faire une vraie coupure, meme courte, pour rester efficace dans son travail."
+      }
+    }
+  ]
+}

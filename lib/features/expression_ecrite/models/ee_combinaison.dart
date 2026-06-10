@@ -97,11 +97,25 @@ class EEExamen {
 
   static Future<EEExamen> loadFromAssets() async {
     try {
-      final jsonString = await rootBundle.loadString(
-        'assets/data/expression_ecrite_combinaisons.json',
+      final indexJson = await rootBundle.loadString(
+        'assets/data/ee/index.json',
       );
-      final json = jsonDecode(jsonString) as Map<String, dynamic>;
-      return EEExamen.fromJson(json);
+      final indexData = jsonDecode(indexJson) as Map<String, dynamic>;
+      final description = indexData['description'] as String? ?? '';
+      final monthRefs = indexData['months'] as List<dynamic>? ?? [];
+
+      final months = <EEMonth>[];
+      for (final ref in monthRefs) {
+        final id = ref['id'] as String?;
+        if (id == null) continue;
+        final monthJson = await rootBundle.loadString(
+          'assets/data/ee/$id.json',
+        );
+        final monthData = jsonDecode(monthJson) as Map<String, dynamic>;
+        months.add(EEMonth.fromJson(monthData));
+      }
+
+      return EEExamen(description: description, months: months);
     } catch (e) {
       throw Exception('Failed to load exam data: $e');
     }
