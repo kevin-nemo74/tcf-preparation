@@ -2,10 +2,15 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = 'https://www.pack-tcf-canada.com/client/tache2_expo_oral.php';
-const OUTPUT_DIR = path.resolve(__dirname, '..', 'assets', 'data', 'eo');
+const URL_PATH = process.argv[2] || 'tache2_expo_oral.php';
+const SUBDIR = process.argv[3] || '';
+const BASE_URL = `https://www.pack-tcf-canada.com/client/${URL_PATH}`;
+const BASE_OUTPUT = path.resolve(__dirname, '..', 'assets', 'data', 'eo');
+const OUTPUT_DIR = SUBDIR ? path.join(BASE_OUTPUT, SUBDIR) : BASE_OUTPUT;
 const INDEX_PATH = path.join(OUTPUT_DIR, 'index.json');
 const SESSION_COOKIE = process.env.EO_PHP_SESSID || '';
+
+const TACHE_LABEL = URL_PATH.includes('tache3') ? 'Tâche 3' : 'Tâche 2';
 
 function fetchUrl(url) {
   return new Promise((resolve, reject) => {
@@ -127,7 +132,7 @@ async function main() {
     console.log(`  → wrote ${fp}`);
   }
 
-  fs.writeFileSync(INDEX_PATH, JSON.stringify({ description: "Expression Orale - Tâche 2 - TCF Canada", months: indexMonths }, null, 2), 'utf-8');
+  fs.writeFileSync(INDEX_PATH, JSON.stringify({ description: `Expression Orale - ${TACHE_LABEL} - TCF Canada`, months: indexMonths }, null, 2), 'utf-8');
   console.log(`\nDone! Index at ${INDEX_PATH}`);
 }
 

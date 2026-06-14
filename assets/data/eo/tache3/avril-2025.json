@@ -1,0 +1,111 @@
+{
+  "id": "avril-2025",
+  "examTitle": "Avril 2025",
+  "parties": [
+    {
+      "title": "Partie 7",
+      "sujets": [
+        "Sujet 1",
+        "Certaines personnes choisissent de ne plus suivre les informations diffusées à la télévision. Quelle est votre opinion à ce sujet ?",
+        "Sujet 2",
+        "De nombreux jeunes adultes au Canada décident de continuer à vivre chez leurs parents car ils s’y sentent à l’aise. Que pensez-vous de cette situation ?",
+        "Sujet 3",
+        "Pensez-vous que l’utilisation d’Internet favorise l’isolement des individus ? Donnez votre avis sur cette idée.",
+        "Sujet 4",
+        "À votre avis, parmi les grandes causes actuelles (sociale, humanitaire ou culturelle), laquelle devrait être prioritaire dans le monde d’aujourd’hui ? Expliquez pourquoi.",
+        "Sujet 5",
+        "Selon vous, quelles sont les trois questions essentielles à se poser avant de commencer une démarche d’immigration au Québec ? Justifiez votre choix."
+      ]
+    },
+    {
+      "title": "Partie 6",
+      "sujets": [
+        "Sujet 1",
+        "Pensez-vous qu’il est préférable d’éviter de travailler avec des amis ou des membres de sa famille ? Expliquez votre point de vue.",
+        "Sujet 2",
+        "À votre avis, de quelle manière Internet a-t-il modifié les habitudes dans le monde professionnel ?",
+        "Sujet 3",
+        "Croyez-vous qu’un monde sans frontières, sans passeport ni visa, pourrait réellement exister ? Justifiez votre réponse.",
+        "Sujet 4",
+        "Êtes-vous d’accord avec l’idée que s’intégrer dans un nouveau pays est toujours une étape difficile ? Expliquez pourquoi.",
+        "Sujet 5",
+        "Pourquoi, selon vous, la vie privée des célébrités attire-t-elle autant l’attention du public ?"
+      ]
+    },
+    {
+      "title": "Partie 5",
+      "sujets": [
+        "Sujet 1",
+        "Il faut faire de longues études pour gagner beaucoup d’argent. Qu’en pensez-vous ?",
+        "Sujet 2",
+        "Les lieux culturels (musées, théâtres, etc.) devraient être gratuits. Qu’en pensez-vous ?",
+        "Sujet 3",
+        "L’accès aux soins médicaux doit être gratuit pour tous. Qu’en pensez-vous ?",
+        "Sujet 4",
+        "Pour protéger l’environnement, les États doivent limiter les voyages en avion de chaque citoyen. Qu’en pensez-vous ?",
+        "Sujet 5",
+        "Selon vous, quelle est la place du vêtement dans nos sociétés modernes ?"
+      ]
+    },
+    {
+      "title": "Partie 4",
+      "sujets": [
+        "Sujet 1",
+        "De nos jours, les gens ne s’envoient presque plus de courrier (cartes de vœux, lettres d’amour, etc.). Est-ce regrettable ?",
+        "Sujet 2",
+        "Est-ce que vous pensez qu’aujourd’hui on peut vivre sans voiture ?",
+        "Sujet 3",
+        "Il est plus facile de vivre seul(e) qu’en famille. Qu’en pensez-vous ?",
+        "Sujet 4",
+        "Pensez-vous que faire travailler les gens jusqu’à 70 ans est une mesure acceptable ?",
+        "Sujet 5",
+        "Une expérience de vie à l’étranger est toujours positive. Êtes-vous d’accord avec cette affirmation ?"
+      ]
+    },
+    {
+      "title": "Partie 3",
+      "sujets": [
+        "Sujet 1",
+        "Apprendre une langue étrangère est difficile. Êtes-vous d’accord avec cette affirmation ?",
+        "Sujet 2",
+        "Faire des études aide à réussir sa vie professionnelle. Qu’en pensez-vous ?",
+        "Sujet 3",
+        "Il est nécessaire de limiter la circulation des voitures en ville. Êtes-vous d’accord avec cette affirmation ?",
+        "Sujet 4",
+        "On est mieux informé grâce à Internet. Qu’en pensez-vous ?",
+        "Sujet 5",
+        "Pour être en bonne santé, il faut arrêter de manger de la viande. Que pensez-vous de cette affirmation ?"
+      ]
+    },
+    {
+      "title": "Partie 2",
+      "sujets": [
+        "Sujet 1",
+        "Pour gagner beaucoup d’argent, il est indispensable d’avoir fait des études. Êtes-vous d’accord avec cette affirmation ?",
+        "Sujet 2",
+        "À la maison, les parents devraient interdire à leurs enfants l’utilisation d’Internet. Êtes-vous d’accord avec cette affirmation ?",
+        "Sujet 3",
+        "Il est possible de vivre dans un pays sans parler sa langue. Qu’en pensez-vous ?",
+        "Sujet 4",
+        "Prendre la décision de quitter son pays est facile. Qu’en pensez-vous ?",
+        "Sujet 5",
+        "Certains économistes pensent que les nouvelles technologies vont détruire les emplois. Qu’en pensez-vous ?"
+      ]
+    },
+    {
+      "title": "Partie 1",
+      "sujets": [
+        "Sujet 1",
+        "Avec Internet, on vit mieux. Qu’en pensez-vous ?",
+        "Sujet 2",
+        "Est-ce que vous pensez que les voyages sont utiles ? Pourquoi ?",
+        "Sujet 3",
+        "Est-il bon de faire plusieurs métiers dans sa carrière ? Qu’en pensez-vous ?",
+        "Sujet 4",
+        "Les immigrés sont une richesse pour un pays. Qu’en pensez-vous ?",
+        "Sujet 5",
+        "Un jour, on travaillera jusqu’à 70 ans. Qu’en pensez-vous ?"
+      ]
+    }
+  ]
+}

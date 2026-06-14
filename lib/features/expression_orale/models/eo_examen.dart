@@ -18,10 +18,13 @@ class EOExamen {
     );
   }
 
-  static Future<EOExamen> loadFromAssets() async {
+  static Future<EOExamen> loadFromAssets({int tache = 2}) async {
     try {
+      final subdir = tache == 3 ? 'tache3' : '';
+      final prefix = subdir.isNotEmpty ? '$subdir/' : '';
+
       final indexJson =
-          await rootBundle.loadString('assets/data/eo/index.json');
+          await rootBundle.loadString('assets/data/eo/${prefix}index.json');
       final indexData = jsonDecode(indexJson) as Map<String, dynamic>;
       final monthRefs = indexData['months'] as List<dynamic>? ?? [];
 
@@ -30,7 +33,7 @@ class EOExamen {
         final id = ref['id'] as String?;
         if (id == null) continue;
         final monthJson =
-            await rootBundle.loadString('assets/data/eo/$id.json');
+            await rootBundle.loadString('assets/data/eo/$prefix$id.json');
         final monthData = jsonDecode(monthJson) as Map<String, dynamic>;
         months.add(EOMonth.fromJson(monthData));
       }

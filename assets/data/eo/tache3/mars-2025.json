@@ -1,0 +1,66 @@
+{
+  "id": "mars-2025",
+  "examTitle": "Mars 2025",
+  "parties": [
+    {
+      "title": "Partie 4",
+      "sujets": [
+        "Sujet 1",
+        "Que pensez-vous des informations diffusées par les médias sur Internet ? Les trouvez-vous intéressantes ou sans intérêt ? Pourquoi ?",
+        "Sujet 2",
+        "Comment réussir à s’intégrer dans un nouvel environnement (pays, travail, études, etc.) ?",
+        "Sujet 3",
+        "Pensez-vous que c’est au(x) pays d’accueil de faire des efforts pour intégrer les immigrants ? Êtes-vous d’accord ?",
+        "Sujet 4",
+        "Est-ce une bonne idée, selon vous, de partager un appartement avec d’autres personnes ? Pourquoi ?",
+        "Sujet 5",
+        "D’après vous, jusqu’à quel âge peut-on travailler ? Quelles en sont les raisons ?"
+      ]
+    },
+    {
+      "title": "Partie 3",
+      "sujets": [
+        "Sujet 1",
+        "Avec Internet, on vit mieux. Qu’en pensez-vous ?",
+        "Sujet 2",
+        "Selon vous, les voyages sont-ils bénéfiques ? Justifiez votre réponse.",
+        "Sujet 3",
+        "Est-il avantageux de pratiquer plusieurs métiers au cours de sa carrière ? Qu’en pensez-vous ?",
+        "Sujet 4",
+        "Selon vous, les immigrés représentent-ils une richesse pour un pays ? Pourquoi ?",
+        "Sujet 5",
+        "Pensez-vous qu’il soit envisageable de travailler jusqu’à 70 ans ? Pourquoi ?"
+      ]
+    },
+    {
+      "title": "Partie 2",
+      "sujets": [
+        "Sujet 1",
+        "Pensez-vous que l’autorité soit essentielle dans l’éducation d’un enfant ? Pourquoi ?",
+        "Sujet 2",
+        "Quels sont, selon vous, les risques liés à l’utilisation quotidienne des appareils électroniques (ordinateurs, téléphones, tablettes, etc.) ?",
+        "Sujet 3",
+        "Pour des raisons d’égalité, certains gouvernements comptent 50% d’hommes et 50% de femmes. Qu’en pensez-vous ?",
+        "Sujet 4",
+        "Est-il indispensable de vivre dans un pays pour comprendre sa culture ? Justifiez votre réponse.",
+        "Sujet 5",
+        "Selon vous, est-il facile de travailler à l’étranger ? Pourquoi ?"
+      ]
+    },
+    {
+      "title": "Partie 1",
+      "sujets": [
+        "Sujet 1",
+        "Certaines personnes choisissent de voyager seules. Quel est votre avis sur ce mode de voyage ?",
+        "Sujet 2",
+        "Préférez-vous travailler sous la direction d’un homme ou d’une femme ? Justifiez votre choix.",
+        "Sujet 3",
+        "Pensez-vous que les jeux vidéo contribuent au développement des enfants ? Expliquez votre point de vue.",
+        "Sujet 4",
+        "Quels seraient, selon vous, les principaux avantages à développer le tourisme dans un pays ?",
+        "Sujet 5",
+        "Est-il réellement difficile de vivre dans un pays étranger ? Donnez votre opinion sur cette affirmation."
+      ]
+    }
+  ]
+}

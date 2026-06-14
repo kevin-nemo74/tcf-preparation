@@ -15,6 +15,7 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
   EOExamen? _examen;
   bool _loading = true;
   String? _error;
+  int _selectedTache = 2;
 
   @override
   void initState() {
@@ -23,8 +24,10 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
   }
 
   Future<void> _loadExam() async {
+    setState(() { _loading = true; _error = null; });
     try {
-      final examen = await EOExamen.loadFromAssets();
+      final examen =
+          await EOExamen.loadFromAssets(tache: _selectedTache);
       setState(() {
         _examen = examen;
         _loading = false;
@@ -35,6 +38,12 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
         _loading = false;
       });
     }
+  }
+
+  void _switchTache(int tache) {
+    if (tache == _selectedTache) return;
+    setState(() => _selectedTache = tache);
+    _loadExam();
   }
 
   void _openMonth(EOMonth month) {
@@ -50,6 +59,27 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
       appBar: AppBar(
         title: const Text('Expression Orale'),
         centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(40),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: SizedBox(
+              width: 200,
+              child: SegmentedButton<int>(
+                segments: const [
+                  ButtonSegment(value: 2, label: Text('Tâche 2')),
+                  ButtonSegment(value: 3, label: Text('Tâche 3')),
+                ],
+                selected: {_selectedTache},
+                onSelectionChanged: (v) => _switchTache(v.first),
+                style: ButtonStyle(
+                  visualDensity: VisualDensity.compact,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
@@ -87,7 +117,10 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _HeroCard(totalSujets: _examen!.totalSujets),
+          _HeroCard(
+            totalSujets: _examen!.totalSujets,
+            tache: _selectedTache,
+          ),
           const SizedBox(height: 24),
           Text(
             'Choisir par mois',
@@ -162,6 +195,21 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
                 ],
               ),
               const Spacer(),
+              SizedBox(
+                width: 200,
+                child: SegmentedButton<int>(
+                  segments: const [
+                    ButtonSegment(value: 2, label: Text('Tâche 2')),
+                    ButtonSegment(value: 3, label: Text('Tâche 3')),
+                  ],
+                  selected: {_selectedTache},
+                  onSelectionChanged: (v) => _switchTache(v.first),
+                  style: ButtonStyle(
+                    visualDensity: VisualDensity.compact,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -193,8 +241,9 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
 
 class _HeroCard extends StatelessWidget {
   final int totalSujets;
+  final int tache;
 
-  const _HeroCard({required this.totalSujets});
+  const _HeroCard({required this.totalSujets, required this.tache});
 
   @override
   Widget build(BuildContext context) {
@@ -238,7 +287,7 @@ class _HeroCard extends StatelessWidget {
             ),
           ),
           Text(
-            'Expression Orale — Tâche 2',
+            'Expression Orale — Tâche $tache',
             style: TextStyle(
               fontSize: 14,
               color: cs.onSurface.withValues(alpha: 0.7),

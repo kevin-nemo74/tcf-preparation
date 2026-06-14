@@ -1,0 +1,66 @@
+{
+  "id": "aout-2025",
+  "examTitle": "Août 2025",
+  "parties": [
+    {
+      "title": "partie 5",
+      "sujets": [
+        "Sujet 1",
+        "La gentillesse aide-t-elle toujours à se faire écouter et respecter ? Êtes-vous d’accord avec cette idée ?",
+        "Sujet 2",
+        "Pensez-vous qu’on puisse être heureux même en restant célibataire ? Quelle est votre opinion ?",
+        "Sujet 3",
+        "Selon vous, est-il important de dédier une journée aux droits des femmes ? Pourquoi  ?",
+        "Sujet 4",
+        "Regarder la télévision, est-ce un bon moyen pour apprendre de nouvelles choses ? Qu’en pensez-vous  ?",
+        "Sujet 5",
+        "À votre avis, est-ce indispensable d’aimer son travail pour réussir sa carrière professionnelle ? Pourquoi  ?"
+      ]
+    },
+    {
+      "title": "Partie 3",
+      "sujets": [
+        "Sujet 1",
+        "Quelles matières devraient être enseignées à l’école pour capter davantage l’intérêt des élèves ? Pourquoi ?",
+        "Sujet 2",
+        "Selon vous, est-il préférable d’avoir une grande famille ou des amis proches ? Qu’en pensez-vous ?",
+        "Sujet 3",
+        "Pensez-vous que les entreprises doivent accompagner les nouveaux employés pour faciliter leur intégration ? Êtes-vous d’accord ?",
+        "Sujet 4",
+        "Quel était votre cours favori à l’école ? Expliquez pourquoi vous l’aimiez.",
+        "Sujet 5",
+        "À votre avis, vivre à l’étranger garantit-il une réussite professionnelle ? Pourquoi ou pourquoi pas ?"
+      ]
+    },
+    {
+      "title": "partie 1",
+      "sujets": [
+        "Sujet 1",
+        "Comment les entreprises doivent-elles agir pour aider les nouveaux employés à trouver leur place ?",
+        "Sujet 2",
+        "D’après vous, une personne qui a vécu dans plusieurs pays a-t-elle un meilleur avenir professionnel ?",
+        "Sujet 3",
+        "Quel était votre cours préféré à l’école ? Pourquoi ?",
+        "Sujet 4",
+        "Quelles matières devraient davantage être enseignées à l’école ? Pourquoi ?",
+        "Sujet 5",
+        "À votre avis, qu’est-ce qui est préférable : avoir une grande famille ou avoir de bons amis ? Pourquoi ?"
+      ]
+    },
+    {
+      "title": "Partie 2",
+      "sujets": [
+        "Sujet 1",
+        "La réussite professionnelle dépend du niveau d’étude et du diplôme obtenu. Qu’en pensez-vous ?",
+        "Sujet 2",
+        "Le travail des personnes âgées est-il une bonne chose pour la société ?",
+        "Sujet 3",
+        "Pendant leur temps libre, certaines personnes s’engagent dans des associations pour aider les autres. Qu’en pensez-vous ?",
+        "Sujet 4",
+        "Préférez-vous regarder des pièces de théâtre ou des films ? Expliquez pourquoi.",
+        "Sujet 5",
+        "Selon vous, quel est l’âge idéal pour immigrer ? Pourquoi ?"
+      ]
+    }
+  ]
+}
