@@ -1,0 +1,81 @@
+{
+  "id": "mai-2025",
+  "examTitle": "Mai 2025",
+  "parties": [
+    {
+      "title": "Partie 5",
+      "sujets": [
+        "Sujet 1",
+        "Je suis agent d’accueil dans un bureau d’information sur les associations locales. Vous souhaitez devenir bénévole dans une association près de chez vous. Vous me posez des questions sur les types d’associations, les activités proposées, le public concerné et les horaires.",
+        "Sujet 2",
+        "Je suis professeur de français. Vous venez d’arriver au Canada et vous aimeriez suivre des cours particuliers. Vous me posez des questions sur mon parcours, ma manière d’enseigner et mes tarifs.",
+        "Sujet 3",
+        "Je suis votre ami(e) canadien(ne). Je reviens de vacances à la montagne et vous avez envie de faire un séjour similaire. Vous me posez des questions sur le lieu, les activités possibles et l’hébergement.",
+        "Sujet 4",
+        "Je suis votre ami(e) et je participe chaque semaine à des cours de théâtre. Vous souhaitez vous inscrire vous aussi, et vous me posez des questions pour en savoir plus sur ces cours (organisation, prix, horaires, etc.).",
+        "Sujet 5",
+        "Vous venez de vous installer au Québec. Je suis votre voisin(e) et je vous ai invité(e) à un apéritif de bienvenue. Pendant la discussion, vous me posez des questions sur le quartier (voisinage, services disponibles, loisirs, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 4",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre collègue et j’ai récemment voyagé au Canada. Vous êtes intéressé(e) par mon expérience et vous me posez des questions sur ce séjour (activités, moyens de transport, loisirs, etc.).",
+        "Sujet 2",
+        "Je suis votre voisin(e) et je propose une maison à louer en bord de mer. Vous êtes intéressé(e) et vous me posez des questions sur cette location.",
+        "Sujet 3",
+        "Je suis votre ami(e). Je pars bientôt en vacances et je souhaite que vous surveilliez mon appartement pendant mon absence. Vous me posez des questions (dates, choses à faire, consignes, etc.).",
+        "Sujet 4",
+        "Nous venons de faire connaissance dans une gare. Vous engagez la conversation avec moi pour en savoir plus sur ma passion pour la montagne, et vous me posez des questions à ce sujet.",
+        "Sujet 5",
+        "Je travaille pour une entreprise de livraison. Vous voulez commander un meuble et vous me posez des questions pour connaître les détails (prix, délai de livraison, conditions, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 3",
+      "sujets": [
+        "Sujet 1",
+        "Je suis un(e) de vos collègues. Vous êtes arrivé(e) récemment dans l’entreprise et vous souhaitez en savoir plus. Vous me posez des questions sur le fonctionnement de l’entreprise (organisation, ambiance, cantine, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e) et je vous invite à une fête. Vous venez de vous installer au Québec et c’est votre première fête ici. Vous me posez des questions sur cet événement (heure, cadeau à apporter, tenue, etc.).",
+        "Sujet 3",
+        "Je travaille à l’accueil du club de sport de votre quartier. Vous voulez commencer une activité sportive mais vous hésitez. Vous me posez des questions sur les sports proposés (horaires, prix, matériel, etc.).",
+        "Sujet 4",
+        "Je travaille à l’accueil d’un musée. Vous souhaitez visiter ce musée avec des amis. Vous me posez des questions pour organiser votre visite (heures d’ouverture, prix, visites guidées, etc.).",
+        "Sujet 5",
+        "Nous sommes collègues. Vous souhaitez partir en week-end et je vous conseille de visiter une ville que je connais bien. Vous me posez des questions sur cette ville (hébergements, restaurants, lieux à visiter, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 2",
+      "sujets": [
+        "Sujet 1",
+        "Je travaille dans une agence immobilière. Vous êtes à la recherche d’un logement et vous souhaitez en savoir plus sur les offres disponibles. Vous me posez des questions sur les types de biens, les tarifs et les quartiers proposés.",
+        "Sujet 2",
+        "Je suis votre voisin(e). Je vais bientôt participer à une course à pied à Vancouver. Vous êtes intéressé(e) par cet événement et vous me posez des questions sur l’inscription, l’entraînement et l’organisation de la course.",
+        "Sujet 3",
+        "Je suis votre collègue. Vous prévoyez de partir en vacances dans une région que je connais bien. Vous me posez des questions pour obtenir des informations sur les activités, les lieux à visiter et le climat de cette région.",
+        "Sujet 4",
+        "Je suis votre ami(e). J’organise une fête pour mon anniversaire. Vous souhaitez m’aider à la préparer et vous me posez des questions sur l’organisation : le repas, la décoration, les invités, etc.",
+        "Sujet 5",
+        "Je suis votre ami(e). J’ai récemment mangé dans un nouveau restaurant à Ottawa. Vous aimeriez y aller et vous me posez des questions sur la carte, les prix et mon avis sur ce restaurant."
+      ]
+    },
+    {
+      "title": "Partie 1",
+      "sujets": [
+        "Sujet 1",
+        "Je travaille dans une agence immobilière. Vous souhaitez acheter un appartement et vous avez vu une offre qui vous intéresse. Vous me posez des questions sur ce logement (taille, coût, quartier, etc.).",
+        "Sujet 2",
+        "Je suis parent d’élève. Vous voulez inscrire vos enfants à une activité extrascolaire. Vous me demandez des renseignements et des conseils sur les activités proposées près de chez vous (type, horaires, prix, animateurs, etc.).",
+        "Sujet 3",
+        "Je suis votre ami(e). Je fais du bénévolat dans une association qui aide les sans-abris. Vous souhaitez vous engager aussi et vous me posez des questions sur le fonctionnement de l’association (organisation, conditions, planning, etc.).",
+        "Sujet 4",
+        "Je suis votre ancien(ne) collègue. Je viens de commencer un nouveau poste. Vous cherchez à changer de travail et vous me posez des questions sur mon métier et mon entreprise (tâches, salaire, collègues, environnement de travail, etc.).",
+        "Sujet 5",
+        "Nous sommes voisin(e)s. Je vous demande de garder mon enfant le week-end prochain. Vous acceptez et vous me posez des questions pour savoir ce que vous devrez faire (heures, repas, activités, etc.)."
+      ]
+    }
+  ]
+}

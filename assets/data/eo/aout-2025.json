@@ -1,0 +1,65 @@
+{
+  "id": "aout-2025",
+  "examTitle": "Août 2025",
+  "parties": [
+    {
+      "title": "partie 04",
+      "sujets": [
+        "Sujet 1",
+        "Je suis un(e) de vos collègues. Vous êtes arrivé(e) récemment dans l’entreprise et vous souhaitez en savoir plus. Vous me posez des questions sur le fonctionnement de l’entreprise (organisation, ambiance, cantine, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e) et je vous invite à une fête. Vous venez de vous installer au Québec et c’est votre première fête ici. Vous me posez des questions sur cet événement (heure, cadeau à apporter, tenue, etc.).",
+        "Sujet 3",
+        "Je travaille à l’accueil du club de sport de votre quartier. Vous voulez commencer une activité sportive mais vous hésitez. Vous me posez des questions sur les sports proposés (horaires, prix, matériel, etc.).",
+        "Sujet 4",
+        "Je travaille à l’accueil d’un musée. Vous souhaitez visiter ce musée avec des amis. Vous me posez des questions pour organiser votre visite (heures d’ouverture, prix, visites guidées, etc.).",
+        "Sujet 5",
+        "Nous sommes collègues. Vous souhaitez partir en week-end et je vous conseille de visiter une ville que je connais bien. Vous me posez des questions sur cette ville (hébergements, restaurants, lieux à visiter, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 3",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre collègue et j’ai récemment voyagé au Canada. Vous êtes intéressé(e) par mon expérience et vous me posez des questions sur ce séjour (activités, moyens de transport, loisirs, etc.).",
+        "Sujet 2",
+        "Je suis votre voisin(e) et je propose une maison à louer en bord de mer. Vous êtes intéressé(e) et vous me posez des questions sur cette location.",
+        "Sujet 3",
+        "Je suis votre ami(e). Je pars bientôt en vacances et je souhaite que vous surveilliez mon appartement pendant mon absence. Vous me posez des questions (dates, choses à faire, consignes, etc.).",
+        "Sujet 4",
+        "Nous venons de faire connaissance dans une gare. Vous engagez la conversation avec moi pour en savoir plus sur ma passion pour la montagne, et vous me posez des questions à ce sujet.",
+        "Sujet 5",
+        "Je travaille pour une entreprise de livraison. Vous voulez commander un meuble et vous me posez des questions pour connaître les détails (prix, délai de livraison, conditions, etc.)."
+      ]
+    },
+    {
+      "title": "partie 1",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). Vous venez d’arriver dans ma ville. Demandez-moi des conseils pour faire une sortie bon marché (lieux, activités, transports, etc.).",
+        "Sujet 2",
+        "Je suis votre voisin(e). J’ai une petite maison au bord de la mer, je la loue pendant les vacances. Vous êtes intéressé(e). Vous me posez des questions pour décider si vous allez la louer (aménagement, environnement, tarifs, etc.).",
+        "Sujet 3",
+        "Je travaille dans un magasin de meubles. Vous souhaitez faire livrer votre meuble. Vous m’interrogez sur les conditions proposées par notre magasin (tarifs, délais, mode de transport, etc.).",
+        "Sujet 4",
+        "Nous sommes dans une salle d’attente. Nous ne nous connaissons pas. Notre train a du retard. Nous commençons à discuter. Je viens de vous dire que je suis passionné(e) de montagne. Vous me posez des questions sur ma passion (lieux, activités, équipement, etc.).",
+        "Sujet 5",
+        "Nous sommes dans une soirée, nous nous rencontrons pour la première fois. Je rentre d’un voyage. Vous me posez des questions sur le voyage que j’ai fait (durée, lieux, impressions, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 2",
+      "sujets": [
+        "Sujet 1",
+        "Je fais partie d’une association de défense des animaux. Je vous propose d’en faire partie. Vous me posez des questions pour connaitre mon association (actions, services, public, etc.)",
+        "Sujet 2",
+        "Je suis un(e) collègue de travail. Je viens de voir un film au cinéma. Vous me posez des questions sur ce film pour décider si vous irez le voir (thème, acteurs principaux, horaires des séances, etc.)",
+        "Sujet 3",
+        "Je suis votre nouveau/nouvelle collègue. J’ai vécu au Québec, je vis et travaille actuellement dans votre pays. Posez-moi des questions sur mon parcours professionnel (études, premier emploi, expérience suivantes, expérience de l’expatriation, intérêt, difficultés, etc.)",
+        "Sujet 4",
+        "Je travaille dans une agence de location. Vous venez d’arriver au Québec et vous cherchez un logement. Vous me posez des questions pour trouver un appartement (démarches, quartier, type de logement, etc.)",
+        "Je travaille dans une bibliothèque. Vous aimeriez vous inscrire. Vous m’interrogez sur le fonctionnement de la bibliothèque (conditions d’inscription, programmation culturelle, horaires, etc.)"
+      ]
+    }
+  ]
+}

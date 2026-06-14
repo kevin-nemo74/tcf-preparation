@@ -83,6 +83,7 @@ flutter:
   assets:
     - assets/data/
     - assets/data/ee/
+    - assets/data/eo/
     - assets/pdfs/
 
   # An image asset can refer to one or more resolution-specific "variants", see

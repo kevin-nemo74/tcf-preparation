@@ -9,6 +9,7 @@ import '../features/admin/user_status_service.dart';
 import '../features/comprehension/screens/test_list_screen.dart';
 import '../features/dashboard/exam_portal_screen.dart';
 import '../features/expression_ecrite/screens/ee_home_screen.dart';
+import '../features/expression_orale/screens/eo_home_screen.dart';
 import '../features/oral/screens/oral_test_list_screen.dart';
 import '../features/resources/pdf_library_screen.dart';
 import '../features/settings/settings_screen.dart';
@@ -31,6 +32,7 @@ class _HomeShellState extends State<HomeShell> {
     TestListScreen(),
     OralTestListScreen(),
     EEHomeScreen(),
+    EOHomeScreen(),
     PdfLibraryScreen(),
     ExamPortalScreen(),
   ];
@@ -78,7 +80,7 @@ class _HomeShellState extends State<HomeShell> {
   }
 
   void _onTabSelected(int index) {
-    if (index < 5) {
+    if (index < 6) {
       _checkUserStatusAndNavigate(index);
     } else {
       setState(() => _index = index);
@@ -162,14 +164,18 @@ class _HomeShellState extends State<HomeShell> {
                   icon: Icon(Icons.headphones_outlined, color: cs.outline),
                   label: Text('CO', style: TextStyle(color: cs.outline)),
                 ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.edit_note_outlined, color: cs.outline),
-                  label: Text('EE', style: TextStyle(color: cs.outline)),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.picture_as_pdf_outlined, color: cs.outline),
-                  label: Text('PDF', style: TextStyle(color: cs.outline)),
-                ),
+          NavigationRailDestination(
+            icon: Icon(Icons.edit_note_outlined, color: cs.outline),
+            label: Text('EE', style: TextStyle(color: cs.outline)),
+          ),
+          NavigationRailDestination(
+            icon: Icon(Icons.record_voice_over_outlined, color: cs.outline),
+            label: Text('EO', style: TextStyle(color: cs.outline)),
+          ),
+          NavigationRailDestination(
+            icon: Icon(Icons.picture_as_pdf_outlined, color: cs.outline),
+            label: Text('PDF', style: TextStyle(color: cs.outline)),
+          ),
                 NavigationRailDestination(
                   icon: Icon(
                     Icons.dashboard_customize_outlined,
@@ -227,12 +233,20 @@ class _HomeShellState extends State<HomeShell> {
             label: "EE",
           ),
           NavigationDestination(
-            icon: Icon(Icons.picture_as_pdf_outlined, color: cs.outline),
-            label: "PDF",
+            icon: Icon(Icons.record_voice_over_outlined, color: cs.outline),
+            label: "EO",
           ),
           NavigationDestination(
-            icon: Icon(Icons.dashboard_customize_outlined, color: cs.outline),
-            label: "Tableau",
+            icon: Icon(Icons.edit_note_outlined, color: cs.outline),
+            label: "EE",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.record_voice_over_outlined, color: cs.outline),
+            label: "EO",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.picture_as_pdf_outlined, color: cs.outline),
+            label: "PDF",
           ),
         ],
       ),
@@ -265,6 +279,11 @@ class _HomeShellState extends State<HomeShell> {
                 icon: Icon(Icons.edit_note_outlined),
                 selectedIcon: Icon(Icons.edit_note_rounded),
                 label: Text('EE'),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.record_voice_over_outlined),
+                selectedIcon: Icon(Icons.record_voice_over_rounded),
+                label: Text('EO'),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.picture_as_pdf_outlined),
@@ -337,6 +356,11 @@ class _HomeShellState extends State<HomeShell> {
             icon: Icon(Icons.edit_note_outlined),
             selectedIcon: Icon(Icons.edit_note_rounded),
             label: "EE",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.record_voice_over_outlined),
+            selectedIcon: Icon(Icons.record_voice_over_rounded),
+            label: "EO",
           ),
           NavigationDestination(
             icon: Icon(Icons.picture_as_pdf_outlined),

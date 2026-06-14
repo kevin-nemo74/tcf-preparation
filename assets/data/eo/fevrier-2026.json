@@ -1,0 +1,312 @@
+{
+  "id": "fevrier-2026",
+  "examTitle": "Février 2026",
+  "parties": [
+    {
+      "title": "partie 1 act ***",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). Je dois m’absenter un week-end et je vous demande de garder ma fille de 3 ans. Vous la connaissez bien mais c’est la première fois que vous vous en occuperez deux jours. Vous me posez des questions sur ses habitudes (sommeil, repas, loisirs, etc.).",
+        "Sujet 2",
+        "Je suis votre collègue et je vous propose d’aller voir un spectacle avec moi. Vous me posez des questions sur ce spectacle (lieu, horaire, genre, etc.) ainsi que sur la sortie (participants, transports, etc.).",
+        "Sujet 3",
+        "Je travaille au service culturel de la mairie. Vous souhaitez avoir des renseignements sur les activités proposées dans la ville (sports, musées, ateliers, spectacles, etc.). Vous me posez des questions sur la fréquence, les prix, la durée, etc.",
+        "Sujet 4",
+        "Je travaille dans une agence de voyages. Vous êtes client(e) et vous cherchez des idées pour un séjour au Canada. Vous me demandez des précisions sur les destinations, les logements, les tarifs et les activités.",
+        "Sujet 5",
+        "Vous conduisez au Canada et votre voiture tombe en panne. Vous appelez votre assurance pour savoir quelles solutions existent (dépannage, réparation, retour, etc.). Je suis l’agent de la compagnie qui vous répond."
+      ]
+    },
+    {
+      "title": "partie 2 act ****",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). J’ai commencé un nouvel emploi et vous voulez savoir comment s’est déroulée ma première journée : l’ambiance, les collègues, les tâches, etc.",
+        "Sujet 2",
+        "Je suis votre voisin(e). Je connais quelqu’un qui propose des cours de musique à domicile. Vous êtes intéressé(e) et vous me posez des questions sur cette personne : ses tarifs, sa disponibilité, son expérience, etc.",
+        "Sujet 3",
+        "Je suis votre voisin(e). Vous souhaitez organiser une sortie à la campagne avec vos amis. Vous me demandez des conseils pour l’organisation : les activités, le transport, le lieu, etc.",
+        "Sujet 4",
+        "Je travaille dans un magasin d’alimentation. Vous êtes client(e) et vous voulez faire livrer vos courses chez vous. Vous me posez des questions sur les conditions offertes : délais, tarifs, mode de livraison, etc.",
+        "Sujet 5",
+        "Je travaille dans une agence immobilière. Vous voulez louer votre appartement pour les vacances afin de gagner plus d’argent. Vous me demandez des conseils sur les prix, la durée de location, le type de locataires, etc."
+      ]
+    },
+    {
+      "title": "partie 3",
+      "sujets": [
+        "Je suis un(e) employé(e) de la mairie de votre ville.",
+        "Vous souhaitez organiser votre anniversaire et vous voulez louer la salle des fêtes de la mairie.",
+        "→ Vous me posez des questions sur la salle (réservation, tarifs, matériel, etc.).",
+        "Je suis votre ami(e).",
+        "Je suis membre d’une association canadienne qui aide les personnes âgées vivant seules.",
+        "Cette association vous intéresse.",
+        "→ Vous me posez des questions pour vous informer (les membres, les actions, le public cible, le financement, etc.).",
+        "Je suis votre voisin(e).",
+        "Je veux vous inviter à une fête organisée pour les habitants de l’immeuble.",
+        "Vous venez d’emménager dans l’immeuble.",
+        "→ Vous me posez des questions pour mieux connaître l’événement (horaires, préparation, lieu, etc.).",
+        "Nous sommes ami(e)s.",
+        "Je vous prête mon logement pour les vacances.",
+        "→ Vous me posez des questions concernant votre séjour (équipement, activités à proximité, tâches à effectuer, etc.).",
+        "Vous venez d’arriver au Canada.",
+        "Vous cherchez un logement. Je cherche un colocataire.",
+        "Vous êtes intéressé(e) par l’appartement.",
+        "→ Vous me posez des questions sur l’appartement (superficie, quartier, loyer, etc.) et sur les règles à respecter."
+      ]
+    },
+    {
+      "title": "partie 4",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). Je veux organiser une sortie en famille dimanche prochain et vous me posez des questions (lieu, activités, budget, transports, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e). Je vis au Canada. Vous allez bientôt vous installer ici. Vous voulez des renseignements sur l’organisation des transports (modes/moyens, prix, fréquence, rapidité, etc.).",
+        "Sujet 3",
+        "Je suis votre voisin(e). J’ai mis en vente un meuble dans le hall de l’immeuble (table, canapé, etc.). Vous êtes intéressé(e) et vous venez me poser des questions pour vous renseigner (état du meuble, prix, livraison possible, date, etc.).",
+        "Sujet 4",
+        "Vous venez d’arriver au Canada et vous m’hébergez pendant quelques jours. Nous sommes des ami(e)s. Vous me demandez des conseils pour trouver et louer un appartement (loyer, quartiers, modalités, etc.).",
+        "Sujet 5",
+        "Vous êtes à l’hôtel pour quelques jours. Je suis responsable de l’accueil. Vous me posez des questions pour organiser votre séjour (petit-déjeuner, accès Internet, renseignements publics, transports, activités, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 5 *** act",
+      "sujets": [
+        "Sujet 1",
+        "Je suis le/la secrétaire de votre médecin. Celui-ci est en congé. Vous me questionnez sur son remplacement (médecin, horaires, durée, etc.).",
+        "Sujet 2",
+        "Je suis un(e) ami(e). Je viens d’être recruté(e) par une entreprise de la région de Toronto. Vous me posez des questions sur mon nouveau travail (activités, collègues, locaux, avantages, etc.).",
+        "Sujet 3",
+        "Je suis un(e) ami(e). J’ai un blog depuis longtemps. Vous voulez écrire un blog lors de votre prochain voyage au Canada. Vous me demandez des conseils (types de contenus, rythme de publication, rubriques, etc.).",
+        "Sujet 4",
+        "Je suis votre ami(e). Vous souhaitez organiser un voyage au Canada pour l’anniversaire de votre conjoint(e). Vous me demandez des conseils (destination, prix, idées, etc.).",
+        "Sujet 5",
+        "Vous déménagez au Canada. Vous voulez louer un appartement en colocation. Je vous propose le mien. Posez-moi des questions pour savoir comment se passera cette colocation (prix, espaces, colocataires, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 6",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). Je déménage dans un nouveau logement. Vous voulez m'aider. Vous",
+        "me posez des questions pour obtenir des informations sur le déménagement (horaires,",
+        "👉🏻 Sujet 2",
+        "Je suis votre ami(e). Je pratique un sport depuis longtemps. Vous voulez pratiquer ce sport",
+        "avec moi. Vous me posez des questions pour obtenir des renseignements sur cette activité",
+        "(type de sport, lieu, équipement, etc.).",
+        "👉🏻 Sujet 3",
+        "Je suis votre ami(e). Je vends mon vélo. Vous êtes intéressé(e). Vous me posez des",
+        "questions pour obtenir des renseignements sur mon vélo (prix, couleur, modèle, etc.).",
+        "👉🏻 Sujet 4",
+        "Je suis votre ami(e). Je vis en colocation. Une chambre est disponible dans le logement.",
+        "Cela vous intéresse. Vous me posez des questions sur la colocation (loyer, pièces, autres",
+        "habitants, etc.).",
+        "👉🏻 Sujet 5",
+        "Je suis votre voisin(e). Vous venez de vous installer à Vancouver. Vous cherchez où faire",
+        "vos courses. Vous me posez des questions sur les magasins du quartier (types de",
+        "commerces, lieux, services, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 7 act****",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). J’ai participé à un jeu télévisé récemment. Vous voulez en savoir plus. Vous me posez des questions sur cette expérience (inscription, déroulement, intérêt, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e). Vous envisagez de venir vivre dans ma ville. Vous me posez des questions pour trouver un quartier qui vous conviendrait (ambiance, loyers, services, etc.).",
+        "Sujet 3",
+        "Je suis votre voisin(e). Je donne des cours de sport dans un centre social. Cette activité vous attire. Vous me posez des questions pour mieux comprendre (types de cours, horaires, participants, etc.).",
+        "Sujet 4",
+        "Je travaille dans un service de location de vélos au Canada. Vous êtes en vacances et vous voulez visiter la ville à vélo. Vous me posez des questions (modèles disponibles, conditions, prix, etc.).",
+        "Sujet 5",
+        "Je travaille dans une agence de voyage. Vous aimeriez faire une croisière au Canada. Vous me posez des questions sur les offres proposées (durée, coût, activités à bord, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 8 act****",
+      "sujets": [
+        "Sujet 1",
+        "Je suis producteur de fruits et légumes bio. Je propose mes produits directement aux particuliers. Vous êtes intéressé(e). Vous me posez des questions pour avoir des informations (prix, produits, livraison, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e). Je fais du bénévolat dans une association qui soutient les personnes âgées. Vous êtes intéressé(e). Vous me posez des questions (activités, public, inscription, etc.).",
+        "Sujet 3",
+        "Je suis votre collègue. J’ai vécu dix ans au Canada. Vous envisagez d’immigrer à Ottawa. Vous me posez des questions sur mon intégration (logement, emploi, culture, etc.).",
+        "Sujet 4",
+        "Je suis votre voisin(e). Je suis allé(e) au zoo le week-end dernier. Vous voulez y emmener votre famille. Vous me posez des questions pour organiser la visite (date, animaux, tarifs, etc.).",
+        "Sujet 5",
+        "Je travaille dans une agence de voyages. Vous souhaitez partir aux sports d’hiver au Canada. Vous me posez des questions pour avoir des informations (activités, logements, prix, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 9",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). Je pars souvent en vacances dans une station de sports d’hiver au Canada. Vous ne connaissez pas ce type de vacances et vous êtes intéressé(e). Vous me posez des questions pour décider si vous aimeriez faire la même chose (lieux, hébergements, activités, etc.).",
+        "Sujet 2",
+        "Je suis votre collègue. Je travaille à distance, chez moi, plusieurs jours par semaine. Vous êtes intéressé(e). Vous me posez des questions sur mes conditions de travail (horaires, équipement, organisation du travail, etc.).",
+        "Sujet 3",
+        "Je suis votre voisin(e). Je prends mon vélo tous les jours pour aller au travail. Vous pensez à utiliser un vélo pour vos déplacements en ville. Vous me posez des questions pour décider si ce moyen de transport vous convient (avantages, coût, sécurité, etc.).",
+        "Sujet 4",
+        "Je suis votre voisin(e). J’organise la fête des voisins le week-end prochain. Vous voulez participer. Vous me posez des questions sur l’organisation (lieu, horaires, plats à apporter, etc.).",
+        "Sujet 5",
+        "Je travaille à l’office de tourisme de Vancouver. Vous voulez visiter un musée. Vous posez des questions sur les différents musées de la ville (types de musées, tarifs, horaires, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 10 **** act",
+      "sujets": [
+        "Je travaille dans un restaurant.Vous souhaitez organiser un dîner de fête pour célébrer (•••••••) d'un membre de votre famille. Vous me posez des questions sur les prestations du restaurant (menus, tarifs, disponibilités, etc.).",
+        "- Sujet 2:",
+        "Nous sommes collègues.Je vends un lot de vêtements d’occasion pour enfants. Vous êtes intéressé(e) et vous me posez des questions à leur sujet (tailles, prix, quantité, etc.).",
+        "- Sujet 3:",
+        "Je suis votre voisin(e).Je propose des cours de cuisine. Vous êtes intéressé(e) et vous me posez des questions pour connaître le fonctionnement (plats préparés, tarifs, nombre de participants, etc.).",
+        "- Sujet 4:",
+        "Je suis votre ami(e).J’ai récemment fait une croisière. Vous aimeriez vivre la même expérience. Vous me posez des questions pour obtenir des informations (activités, services, prix, etc.).",
+        "- Sujet 5:",
+        "Je suis votre ami(e).Je souhaite vendre ma maison. Vous êtes intéressé(e) et vous me posez des questions pour en savoir plus (nombre de pièces, équipements, prix, etc.)."
+      ]
+    },
+    {
+      "title": "partie 11 act ***",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e) canadien(ne) et je travaille dans un cinéma. Vous êtes en vacances au Canada et souhaitez aller voir un film. Vous me demandez des conseils pour faire votre choix (types de films, horaires, tarifs, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e) canadien(ne) et je viens de passer des vacances exceptionnelles au bord de la mer. Curieux(se) de vivre une expérience similaire, vous me posez des questions sur ce séjour (lieu, activités, tarifs, etc.).",
+        "Sujet 3",
+        "Je suis votre ami(e) francophone. Vous devez rédiger un article pour présenter un livre dans la revue de votre association littéraire. Vous cherchez de l’inspiration et me demandez des suggestions basées sur mes lectures récentes.",
+        "Sujet 4",
+        "Je suis votre ami(e) et j’ai participé à un jeu télévisé. Vous m’interrogez sur mon expérience (conditions d’inscription, déroulement, intérêt, etc.) pour décider si vous souhaitez y participer.",
+        "Sujet 5",
+        "Je suis votre employé(e) de l’agence de transports en commun de la ville. C’est votre première visite et vous cherchez à comprendre le fonctionnement des transports en commun (types de transports, tarifs, horaires, etc.)."
+      ]
+    },
+    {
+      "title": "partie 12  act ****",
+      "sujets": [
+        "Sujet 1",
+        "Je travaille à l'accueil d'un club de sport. Vous êtes intéressé(e) et vous me posez des questions pour obtenir des informations (types de sports, horaires, tarifs, etc.).",
+        "Sujet 2",
+        "Je suis votre voisin(e). Je suis conducteur/conductrice et je propose de partager des allers-retours avec ma voiture. Vous êtes intéressé(e) et vous me posez des questions sur ce type de service (prix, horaires, organisation, etc.).",
+        "Sujet 3",
+        "Je travaille à l’accueil d’un hôtel. Vous souhaitez réserver une chambre. Vous me posez des questions, et je vous donne des informations (prix, type de chambre, petit-déjeuner, etc.).",
+        "Sujet 4",
+        "Je suis chef cuisinier/cheffe cuisinière à domicile. Vous souhaitez organiser un repas de famille. Vous me posez des questions sur ce que je peux vous proposer (plats, matériel, prix, etc.).",
+        "Sujet 5",
+        "Je travaille à l'accueil d'une école de (langues,....). Vous voulez vous inscrire à un cours. Vous me posez des questions (types de cours, horaires, tarifs, etc.), et je vous donne des informations."
+      ]
+    },
+    {
+      "title": "partie 13",
+      "sujets": [
+        "Sujet 1",
+        "Je suis parent d’élève. Nos enfants fréquentent la même école. Vous allez participer pour la première fois à la fête de l’école. Vous me posez des questions sur son déroulement (programme, horaires, animations, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e). J’habite dans une grande ville. Vous cherchez à louer un logement ici et vous me posez des questions (quartier, prix, offres disponibles, etc.).",
+        "Sujet 3",
+        "Je travaille dans un club de sport. Vous souhaitez vous inscrire à un cours et vous me posez des questions pour vous renseigner (types de sports, tarifs, horaires, etc.).",
+        "Sujet 4",
+        "Je travaille dans une agence de voyages. Vous recherchez une idée de vacances. Vous me posez des questions pour choisir votre destination (activités, lieu, prix, etc.)."
+      ]
+    },
+    {
+      "title": "partie 14",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). Vous venez de vous installer au Canada et vous cherchez un logement. Je vous propose une chambre en colocation dans mon appartement. Posez-moi des questions.",
+        "Sujet 2",
+        "Je suis votre ami(e) et j’ai commencé un nouveau travail. Posez-moi des questions sur cette expérience.",
+        "Sujet 3",
+        "Je suis l’assistante de votre médecin de famille, actuellement il est en vacances et remplacé par un autre médecin. Vous m’appelez pour obtenir des informations à son sujet. Posez-moi des questions.",
+        "Sujet 4",
+        "Je suis votre ami(e) et je tiens un blog. Vous souhaitez voyager et me demandez des conseils sur la création d’un blog. Posez-moi des questions.",
+        "Sujet 5",
+        "⁠Je suis votre voisin(e). Vous venez de vous installer au Canada et vous souhaitez organiser l’anniversaire de votre conjoint(e). Posez-moi des questions"
+      ]
+    },
+    {
+      "title": "Partie15 act ***",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre voisin(e), vous venez de vous installer au Canada. Vous me posez des questions sur les transports en commun (abonnement, fonctionnement, types de transport, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e). Je vends mon vélo électrique. Vous êtes intéressé(e). Vous me posez des questions pour avoir des informations (prix, couleur, modèle, état, etc.).",
+        "Sujet 3",
+        "Je suis votre ami(e) au Canada. Je pratique le ski de fond. Vous êtes intéressé(e). Vous me posez des questions sur ce sport (prix, équipements, vêtements, formation, etc.).",
+        "Sujet 4",
+        "Je suis votre ami(e). Vous allez recevoir vos neveux chez vous. Vous me posez des questions pour avoir des conseils (activités, sorties, jeux, etc.).",
+        "Sujet 5",
+        "Je suis chargé(e) d’accueil à la mairie. Vous venez d’arriver au Canada. Vous me posez des questions pour vous informer (logement, démarches, services municipaux, etc.)"
+      ]
+    },
+    {
+      "title": "Partie 16 act ***",
+      "sujets": [
+        "Sujet 1",
+        "Je suis agent d’accueil dans un bureau d’information sur les associations. Vous voulez faire du bénévolat dans votre quartier. Vous me posez des questions (types, activités, public, horaires, etc.).",
+        "Sujet 2",
+        "Je suis professeur de français. Vous venez d’arriver au Canada et vous cherchez des cours particuliers. Vous me posez des questions sur mon parcours (expérience, méthode, prix, etc.).",
+        "Sujet 3",
+        "Je suis un(e) ami(e) canadien(ne). Je reviens de vacances à la montagne. Vous êtes intéressé(e) et vous me posez des questions (lieu, activités, hébergement, etc.).",
+        "Sujet 4",
+        "Je suis votre ami(e). Je fais du théâtre chaque semaine. Vous voulez vous inscrire. Vous me posez des questions (tarifs, horaires, organisation, etc.).",
+        "Sujet 5",
+        "Vous arrivez au Québec. Je suis votre voisin(e). Je vous invite à un apéritif. Vous me posez des questions sur la vie du quartier (voisins, services, activités, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 17 act ****",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre voisin(e). Vous êtes nouveau dans l’immeuble et nous nous sommes rencontré dans l’ascenseur. Posez-moi des questions (voisinage, commerces, activités…).",
+        "Sujet 2",
+        "Je suis agent immobilier. Vous voulez réserver un chalet au bord de la mer pour les vacances. Posez-moi des questions.",
+        "Sujet 3",
+        "Je suis votre voisin(e). Vous venez d’arriver au Canada et vous cherchez une école pour vos enfants. Posez-moi des questions.",
+        "Sujet 4",
+        "Je suis votre collège. Je vous propose une chambre en collocation et vous êtes intéressé. Posez-moi des questions.",
+        "Sujet 5",
+        "Je travaille à l’accueil d’une école de danse. Vous êtes intéressé par des cours de danse. Posez-moi des questions."
+      ]
+    },
+    {
+      "title": "Partie 18 act ****",
+      "sujets": [
+        "Fox tcf 🦊🦊🦊",
+        "source pack imad 🦅🦅",
+        "16-02-2026",
+        "1-🦊e suis votre ami(e), je suis parti(e) en vacances à la mer l’année dernière. Vous",
+        "êtes intéressé(e). Vous me demandez des conseils (activités, prix, hébergement,",
+        "etc.) pour organiser votre voyage.",
+        "2-🦊2. Je suis votre collègue. Je prends des cours de danse dans une association. Vous",
+        "êtes intéressé(e). Vous me posez des questions sur ces cours (type de danse, lieu,",
+        "horaires, etc.).",
+        "3-🦊3. Je suis votre collègue. J’organise une fête pour ma nomination à un poste de",
+        "responsable. Vous me posez des questions pour obtenir des informations (horaires,",
+        "lieu, invités, etc.).",
+        "4-🦊4. Je suis votre voisin(e). Vous avez accepté de garder mon enfant une journée pour",
+        "me rendre service. Vous me demandez des informations sur mon enfant (activités",
+        "préférées, habitudes, repas, etc.).",
+        "5-🦊5. Je travaille à l’accueil de l’office de tourisme. Vous souhaitez visiter la ville avec",
+        "des amis. Vous me posez des questions sur les choix possibles (type d’activités,",
+        "tarifs, horaires, etc.)."
+      ]
+    },
+    {
+      "title": "partie 19 act ***",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). Je déménage à l’étranger. Je ne peux pas emporter toutes mes affaires. Je décide d’en vendre une partie. Vous êtes intéressé(e) et vous me posez des questions sur ce que je vends (objets, meubles, prix, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e). Vous allez recevoir des amis étrangers qui ne connaissent pas votre ville. Vous me demandez des conseils pour organiser leur séjour (visites, activités, restaurant, etc.).",
+        "Sujet 3",
+        "Je suis votre collègue. Je suis allé(e) à un mariage le week-end dernier. Vous me posez des questions pour savoir comment la fête s’est passée (lieu, menu, activités, etc.).",
+        "Sujet 4",
+        "Je suis votre collègue. J’ai participé à un circuit touristique pour découvrir le Canada. Vous voulez faire la même chose l’été prochain. Vous me posez des questions sur le circuit (étapes, durée, prix, etc.).",
+        "Sujet 5",
+        "Je vis dans votre quartier. Je vais partir une semaine en vacances, je cherche quelqu’un pour garder mon chien pendant mon absence. Vous êtes intéressé(e). Vous me demandez des précisions (dates, salaire, activités, etc.)."
+      ]
+    }
+  ]
+}

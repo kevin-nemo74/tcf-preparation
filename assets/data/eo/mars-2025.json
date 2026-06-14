@@ -1,0 +1,66 @@
+{
+  "id": "mars-2025",
+  "examTitle": "Mars 2025",
+  "parties": [
+    {
+      "title": "Partie 4",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e). J’aime beaucoup le Canada. Nous en parlons ensemble et vous me posez des questions pour savoir pourquoi j’aime ce pays (cuisine, habitants, paysages, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e). Vous envisagez de partir en vacances au Canada. Vous me demandez des conseils pour bien organiser votre séjour (transports, hébergement, coûts, etc.).",
+        "Sujet 3",
+        "Je suis votre colocataire. J’aimerais adopter un animal de compagnie. Vous me posez des questions pour mieux comprendre cette décision (type d’animal, frais, soins, gestion pendant les vacances, etc.).",
+        "Sujet 4",
+        "Je suis votre voisin(e). Je pars au Canada la semaine prochaine pour un voyage. Vous me posez des questions pour connaître les détails de ce projet (durée, itinéraire, type de séjour, etc.).",
+        "Sujet 5",
+        "Je suis votre voisin(e). Vous souhaitez organiser un pique-nique. Vous me demandez des conseils pour bien préparer cette sortie (endroit, nourriture, activités, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 3",
+      "sujets": [
+        "Sujet 1",
+        "Je suis un(e) employé(e) dans une salle de sport où je travaille à l’accueil. Vous venez vous renseigner sur les activités proposées, les tarifs et les horaires d’ouverture.",
+        "Sujet 2",
+        "Je suis votre ami(e) installé(e) au Canada depuis longtemps. Vous venez d’arriver dans ma ville et me demandez des conseils pratiques pour vous installer (logement, démarches administratives, transports, commerces, loisirs, etc.).",
+        "Sujet 3",
+        "Je suis marchand(e) de journaux. Vous souhaitez lire la presse canadienne et me demandez de vous recommander une lecture intéressante (thème, prix, niveau de langue, etc.).",
+        "Sujet 4",
+        "Je suis votre enseignant(e) de français. Vous envisagez d’étudier à l’étranger et me posez des questions à ce sujet.",
+        "Sujet 5",
+        "Je souhaite vendre ma voiture et j’ai publié une annonce en ligne. Vous voulez acheter une voiture et me posez des questions sur le modèle proposé (âge, état, prix, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 2",
+      "sujets": [
+        "Sujet 1",
+        "Je suis votre ami(e) canadien(ne) et je travaille dans un cinéma. Vous êtes en vacances au Canada et souhaitez aller voir un film. Vous me demandez des conseils pour faire votre choix (types de films, horaires, tarifs, etc.).",
+        "Sujet 2",
+        "Je suis votre ami(e) canadien(ne) et je viens de passer des vacances exceptionnelles au bord de la mer. Curieux(se) de vivre une expérience similaire, vous me posez des questions sur ce séjour (lieu, activités, tarifs, etc.).",
+        "Sujet 3",
+        "Je suis votre ami(e) francophone. Vous devez rédiger un article pour présenter un livre dans la revue de votre association littéraire. Vous cherchez de l’inspiration et me demandez des suggestions basées sur mes lectures récentes.",
+        "Sujet 4",
+        "Je suis votre ami(e) et j’ai participé à un jeu télévisé. Vous m’interrogez sur mon expérience (conditions d’inscription, déroulement, intérêt, etc.) pour décider si vous souhaitez y participer.",
+        "Sujet 5",
+        "Je suis votre employé(e) de l’agence de transports en commun de la ville. C’est votre première visite et vous cherchez à comprendre le fonctionnement des transports en commun (types de transports, tarifs, horaires, etc.)."
+      ]
+    },
+    {
+      "title": "Partie 1",
+      "sujets": [
+        "Sujet 1",
+        "Je suis un(e) ami(e) francophone. Vous devez rédiger un article sur un film pour la revue de votre association culturelle. Vous cherchez de l’inspiration et me demandez des suggestions sur les films que j’ai appréciés (type de film, décor, récompenses, etc.).",
+        "Sujet 2",
+        "Je travaille dans une agence de voyages. Vous souhaitez organiser un séjour touristique. En entrant dans mon agence, vous me posez des questions sur les destinations possibles (itinéraires, coûts, activités proposées, etc.).",
+        "Sujet 3",
+        "Je suis votre voisin(e). Vous envisagez d’organiser une fête entre voisins et souhaitez obtenir des conseils. Vous me demandez mon avis sur l’organisation (liste des invités, repas, musique, etc.).",
+        "Sujet 4",
+        "Je suis votre voisin(e). Vous venez d’emménager dans la ville et ne connaissez encore personne. Vous me sollicitez pour obtenir des conseils sur la meilleure façon de rencontrer de nouvelles personnes.",
+        "Sujet 5",
+        "Vous vous intéressez aux conditions de travail au Canada. Vous m’interrogez sur les horaires, les jours de congé et comparez cette situation avec celle de votre pays."
+      ]
+    }
+  ]
+}
