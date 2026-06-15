@@ -8,7 +8,7 @@ class GroqSTTService {
   static const String _baseUrl =
       'https://api.groq.com/openai/v1/audio/transcriptions';
 
-  static Future<String> transcribe(String audioPath) async {
+  static Future<String> transcribe(List<int> audioBytes) async {
     final apiKey = DotenvService.openRouterApiKey;
     if (apiKey.isEmpty) {
       throw Exception(
@@ -24,7 +24,11 @@ class GroqSTTService {
     request.fields['response_format'] = 'json';
     request.fields['language'] = 'fr';
 
-    request.files.add(await http.MultipartFile.fromPath('file', audioPath));
+    request.files.add(http.MultipartFile.fromBytes(
+      'file',
+      audioBytes,
+      filename: 'audio.wav',
+    ));
 
     final streamed = await request.send();
     final response = await http.Response.fromStream(streamed);

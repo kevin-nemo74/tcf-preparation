@@ -1,8 +1,9 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:io' show Directory, File;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:just_audio/just_audio.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import '../models/eo_evaluation.dart';
 import '../services/eo_evaluation_service.dart';
@@ -47,23 +48,24 @@ class _EOPracticeScreenState extends State<EOPracticeScreen> {
   }
 
   Future<void> _startRecording() async {
-    final hasPermission = await _recorder.hasPermission();
-    if (!hasPermission) {
+    final ts = DateTime.now().millisecondsSinceEpoch;
+    final path = kIsWeb
+        ? 'eo_recording_$ts.wav'
+        : '${Directory.systemTemp.path}/eo_recording_$ts.wav';
+
+    try {
+      await _recorder.start(
+        const RecordConfig(encoder: AudioEncoder.wav),
+        path: path,
+      );
+    } catch (_) {
+      if (!mounted) return;
       setState(() {
         _state = PracticeState.error;
         _errorMessage = 'Permission microphonique non accordée';
       });
       return;
     }
-
-    final dir = await getTemporaryDirectory();
-    final path =
-        '${dir.path}/eo_recording_${DateTime.now().millisecondsSinceEpoch}.wav';
-
-    await _recorder.start(
-      const RecordConfig(encoder: AudioEncoder.wav),
-      path: path,
-    );
 
     setState(() {
       _state = PracticeState.recording;
@@ -91,11 +93,18 @@ class _EOPracticeScreenState extends State<EOPracticeScreen> {
   Future<void> _evaluate() async {
     try {
       final path = _audioPath;
-      if (path == null || !File(path).existsSync()) {
-        throw Exception('Fichier audio introuvable');
+      if (path == null) throw Exception('Fichier audio introuvable');
+
+      List<int> audioBytes;
+      if (kIsWeb) {
+        final resp = await http.get(Uri.parse(path));
+        if (resp.statusCode != 200) throw Exception('Impossible de lire l\'audio');
+        audioBytes = resp.bodyBytes;
+      } else {
+        audioBytes = await File(path).readAsBytes();
       }
 
-      final transcription = await GroqSTTService.transcribe(path);
+      final transcription = await GroqSTTService.transcribe(audioBytes);
       if (!mounted) return;
 
       final evaluation = await EoEvaluationService.evaluate(
