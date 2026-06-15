@@ -85,21 +85,26 @@ class _EOPracticeScreenState extends State<EOPracticeScreen>
   }
 
   Future<void> _startRecording() async {
-    final ts = DateTime.now().millisecondsSinceEpoch;
-    final path = kIsWeb
-        ? 'eo_recording_$ts.wav'
-        : '${Directory.systemTemp.path}/eo_recording_$ts.wav';
-
     try {
-      await _recorder.start(
-        const RecordConfig(encoder: AudioEncoder.wav),
-        path: path,
-      );
-    } catch (_) {
+      if (kIsWeb) {
+        await _recorder.start(const RecordConfig(encoder: AudioEncoder.wav));
+      } else {
+        final ts = DateTime.now().millisecondsSinceEpoch;
+        final path =
+            '${Directory.systemTemp.path}/eo_recording_$ts.wav';
+        await _recorder.start(
+          const RecordConfig(encoder: AudioEncoder.wav),
+          path: path,
+        );
+        _audioPath = path;
+      }
+    } catch (e) {
       if (!mounted) return;
       setState(() {
         _state = PracticeState.error;
-        _errorMessage = 'Permission microphonique non accordée';
+        _errorMessage = kIsWeb
+            ? 'Erreur micro : $e'
+            : 'Permission microphonique non accordée';
       });
       return;
     }
