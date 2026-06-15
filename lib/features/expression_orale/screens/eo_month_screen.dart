@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import '../models/eo_month.dart';
 import '../models/eo_party.dart';
+import 'eo_practice_screen.dart';
 
 class EOMonthScreen extends StatelessWidget {
   final EOMonth month;
+  final int tache;
 
-  const EOMonthScreen({super.key, required this.month});
+  const EOMonthScreen({super.key, required this.month, this.tache = 2});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class EOMonthScreen extends StatelessWidget {
         itemCount: month.parties.length,
         itemBuilder: (context, index) {
           final party = month.parties[index];
-          return _PartyCard(party: party, index: index);
+          return _PartyCard(party: party, index: index, tache: tache);
         },
       ),
     );
@@ -29,8 +31,9 @@ class EOMonthScreen extends StatelessWidget {
 class _PartyCard extends StatefulWidget {
   final EOParty party;
   final int index;
+  final int tache;
 
-  const _PartyCard({required this.party, required this.index});
+  const _PartyCard({required this.party, required this.index, required this.tache});
 
   @override
   State<_PartyCard> createState() => _PartyCardState();
@@ -182,6 +185,31 @@ class _PartyCardState extends State<_PartyCard> {
                                     fontSize: 13,
                                     color: cs.onSurface.withValues(alpha: 0.85),
                                     height: 1.4,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              SizedBox(
+                                height: 28,
+                                child: OutlinedButton.icon(
+                                  onPressed: () {
+                                    final maxSecs = widget.tache == 2 ? 210 : 270;
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder:
+                                            (_) => EOPracticeScreen(
+                                          sujet: sujet,
+                                          tache: widget.tache,
+                                          maxDurationSeconds: maxSecs,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(Icons.mic_rounded, size: 14),
+                                  label: const Text('EO', style: TextStyle(fontSize: 11)),
+                                  style: OutlinedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                                    visualDensity: VisualDensity.compact,
                                   ),
                                 ),
                               ),

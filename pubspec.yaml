@@ -52,6 +52,8 @@ dependencies:
   flutter_dotenv: ^5.1.0
   http: ^1.2.0
   url_launcher: ^6.3.1
+  record: ^5.2.1
+  path_provider: ^2.1.5
 
 
 dev_dependencies:
@@ -84,6 +86,7 @@ flutter:
     - assets/data/
     - assets/data/ee/
     - assets/data/eo/
+    - assets/data/eo/tache1.json
     - assets/data/eo/tache3/
     - assets/pdfs/
 

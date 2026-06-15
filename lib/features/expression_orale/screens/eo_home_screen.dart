@@ -3,6 +3,7 @@ import 'package:tcf_canada_preparation/core/layout/responsive.dart';
 import '../models/eo_examen.dart';
 import '../models/eo_month.dart';
 import 'eo_month_screen.dart';
+import 'eo_tache1_screen.dart';
 
 class EOHomeScreen extends StatefulWidget {
   const EOHomeScreen({super.key});
@@ -43,13 +44,19 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
   void _switchTache(int tache) {
     if (tache == _selectedTache) return;
     setState(() => _selectedTache = tache);
-    _loadExam();
+    if (tache == 1) {
+      setState(() => _loading = false);
+    } else {
+      _loadExam();
+    }
   }
 
   void _openMonth(EOMonth month) {
-    Navigator.push(
+      Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => EOMonthScreen(month: month)),
+      MaterialPageRoute(
+        builder: (_) => EOMonthScreen(month: month, tache: _selectedTache),
+      ),
     );
   }
 
@@ -64,9 +71,9 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
           child: Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: SizedBox(
-              width: 200,
               child: SegmentedButton<int>(
                 segments: const [
+                  ButtonSegment(value: 1, label: Text('Tâche 1')),
                   ButtonSegment(value: 2, label: Text('Tâche 2')),
                   ButtonSegment(value: 3, label: Text('Tâche 3')),
                 ],
@@ -81,13 +88,15 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
           ),
         ),
       ),
-      body: _loading
-          ? const Center(child: CircularProgressIndicator())
-          : _error != null
-              ? _buildError()
-              : Responsive.isTabletWeb(context)
-                  ? _buildWebLayout()
-                  : _buildMobileLayout(),
+      body: _selectedTache == 1
+          ? const EOTache1Screen()
+          : _loading
+              ? const Center(child: CircularProgressIndicator())
+              : _error != null
+                  ? _buildError()
+                  : Responsive.isTabletWeb(context)
+                      ? _buildWebLayout()
+                      : _buildMobileLayout(),
     );
   }
 
@@ -196,9 +205,9 @@ class _EOHomeScreenState extends State<EOHomeScreen> {
               ),
               const Spacer(),
               SizedBox(
-                width: 200,
                 child: SegmentedButton<int>(
                   segments: const [
+                    ButtonSegment(value: 1, label: Text('Tâche 1')),
                     ButtonSegment(value: 2, label: Text('Tâche 2')),
                     ButtonSegment(value: 3, label: Text('Tâche 3')),
                   ],
