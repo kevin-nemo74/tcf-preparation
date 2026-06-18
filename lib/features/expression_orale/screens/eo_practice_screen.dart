@@ -85,19 +85,16 @@ class _EOPracticeScreenState extends State<EOPracticeScreen>
   }
 
   Future<void> _startRecording() async {
+    final ts = DateTime.now().millisecondsSinceEpoch;
+    final path = kIsWeb
+        ? 'eo_recording_$ts.webm'
+        : '${Directory.systemTemp.path}/eo_recording_$ts.wav';
+
     try {
-      if (kIsWeb) {
-        await _recorder.start(const RecordConfig(encoder: AudioEncoder.wav));
-      } else {
-        final ts = DateTime.now().millisecondsSinceEpoch;
-        final path =
-            '${Directory.systemTemp.path}/eo_recording_$ts.wav';
-        await _recorder.start(
-          const RecordConfig(encoder: AudioEncoder.wav),
-          path: path,
-        );
-        _audioPath = path;
-      }
+      await _recorder.start(
+        const RecordConfig(encoder: AudioEncoder.wav),
+        path: path,
+      );
     } catch (e) {
       if (!mounted) return;
       setState(() {

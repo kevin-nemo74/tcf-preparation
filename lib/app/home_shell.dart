@@ -311,7 +311,7 @@ class _HomeShellState extends State<HomeShell> {
                 Expanded(
                   child: ResponsiveFrame(
                     expandToViewport: true,
-                    child: _index == 5
+                    child: _index >= _fullPages.length
                         ? const SettingsScreen()
                         : IndexedStack(index: _index, children: _fullPages),
                   ),
