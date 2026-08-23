@@ -18,9 +18,9 @@ class OpenRouterService {
       'https://api.groq.com/openai/v1/chat/completions';
 
   static const List<Map<String, String>> _models = [
-    {'id': 'llama-3.3-70b-versatile', 'name': 'Llama 3.3 70B'},
-    {'id': 'mixtral-8x7b-32768', 'name': 'Mixtral 8x7B'},
-    {'id': 'llama3-8b-8192', 'name': 'Llama 3 8B'},
+    {'id': 'openai/gpt-oss-120b', 'name': 'GPT-OSS 120B'},
+    {'id': 'openai/gpt-oss-20b', 'name': 'GPT-OSS 20B'},
+    {'id': 'llama-3.1-8b-instant', 'name': 'Llama 3.1 8B'},
   ];
 
   static Future<EECombinaisonEvaluation> evaluate({
