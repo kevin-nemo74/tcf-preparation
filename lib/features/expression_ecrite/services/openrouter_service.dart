@@ -20,7 +20,6 @@ class OpenRouterService {
   static const List<Map<String, String>> _models = [
     {'id': 'openai/gpt-oss-120b', 'name': 'GPT-OSS 120B'},
     {'id': 'openai/gpt-oss-20b', 'name': 'GPT-OSS 20B'},
-    {'id': 'llama-3.1-8b-instant', 'name': 'Llama 3.1 8B'},
   ];
 
   static Future<EECombinaisonEvaluation> evaluate({
@@ -165,6 +164,12 @@ $tache3Answer
           }
           if (response.statusCode >= 500) {
             lastError = 'Serveur indisponible ($modelName): $errorMsg';
+            continue;
+          }
+          if (response.statusCode == 404 ||
+              errorMsg.toLowerCase().contains('does not exist')) {
+            lastError =
+                'Modèle décommissionné ($modelName). Essai avec un autre modèle...';
             continue;
           }
           throw Exception(errorMsg);
