@@ -159,7 +159,7 @@ $tache3Answer
 
           if (response.statusCode == 429) {
             lastError =
-                'Rate limit atteint pour $modelName. Essai avec un autre modèle...';
+                'Rate limit atteint ($modelName): $errorMsg';
             continue;
           }
           if (response.statusCode >= 500) {
@@ -169,7 +169,7 @@ $tache3Answer
           if (response.statusCode == 404 ||
               errorMsg.toLowerCase().contains('does not exist')) {
             lastError =
-                'Modèle décommissionné ($modelName). Essai avec un autre modèle...';
+                'Modèle décommissionné ($modelName): $errorMsg';
             continue;
           }
           throw Exception(errorMsg);

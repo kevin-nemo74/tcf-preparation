@@ -109,6 +109,8 @@ $transcription
 Évalue cette production orale selon les critères du TCF Canada.
 ''';
 
+    String? lastError;
+
     for (final model in _models) {
       try {
         final body = jsonEncode({
@@ -144,6 +146,8 @@ $transcription
         } else if (response.statusCode == 429 ||
             response.statusCode == 404 ||
             response.statusCode == 503) {
+          lastError =
+              'Erreur API (${response.statusCode}): ${response.body}';
           continue;
         } else {
           throw Exception(
@@ -151,11 +155,15 @@ $transcription
           );
         }
       } catch (e) {
-        if (model == _models.last) rethrow;
+        if (model == _models.last) {
+          throw Exception(lastError ?? 'Erreur inconnue: $e');
+        }
       }
     }
 
-    throw Exception('Aucun modèle disponible pour l\'évaluation');
+    throw Exception(
+      lastError ?? 'Aucun modèle disponible pour l\'évaluation',
+    );
   }
 
   static String _extractJson(String content) {
