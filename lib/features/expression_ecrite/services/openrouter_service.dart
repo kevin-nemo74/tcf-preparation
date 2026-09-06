@@ -129,96 +129,103 @@ $tache3Answer
       final model = modelInfo['id']!;
       final modelName = modelInfo['name']!;
 
-      try {
-        final response = await http.post(
-          Uri.parse(_baseUrl),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer $apiKey',
-          },
-          body: jsonEncode({
-            'model': model,
-            'messages': [
-              {'role': 'system', 'content': systemPrompt},
-              {'role': 'user', 'content': userPrompt},
-            ],
-            'temperature': 0.3,
-            'max_tokens': 2500,
-          }),
-        );
+      for (var attempt = 0; attempt < 3; attempt++) {
+        if (attempt > 0) {
+          await Future.delayed(Duration(seconds: 2 * attempt));
+        }
 
-        if (response.statusCode != 200) {
-          String errorMsg = 'Erreur API: ${response.statusCode}';
-          try {
-            final errorBody = jsonDecode(response.body) as Map<String, dynamic>;
-            final error = errorBody['error'] as Map<String, dynamic>?;
-            if (error != null) {
-              errorMsg = error['message']?.toString() ?? errorMsg;
+        try {
+          final response = await http.post(
+            Uri.parse(_baseUrl),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer $apiKey',
+            },
+            body: jsonEncode({
+              'model': model,
+              'messages': [
+                {'role': 'system', 'content': systemPrompt},
+                {'role': 'user', 'content': userPrompt},
+              ],
+              'temperature': 0.3,
+              'max_tokens': 2500,
+            }),
+          );
+
+          if (response.statusCode != 200) {
+            String errorMsg = 'Erreur API: ${response.statusCode}';
+            try {
+              final errorBody =
+                  jsonDecode(response.body) as Map<String, dynamic>;
+              final error = errorBody['error'] as Map<String, dynamic>?;
+              if (error != null) {
+                errorMsg = error['message']?.toString() ?? errorMsg;
+              }
+            } catch (_) {}
+
+            if (response.statusCode == 429) {
+              lastError =
+                  'Rate limit ($modelName, tentative ${attempt + 1}/3): $errorMsg';
+              continue;
             }
-          } catch (_) {}
-
-          if (response.statusCode == 429) {
-            lastError =
-                'Rate limit atteint ($modelName): $errorMsg';
-            continue;
+            if (response.statusCode >= 500) {
+              lastError =
+                  'Serveur indisponible ($modelName, tentative ${attempt + 1}/3): $errorMsg';
+              continue;
+            }
+            if (response.statusCode == 404 ||
+                errorMsg.toLowerCase().contains('does not exist')) {
+              lastError = 'Modèle décommissionné ($modelName): $errorMsg';
+              break;
+            }
+            throw Exception(errorMsg);
           }
-          if (response.statusCode >= 500) {
-            lastError = 'Serveur indisponible ($modelName): $errorMsg';
-            continue;
+
+          Map<String, dynamic> data;
+          try {
+            data = jsonDecode(response.body) as Map<String, dynamic>;
+          } catch (_) {
+            throw _RetryableException(
+              'Réponse invalide du serveur. Essai avec un autre modèle...',
+            );
           }
-          if (response.statusCode == 404 ||
-              errorMsg.toLowerCase().contains('does not exist')) {
-            lastError =
-                'Modèle décommissionné ($modelName): $errorMsg';
-            continue;
+
+          final error = data['error'] as Map<String, dynamic>?;
+          if (error != null) {
+            final message = error['message']?.toString() ?? 'Erreur inconnue';
+            throw Exception(message);
           }
-          throw Exception(errorMsg);
-        }
 
-        Map<String, dynamic> data;
-        try {
-          data = jsonDecode(response.body) as Map<String, dynamic>;
-        } catch (_) {
-          throw _RetryableException(
-            'Réponse invalide du serveur. Essai avec un autre modèle...',
-          );
-        }
+          final choices = data['choices'] as List<dynamic>?;
+          if (choices == null || choices.isEmpty) {
+            throw _RetryableException(
+              'Réponse du modèle incomplète. Essai avec un autre modèle...',
+            );
+          }
 
-        final error = data['error'] as Map<String, dynamic>?;
-        if (error != null) {
-          final message = error['message']?.toString() ?? 'Erreur inconnue';
-          throw Exception(message);
-        }
+          final content = choices[0]['message']?['content'] as String?;
 
-        final choices = data['choices'] as List<dynamic>?;
-        if (choices == null || choices.isEmpty) {
-          throw _RetryableException(
-            'Réponse du modèle incomplète. Essai avec un autre modèle...',
-          );
-        }
+          if (content == null || content.isEmpty) {
+            throw _RetryableException(
+              'Aucune réponse de l\'IA. Veuillez réessayer.',
+            );
+          }
 
-        final content = choices[0]['message']?['content'] as String?;
-
-        if (content == null || content.isEmpty) {
-          throw _RetryableException(
-            'Aucune réponse de l\'IA. Veuillez réessayer.',
-          );
+          String jsonStr;
+          try {
+            jsonStr = _extractJson(content);
+            final parsed = _parseJson(jsonStr);
+            return EECombinaisonEvaluation.fromJson(parsed);
+          } catch (_) {
+            throw _RetryableException(
+              'Le modèle a retourné un format inattendu. Essai avec un autre modèle...',
+            );
+          }
+        } on _RetryableException {
+          break;
+        } catch (e) {
+          rethrow;
         }
-
-        String jsonStr;
-        try {
-          jsonStr = _extractJson(content);
-          final parsed = _parseJson(jsonStr);
-          return EECombinaisonEvaluation.fromJson(parsed);
-        } catch (_) {
-          throw _RetryableException(
-            'Le modèle a retourné un format inattendu. Essai avec un autre modèle...',
-          );
-        }
-      } on _RetryableException {
-        continue;
-      } catch (e) {
-        rethrow;
       }
     }
 

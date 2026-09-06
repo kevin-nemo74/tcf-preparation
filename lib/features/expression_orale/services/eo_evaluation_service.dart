@@ -112,51 +112,63 @@ $transcription
     String? lastError;
 
     for (final model in _models) {
-      try {
-        final body = jsonEncode({
-          'model': model['id'],
-          'messages': [
-            {'role': 'system', 'content': systemPrompt},
-            {'role': 'user', 'content': userPrompt},
-          ],
-          'temperature': 0.3,
-          'max_tokens': 1500,
-        });
+      final modelId = model['id']!;
+      final modelName = model['name']!;
 
-        final response = await http.post(
-          Uri.parse(_baseUrl),
-          headers: {
-            'Authorization': 'Bearer $apiKey',
-            'Content-Type': 'application/json',
-          },
-          body: body,
-        );
-
-        if (response.statusCode == 200) {
-          final data = jsonDecode(response.body) as Map<String, dynamic>;
-          final choices = data['choices'] as List?;
-          if (choices != null && choices.isNotEmpty) {
-            final message = choices[0]['message'] as Map<String, dynamic>;
-            final content = message['content'] as String? ?? '';
-            final jsonStr = _extractJson(content);
-            final parsed = _parseJson(jsonStr);
-            parsed['transcription'] = transcription;
-            return EOEvaluation.fromJson(parsed);
-          }
-        } else if (response.statusCode == 429 ||
-            response.statusCode == 404 ||
-            response.statusCode == 503) {
-          lastError =
-              'Erreur API (${response.statusCode}): ${response.body}';
-          continue;
-        } else {
-          throw Exception(
-            'Erreur API (${response.statusCode}): ${response.body}',
-          );
+      for (var attempt = 0; attempt < 3; attempt++) {
+        if (attempt > 0) {
+          await Future.delayed(Duration(seconds: 2 * attempt));
         }
-      } catch (e) {
-        if (model == _models.last) {
-          throw Exception(lastError ?? 'Erreur inconnue: $e');
+
+        try {
+          final body = jsonEncode({
+            'model': modelId,
+            'messages': [
+              {'role': 'system', 'content': systemPrompt},
+              {'role': 'user', 'content': userPrompt},
+            ],
+            'temperature': 0.3,
+            'max_tokens': 1500,
+          });
+
+          final response = await http.post(
+            Uri.parse(_baseUrl),
+            headers: {
+              'Authorization': 'Bearer $apiKey',
+              'Content-Type': 'application/json',
+            },
+            body: body,
+          );
+
+          if (response.statusCode == 200) {
+            final data = jsonDecode(response.body) as Map<String, dynamic>;
+            final choices = data['choices'] as List?;
+            if (choices != null && choices.isNotEmpty) {
+              final message = choices[0]['message'] as Map<String, dynamic>;
+              final content = message['content'] as String? ?? '';
+              final jsonStr = _extractJson(content);
+              final parsed = _parseJson(jsonStr);
+              parsed['transcription'] = transcription;
+              return EOEvaluation.fromJson(parsed);
+            }
+            lastError = 'Réponse du modèle incomplète ($modelName)';
+            break;
+          } else if (response.statusCode == 429 ||
+              response.statusCode >= 500) {
+            lastError =
+                'Erreur API (${response.statusCode}) ($modelName, tentative ${attempt + 1}/3): ${response.body}';
+            continue;
+          } else if (response.statusCode == 404) {
+            lastError = 'Modèle décommissionné ($modelName): ${response.body}';
+            break;
+          } else {
+            throw Exception(
+              'Erreur API (${response.statusCode}): ${response.body}',
+            );
+          }
+        } catch (e) {
+          lastError = 'Erreur ($modelName): $e';
+          break;
         }
       }
     }
