@@ -148,7 +148,8 @@ $tache3Answer
                 {'role': 'user', 'content': userPrompt},
               ],
               'temperature': 0.3,
-              'max_tokens': 2500,
+              'max_tokens': 3200,
+              'reasoning_effort': 'low',
             }),
           );
 

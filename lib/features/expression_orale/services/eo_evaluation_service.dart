@@ -127,9 +127,10 @@ $transcription
               {'role': 'system', 'content': systemPrompt},
               {'role': 'user', 'content': userPrompt},
             ],
-            'temperature': 0.3,
-            'max_tokens': 1500,
-          });
+          'temperature': 0.3,
+          'max_tokens': 1500,
+          'reasoning_effort': 'low',
+        });
 
           final response = await http.post(
             Uri.parse(_baseUrl),
